@@ -1,10 +1,18 @@
+application_core:
+    resource: "@ApplicationCoreBundle/Resources/config/routing.yml"
+    prefix:   /
+
+application_admin:
+    resource: "@ApplicationAdminBundle/Resources/config/routing.yml"
+    prefix:   /
+
+application_client:
+    resource: "@ApplicationClientBundle/Resources/config/routing.yml"
+    prefix:   /
+
 application_api:
     resource: "@ApplicationApiBundle/Resources/config/routing.yml"
     prefix:   /
-
-acme_api:
-    resource: "@AcmeApiBundle/Resources/config/routing.yml"
-    prefix:   /api
 
 NelmioApiDocBundle:
     resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
