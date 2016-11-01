@@ -1,23 +1,7 @@
-application_email:
-    resource: "@ApplicationEmailBundle/Resources/config/routing.yml"
-    prefix:   /
+api:
+    resource: '.'
+    type:     'api_platform'
 
-application_core:
-    resource: "@ApplicationCoreBundle/Resources/config/routing.yml"
-    prefix:   /
-
-application_admin:
-    resource: "@ApplicationAdminBundle/Resources/config/routing.yml"
-    prefix:   /
-
-application_client:
-    resource: "@ApplicationClientBundle/Resources/config/routing.yml"
-    prefix:   /
-
-application_api:
-    resource: "@ApplicationApiBundle/Resources/config/routing.yml"
-    prefix:   /
-
-NelmioApiDocBundle:
-    resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
-    prefix:   /api/doc
+app:
+    resource: '@AppBundle/Action/'
+    type:     'annotation'

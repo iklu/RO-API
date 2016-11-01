@@ -1,7 +1,7 @@
 <?php
 
-use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Config\Loader\LoaderInterface;
+use Symfony\Component\HttpKernel\Kernel;
 
 class AppKernel extends Kernel
 {
@@ -15,11 +15,10 @@ class AppKernel extends Kernel
             new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
-            new Application\Bundle\ApiBundle\ApplicationApiBundle(),
-            new Application\Bundle\ClientBundle\ApplicationClientBundle(),
-            new Application\Bundle\AdminBundle\ApplicationAdminBundle(),
-            new Application\Bundle\CoreBundle\ApplicationCoreBundle(),
-            new Application\Bundle\EmailBundle\ApplicationEmailBundle(),
+            new Dunglas\ActionBundle\DunglasActionBundle(),
+            new ApiPlatform\Core\Bridge\Symfony\Bundle\ApiPlatformBundle(),
+            new Nelmio\CorsBundle\NelmioCorsBundle(),
+            new AppBundle\AppBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
@@ -27,6 +26,7 @@ class AppKernel extends Kernel
             $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
             $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
             $bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();
+            $bundles[] = new Hautelook\AliceBundle\HautelookAliceBundle();
         }
 
         return $bundles;
