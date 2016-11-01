@@ -77,3 +77,9 @@ nelmio_cors:
         max_age:        3600
     paths:
         '^/': ~
+
+# app/config/config.yml
+fos_user:
+    db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
+    firewall_name: main
+    user_class: Application\AdminBundle\Entity\User

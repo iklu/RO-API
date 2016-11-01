@@ -2,6 +2,10 @@ api:
     resource: '.'
     type:     'api_platform'
 
-app:
-    resource: '@AppBundle/Action/'
-    type:     'annotation'
+admin:
+    resource: "@ApplicationAdminBundle/Action/"
+    prefix:   'annotation'
+
+client:
+    resource: "@ApplicationClientBundle/Action/"
+    prefix:   'annotation'

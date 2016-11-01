@@ -1,0 +1,14 @@
+{
+	"firstName":"ovidiu",
+	"lastName":"dragoi",
+	"username":"dragoiovidiu2011@gmail.com",
+	"email":"dragoiovidiu@gmail.com",
+	"usernameCanonical":"dragoiovidiu2011@gmail.com",
+	"emailCanonical":"dragoiovidiu@gmail.com",
+	"password":"parola86",
+	"enabled":1,
+	"roles":["USER"],
+	"locked":0,
+	"expired":0,
+	"credentialExpired":0
+}
