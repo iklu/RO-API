@@ -81,5 +81,9 @@ nelmio_cors:
 # app/config/config.yml
 fos_user:
     db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
-    firewall_name: main
+    firewall_name: wsse_secured
     user_class: Application\AdminBundle\Entity\User
+
+# Escape WSSE authentication configuration
+escape_wsse_authentication:
+    authentication_provider_class: Application\AdminBundle\Security\Core\Authentication\Provider\Provider

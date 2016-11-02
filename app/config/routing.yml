@@ -2,10 +2,6 @@ api:
     resource: '.'
     type:     'api_platform'
 
-admin:
-    resource: "@ApplicationAdminBundle/Action/"
-    prefix:   'annotation'
-
-client:
-    resource: "@ApplicationClientBundle/Action/"
-    prefix:   'annotation'
+application_app:
+    resource: "@ApplicationAppBundle/Resources/config/routing.yml"
+    prefix:   /api

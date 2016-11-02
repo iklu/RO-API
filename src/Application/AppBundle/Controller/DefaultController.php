@@ -1,6 +1,6 @@
 <?php
 
-namespace Application\AdminBundle\Controller;
+namespace Application\AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -8,6 +8,6 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('ApplicationAdminBundle:Default:index.html.twig');
+        return $this->render('ApplicationAppBundle:Default:index.html.twig');
     }
 }

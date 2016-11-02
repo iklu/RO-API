@@ -34,7 +34,8 @@
         "dunglas/action-bundle": "^0.3",
         "nelmio/cors-bundle": "^1.4",
         "phpdocumentor/reflection-docblock": "^3.0",
-        "friendsofsymfony/user-bundle": "dev-master"
+        "friendsofsymfony/user-bundle": "dev-master",
+        "escapestudios/wsse-authentication-bundle": "^2.2"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
