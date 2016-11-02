@@ -1,3 +1,7 @@
-application_admin_homepage:
-    path:     /
-    defaults: { _controller: ApplicationAdminBundle:Default:index }
+profile:
+    path: '/secured/profile/{id}/'
+    methods:  ['GET']
+    defaults:
+        _controller: 'ApplicationAdminBundle:Security:getProfile'
+        _api_resource_class: 'Application\AdminBundle\Entity\User'
+        _api_item_operation_name: 'profile'

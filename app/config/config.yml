@@ -78,6 +78,37 @@ nelmio_cors:
     paths:
         '^/': ~
 
+nelmio_api_doc:
+    name:                 "Application"
+    exclude_sections:     []
+    request_listener:
+        enabled:              true
+        parameter:            _doc
+    sandbox:
+        enabled:              true
+        endpoint:             null
+        accept_type:          null
+        body_format:
+            formats: []
+            default_format: form
+        request_format:
+            formats: []
+            method: accept_header
+    swagger:
+        api_base_path:        /api
+        swagger_version:      '1.2'
+        api_version:          '0.1'
+        info:
+            title:                "Application"
+            description:          "Application"
+            TermsOfServiceUrl:    null
+            contact:              null
+            license:              null
+            licenseUrl:           null
+    cache:
+        enabled:              true
+        file:                 '%kernel.cache_dir%/api-doc.cache'
+
 # app/config/config.yml
 fos_user:
     db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'

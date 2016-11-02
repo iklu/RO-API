@@ -35,7 +35,8 @@
         "nelmio/cors-bundle": "^1.4",
         "phpdocumentor/reflection-docblock": "^3.0",
         "friendsofsymfony/user-bundle": "dev-master",
-        "escapestudios/wsse-authentication-bundle": "^2.2"
+        "escapestudios/wsse-authentication-bundle": "^2.2",
+        "nelmio/api-doc-bundle": "^2.13"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
