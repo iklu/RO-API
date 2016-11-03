@@ -11,9 +11,19 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity
- * @ApiResource(itemOperations={
- *     "profile"={"route_name"="profile"}
- * })
+ * @ApiResource(
+ *     itemOperations={
+ *          "getUser"={"route_name"="get_user"},
+ *          "updateUser"={"route_name"="update_user"}
+ *      },
+ *     collectionOperations = {
+ *          "addUser"={"route_name"="add_user"}
+ *      },
+ *     attributes={
+ *          "normalization_context"={"groups"={"user", "user-read"}},
+ *          "denormalization_context"={"groups"={"user", "user-write"}}
+ * }
+ *  )
  */
 class User extends BaseUser
 {
@@ -25,13 +35,12 @@ class User extends BaseUser
     protected $id;
 
     /**
-     * @Groups({"user"})
+     * @Groups({"user-write"})
      */
     protected $email;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"user"})
+     * @Groups({"user-write"})
      */
     protected $fullname;
 
@@ -41,9 +50,47 @@ class User extends BaseUser
     protected $plainPassword;
 
     /**
-     * @Groups({"user"})
+     * @Groups({"user-write"})
      */
     protected $username;
+
+    /**
+     * @Groups({"user-write"})
+     */
+    protected $usernameCanonical;
+
+    /**
+     * @Groups({"user-write"})
+     */
+    protected $emailCanonical;
+
+    /**
+     * @Groups({"user-write"})
+     */
+    protected $enabled;
+
+    /**
+     * @Groups({"user-write"})
+     */
+    protected $salt;
+
+    /**
+     * @Groups({"user-write"})
+     */
+    protected $password;
+
+
+    /**
+     * @Groups({"user-write"})
+     */
+    protected $confirmationToken;
+
+
+    /**
+     * @Groups({"user-write"})
+     */
+    protected $locked;
+
 
     public function setFullname($fullname)
     {

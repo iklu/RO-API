@@ -1,7 +1,23 @@
-profile:
-    path: '/secured/profile/{id}/'
+get_user:
+    path: '/secured/user/{id}/'
     methods:  ['GET']
     defaults:
-        _controller: 'ApplicationAdminBundle:Security:getProfile'
+        _controller: 'ApplicationAdminBundle:Security:getUser'
         _api_resource_class: 'Application\AdminBundle\Entity\User'
-        _api_item_operation_name: 'profile'
+        _api_item_operation_name: 'getUser'
+
+update_user:
+    path: '/secured/user/{id}/'
+    methods:  ['PUT']
+    defaults:
+        _controller: 'ApplicationAdminBundle:Security:updateUser'
+        _api_resource_class: 'Application\AdminBundle\Entity\User'
+        _api_item_operation_name: 'updateUser'
+
+add_user:
+    path: '/users/'
+    methods:  ['POST']
+    defaults:
+        _controller: 'ApplicationAdminBundle:Security:addUser'
+        _api_resource_class: 'Application\AdminBundle\Entity\User'
+        _api_collection_operation_name: 'addUser'
