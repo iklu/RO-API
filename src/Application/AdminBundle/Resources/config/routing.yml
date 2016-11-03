@@ -1,16 +1,16 @@
 get_user:
-    path: '/secured/user/{id}/'
+    path: '/user/{id}/'
     methods:  ['GET']
     defaults:
-        _controller: 'ApplicationAdminBundle:Security:getUser'
+        _controller: 'ApplicationAdminBundle:User:getUser'
         _api_resource_class: 'Application\AdminBundle\Entity\User'
         _api_item_operation_name: 'getUser'
 
 update_user:
-    path: '/secured/user/{id}/'
+    path: '/user/{id}/'
     methods:  ['PUT']
     defaults:
-        _controller: 'ApplicationAdminBundle:Security:updateUser'
+        _controller: 'ApplicationAdminBundle:User:updateUser'
         _api_resource_class: 'Application\AdminBundle\Entity\User'
         _api_item_operation_name: 'updateUser'
 
@@ -18,6 +18,14 @@ add_user:
     path: '/users/'
     methods:  ['POST']
     defaults:
-        _controller: 'ApplicationAdminBundle:Security:addUser'
+        _controller: 'ApplicationAdminBundle:User:addUser'
         _api_resource_class: 'Application\AdminBundle\Entity\User'
         _api_collection_operation_name: 'addUser'
+
+get_users:
+    path: '/users/'
+    methods:  ['get']
+    defaults:
+        _controller: 'ApplicationAdminBundle:User:getUsers'
+        _api_resource_class: 'Application\AdminBundle\Entity\User'
+        _api_collection_operation_name: 'getUsers'

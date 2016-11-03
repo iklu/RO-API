@@ -17,7 +17,8 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *          "updateUser"={"route_name"="update_user"}
  *      },
  *     collectionOperations = {
- *          "addUser"={"route_name"="add_user"}
+ *          "addUser"={"route_name"="add_user"},
+ *          "getUsers"={"route_name"="get_users"}
  *      },
  *     attributes={
  *          "normalization_context"={"groups"={"user", "user-read"}},

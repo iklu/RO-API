@@ -5,7 +5,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Symfony\Component\HttpFoundation\Request;
 
-class SecurityController extends Controller
+class UserController extends Controller
 {
 
     /**
@@ -30,7 +30,7 @@ class SecurityController extends Controller
      */
     public function getUserAction($data)
     {
-        $user = $this->get('security.token_storage')->getToken()->getUser();
+        //$user = $this->get('security.token_storage')->getToken()->getUser();
 
         $data->getUsername();
         return $data;
@@ -60,7 +60,7 @@ class SecurityController extends Controller
     {
         $user = $this->get('security.token_storage')->getToken()->getUser();
 
-        $data->getUsername();
+        //$data->getUsername();
         return $data;
     }
 
@@ -72,7 +72,6 @@ class SecurityController extends Controller
      *     resource=true,
      *     description="Register profile",
      *     parameters={
-     *         {"name"="facebookId", "dataType"="string", "required"=false, "description"="user facebookId"},
      *         {"name"="firstName", "dataType"="string", "required"=false, "description"="user first name"},
      *         {"name"="lastName", "dataType"="string", "required"=false, "description"="user last name"},
      *         {"name"="email", "dataType"="string", "required"=true, "description"="user email address"},
@@ -93,12 +92,28 @@ class SecurityController extends Controller
      */
     public function addUserAction($data , Request $request)
     {
+        return $data;
+    }
 
-
-
-
-   
-        
+    /**
+     * Get service used to get all the users.
+     *
+     * @ApiDoc(
+     *     section="User",
+     *     resource=true,
+     *     description="Get the users",
+     *     statusCodes={
+     *         200="Returned when successful.",
+     *         400="Returned when parameters are invalid.",
+     *         401="Returned when the user is not authorized.",
+     *         500="Returned when the server makes a booboo."
+     *     }
+     * )
+     *
+     *
+     */
+    public function getUsersAction($data , Request $request)
+    {
         return $data;
     }
 }
