@@ -36,59 +36,59 @@ class User extends BaseUser
     protected $id;
 
     /**
-     * @Groups({"user-write"})
+     * @Groups({"user"})
      */
     protected $email;
 
     /**
-     * @Groups({"user-write"})
+     * @Groups({"user"})
      */
     protected $fullname;
 
     /**
-     * @Groups({"user-write"})
+     * @Groups({"user"})
      */
     protected $plainPassword;
 
     /**
-     * @Groups({"user-write"})
+     * @Groups({"user"})
      */
     protected $username;
 
     /**
-     * @Groups({"user-write"})
+     * @Groups({"user"})
      */
     protected $usernameCanonical;
 
     /**
-     * @Groups({"user-write"})
+     * @Groups({"user"})
      */
     protected $emailCanonical;
 
     /**
-     * @Groups({"user-write"})
+     * @Groups({"user"})
      */
     protected $enabled;
 
     /**
-     * @Groups({"user-write"})
+     * @Groups({"user"})
      */
     protected $salt;
 
     /**
-     * @Groups({"user-write"})
+     * @Groups({"user"})
      */
     protected $password;
 
 
     /**
-     * @Groups({"user-write"})
+     * @Groups({"user"})
      */
     protected $confirmationToken;
 
 
     /**
-     * @Groups({"user-write"})
+     * @Groups({"user"})
      */
     protected $locked;
 
