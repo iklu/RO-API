@@ -8,6 +8,7 @@ use FOS\UserBundle\Model\GroupableInterface;
 use FOS\UserBundle\Model\User as BaseUser;
 use FOS\UserBundle\Model\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -52,6 +53,7 @@ class User extends BaseUser
 
     /**
      * @Groups({"user"})
+     * @Assert\NotBlank()
      */
     protected $username;
 
@@ -77,6 +79,7 @@ class User extends BaseUser
 
     /**
      * @Groups({"user"})
+     * @Assert\NotBlank()
      */
     protected $password;
 

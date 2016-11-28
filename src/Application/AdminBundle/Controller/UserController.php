@@ -12,7 +12,7 @@ class UserController extends Controller
      * Get profile service used to get full profile info.
      *
      * @ApiDoc(
-     *     section="Security",
+     *     section="User",
      *     resource=true,
      *     description="Get profile",
      *     requirements={
@@ -40,7 +40,7 @@ class UserController extends Controller
      * Get profile service used to get full profile info.
      *
      * @ApiDoc(
-     *     section="Security",
+     *     section="User",
      *     resource=true,
      *     description="Get profile",
      *     requirements={
@@ -68,7 +68,7 @@ class UserController extends Controller
      * Register service used to add a new user.
      *
      * @ApiDoc(
-     *     section="Security",
+     *     section="User",
      *     resource=true,
      *     description="Register profile",
      *     parameters={

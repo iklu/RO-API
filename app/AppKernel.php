@@ -24,6 +24,7 @@ class AppKernel extends Kernel
             new Escape\WSSEAuthenticationBundle\EscapeWSSEAuthenticationBundle(),
             new Application\AppBundle\ApplicationAppBundle(),
             new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
+            new Application\CoreBundle\ApplicationCoreBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

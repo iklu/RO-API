@@ -29,3 +29,11 @@ get_users:
         _controller: 'ApplicationAdminBundle:User:getUsers'
         _api_resource_class: 'Application\AdminBundle\Entity\User'
         _api_collection_operation_name: 'getUsers'
+
+login_action:
+    path: '/login/'
+    methods:  ['POST']
+    defaults:
+        _controller: 'ApplicationAdminBundle:Security:login'
+        _api_resource_class: 'Application\AdminBundle\Entity\User'
+        _api_collection_operation_name: 'addUser'
