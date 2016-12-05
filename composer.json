@@ -34,7 +34,8 @@
         "dunglas/action-bundle": "^0.3",
         "nelmio/cors-bundle": "^1.4",
         "phpdocumentor/reflection-docblock": "^3.0",
-        "nelmio/api-doc-bundle": "^2.13"
+        "nelmio/api-doc-bundle": "^2.13",
+        "jms/serializer-bundle": "^1.1"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

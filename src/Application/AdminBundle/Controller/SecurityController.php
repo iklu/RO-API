@@ -9,6 +9,7 @@
 namespace Application\AdminBundle\Controller;
 
 use Application\AdminBundle\Entity\User;
+use Application\CoreBundle\Utils\ApiResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -38,22 +39,16 @@ class SecurityController extends Controller
      *
      *
      */
-    public function loginAction($data)
+    public function loginAction(Request $request)
     {
         //$user = $this->get('security.token_storage')->getToken()->getUser();
 
-//        $username = $data->getUsername();
-//        $password = $data->getPassword();
-//
-//        $user  = new User();
-//        $user->setUsername($username);
-//        $user->setPassword($password);
 
 
         $validator = $this->get('validator');
-        $errors = $validator->validate($data);
+        $errors = $validator->validate($request);
 
-        $login = $this->get('application_admin.login')->initiate($data);
+        $loginData = $this->get('application_admin.login')->initiate($request);
 
         if (count($errors) > 0) {
             /*
@@ -66,8 +61,7 @@ class SecurityController extends Controller
             return new Response($errorsString);
         }
 
-        return new JsonResponse($data);
-        //return $data;
+      return ApiResponse::setResponse($loginData["message"], $loginData["status"]);
     }
 
     /**
@@ -91,7 +85,6 @@ class SecurityController extends Controller
    *
    */
   public function getProfileAction(Request $request, $id) {
-      echo "hola";
 
     $em = $this->getDoctrine()->getManager();
 

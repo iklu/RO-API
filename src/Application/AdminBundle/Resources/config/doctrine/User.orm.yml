@@ -100,6 +100,10 @@ Application\AdminBundle\Entity\User:
             type: boolean
             nullable: true
             comment: ''
+        enabled:
+            type: boolean
+            nullable: true
+            comment: ''
         confirmationToken:
             column: confirmation_token
             type: string

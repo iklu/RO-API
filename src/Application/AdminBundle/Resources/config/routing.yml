@@ -31,7 +31,7 @@ get_users:
         _api_collection_operation_name: 'getUsers'
 
 login_action:
-    path: '/login/'
+    path: '/account/login/'
     methods:  ['POST']
     defaults:
         _controller: 'ApplicationAdminBundle:Security:login'

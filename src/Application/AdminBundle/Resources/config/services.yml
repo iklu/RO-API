@@ -1,6 +1,6 @@
 services:
     application_admin.login:
         class: Application\AdminBundle\Services\Login
-#        arguments: ["@service_id", "plain_value", "%parameter%"]
+        arguments: ["@doctrine.orm.entity_manager", "@security.encoder_factory"]
 
 
