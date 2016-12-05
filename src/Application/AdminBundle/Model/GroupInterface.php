@@ -1,19 +1,25 @@
 <?php
 
-/*
- * This file is part of the FOSUserBundle package.
- *
- * (c) FriendsOfSymfony <http://friendsofsymfony.github.com/>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
 
 namespace Application\AdminBundle\Model;
 
+use ApiPlatform\Core\Annotation\ApiResource;
+
 /**
- * @author Johannes M. Schmitt <schmittjoh@gmail.com>
- * @author Christophe Coevoet <stof@notk.org>
+ * @ApiResource(
+ *     itemOperations={
+ *          "getUser"={"route_name"="get_user"},
+ *          "updateUser"={"route_name"="update_user"}
+ *      },
+ *     collectionOperations = {
+ *          "addUser"={"route_name"="add_user"},
+ *          "getUsers"={"route_name"="get_users"}
+ *      },
+ *     attributes={
+ *          "normalization_context"={"groups"={"user", "user-read"}},
+ *          "denormalization_context"={"groups"={"user", "user-write"}}
+ * }
+ *  )
  */
 interface GroupInterface
 {

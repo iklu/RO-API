@@ -37,3 +37,11 @@ login_action:
         _controller: 'ApplicationAdminBundle:Security:login'
         _api_resource_class: 'Application\AdminBundle\Entity\User'
         _api_collection_operation_name: 'addUser'
+
+get_profile_action:
+    path: '/secured/account/profile/{id}/'
+    methods:  ['GET']
+    defaults:
+        _controller: 'ApplicationAdminBundle:Security:getProfile'
+        _api_resource_class: 'Application\AdminBundle\Entity\User'
+        _api_collection_operation_name: 'addUser'
