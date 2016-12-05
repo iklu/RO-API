@@ -11,9 +11,12 @@ security:
         ROLE_MEINEKE: ROLE_MEINEKE
 
     providers:
+        chain_provider:
+            chain:
+                providers: [in_memory, wsse_provider]
         wsse_provider:
             entity:
-                class: Application\AdminBundle\Entity\User  # This class must implement UserProviderIterface
+                class: Application\AdminBundle\Entity\User
         in_memory:
             memory:
                 users:
@@ -24,3 +27,10 @@ security:
             pattern: ^/api/secured/.*
             stateless: true
             wsse: true
+            provider: wsse_provider
+        secured_area:
+            pattern: ^/api/doc
+            http_basic:
+                realm: 'API Documentation'
+                provider: in_memory
+

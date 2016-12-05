@@ -1,7 +1,3 @@
-application_core:
-    resource: "@ApplicationCoreBundle/Resources/config/routing.yml"
-    prefix:   /
-
 api:
     resource: '.'
     type:     'api_platform'
@@ -12,4 +8,4 @@ application_app:
 
 NelmioApiDocBundle:
     resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
-    prefix:   /api/doc
+    prefix:   /api/doc/

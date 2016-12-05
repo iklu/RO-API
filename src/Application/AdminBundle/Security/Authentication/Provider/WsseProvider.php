@@ -8,7 +8,7 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\Exception\NonceExpiredException;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use AppBundle\Security\Authentication\Token\WsseUserToken;
+use Application\AdminBundle\Security\Authentication\Token\WsseUserToken;
 
 class WsseProvider implements AuthenticationProviderInterface
 {
@@ -28,11 +28,10 @@ class WsseProvider implements AuthenticationProviderInterface
             throw new AuthenticationException("Bad credentials... Did you forgot your username ?");
         }
         if ($user && $this->validateDigest($token->digest, $token->nonce, $token->created, $user->getPassword())) {
-        $authenticatedToken = new WsseUserToken($user->getRoles());
-        $authenticatedToken->setUser($user);
-
-        return $authenticatedToken;
-    }
+            $authenticatedToken = new WsseUserToken($user->getRoles());
+            $authenticatedToken->setUser($user);
+            return $authenticatedToken;
+        }
     throw new AuthenticationException('The WSSE authentication failed.');
     }
 

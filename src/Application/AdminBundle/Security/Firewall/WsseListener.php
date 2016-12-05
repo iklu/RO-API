@@ -38,7 +38,7 @@ class WsseListener implements ListenerInterface
         $token->created  = $matches[4];
     try {
         $authToken = $this->authenticationManager->authenticate($token);
-        $this->securityContext->setToken($authToken);
+        $this->tokenStorage->setToken($authToken);
         return;
     } catch (AuthenticationException $failed) {
          $failedMessage = 'WSSE Login failed for '.$token->getUsername().'. Why ? '.$failed->getMessage();
