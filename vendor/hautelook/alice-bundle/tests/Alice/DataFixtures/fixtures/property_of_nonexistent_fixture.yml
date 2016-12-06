@@ -1,0 +1,3 @@
+Hautelook\AliceBundle\Tests\Functional\TestBundle\Entity\City:
+   city_paris:
+       name: '@unknown->username'

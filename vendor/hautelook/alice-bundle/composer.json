@@ -1,0 +1,60 @@
+{
+    "name": "hautelook/alice-bundle",
+    "description": "Symfony2 Bundle to manage fixtures with Alice and Faker.",
+    "keywords": ["Symfony", "Fixture", "ORM", "Alice", "Faker"],
+    "type": "symfony-bundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Baldur Rensch",
+            "email": "brensch@gmail.com"
+        },
+        {
+            "name": "Théo FIDRY",
+            "email": "theo.fidry@gmail.com",
+            "homepage": "https://github.com/theofidry"
+        }
+    ],
+    "require": {
+        "php": "^5.6||^7.0",
+        "nelmio/alice": "^2.1 < 2.2.0 || ^2.2.1",
+        "symfony/finder": "^2.7||^3.0"
+    },
+    "require-dev": {
+        "doctrine/data-fixtures": "1.0.1",
+        "doctrine/doctrine-bundle": "^1.6.4",
+        "doctrine/doctrine-fixtures-bundle": "^2.2",
+        "doctrine/mongodb-odm": "^1.0",
+        "doctrine/mongodb-odm-bundle": "^3.0",
+        "doctrine/orm": "^2.4",
+        "sllh/php-cs-fixer-styleci-bridge": "^1.0",
+        "symfony/console": "^2.3||~3.0",
+        "symfony/framework-bundle": "^2.3||^3.0",
+        "symfony/phpunit-bridge": "^3.1",
+        "symfony/yaml": "^2.3||^3.0",
+        "symfony/validator": "^2.3|^3.0",
+        "phpunit/phpunit": "^5.6"
+    },
+    "suggest": {
+        "theofidry/alice-bundle-extension": "Behat extension for HautelookAliceBundle",
+        "doctrine/data-fixtures": "To use Doctrine fixtures loader",
+        "doctrine/orm": "To use Doctrine ORM",
+        "doctrine/doctrine-bundle": "To use Doctrine with Symfony",
+        "doctrine/mongodb-odm": "To use Doctrine MongoDB",
+        "doctrine/mongodb-odm-bundle": "To use Doctrine MongoDB with Symfony"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": { "Hautelook\\AliceBundle\\": "src" }
+    },
+    "autoload-dev": {
+        "psr-4": { "Hautelook\\AliceBundle\\Tests\\": "tests" }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.x-dev"
+        },
+        "sort-packages": true
+    }
+}
