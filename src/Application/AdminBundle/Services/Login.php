@@ -47,7 +47,7 @@ class Login
         //no user found
         if (!$entity) {
             $response["message"] = "User not found";
-            $response["status"] = 404;
+            $response["status"] = 401;
             return $response;
 
         }
