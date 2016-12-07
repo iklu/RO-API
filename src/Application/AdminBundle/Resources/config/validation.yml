@@ -1,0 +1,10 @@
+Application\AdminBundle\Entity\User:
+    properties:
+        username:
+            - NotBlank:
+                message: "Need to login"
+        email:
+            - NotBlank:
+            - Email:
+        password:
+            - NotBlank:

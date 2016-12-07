@@ -3,4 +3,9 @@ services:
         class: Application\AdminBundle\Services\Login
         arguments: ["@doctrine.orm.entity_manager", "@security.encoder_factory"]
 
+    application_admin.login.validate:
+        class: Application\AdminBundle\Validator\LoginValidation
+        arguments: ["@validator", "@request_stack"]
+
+
 
