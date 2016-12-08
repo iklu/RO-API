@@ -23,6 +23,7 @@
       <parameter key="ApplicationAppBundle">Application\AppBundle\ApplicationAppBundle</parameter>
       <parameter key="NelmioApiDocBundle">Nelmio\ApiDocBundle\NelmioApiDocBundle</parameter>
       <parameter key="ApplicationCoreBundle">Application\CoreBundle\ApplicationCoreBundle</parameter>
+      <parameter key="ApplicationEmailBundle">Application\EmailBundle\ApplicationEmailBundle</parameter>
       <parameter key="DebugBundle">Symfony\Bundle\DebugBundle\DebugBundle</parameter>
       <parameter key="WebProfilerBundle">Symfony\Bundle\WebProfilerBundle\WebProfilerBundle</parameter>
       <parameter key="SensioDistributionBundle">Sensio\Bundle\DistributionBundle\SensioDistributionBundle</parameter>
@@ -31,11 +32,11 @@
     </parameter>
     <parameter key="kernel.charset">UTF-8</parameter>
     <parameter key="kernel.container_class">appDevDebugProjectContainer</parameter>
-    <parameter key="database_host">52.24.27.64</parameter>
-    <parameter key="database_port">null</parameter>
-    <parameter key="database_name">api_platform</parameter>
-    <parameter key="database_user">mnk</parameter>
-    <parameter key="database_password">mnkdevelop13#</parameter>
+    <parameter key="database_host">52.29.239.198</parameter>
+    <parameter key="database_port">3306</parameter>
+    <parameter key="database_name">sql7148029</parameter>
+    <parameter key="database_user">sql7148029</parameter>
+    <parameter key="database_password">hMSA8k8MFi</parameter>
     <parameter key="mailer_transport">smtp</parameter>
     <parameter key="mailer_host">127.0.0.1</parameter>
     <parameter key="mailer_user">null</parameter>
@@ -443,6 +444,7 @@
       <parameter key="licenseUrl">null</parameter>
     </parameter>
     <parameter key="nelmio_api_doc.swagger.model_naming_strategy">dot_notation</parameter>
+    <parameter key="admin.registration.confirmation.template">ApplicationEmailBundle:Registration:email.txt.twig</parameter>
     <parameter key="web_profiler.debug_toolbar.position">bottom</parameter>
     <parameter key="web_profiler.debug_toolbar.intercept_redirects">false</parameter>
     <parameter key="web_profiler.debug_toolbar.mode">2</parameter>
@@ -641,7 +643,7 @@
                   <tag name="cache.pool"/>
                   <argument>XjpAxhtQa1</argument>
                   <argument>0</argument>
-                  <argument>qQ5eNtfpKQ6AemMXeNqnAX</argument>
+                  <argument>T4bzbIzVQzXO8MKqA1SFbb</argument>
                   <argument>/var/www/html/RO-API/var/cache/dev/pools</argument>
                   <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
                   <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
@@ -654,7 +656,7 @@
                   <tag name="cache.pool"/>
                   <argument>3RTCZUV4M+</argument>
                   <argument>0</argument>
-                  <argument>qQ5eNtfpKQ6AemMXeNqnAX</argument>
+                  <argument>T4bzbIzVQzXO8MKqA1SFbb</argument>
                   <argument>/var/www/html/RO-API/var/cache/dev/pools</argument>
                   <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
                   <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
@@ -986,7 +988,7 @@
       <tag name="cache.pool"/>
       <argument>89ErCvMU+5</argument>
       <argument>0</argument>
-      <argument>qQ5eNtfpKQ6AemMXeNqnAX</argument>
+      <argument>T4bzbIzVQzXO8MKqA1SFbb</argument>
       <argument>/var/www/html/RO-API/var/cache/dev/pools</argument>
       <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
@@ -1275,6 +1277,11 @@
       <call method="addXmlMappings">
         <argument type="collection">
           <argument>/var/www/html/RO-API/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/config/validation.xml</argument>
+        </argument>
+      </call>
+      <call method="addYamlMappings">
+        <argument type="collection">
+          <argument>/var/www/html/RO-API/src/Application/AdminBundle/Resources/config/validation.yml</argument>
         </argument>
       </call>
       <call method="enableAnnotationMapping">
@@ -2650,11 +2657,11 @@
     <service id="doctrine.dbal.default_connection" class="Doctrine\DBAL\Connection">
       <argument type="collection">
         <argument key="driver">pdo_mysql</argument>
-        <argument key="host">52.24.27.64</argument>
-        <argument key="port">null</argument>
-        <argument key="dbname">api_platform</argument>
-        <argument key="user">mnk</argument>
-        <argument key="password">mnkdevelop13#</argument>
+        <argument key="host">52.29.239.198</argument>
+        <argument key="port">3306</argument>
+        <argument key="dbname">sql7148029</argument>
+        <argument key="user">sql7148029</argument>
+        <argument key="password">hMSA8k8MFi</argument>
         <argument key="charset">UTF8</argument>
         <argument key="driverOptions" type="collection"/>
         <argument key="defaultTableOptions" type="collection"/>
@@ -2692,7 +2699,9 @@
           </call>
         </service>
       </argument>
-      <argument type="collection"/>
+      <argument type="collection">
+        <argument key="enum">string</argument>
+      </argument>
       <factory service="doctrine.dbal.connection_factory" method="createConnection"/>
     </service>
     <service id="form.type_guesser.doctrine" class="Symfony\Bridge\Doctrine\Form\DoctrineOrmTypeGuesser">
@@ -3186,9 +3195,40 @@
         <argument key="origin_regex">false</argument>
       </argument>
     </service>
-    <service id="application_admin.login" class="Application\AdminBundle\Services\Login">
+    <service id="admin.user" class="Application\AdminBundle\Entity\User"/>
+    <service id="admin.login" class="Application\AdminBundle\Services\Login">
       <argument type="service" id="doctrine.orm.default_entity_manager"/>
       <argument type="service" id="security.encoder_factory"/>
+    </service>
+    <service id="admin.login.validate" class="Application\AdminBundle\Validator\LoginValidation">
+      <argument type="service" id="validator"/>
+      <argument type="service" id="request_stack"/>
+    </service>
+    <service id="admin.register.validate" class="Application\AdminBundle\Validator\RegisterValidation">
+      <argument type="service" id="validator"/>
+      <argument type="service" id="request_stack"/>
+    </service>
+    <service id="admin.util_canonicalizer" class="Application\AdminBundle\Util\Canonicalizer"/>
+    <service id="admin.util_canonical_fields_updater" class="Application\AdminBundle\Util\CanonicalFieldsUpdater">
+      <argument type="service" id="admin.util_canonicalizer"/>
+      <argument type="service" id="admin.util_canonicalizer"/>
+    </service>
+    <service id="admin.util_canonical_password_updater" class="Application\AdminBundle\Util\PasswordUpdater">
+      <argument type="service" id="security.encoder_factory"/>
+    </service>
+    <service id="admin.util_token_generator" class="Application\AdminBundle\Util\TokenGenerator"/>
+    <service id="admin.user_manager" class="Application\AdminBundle\Model\UserManager">
+      <argument type="service" id="admin.user"/>
+      <argument type="service" id="admin.util_canonical_password_updater"/>
+      <argument type="service" id="admin.util_canonical_fields_updater"/>
+    </service>
+    <service id="admin.initialize_user_registration.listener" class="Application\AdminBundle\EventListener\RegistrationListener">
+      <argument type="service" id="email.user_confirmation"/>
+      <argument type="service" id="admin.util_token_generator"/>
+    </service>
+    <service id="admin.confirm_user_registration.listener" class="Application\AdminBundle\EventListener\EmailConfirmationListener">
+      <argument type="service" id="email.user_confirmation"/>
+      <argument type="service" id="admin.util_token_generator"/>
     </service>
     <service id="nelmio_api_doc.formatter.markdown_formatter" class="Nelmio\ApiDocBundle\Formatter\MarkdownFormatter"/>
     <service id="nelmio_api_doc.formatter.simple_formatter" class="Nelmio\ApiDocBundle\Formatter\SimpleFormatter"/>
@@ -3334,6 +3374,14 @@
       <argument type="service" id="serializer"/>
       <argument type="service" id="api_platform.serializer.context_builder"/>
       <argument type="service" id="api_platform.listener.request.deserialize"/>
+    </service>
+    <service id="email.user_confirmation" class="Application\EmailBundle\Mailer\Mailer">
+      <argument type="service" id="swiftmailer.mailer.default"/>
+      <argument type="service" id="router"/>
+      <argument type="service" id="templating"/>
+      <argument type="collection">
+        <argument key="confirmation.template">ApplicationEmailBundle:Registration:email.txt.twig</argument>
+      </argument>
     </service>
     <service id="data_collector.dump" class="Symfony\Component\HttpKernel\DataCollector\DumpDataCollector">
       <tag name="data_collector" id="dump" template="@Debug/Profiler/dump.html.twig" priority="240"/>
@@ -3493,6 +3541,7 @@
           <argument key="ApplicationAppBundle">Application\AppBundle\ApplicationAppBundle</argument>
           <argument key="NelmioApiDocBundle">Nelmio\ApiDocBundle\NelmioApiDocBundle</argument>
           <argument key="ApplicationCoreBundle">Application\CoreBundle\ApplicationCoreBundle</argument>
+          <argument key="ApplicationEmailBundle">Application\EmailBundle\ApplicationEmailBundle</argument>
           <argument key="DebugBundle">Symfony\Bundle\DebugBundle\DebugBundle</argument>
           <argument key="WebProfilerBundle">Symfony\Bundle\WebProfilerBundle\WebProfilerBundle</argument>
           <argument key="SensioDistributionBundle">Sensio\Bundle\DistributionBundle\SensioDistributionBundle</argument>
@@ -3501,11 +3550,11 @@
         </argument>
         <argument key="kernel.charset">UTF-8</argument>
         <argument key="kernel.container_class">appDevDebugProjectContainer</argument>
-        <argument key="database_host">52.24.27.64</argument>
-        <argument key="database_port">null</argument>
-        <argument key="database_name">api_platform</argument>
-        <argument key="database_user">mnk</argument>
-        <argument key="database_password">mnkdevelop13#</argument>
+        <argument key="database_host">52.29.239.198</argument>
+        <argument key="database_port">3306</argument>
+        <argument key="database_name">sql7148029</argument>
+        <argument key="database_user">sql7148029</argument>
+        <argument key="database_password">hMSA8k8MFi</argument>
         <argument key="mailer_transport">smtp</argument>
         <argument key="mailer_host">127.0.0.1</argument>
         <argument key="mailer_user">null</argument>
@@ -3914,6 +3963,7 @@
           <argument key="licenseUrl">null</argument>
         </argument>
         <argument key="nelmio_api_doc.swagger.model_naming_strategy">dot_notation</argument>
+        <argument key="admin.registration.confirmation.template">ApplicationEmailBundle:Registration:email.txt.twig</argument>
         <argument key="web_profiler.debug_toolbar.position">bottom</argument>
         <argument key="web_profiler.debug_toolbar.intercept_redirects">false</argument>
         <argument key="web_profiler.debug_toolbar.mode">2</argument>
@@ -4192,6 +4242,10 @@
         <argument>ApplicationCore</argument>
       </call>
       <call method="addPath">
+        <argument>/var/www/html/RO-API/src/Application/EmailBundle/Resources/views</argument>
+        <argument>ApplicationEmail</argument>
+      </call>
+      <call method="addPath">
         <argument>/var/www/html/RO-API/vendor/symfony/symfony/src/Symfony/Bundle/DebugBundle/Resources/views</argument>
         <argument>Debug</argument>
       </call>
@@ -4420,6 +4474,7 @@
     <service id="api_platform.action.get_item" alias="api_platform.action.placeholder"/>
     <service id="api_platform.action.put_item" alias="api_platform.action.placeholder"/>
     <service id="api_platform.action.delete_item" alias="api_platform.action.placeholder"/>
+    <service id="admin.util_username_canonicalizer" alias="admin.util_canonicalizer"/>
     <service id="console.command.apiplatform_core_bridge_symfony_bundle_command_swaggercommand" alias="api_platform.swagger.command.swagger_command"/>
     <service id="console.command.sensiolabs_security_command_securitycheckercommand" alias="sensio_distribution.security_checker.command"/>
     <service id="console.command.hautelook_alicebundle_doctrine_command_loaddatafixturescommand" alias="hautelook_alice.doctrine.command.load_command"/>

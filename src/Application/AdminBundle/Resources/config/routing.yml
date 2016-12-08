@@ -38,6 +38,14 @@ login_action:
         _api_resource_class: 'Application\AdminBundle\Entity\User'
         _api_collection_operation_name: 'addUser'
 
+register_action:
+    path: '/account/register/'
+    methods:  ['POST']
+    defaults:
+        _controller: 'ApplicationAdminBundle:Security:register'
+        _api_resource_class: 'Application\AdminBundle\Entity\User'
+        _api_collection_operation_name: 'addUser'
+
 get_profile_action:
     path: '/secured/account/profile/{id}/'
     methods:  ['GET']

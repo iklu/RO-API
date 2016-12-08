@@ -1,11 +1,54 @@
 services:
-    application_admin.login:
+    admin.user:
+        class: Application\AdminBundle\Entity\User
+
+    admin.login:
         class: Application\AdminBundle\Services\Login
         arguments: ["@doctrine.orm.entity_manager", "@security.encoder_factory"]
 
-    application_admin.login.validate:
+    admin.login.validate:
         class: Application\AdminBundle\Validator\LoginValidation
         arguments: ["@validator", "@request_stack"]
+
+    admin.register.validate:
+        class: Application\AdminBundle\Validator\RegisterValidation
+        arguments: ["@validator", "@request_stack", "@doctrine.orm.entity_manager"]
+
+    admin.util_canonicalizer:
+        class: Application\AdminBundle\Util\Canonicalizer
+
+    admin.util_username_canonicalizer:
+        alias: admin.util_canonicalizer
+
+    admin.util_email_canonicalizer:
+        alias: admin.util_canonicalizer
+
+    admin.util_canonical_fields_updater:
+        class: Application\AdminBundle\Util\CanonicalFieldsUpdater
+        arguments: ["@admin.util_canonicalizer", "@admin.util_username_canonicalizer"]
+
+    admin.util_canonical_password_updater:
+        class: Application\AdminBundle\Util\PasswordUpdater
+        arguments: ["@security.encoder_factory"]
+
+    admin.util_token_generator:
+        class: Application\AdminBundle\Util\TokenGenerator
+
+    admin.user_manager:
+        class: Application\AdminBundle\Doctrine\UserManager
+        arguments: ["@security.encoder_factory", "@admin.util_username_canonicalizer", "@admin.util_email_canonicalizer", "@doctrine.orm.entity_manager", "@admin.user"]
+
+    admin.initialize_user_registration.listener:
+        class: Application\AdminBundle\EventListener\RegistrationListener
+        tags:
+            - { name: kernel.event_subscriber }
+        arguments: ["@email.user_confirmation", "@admin.util_token_generator"]
+
+    admin.confirm_user_registration.listener:
+        class: Application\AdminBundle\EventListener\EmailConfirmationListener
+        tags:
+            - { name: kernel.event_subscriber }
+        arguments: ["@email.user_confirmation", "@admin.util_token_generator"]
 
 
 

@@ -27,7 +27,7 @@ use Doctrine\Common\Collections\Collection;
  * }
  *  )
  */
-  class User implements UserInterface, GroupableInterface
+class User implements UserInterface, GroupableInterface
 {
     /**
      * @Groups({"user"})
@@ -59,47 +59,65 @@ use Doctrine\Common\Collections\Collection;
      */
     protected $emailCanonical;
 
-  /**
-   * @Groups({"user"})
-   * @var string
-   */
-  protected $address;
+    /**
+     * @Groups({"user"})
+     * @var string
+     */
+    protected $firstName;
 
-  /**
-   * @Groups({"user"})
-   * @var string
-   */
-  protected $city;
+    /**
+     * @Groups({"user"})
+     * @var string
+     */
+    protected $lastName;
 
-  /**
-   * @Groups({"user"})
-   * @var string
-   */
-  protected $state;
+    /**
+     * @Groups({"user"})
+     * @var string
+     */
+    protected $phone;
 
-  /**
-   * @Groups({"user"})
-   * @var string
-   */
-  protected $country;
+    /**
+     * @Groups({"user"})
+     * @var string
+     */
+    protected $address;
 
-  /**
-   * @Groups({"user"})
-   * @var string
-   */
-  protected $cardNumber;
+    /**
+     * @Groups({"user"})
+     * @var string
+     */
+    protected $city;
 
-  /**
-   * @Groups({"user"})
-   * @var string
-   */
-  protected $customCardNumber;
+    /**
+     * @Groups({"user"})
+     * @var string
+     */
+    protected $state;
 
-  /**
-   * @Groups({"user"})
-   * @var string
-   */
-  protected $loyaltyPointsBalance;
+    /**
+     * @Groups({"user"})
+     * @var string
+     */
+    protected $country;
+
+    /**
+     * @Groups({"user"})
+     * @var string
+     */
+    protected $cardNumber;
+
+    /**
+     * @Groups({"user"})
+     * @var string
+     */
+    protected $customCardNumber;
+
+    /**
+     * @Groups({"user"})
+     * @var string
+     */
+    protected $loyaltyPointsBalance;
 
     /**
      * @Groups({"user"})
@@ -191,15 +209,15 @@ use Doctrine\Common\Collections\Collection;
     protected $credentialsExpireAt;
 
     /**
-   * @Groups({"user"})
-   * @var \DateTime
-   */
-  protected $dateUpdated;
+     * @Groups({"user"})
+     * @var \DateTime
+     */
+    protected $dateUpdated;
 
-  /**
-   * @var \DateTime
-   */
-  protected $dateCreated;
+    /**
+     * @var \DateTime
+     */
+    protected $dateCreated;
 
     /**
      * User constructor.
@@ -277,7 +295,7 @@ use Doctrine\Common\Collections\Collection;
             $this->credentialsExpireAt,
             $this->email,
             $this->emailCanonical
-        ) = $data;
+            ) = $data;
     }
 
     /**
@@ -303,6 +321,24 @@ use Doctrine\Common\Collections\Collection;
     {
         return $this->username;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getFirstName()
+    {
+        return $this->firstName;
+    }
+
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getLastName()
+    {
+        return $this->lastName;
+    }
+
 
     /**
      * {@inheritdoc}
@@ -336,190 +372,190 @@ use Doctrine\Common\Collections\Collection;
         return $this->emailCanonical;
     }
 
-     /**
-   * Set phone
-   *
-   * @param string $phone
-   * @return User
-   */
-  public function setPhone($phone)
-  {
-    $this->phone = $phone;
+    /**
+     * Set phone
+     *
+     * @param string $phone
+     * @return User
+     */
+    public function setPhone($phone)
+    {
+        $this->phone = $phone;
 
-    return $this;
-  }
+        return $this;
+    }
 
-  /**
-   * Set address
-   *
-   * @param string $address
-   * @return User
-   */
-  public function setAddress($address)
-  {
-    $this->address = $address;
+    /**
+     * Set address
+     *
+     * @param string $address
+     * @return User
+     */
+    public function setAddress($address)
+    {
+        $this->address = $address;
 
-    return $this;
-  }
+        return $this;
+    }
 
-  /**
-   * Get address
-   *
-   * @return string
-   */
-  public function getAddress()
-  {
-    return $this->address;
-  }
+    /**
+     * Get address
+     *
+     * @return string
+     */
+    public function getAddress()
+    {
+        return $this->address;
+    }
 
-  /**
-   * Set city
-   *
-   * @param string $city
-   * @return User
-   */
-  public function setCity($city)
-  {
-    $this->city = $city;
+    /**
+     * Set city
+     *
+     * @param string $city
+     * @return User
+     */
+    public function setCity($city)
+    {
+        $this->city = $city;
 
-    return $this;
-  }
+        return $this;
+    }
 
-  /**
-   * Get city
-   *
-   * @return string
-   */
-  public function getCity()
-  {
-    return $this->city;
-  }
+    /**
+     * Get city
+     *
+     * @return string
+     */
+    public function getCity()
+    {
+        return $this->city;
+    }
 
-  /**
-   * Set state
-   *
-   * @param string $state
-   * @return User
-   */
-  public function setState($state)
-  {
-    $this->state = $state;
+    /**
+     * Set state
+     *
+     * @param string $state
+     * @return User
+     */
+    public function setState($state)
+    {
+        $this->state = $state;
 
-    return $this;
-  }
+        return $this;
+    }
 
-  /**
-   * Get state
-   *
-   * @return string
-   */
-  public function getState()
-  {
-    return $this->state;
-  }
+    /**
+     * Get state
+     *
+     * @return string
+     */
+    public function getState()
+    {
+        return $this->state;
+    }
 
-  /**
-   * Set country
-   *
-   * @param string $country
-   * @return User
-   */
-  public function setCountry($country)
-  {
-    $this->country = $country;
+    /**
+     * Set country
+     *
+     * @param string $country
+     * @return User
+     */
+    public function setCountry($country)
+    {
+        $this->country = $country;
 
-    return $this;
-  }
+        return $this;
+    }
 
-  /**
-   * Get country
-   *
-   * @return string
-   */
-  public function getCountry()
-  {
-    return $this->country;
-  }
+    /**
+     * Get country
+     *
+     * @return string
+     */
+    public function getCountry()
+    {
+        return $this->country;
+    }
 
-  /**
-   * Set cardNumber
-   *
-   * @param string $cardNumber
-   * @return User
-   */
-  public function setCardNumber($cardNumber)
-  {
-    $this->cardNumber = $cardNumber;
+    /**
+     * Set cardNumber
+     *
+     * @param string $cardNumber
+     * @return User
+     */
+    public function setCardNumber($cardNumber)
+    {
+        $this->cardNumber = $cardNumber;
 
-    return $this;
-  }
+        return $this;
+    }
 
-  /**
-   * Get cardNumber
-   *
-   * @return string
-   */
-  public function getCardNumber()
-  {
-    return $this->cardNumber;
-  }
+    /**
+     * Get cardNumber
+     *
+     * @return string
+     */
+    public function getCardNumber()
+    {
+        return $this->cardNumber;
+    }
 
-  /**
-   * Set customCardNumber
-   *
-   * @param string $customCardNumber
-   * @return User
-   */
-  public function setCustomCardNumber($customCardNumber)
-  {
-    $this->customCardNumber = $customCardNumber;
+    /**
+     * Set customCardNumber
+     *
+     * @param string $customCardNumber
+     * @return User
+     */
+    public function setCustomCardNumber($customCardNumber)
+    {
+        $this->customCardNumber = $customCardNumber;
 
-    return $this;
-  }
+        return $this;
+    }
 
-  /**
-   * Get customCardNumber
-   *
-   * @return string
-   */
-  public function getCustomCardNumber()
-  {
-    return $this->customCardNumber;
-  }
+    /**
+     * Get customCardNumber
+     *
+     * @return string
+     */
+    public function getCustomCardNumber()
+    {
+        return $this->customCardNumber;
+    }
 
-  /**
-   * Set loyaltyPointsBalance
-   *
-   * @param string $loyaltyPointsBalance
-   * @return User
-   */
-  public function setLoyaltyPointsBalance($loyaltyPointsBalance)
-  {
-    $this->loyaltyPointsBalance = $loyaltyPointsBalance;
+    /**
+     * Set loyaltyPointsBalance
+     *
+     * @param string $loyaltyPointsBalance
+     * @return User
+     */
+    public function setLoyaltyPointsBalance($loyaltyPointsBalance)
+    {
+        $this->loyaltyPointsBalance = $loyaltyPointsBalance;
 
-    return $this;
-  }
+        return $this;
+    }
 
-  /**
-   * Get loyaltyPointsBalance
-   *
-   * @return string
-   */
-  public function getLoyaltyPointsBalance()
-  {
-    return $this->loyaltyPointsBalance;
-  }
+    /**
+     * Get loyaltyPointsBalance
+     *
+     * @return string
+     */
+    public function getLoyaltyPointsBalance()
+    {
+        return $this->loyaltyPointsBalance;
+    }
 
 
-  /**
-   * Get phone
-   *
-   * @return string
-   */
-  public function getPhone()
-  {
-    return $this->phone;
-  }
+    /**
+     * Get phone
+     *
+     * @return string
+     */
+    public function getPhone()
+    {
+        return $this->phone;
+    }
 
 
     /**
@@ -687,6 +723,27 @@ use Doctrine\Common\Collections\Collection;
     /**
      * {@inheritdoc}
      */
+    public function setFirstName($firstName)
+    {
+        $this->firstName = $firstName;
+
+        return $this;
+    }
+
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setLastName($lastName)
+    {
+        $this->lastName = $lastName;
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function setUsernameCanonical($usernameCanonical)
     {
         $this->usernameCanonical = $usernameCanonical;
@@ -743,7 +800,7 @@ use Doctrine\Common\Collections\Collection;
      */
     public function setEnabled($boolean)
     {
-        $this->enabled = (bool) $boolean;
+        $this->enabled = (bool)$boolean;
 
         return $this;
     }
@@ -757,7 +814,7 @@ use Doctrine\Common\Collections\Collection;
      */
     public function setExpired($boolean)
     {
-        $this->expired = (bool) $boolean;
+        $this->expired = (bool)$boolean;
 
         return $this;
     }
@@ -859,50 +916,50 @@ use Doctrine\Common\Collections\Collection;
     }
 
     /**
-   * Set dateUpdated
-   *
-   * @param \DateTime $dateUpdated
-   * @return User
-   */
-  public function setDateUpdated($dateUpdated)
-  {
-    $this->dateUpdated = $dateUpdated;
+     * Set dateUpdated
+     *
+     * @param \DateTime $dateUpdated
+     * @return User
+     */
+    public function setDateUpdated($dateUpdated)
+    {
+        $this->dateUpdated = $dateUpdated;
 
-    return $this;
-  }
+        return $this;
+    }
 
-  /**
-   * Get dateUpdated
-   *
-   * @return \DateTime
-   */
-  public function getDateUpdated()
-  {
-    return $this->dateUpdated;
-  }
+    /**
+     * Get dateUpdated
+     *
+     * @return \DateTime
+     */
+    public function getDateUpdated()
+    {
+        return $this->dateUpdated;
+    }
 
-  /**
-   * Set dateCreated
-   *
-   * @param \DateTime $dateCreated
-   * @return User
-   */
-  public function setDateCreated($dateCreated)
-  {
-    $this->dateCreated = $dateCreated;
+    /**
+     * Set dateCreated
+     *
+     * @param \DateTime $dateCreated
+     * @return User
+     */
+    public function setDateCreated($dateCreated)
+    {
+        $this->dateCreated = $dateCreated;
 
-    return $this;
-  }
+        return $this;
+    }
 
-  /**
-   * Get dateCreated
-   *
-   * @return \DateTime
-   */
-  public function getDateCreated()
-  {
-    return $this->dateCreated;
-  }
+    /**
+     * Get dateCreated
+     *
+     * @return \DateTime
+     */
+    public function getDateCreated()
+    {
+        return $this->dateCreated;
+    }
 
     /**
      * {@inheritdoc}
@@ -910,7 +967,7 @@ use Doctrine\Common\Collections\Collection;
     public function isPasswordRequestNonExpired($ttl)
     {
         return $this->getPasswordRequestedAt() instanceof \DateTime &&
-               $this->getPasswordRequestedAt()->getTimestamp() + $ttl > time();
+        $this->getPasswordRequestedAt()->getTimestamp() + $ttl > time();
     }
 
     /**
@@ -985,6 +1042,6 @@ use Doctrine\Common\Collections\Collection;
      */
     public function __toString()
     {
-        return (string) $this->getUsername();
+        return (string)$this->getUsername();
     }
 }

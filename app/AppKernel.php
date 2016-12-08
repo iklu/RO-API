@@ -23,6 +23,7 @@ class AppKernel extends Kernel
             new Application\AppBundle\ApplicationAppBundle(),
             new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
             new Application\CoreBundle\ApplicationCoreBundle(),
+            new Application\EmailBundle\ApplicationEmailBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

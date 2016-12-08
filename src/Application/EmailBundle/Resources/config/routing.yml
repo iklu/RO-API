@@ -1,0 +1,3 @@
+application_email_homepage:
+    path:     /
+    defaults: { _controller: ApplicationEmailBundle:Default:index }

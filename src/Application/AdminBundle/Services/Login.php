@@ -6,6 +6,7 @@ use Application\CoreBundle\Utils\ApiResponse;
 use Application\CoreBundle\Utils\DataSerializer;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 
 /**
@@ -47,7 +48,7 @@ class Login
         //no user found
         if (!$entity) {
             $response["message"] = "User not found";
-            $response["status"] = 401;
+            $response["status"] = Response::HTTP_UNAUTHORIZED;
             return $response;
 
         }
@@ -55,7 +56,7 @@ class Login
         //user is not active
         if (!$entity->isEnabled()) {     
             $response["message"] = 'Your account is not active.'.$entity->isEnabled();
-            $response["status"] = 401;
+            $response["status"] = Response::HTTP_UNAUTHORIZED;
             return $response;
         }
 
@@ -69,12 +70,12 @@ class Login
 
         if (strcmp($password, $pass) !== 0) {
             $response["message"] = 'Incorrect password.';
-            $response["status"] = 401;
+            $response["status"] = Response::HTTP_UNAUTHORIZED;
             return $response;
         }
 
         $response["message"] = DataSerializer::deserializeWithCamelCaseEntityToArray($entity);
-        $response["status"] = 200;
+        $response["status"] = Response::HTTP_OK;
 
         return $response;
     }

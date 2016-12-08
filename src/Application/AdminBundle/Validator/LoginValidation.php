@@ -41,7 +41,7 @@ class LoginValidation
      * @return mixed
      */
     public function validate(User $user) {
-        
+
         $usernameNotEmpty = new NotBlank(
             array('message' => 'Username is required')
         );
@@ -50,21 +50,16 @@ class LoginValidation
             array('message' => 'Password is required')
         );
 
-        $username = $this->validator->validate($user->getUsername(), $usernameNotEmpty);
-        $password = $this->validator->validate($user->getPlainPassword(), $passwordNotEmpty);
+        $validations[] = $this->validator->validate($user->getUsername(), $usernameNotEmpty);
+        $validations[] = $this->validator->validate($user->getPlainPassword(), $passwordNotEmpty);
 
         $serializer = SerializerBuilder::create()->build();
 
-        $deserializedUsernameError = $serializer->toArray($username);
-        $deserializedPassError = $serializer->toArray($password);
+        foreach($validations as $deserialize) {
+            $deserialized =  $serializer->toArray($deserialize);
+            if($deserialized["violations"][0]["message"] != null)
+                return $deserialized["violations"][0]["message"];
+        }
 
-
-
-        if($deserializedUsernameError["violations"][0]["message"] != null)
-            return $deserializedUsernameError["violations"][0]["message"];
-        if($deserializedPassError["violations"][0]["message"] != null)
-            return $deserializedPassError["violations"][0]["message"];
-
-        return null;
     }
 }

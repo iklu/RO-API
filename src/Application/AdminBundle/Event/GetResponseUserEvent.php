@@ -11,25 +11,25 @@
 
 namespace Application\AdminBundle\Event;
 
-use Symfony\Component\HttpFoundation\Response;
+use Application\CoreBundle\Utils\ApiResponse;
 
 class GetResponseUserEvent extends UserEvent
 {
     /**
-     * @var Response
+     * @var
      */
     private $response;
 
     /**
-     * @param Response $response
+     * @param $response
      */
-    public function setResponse(Response $response)
+    public function setResponse($response)
     {
         $this->response = $response;
     }
 
     /**
-     * @return Response|null
+     * @return mixed
      */
     public function getResponse()
     {

@@ -47,6 +47,26 @@ Application\AdminBundle\Entity\User:
             nullable: false
             fixed: false
             comment: ''
+        firstName:
+            type: string
+            column: first_name
+            nullable: true
+            length: 180
+            fixed: false
+            comment: ''
+        lastName:
+            type: string
+            column: last_name
+            nullable: true
+            length: 180
+            fixed: false
+            comment: ''
+        phone:
+            type: string
+            nullable: true
+            length: 10
+            fixed: false
+            comment: ''
         address:
             type: string
             nullable: true

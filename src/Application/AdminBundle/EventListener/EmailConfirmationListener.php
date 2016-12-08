@@ -9,9 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace FOS\UserBundle\EventListener;
+namespace Application\AdminBundle\EventListener;
 
-use FOS\UserBundle\Event\FormEvent;
+use Application\AdminBundle\Event\GetResponseUserEvent;
+use Application\EmailBundle\Mailer\MailerInterface;
+use Application\AdminBundle\Event\FormEvent;
+use Application\AdminBundle\Model\UserInterface;
+use Application\AdminBundle\Util\TokenGeneratorInterface;
 use Application\AdminBundle\ApplicationAdminEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -27,18 +31,13 @@ class EmailConfirmationListener implements EventSubscriberInterface
 
     /**
      * EmailConfirmationListener constructor.
-     *
-     * @param MailerInterface         $mailer
+     * @param MailerInterface $mailer
      * @param TokenGeneratorInterface $tokenGenerator
-     * @param UrlGeneratorInterface   $router
-     * @param SessionInterface        $session
      */
-    public function __construct(MailerInterface $mailer, TokenGeneratorInterface $tokenGenerator, UrlGeneratorInterface $router, SessionInterface $session)
+    public function __construct(MailerInterface $mailer, TokenGeneratorInterface $tokenGenerator)
     {
         $this->mailer = $mailer;
         $this->tokenGenerator = $tokenGenerator;
-        $this->router = $router;
-        $this->session = $session;
     }
 
     /**
@@ -52,12 +51,13 @@ class EmailConfirmationListener implements EventSubscriberInterface
     }
 
     /**
-     * @param FormEvent $event
+     * @param GetResponseUserEvent $event
      */
-    public function onRegistrationSuccess(FormEvent $event)
+    public function onRegistrationSuccess(GetResponseUserEvent $event)
     {
-        /** @var $user \FOS\UserBundle\Model\UserInterface */
-        $user = $event->getForm()->getData();
+
+        /** @var $user UserInterface */
+        $user = $event->getUser();
 
         $user->setEnabled(false);
         if (null === $user->getConfirmationToken()) {
@@ -69,6 +69,6 @@ class EmailConfirmationListener implements EventSubscriberInterface
         $this->session->set('fos_user_send_confirmation_email/email', $user->getEmail());
 
         $url = $this->router->generate('fos_user_registration_check_email');
-        $event->setResponse(new RedirectResponse($url));
+        $event->setResponse(true);
     }
 }
