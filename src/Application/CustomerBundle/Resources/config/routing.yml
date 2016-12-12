@@ -1,0 +1,3 @@
+application_customer_homepage:
+    path:     /
+    defaults: { _controller: ApplicationCustomerBundle:Default:index }

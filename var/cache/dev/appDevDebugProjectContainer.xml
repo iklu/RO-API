@@ -18,12 +18,14 @@
       <parameter key="DunglasActionBundle">Dunglas\ActionBundle\DunglasActionBundle</parameter>
       <parameter key="ApiPlatformBundle">ApiPlatform\Core\Bridge\Symfony\Bundle\ApiPlatformBundle</parameter>
       <parameter key="NelmioCorsBundle">Nelmio\CorsBundle\NelmioCorsBundle</parameter>
-      <parameter key="ApplicationClientBundle">Application\ClientBundle\ApplicationClientBundle</parameter>
       <parameter key="ApplicationAdminBundle">Application\AdminBundle\ApplicationAdminBundle</parameter>
       <parameter key="ApplicationAppBundle">Application\AppBundle\ApplicationAppBundle</parameter>
       <parameter key="NelmioApiDocBundle">Nelmio\ApiDocBundle\NelmioApiDocBundle</parameter>
       <parameter key="ApplicationCoreBundle">Application\CoreBundle\ApplicationCoreBundle</parameter>
       <parameter key="ApplicationEmailBundle">Application\EmailBundle\ApplicationEmailBundle</parameter>
+      <parameter key="ApplicationProductBundle">Application\ProductBundle\ApplicationProductBundle</parameter>
+      <parameter key="ApplicationCategoryBundle">Application\CategoryBundle\ApplicationCategoryBundle</parameter>
+      <parameter key="ApplicationCustomerBundle">Application\CustomerBundle\ApplicationCustomerBundle</parameter>
       <parameter key="DebugBundle">Symfony\Bundle\DebugBundle\DebugBundle</parameter>
       <parameter key="WebProfilerBundle">Symfony\Bundle\WebProfilerBundle\WebProfilerBundle</parameter>
       <parameter key="SensioDistributionBundle">Sensio\Bundle\DistributionBundle\SensioDistributionBundle</parameter>
@@ -643,7 +645,7 @@
                   <tag name="cache.pool"/>
                   <argument>XjpAxhtQa1</argument>
                   <argument>0</argument>
-                  <argument>T4bzbIzVQzXO8MKqA1SFbb</argument>
+                  <argument>3sJoL6uv3yDw8ef7TU3r8I</argument>
                   <argument>/var/www/html/RO-API/var/cache/dev/pools</argument>
                   <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
                   <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
@@ -656,7 +658,7 @@
                   <tag name="cache.pool"/>
                   <argument>3RTCZUV4M+</argument>
                   <argument>0</argument>
-                  <argument>T4bzbIzVQzXO8MKqA1SFbb</argument>
+                  <argument>3sJoL6uv3yDw8ef7TU3r8I</argument>
                   <argument>/var/www/html/RO-API/var/cache/dev/pools</argument>
                   <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
                   <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
@@ -988,7 +990,7 @@
       <tag name="cache.pool"/>
       <argument>89ErCvMU+5</argument>
       <argument>0</argument>
-      <argument>T4bzbIzVQzXO8MKqA1SFbb</argument>
+      <argument>3sJoL6uv3yDw8ef7TU3r8I</argument>
       <argument>/var/www/html/RO-API/var/cache/dev/pools</argument>
       <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
@@ -2079,6 +2081,14 @@
         <argument>Sensio\Bundle\FrameworkExtraBundle\EventListener\SecurityListener</argument>
       </call>
       <call method="addSubscriberService">
+        <argument>admin.initialize_user_registration.listener</argument>
+        <argument>Application\AdminBundle\EventListener\RegistrationListener</argument>
+      </call>
+      <call method="addSubscriberService">
+        <argument>admin.confirm_user_registration.listener</argument>
+        <argument>Application\AdminBundle\EventListener\EmailConfirmationListener</argument>
+      </call>
+      <call method="addSubscriberService">
         <argument>debug.dump_listener</argument>
         <argument>Symfony\Component\HttpKernel\EventListener\DumpListener</argument>
       </call>
@@ -2750,6 +2760,7 @@
           <call method="setEntityNamespaces">
             <argument type="collection">
               <argument key="ApplicationAdminBundle">Application\AdminBundle\Entity</argument>
+              <argument key="ApplicationProductBundle">Application\ProductBundle\Entity</argument>
             </argument>
           </call>
           <call method="setMetadataCacheImpl">
@@ -2769,6 +2780,7 @@
                     <service class="Doctrine\ORM\Mapping\Driver\SimplifiedYamlDriver" public="false">
                       <argument type="collection">
                         <argument key="/var/www/html/RO-API/src/Application/AdminBundle/Resources/config/doctrine">Application\AdminBundle\Entity</argument>
+                        <argument key="/var/www/html/RO-API/src/Application/ProductBundle/Resources/config/doctrine">Application\ProductBundle\Entity</argument>
                       </argument>
                       <call method="setGlobalBasename">
                         <argument>mapping</argument>
@@ -2776,6 +2788,20 @@
                     </service>
                   </argument>
                   <argument>Application\AdminBundle\Entity</argument>
+                </call>
+                <call method="addDriver">
+                  <argument type="service">
+                    <service class="Doctrine\ORM\Mapping\Driver\SimplifiedYamlDriver" public="false">
+                      <argument type="collection">
+                        <argument key="/var/www/html/RO-API/src/Application/AdminBundle/Resources/config/doctrine">Application\AdminBundle\Entity</argument>
+                        <argument key="/var/www/html/RO-API/src/Application/ProductBundle/Resources/config/doctrine">Application\ProductBundle\Entity</argument>
+                      </argument>
+                      <call method="setGlobalBasename">
+                        <argument>mapping</argument>
+                      </call>
+                    </service>
+                  </argument>
+                  <argument>Application\ProductBundle\Entity</argument>
                 </call>
               </service>
             </argument>
@@ -3207,6 +3233,7 @@
     <service id="admin.register.validate" class="Application\AdminBundle\Validator\RegisterValidation">
       <argument type="service" id="validator"/>
       <argument type="service" id="request_stack"/>
+      <argument type="service" id="doctrine.orm.default_entity_manager"/>
     </service>
     <service id="admin.util_canonicalizer" class="Application\AdminBundle\Util\Canonicalizer"/>
     <service id="admin.util_canonical_fields_updater" class="Application\AdminBundle\Util\CanonicalFieldsUpdater">
@@ -3217,16 +3244,20 @@
       <argument type="service" id="security.encoder_factory"/>
     </service>
     <service id="admin.util_token_generator" class="Application\AdminBundle\Util\TokenGenerator"/>
-    <service id="admin.user_manager" class="Application\AdminBundle\Model\UserManager">
+    <service id="admin.user_manager" class="Application\AdminBundle\Doctrine\UserManager">
+      <argument type="service" id="security.encoder_factory"/>
+      <argument type="service" id="admin.util_canonicalizer"/>
+      <argument type="service" id="admin.util_canonicalizer"/>
+      <argument type="service" id="doctrine.orm.default_entity_manager"/>
       <argument type="service" id="admin.user"/>
-      <argument type="service" id="admin.util_canonical_password_updater"/>
-      <argument type="service" id="admin.util_canonical_fields_updater"/>
     </service>
     <service id="admin.initialize_user_registration.listener" class="Application\AdminBundle\EventListener\RegistrationListener">
+      <tag name="kernel.event_subscriber"/>
       <argument type="service" id="email.user_confirmation"/>
       <argument type="service" id="admin.util_token_generator"/>
     </service>
     <service id="admin.confirm_user_registration.listener" class="Application\AdminBundle\EventListener\EmailConfirmationListener">
+      <tag name="kernel.event_subscriber"/>
       <argument type="service" id="email.user_confirmation"/>
       <argument type="service" id="admin.util_token_generator"/>
     </service>
@@ -3536,12 +3567,14 @@
           <argument key="DunglasActionBundle">Dunglas\ActionBundle\DunglasActionBundle</argument>
           <argument key="ApiPlatformBundle">ApiPlatform\Core\Bridge\Symfony\Bundle\ApiPlatformBundle</argument>
           <argument key="NelmioCorsBundle">Nelmio\CorsBundle\NelmioCorsBundle</argument>
-          <argument key="ApplicationClientBundle">Application\ClientBundle\ApplicationClientBundle</argument>
           <argument key="ApplicationAdminBundle">Application\AdminBundle\ApplicationAdminBundle</argument>
           <argument key="ApplicationAppBundle">Application\AppBundle\ApplicationAppBundle</argument>
           <argument key="NelmioApiDocBundle">Nelmio\ApiDocBundle\NelmioApiDocBundle</argument>
           <argument key="ApplicationCoreBundle">Application\CoreBundle\ApplicationCoreBundle</argument>
           <argument key="ApplicationEmailBundle">Application\EmailBundle\ApplicationEmailBundle</argument>
+          <argument key="ApplicationProductBundle">Application\ProductBundle\ApplicationProductBundle</argument>
+          <argument key="ApplicationCategoryBundle">Application\CategoryBundle\ApplicationCategoryBundle</argument>
+          <argument key="ApplicationCustomerBundle">Application\CustomerBundle\ApplicationCustomerBundle</argument>
           <argument key="DebugBundle">Symfony\Bundle\DebugBundle\DebugBundle</argument>
           <argument key="WebProfilerBundle">Symfony\Bundle\WebProfilerBundle\WebProfilerBundle</argument>
           <argument key="SensioDistributionBundle">Sensio\Bundle\DistributionBundle\SensioDistributionBundle</argument>
@@ -4226,10 +4259,6 @@
         <argument>ApiPlatform</argument>
       </call>
       <call method="addPath">
-        <argument>/var/www/html/RO-API/src/Application/ClientBundle/Resources/views</argument>
-        <argument>ApplicationClient</argument>
-      </call>
-      <call method="addPath">
         <argument>/var/www/html/RO-API/src/Application/AppBundle/Resources/views</argument>
         <argument>ApplicationApp</argument>
       </call>
@@ -4244,6 +4273,18 @@
       <call method="addPath">
         <argument>/var/www/html/RO-API/src/Application/EmailBundle/Resources/views</argument>
         <argument>ApplicationEmail</argument>
+      </call>
+      <call method="addPath">
+        <argument>/var/www/html/RO-API/src/Application/ProductBundle/Resources/views</argument>
+        <argument>ApplicationProduct</argument>
+      </call>
+      <call method="addPath">
+        <argument>/var/www/html/RO-API/src/Application/CategoryBundle/Resources/views</argument>
+        <argument>ApplicationCategory</argument>
+      </call>
+      <call method="addPath">
+        <argument>/var/www/html/RO-API/src/Application/CustomerBundle/Resources/views</argument>
+        <argument>ApplicationCustomer</argument>
       </call>
       <call method="addPath">
         <argument>/var/www/html/RO-API/vendor/symfony/symfony/src/Symfony/Bundle/DebugBundle/Resources/views</argument>
@@ -4349,6 +4390,7 @@
                   <argument type="service" id="annotation_reader"/>
                   <argument type="collection">
                     <argument>/var/www/html/RO-API/src/Application/AdminBundle/Entity</argument>
+                    <argument>/var/www/html/RO-API/src/Application/ProductBundle/Entity</argument>
                   </argument>
                 </service>
               </argument>
@@ -4475,6 +4517,7 @@
     <service id="api_platform.action.put_item" alias="api_platform.action.placeholder"/>
     <service id="api_platform.action.delete_item" alias="api_platform.action.placeholder"/>
     <service id="admin.util_username_canonicalizer" alias="admin.util_canonicalizer"/>
+    <service id="admin.util_email_canonicalizer" alias="admin.util_canonicalizer"/>
     <service id="console.command.apiplatform_core_bridge_symfony_bundle_command_swaggercommand" alias="api_platform.swagger.command.swagger_command"/>
     <service id="console.command.sensiolabs_security_command_securitycheckercommand" alias="sensio_distribution.security_checker.command"/>
     <service id="console.command.hautelook_alicebundle_doctrine_command_loaddatafixturescommand" alias="hautelook_alice.doctrine.command.load_command"/>

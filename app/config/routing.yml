@@ -1,3 +1,15 @@
+application_customer:
+    resource: "@ApplicationCustomerBundle/Resources/config/routing.yml"
+    prefix:   /
+
+application_category:
+    resource: "@ApplicationCategoryBundle/Resources/config/routing.yml"
+    prefix:   /
+
+application_product:
+    resource: "@ApplicationProductBundle/Resources/config/routing.yml"
+    prefix:   /
+
 application_email:
     resource: "@ApplicationEmailBundle/Resources/config/routing.yml"
     prefix:   /

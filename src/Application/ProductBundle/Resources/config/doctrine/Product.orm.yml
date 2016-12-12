@@ -1,0 +1,66 @@
+Application\ProductBundle\Entity\Product:
+    type: entity
+    table: null
+    repositoryClass: Application\ProductBundle\Repository\ProductRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        title:
+            type: string
+            length: 255
+        description:
+            type: text
+        country:
+            type: string
+            length: '255'
+            nullable: true
+        county:
+            type: string
+            length: '255'
+            nullable: true
+        village:
+            type: string
+            length: 255
+            nullable: true
+        address1:
+            type: string
+            length: 255
+            nullable: true
+        address2:
+            type: string
+            length: 255
+            nullable: true
+        contactPerson:
+            type: string
+            length: 255
+            nullable: true
+        contactPhone:
+            type: integer
+            nullable: true
+        contactEmail:
+            type: string
+            length: 255
+            nullable: true
+        lng:
+            type: float
+            nullable: true
+        lat:
+            type: float
+            nullable: true
+        addedDate:
+            type: datetime
+            nullable: true
+        isFeatured:
+            type: boolean
+            nullable: true
+        dateUpdated:
+            type: datetime
+            nullable: true
+        dateCreated:
+            type: datetime
+            nullable: true
+    lifecycleCallbacks: {  }

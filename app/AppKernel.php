@@ -18,12 +18,14 @@ class AppKernel extends Kernel
             new Dunglas\ActionBundle\DunglasActionBundle(),
             new ApiPlatform\Core\Bridge\Symfony\Bundle\ApiPlatformBundle(),
             new Nelmio\CorsBundle\NelmioCorsBundle(),
-            new Application\ClientBundle\ApplicationClientBundle(),
             new Application\AdminBundle\ApplicationAdminBundle(),
             new Application\AppBundle\ApplicationAppBundle(),
             new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
             new Application\CoreBundle\ApplicationCoreBundle(),
             new Application\EmailBundle\ApplicationEmailBundle(),
+            new Application\ProductBundle\ApplicationProductBundle(),
+            new Application\CategoryBundle\ApplicationCategoryBundle(),
+            new Application\CustomerBundle\ApplicationCustomerBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
