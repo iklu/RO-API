@@ -9,12 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace FOS\UserBundle\Doctrine;
+namespace Application\AdminBundle\Doctrine;
 
+use Application\AdminBundle\Model\UserInterface;
+use Application\AdminBundle\Model\UserManagerInterface;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use FOS\UserBundle\Model\UserInterface;
+
 
 /**
  * Base Doctrine listener updating the canonical username and password fields.
@@ -28,7 +30,7 @@ use FOS\UserBundle\Model\UserInterface;
 abstract class AbstractUserListener implements EventSubscriber
 {
     /**
-     * @var \FOS\UserBundle\Model\UserManagerInterface
+     * @var UserManagerInterface
      */
     private $userManager;
 
