@@ -1,0 +1,24 @@
+Application\AdminBundle\Entity\Group:
+    type: entity
+    table: user
+    repositoryClass: Application\AdminBundle\Repository\GroupRepository
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: true
+            comment: ''
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        name:
+            type: string
+            nullable: true
+            length: 255
+            fixed: false
+            comment: ''
+        roles:
+            type: array
+            comment: ''
+    lifecycleCallbacks: { }

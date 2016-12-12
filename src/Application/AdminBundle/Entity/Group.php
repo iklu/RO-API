@@ -9,11 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Application\AdminBundle\Model;
+namespace Application\AdminBundle\Entity;
 
-/**
- * @author Johannes M. Schmitt <schmittjoh@gmail.com>
- */
+
 abstract class Group implements GroupInterface
 {
     /**

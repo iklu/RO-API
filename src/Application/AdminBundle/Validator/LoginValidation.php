@@ -57,7 +57,7 @@ class LoginValidation
 
         foreach($validations as $deserialize) {
             $deserialized =  $serializer->toArray($deserialize);
-            if($deserialized["violations"][0]["message"] != null)
+            if(isset($deserialized["violations"][0]["message"]) &&  $deserialized["violations"][0]["message"] != null)
                 return $deserialized["violations"][0]["message"];
         }
 
