@@ -1,0 +1,3 @@
+application_producer_homepage:
+    path:     /
+    defaults: { _controller: ApplicationProducerBundle:Default:index }

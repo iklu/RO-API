@@ -1,0 +1,3 @@
+application_business_homepage:
+    path:     /
+    defaults: { _controller: ApplicationBusinessBundle:Default:index }

@@ -1,0 +1,3 @@
+application_industry_homepage:
+    path:     /
+    defaults: { _controller: ApplicationIndustryBundle:Default:index }

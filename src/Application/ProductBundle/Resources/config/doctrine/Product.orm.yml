@@ -1,19 +1,26 @@
 Application\ProductBundle\Entity\Product:
     type: entity
-    table: null
+    table: car
     repositoryClass: Application\ProductBundle\Repository\ProductRepository
+    inheritanceType: SINGLE_TABLE
     id:
         id:
             type: integer
+            nullable: false
+            unsigned: true
+            comment: ''
             id: true
             generator:
-                strategy: AUTO
+                strategy: IDENTITY
     fields:
         title:
             type: string
             length: 255
         description:
             type: text
+        price:
+            type: float
+            nullable: true
         country:
             type: string
             length: '255'
@@ -35,13 +42,16 @@ Application\ProductBundle\Entity\Product:
             length: 255
             nullable: true
         contactPerson:
+            column: contact_person
             type: string
             length: 255
             nullable: true
         contactPhone:
+            column: contact_phone
             type: integer
             nullable: true
         contactEmail:
+            column: contact_email
             type: string
             length: 255
             nullable: true
@@ -52,15 +62,23 @@ Application\ProductBundle\Entity\Product:
             type: float
             nullable: true
         addedDate:
+            column: added_date
             type: datetime
             nullable: true
         isFeatured:
+            column: is_featured
+            type: boolean
+            nullable: true
+        isNegotiable:
+            column: is_negotiable
             type: boolean
             nullable: true
         dateUpdated:
+            column: date_updated
             type: datetime
             nullable: true
         dateCreated:
+            column: date_created
             type: datetime
             nullable: true
     lifecycleCallbacks: {  }

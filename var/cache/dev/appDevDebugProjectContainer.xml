@@ -26,6 +26,18 @@
       <parameter key="ApplicationProductBundle">Application\ProductBundle\ApplicationProductBundle</parameter>
       <parameter key="ApplicationCategoryBundle">Application\CategoryBundle\ApplicationCategoryBundle</parameter>
       <parameter key="ApplicationCustomerBundle">Application\CustomerBundle\ApplicationCustomerBundle</parameter>
+      <parameter key="ApplicationAutoBundle">Application\AutoBundle\ApplicationAutoBundle</parameter>
+      <parameter key="ApplicationRealEstateBundle">Application\RealEstateBundle\ApplicationRealEstateBundle</parameter>
+      <parameter key="ApplicationElectronicsBundle">Application\ElectronicsBundle\ApplicationElectronicsBundle</parameter>
+      <parameter key="ApplicationFashionBundle">Application\FashionBundle\ApplicationFashionBundle</parameter>
+      <parameter key="ApplicationHouseGardeningBundle">Application\HouseGardeningBundle\ApplicationHouseGardeningBundle</parameter>
+      <parameter key="ApplicationFamilyBundle">Application\FamilyBundle\ApplicationFamilyBundle</parameter>
+      <parameter key="ApplicationSportBundle">Application\SportBundle\ApplicationSportBundle</parameter>
+      <parameter key="ApplicationPetsBundle">Application\PetsBundle\ApplicationPetsBundle</parameter>
+      <parameter key="ApplicationIndustryBundle">Application\IndustryBundle\ApplicationIndustryBundle</parameter>
+      <parameter key="ApplicationBusinessBundle">Application\BusinessBundle\ApplicationBusinessBundle</parameter>
+      <parameter key="ApplicationJobsBundle">Application\JobsBundle\ApplicationJobsBundle</parameter>
+      <parameter key="ApplicationProducerBundle">Application\ProducerBundle\ApplicationProducerBundle</parameter>
       <parameter key="DebugBundle">Symfony\Bundle\DebugBundle\DebugBundle</parameter>
       <parameter key="WebProfilerBundle">Symfony\Bundle\WebProfilerBundle\WebProfilerBundle</parameter>
       <parameter key="SensioDistributionBundle">Sensio\Bundle\DistributionBundle\SensioDistributionBundle</parameter>
@@ -34,11 +46,11 @@
     </parameter>
     <parameter key="kernel.charset">UTF-8</parameter>
     <parameter key="kernel.container_class">appDevDebugProjectContainer</parameter>
-    <parameter key="database_host">52.29.239.198</parameter>
+    <parameter key="database_host">localhost</parameter>
     <parameter key="database_port">3306</parameter>
-    <parameter key="database_name">sql7148029</parameter>
-    <parameter key="database_user">sql7148029</parameter>
-    <parameter key="database_password">hMSA8k8MFi</parameter>
+    <parameter key="database_name">apiplatform</parameter>
+    <parameter key="database_user">root</parameter>
+    <parameter key="database_password">parola86</parameter>
     <parameter key="mailer_transport">smtp</parameter>
     <parameter key="mailer_host">127.0.0.1</parameter>
     <parameter key="mailer_user">null</parameter>
@@ -645,7 +657,7 @@
                   <tag name="cache.pool"/>
                   <argument>XjpAxhtQa1</argument>
                   <argument>0</argument>
-                  <argument>3sJoL6uv3yDw8ef7TU3r8I</argument>
+                  <argument>dReir2s+-uyvz9VFQr-b1j</argument>
                   <argument>/var/www/html/RO-API/var/cache/dev/pools</argument>
                   <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
                   <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
@@ -658,7 +670,7 @@
                   <tag name="cache.pool"/>
                   <argument>3RTCZUV4M+</argument>
                   <argument>0</argument>
-                  <argument>3sJoL6uv3yDw8ef7TU3r8I</argument>
+                  <argument>dReir2s+-uyvz9VFQr-b1j</argument>
                   <argument>/var/www/html/RO-API/var/cache/dev/pools</argument>
                   <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
                   <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
@@ -990,7 +1002,7 @@
       <tag name="cache.pool"/>
       <argument>89ErCvMU+5</argument>
       <argument>0</argument>
-      <argument>3sJoL6uv3yDw8ef7TU3r8I</argument>
+      <argument>dReir2s+-uyvz9VFQr-b1j</argument>
       <argument>/var/www/html/RO-API/var/cache/dev/pools</argument>
       <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
@@ -2667,11 +2679,11 @@
     <service id="doctrine.dbal.default_connection" class="Doctrine\DBAL\Connection">
       <argument type="collection">
         <argument key="driver">pdo_mysql</argument>
-        <argument key="host">52.29.239.198</argument>
+        <argument key="host">localhost</argument>
         <argument key="port">3306</argument>
-        <argument key="dbname">sql7148029</argument>
-        <argument key="user">sql7148029</argument>
-        <argument key="password">hMSA8k8MFi</argument>
+        <argument key="dbname">apiplatform</argument>
+        <argument key="user">root</argument>
+        <argument key="password">parola86</argument>
         <argument key="charset">UTF8</argument>
         <argument key="driverOptions" type="collection"/>
         <argument key="defaultTableOptions" type="collection"/>
@@ -2761,6 +2773,9 @@
             <argument type="collection">
               <argument key="ApplicationAdminBundle">Application\AdminBundle\Entity</argument>
               <argument key="ApplicationProductBundle">Application\ProductBundle\Entity</argument>
+              <argument key="ApplicationCategoryBundle">Application\CategoryBundle\Entity</argument>
+              <argument key="ApplicationAutoBundle">Application\AutoBundle\Entity</argument>
+              <argument key="ApplicationProducerBundle">Application\ProducerBundle\Entity</argument>
             </argument>
           </call>
           <call method="setMetadataCacheImpl">
@@ -2781,6 +2796,8 @@
                       <argument type="collection">
                         <argument key="/var/www/html/RO-API/src/Application/AdminBundle/Resources/config/doctrine">Application\AdminBundle\Entity</argument>
                         <argument key="/var/www/html/RO-API/src/Application/ProductBundle/Resources/config/doctrine">Application\ProductBundle\Entity</argument>
+                        <argument key="/var/www/html/RO-API/src/Application/CategoryBundle/Resources/config/doctrine">Application\CategoryBundle\Entity</argument>
+                        <argument key="/var/www/html/RO-API/src/Application/AutoBundle/Resources/config/doctrine">Application\AutoBundle\Entity</argument>
                       </argument>
                       <call method="setGlobalBasename">
                         <argument>mapping</argument>
@@ -2795,6 +2812,8 @@
                       <argument type="collection">
                         <argument key="/var/www/html/RO-API/src/Application/AdminBundle/Resources/config/doctrine">Application\AdminBundle\Entity</argument>
                         <argument key="/var/www/html/RO-API/src/Application/ProductBundle/Resources/config/doctrine">Application\ProductBundle\Entity</argument>
+                        <argument key="/var/www/html/RO-API/src/Application/CategoryBundle/Resources/config/doctrine">Application\CategoryBundle\Entity</argument>
+                        <argument key="/var/www/html/RO-API/src/Application/AutoBundle/Resources/config/doctrine">Application\AutoBundle\Entity</argument>
                       </argument>
                       <call method="setGlobalBasename">
                         <argument>mapping</argument>
@@ -2802,6 +2821,49 @@
                     </service>
                   </argument>
                   <argument>Application\ProductBundle\Entity</argument>
+                </call>
+                <call method="addDriver">
+                  <argument type="service">
+                    <service class="Doctrine\ORM\Mapping\Driver\SimplifiedYamlDriver" public="false">
+                      <argument type="collection">
+                        <argument key="/var/www/html/RO-API/src/Application/AdminBundle/Resources/config/doctrine">Application\AdminBundle\Entity</argument>
+                        <argument key="/var/www/html/RO-API/src/Application/ProductBundle/Resources/config/doctrine">Application\ProductBundle\Entity</argument>
+                        <argument key="/var/www/html/RO-API/src/Application/CategoryBundle/Resources/config/doctrine">Application\CategoryBundle\Entity</argument>
+                        <argument key="/var/www/html/RO-API/src/Application/AutoBundle/Resources/config/doctrine">Application\AutoBundle\Entity</argument>
+                      </argument>
+                      <call method="setGlobalBasename">
+                        <argument>mapping</argument>
+                      </call>
+                    </service>
+                  </argument>
+                  <argument>Application\CategoryBundle\Entity</argument>
+                </call>
+                <call method="addDriver">
+                  <argument type="service">
+                    <service class="Doctrine\ORM\Mapping\Driver\SimplifiedYamlDriver" public="false">
+                      <argument type="collection">
+                        <argument key="/var/www/html/RO-API/src/Application/AdminBundle/Resources/config/doctrine">Application\AdminBundle\Entity</argument>
+                        <argument key="/var/www/html/RO-API/src/Application/ProductBundle/Resources/config/doctrine">Application\ProductBundle\Entity</argument>
+                        <argument key="/var/www/html/RO-API/src/Application/CategoryBundle/Resources/config/doctrine">Application\CategoryBundle\Entity</argument>
+                        <argument key="/var/www/html/RO-API/src/Application/AutoBundle/Resources/config/doctrine">Application\AutoBundle\Entity</argument>
+                      </argument>
+                      <call method="setGlobalBasename">
+                        <argument>mapping</argument>
+                      </call>
+                    </service>
+                  </argument>
+                  <argument>Application\AutoBundle\Entity</argument>
+                </call>
+                <call method="addDriver">
+                  <argument type="service">
+                    <service class="Doctrine\ORM\Mapping\Driver\AnnotationDriver" public="false">
+                      <argument type="service" id="annotation_reader"/>
+                      <argument type="collection">
+                        <argument>/var/www/html/RO-API/src/Application/ProducerBundle/Entity</argument>
+                      </argument>
+                    </service>
+                  </argument>
+                  <argument>Application\ProducerBundle\Entity</argument>
                 </call>
               </service>
             </argument>
@@ -3575,6 +3637,18 @@
           <argument key="ApplicationProductBundle">Application\ProductBundle\ApplicationProductBundle</argument>
           <argument key="ApplicationCategoryBundle">Application\CategoryBundle\ApplicationCategoryBundle</argument>
           <argument key="ApplicationCustomerBundle">Application\CustomerBundle\ApplicationCustomerBundle</argument>
+          <argument key="ApplicationAutoBundle">Application\AutoBundle\ApplicationAutoBundle</argument>
+          <argument key="ApplicationRealEstateBundle">Application\RealEstateBundle\ApplicationRealEstateBundle</argument>
+          <argument key="ApplicationElectronicsBundle">Application\ElectronicsBundle\ApplicationElectronicsBundle</argument>
+          <argument key="ApplicationFashionBundle">Application\FashionBundle\ApplicationFashionBundle</argument>
+          <argument key="ApplicationHouseGardeningBundle">Application\HouseGardeningBundle\ApplicationHouseGardeningBundle</argument>
+          <argument key="ApplicationFamilyBundle">Application\FamilyBundle\ApplicationFamilyBundle</argument>
+          <argument key="ApplicationSportBundle">Application\SportBundle\ApplicationSportBundle</argument>
+          <argument key="ApplicationPetsBundle">Application\PetsBundle\ApplicationPetsBundle</argument>
+          <argument key="ApplicationIndustryBundle">Application\IndustryBundle\ApplicationIndustryBundle</argument>
+          <argument key="ApplicationBusinessBundle">Application\BusinessBundle\ApplicationBusinessBundle</argument>
+          <argument key="ApplicationJobsBundle">Application\JobsBundle\ApplicationJobsBundle</argument>
+          <argument key="ApplicationProducerBundle">Application\ProducerBundle\ApplicationProducerBundle</argument>
           <argument key="DebugBundle">Symfony\Bundle\DebugBundle\DebugBundle</argument>
           <argument key="WebProfilerBundle">Symfony\Bundle\WebProfilerBundle\WebProfilerBundle</argument>
           <argument key="SensioDistributionBundle">Sensio\Bundle\DistributionBundle\SensioDistributionBundle</argument>
@@ -3583,11 +3657,11 @@
         </argument>
         <argument key="kernel.charset">UTF-8</argument>
         <argument key="kernel.container_class">appDevDebugProjectContainer</argument>
-        <argument key="database_host">52.29.239.198</argument>
+        <argument key="database_host">localhost</argument>
         <argument key="database_port">3306</argument>
-        <argument key="database_name">sql7148029</argument>
-        <argument key="database_user">sql7148029</argument>
-        <argument key="database_password">hMSA8k8MFi</argument>
+        <argument key="database_name">apiplatform</argument>
+        <argument key="database_user">root</argument>
+        <argument key="database_password">parola86</argument>
         <argument key="mailer_transport">smtp</argument>
         <argument key="mailer_host">127.0.0.1</argument>
         <argument key="mailer_user">null</argument>
@@ -4287,6 +4361,54 @@
         <argument>ApplicationCustomer</argument>
       </call>
       <call method="addPath">
+        <argument>/var/www/html/RO-API/src/Application/AutoBundle/Resources/views</argument>
+        <argument>ApplicationAuto</argument>
+      </call>
+      <call method="addPath">
+        <argument>/var/www/html/RO-API/src/Application/RealEstateBundle/Resources/views</argument>
+        <argument>ApplicationRealEstate</argument>
+      </call>
+      <call method="addPath">
+        <argument>/var/www/html/RO-API/src/Application/ElectronicsBundle/Resources/views</argument>
+        <argument>ApplicationElectronics</argument>
+      </call>
+      <call method="addPath">
+        <argument>/var/www/html/RO-API/src/Application/FashionBundle/Resources/views</argument>
+        <argument>ApplicationFashion</argument>
+      </call>
+      <call method="addPath">
+        <argument>/var/www/html/RO-API/src/Application/HouseGardeningBundle/Resources/views</argument>
+        <argument>ApplicationHouseGardening</argument>
+      </call>
+      <call method="addPath">
+        <argument>/var/www/html/RO-API/src/Application/FamilyBundle/Resources/views</argument>
+        <argument>ApplicationFamily</argument>
+      </call>
+      <call method="addPath">
+        <argument>/var/www/html/RO-API/src/Application/SportBundle/Resources/views</argument>
+        <argument>ApplicationSport</argument>
+      </call>
+      <call method="addPath">
+        <argument>/var/www/html/RO-API/src/Application/PetsBundle/Resources/views</argument>
+        <argument>ApplicationPets</argument>
+      </call>
+      <call method="addPath">
+        <argument>/var/www/html/RO-API/src/Application/IndustryBundle/Resources/views</argument>
+        <argument>ApplicationIndustry</argument>
+      </call>
+      <call method="addPath">
+        <argument>/var/www/html/RO-API/src/Application/BusinessBundle/Resources/views</argument>
+        <argument>ApplicationBusiness</argument>
+      </call>
+      <call method="addPath">
+        <argument>/var/www/html/RO-API/src/Application/JobsBundle/Resources/views</argument>
+        <argument>ApplicationJobs</argument>
+      </call>
+      <call method="addPath">
+        <argument>/var/www/html/RO-API/src/Application/ProducerBundle/Resources/views</argument>
+        <argument>ApplicationProducer</argument>
+      </call>
+      <call method="addPath">
         <argument>/var/www/html/RO-API/vendor/symfony/symfony/src/Symfony/Bundle/DebugBundle/Resources/views</argument>
         <argument>Debug</argument>
       </call>
@@ -4391,6 +4513,9 @@
                   <argument type="collection">
                     <argument>/var/www/html/RO-API/src/Application/AdminBundle/Entity</argument>
                     <argument>/var/www/html/RO-API/src/Application/ProductBundle/Entity</argument>
+                    <argument>/var/www/html/RO-API/src/Application/CategoryBundle/Entity</argument>
+                    <argument>/var/www/html/RO-API/src/Application/AutoBundle/Entity</argument>
+                    <argument>/var/www/html/RO-API/src/Application/ProducerBundle/Entity</argument>
                   </argument>
                 </service>
               </argument>

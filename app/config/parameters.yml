@@ -1,10 +1,21 @@
 # This file is auto-generated during the composer install
 parameters:
-    database_host: 52.29.239.198
+#    database_host: 52.29.239.198
+#    database_port: 3306
+#    database_name: sql7148029
+#    database_user: sql7148029
+#    database_password: 'hMSA8k8MFi'
+#    mailer_transport: smtp
+#    mailer_host: 127.0.0.1
+#    mailer_user: null
+#    mailer_password: null
+#    secret: ThisTokenIsNotSoSecretChangeIt
+#    cors_allow_origin: 'http://localhost'
+    database_host: localhost
     database_port: 3306
-    database_name: sql7148029
-    database_user: sql7148029
-    database_password: 'hMSA8k8MFi'
+    database_name: apiplatform
+    database_user: root
+    database_password: 'parola86'
     mailer_transport: smtp
     mailer_host: 127.0.0.1
     mailer_user: null

@@ -1,0 +1,4 @@
+services:
+#    application_producer.example:
+#        class: Application\ProducerBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]

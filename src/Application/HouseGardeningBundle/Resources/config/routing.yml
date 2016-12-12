@@ -1,0 +1,3 @@
+application_house_gardening_homepage:
+    path:     /
+    defaults: { _controller: ApplicationHouseGardeningBundle:Default:index }

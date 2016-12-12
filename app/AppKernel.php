@@ -26,6 +26,18 @@ class AppKernel extends Kernel
             new Application\ProductBundle\ApplicationProductBundle(),
             new Application\CategoryBundle\ApplicationCategoryBundle(),
             new Application\CustomerBundle\ApplicationCustomerBundle(),
+            new Application\AutoBundle\ApplicationAutoBundle(),
+            new Application\RealEstateBundle\ApplicationRealEstateBundle(),
+            new Application\ElectronicsBundle\ApplicationElectronicsBundle(),
+            new Application\FashionBundle\ApplicationFashionBundle(),
+            new Application\HouseGardeningBundle\ApplicationHouseGardeningBundle(),
+            new Application\FamilyBundle\ApplicationFamilyBundle(),
+            new Application\SportBundle\ApplicationSportBundle(),
+            new Application\PetsBundle\ApplicationPetsBundle(),
+            new Application\IndustryBundle\ApplicationIndustryBundle(),
+            new Application\BusinessBundle\ApplicationBusinessBundle(),
+            new Application\JobsBundle\ApplicationJobsBundle(),
+            new Application\ProducerBundle\ApplicationProducerBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

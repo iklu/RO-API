@@ -23,6 +23,16 @@ class Product
     private $description;
 
     /**
+     * @var float
+     */
+    private $price;
+
+    /**
+     * @var boolean
+     */
+    private $isNegotiable;
+
+    /**
      * @var string
      */
     private $country;
@@ -485,6 +495,54 @@ class Product
     public function getDateCreated()
     {
         return $this->dateCreated;
+    }
+
+    /**
+     * Set isNegotiable
+     *
+     * @param boolean $isNegotiable
+     *
+     * @return Product
+     */
+    public function setIsNegotiable($isNegotiable)
+    {
+        $this->isNegotiable = $isNegotiable;
+
+        return $this;
+    }
+
+    /**
+     * Get isNegotiable
+     *
+     * @return bool
+     */
+    public function getIsNegotiable()
+    {
+        return $this->isNegotiable;
+    }
+
+    /**
+     * Set price
+     *
+     * @param float $price
+     *
+     * @return Car
+     */
+    public function setPrice($price)
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
+    /**
+     * Get price
+     *
+     * @return float
+     */
+    public function getPrice()
+    {
+        return $this->price;
     }
 }
 

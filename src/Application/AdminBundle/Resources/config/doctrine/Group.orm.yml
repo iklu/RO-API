@@ -1,6 +1,6 @@
 Application\AdminBundle\Entity\Group:
     type: entity
-    table: user
+    table: group
     repositoryClass: Application\AdminBundle\Repository\GroupRepository
     id:
         id:

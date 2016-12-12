@@ -1,0 +1,16 @@
+Application\AutoBundle\Entity\CarHasProducer:
+    type: entity
+    table: null
+    repositoryClass: Application\AutoBundle\Repository\CarHasProducerRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        producers:
+            type: integer
+        cars:
+            type: integer
+    lifecycleCallbacks: {  }

@@ -1,0 +1,4 @@
+services:
+#    application_family.example:
+#        class: Application\FamilyBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]

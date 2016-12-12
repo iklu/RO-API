@@ -1,3 +1,51 @@
+application_producer:
+    resource: "@ApplicationProducerBundle/Resources/config/routing.yml"
+    prefix:   /
+
+application_jobs:
+    resource: "@ApplicationJobsBundle/Resources/config/routing.yml"
+    prefix:   /
+
+application_business:
+    resource: "@ApplicationBusinessBundle/Resources/config/routing.yml"
+    prefix:   /
+
+application_industry:
+    resource: "@ApplicationIndustryBundle/Resources/config/routing.yml"
+    prefix:   /
+
+application_pets:
+    resource: "@ApplicationPetsBundle/Resources/config/routing.yml"
+    prefix:   /
+
+application_sport:
+    resource: "@ApplicationSportBundle/Resources/config/routing.yml"
+    prefix:   /
+
+application_family:
+    resource: "@ApplicationFamilyBundle/Resources/config/routing.yml"
+    prefix:   /
+
+application_house_gardening:
+    resource: "@ApplicationHouseGardeningBundle/Resources/config/routing.yml"
+    prefix:   /
+
+application_fashion:
+    resource: "@ApplicationFashionBundle/Resources/config/routing.yml"
+    prefix:   /
+
+application_electronics:
+    resource: "@ApplicationElectronicsBundle/Resources/config/routing.yml"
+    prefix:   /
+
+application_real_estate:
+    resource: "@ApplicationRealEstateBundle/Resources/config/routing.yml"
+    prefix:   /
+
+application_auto:
+    resource: "@ApplicationAutoBundle/Resources/config/routing.yml"
+    prefix:   /
+
 application_customer:
     resource: "@ApplicationCustomerBundle/Resources/config/routing.yml"
     prefix:   /

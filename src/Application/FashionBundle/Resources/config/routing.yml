@@ -1,0 +1,3 @@
+application_fashion_homepage:
+    path:     /
+    defaults: { _controller: ApplicationFashionBundle:Default:index }

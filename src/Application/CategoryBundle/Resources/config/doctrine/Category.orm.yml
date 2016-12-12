@@ -1,0 +1,52 @@
+Application\CategoryBundle\Entity\Category:
+    type: entity
+    table: null
+    repositoryClass: Application\CategoryBundle\Repository\CategoryRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 255
+            nullable: true
+        shortDescription:
+            type: string
+            length: 255
+            nullable: true
+        description:
+            type: text
+            nullable: true
+        photo:
+            type: string
+            length: 255
+            nullable: true
+        slug:
+            type: string
+            length: 255
+            nullable: true
+        metaTitle:
+            type: string
+            length: 255
+            nullable: true
+        metaDescription:
+            type: string
+            length: 255
+            nullable: true
+        metaKeywords:
+            type: string
+            length: 255
+            nullable: true
+        orderIdx:
+            type: integer
+            nullable: true
+        dateUpdated:
+            type: datetime
+            nullable: true
+        dateCreated:
+            type: datetime
+            nullable: true
+    lifecycleCallbacks: {  }

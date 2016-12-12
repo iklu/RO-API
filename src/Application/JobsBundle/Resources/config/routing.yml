@@ -1,0 +1,3 @@
+application_jobs_homepage:
+    path:     /
+    defaults: { _controller: ApplicationJobsBundle:Default:index }

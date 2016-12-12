@@ -1,0 +1,3 @@
+application_electronics_homepage:
+    path:     /
+    defaults: { _controller: ApplicationElectronicsBundle:Default:index }

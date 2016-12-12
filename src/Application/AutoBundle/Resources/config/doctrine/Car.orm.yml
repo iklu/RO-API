@@ -1,0 +1,42 @@
+Application\AutoBundle\Entity\Car:
+    type: entity
+    table: cars
+    repositoryClass: Application\AutoBundle\Repository\CarRepository
+    indexes:
+        fk_cars_title_idx:
+            columns:
+                - title
+    fields:
+        fuel:
+            type: string
+            length: 255
+            nullable: true
+        mileage:
+            type: float
+            nullable: true
+        engineCapacity:
+            type: float
+            nullable: true
+        vehicleType:
+            type: string
+            length: 255
+            nullable: true
+        carCondition:
+            type: string
+            length: 255
+            nullable: true
+        seatsNumber:
+            type: integer
+            nullable: true
+        transmission:
+            type: string
+            length: 255
+            nullable: true
+        exteriorColour:
+            type: string
+            length: 255
+            nullable: true
+        airConditioning:
+            type: boolean
+            nullable: true
+    lifecycleCallbacks: {  }
