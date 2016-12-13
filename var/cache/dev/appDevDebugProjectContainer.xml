@@ -657,7 +657,7 @@
                   <tag name="cache.pool"/>
                   <argument>XjpAxhtQa1</argument>
                   <argument>0</argument>
-                  <argument>dReir2s+-uyvz9VFQr-b1j</argument>
+                  <argument>nWE8WSNW7LIQA7tYylgMyn</argument>
                   <argument>/var/www/html/RO-API/var/cache/dev/pools</argument>
                   <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
                   <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
@@ -670,7 +670,7 @@
                   <tag name="cache.pool"/>
                   <argument>3RTCZUV4M+</argument>
                   <argument>0</argument>
-                  <argument>dReir2s+-uyvz9VFQr-b1j</argument>
+                  <argument>nWE8WSNW7LIQA7tYylgMyn</argument>
                   <argument>/var/www/html/RO-API/var/cache/dev/pools</argument>
                   <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
                   <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
@@ -1002,7 +1002,7 @@
       <tag name="cache.pool"/>
       <argument>89ErCvMU+5</argument>
       <argument>0</argument>
-      <argument>dReir2s+-uyvz9VFQr-b1j</argument>
+      <argument>nWE8WSNW7LIQA7tYylgMyn</argument>
       <argument>/var/www/html/RO-API/var/cache/dev/pools</argument>
       <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
@@ -2798,6 +2798,7 @@
                         <argument key="/var/www/html/RO-API/src/Application/ProductBundle/Resources/config/doctrine">Application\ProductBundle\Entity</argument>
                         <argument key="/var/www/html/RO-API/src/Application/CategoryBundle/Resources/config/doctrine">Application\CategoryBundle\Entity</argument>
                         <argument key="/var/www/html/RO-API/src/Application/AutoBundle/Resources/config/doctrine">Application\AutoBundle\Entity</argument>
+                        <argument key="/var/www/html/RO-API/src/Application/ProducerBundle/Resources/config/doctrine">Application\ProducerBundle\Entity</argument>
                       </argument>
                       <call method="setGlobalBasename">
                         <argument>mapping</argument>
@@ -2814,6 +2815,7 @@
                         <argument key="/var/www/html/RO-API/src/Application/ProductBundle/Resources/config/doctrine">Application\ProductBundle\Entity</argument>
                         <argument key="/var/www/html/RO-API/src/Application/CategoryBundle/Resources/config/doctrine">Application\CategoryBundle\Entity</argument>
                         <argument key="/var/www/html/RO-API/src/Application/AutoBundle/Resources/config/doctrine">Application\AutoBundle\Entity</argument>
+                        <argument key="/var/www/html/RO-API/src/Application/ProducerBundle/Resources/config/doctrine">Application\ProducerBundle\Entity</argument>
                       </argument>
                       <call method="setGlobalBasename">
                         <argument>mapping</argument>
@@ -2830,6 +2832,7 @@
                         <argument key="/var/www/html/RO-API/src/Application/ProductBundle/Resources/config/doctrine">Application\ProductBundle\Entity</argument>
                         <argument key="/var/www/html/RO-API/src/Application/CategoryBundle/Resources/config/doctrine">Application\CategoryBundle\Entity</argument>
                         <argument key="/var/www/html/RO-API/src/Application/AutoBundle/Resources/config/doctrine">Application\AutoBundle\Entity</argument>
+                        <argument key="/var/www/html/RO-API/src/Application/ProducerBundle/Resources/config/doctrine">Application\ProducerBundle\Entity</argument>
                       </argument>
                       <call method="setGlobalBasename">
                         <argument>mapping</argument>
@@ -2846,6 +2849,7 @@
                         <argument key="/var/www/html/RO-API/src/Application/ProductBundle/Resources/config/doctrine">Application\ProductBundle\Entity</argument>
                         <argument key="/var/www/html/RO-API/src/Application/CategoryBundle/Resources/config/doctrine">Application\CategoryBundle\Entity</argument>
                         <argument key="/var/www/html/RO-API/src/Application/AutoBundle/Resources/config/doctrine">Application\AutoBundle\Entity</argument>
+                        <argument key="/var/www/html/RO-API/src/Application/ProducerBundle/Resources/config/doctrine">Application\ProducerBundle\Entity</argument>
                       </argument>
                       <call method="setGlobalBasename">
                         <argument>mapping</argument>
@@ -2856,11 +2860,17 @@
                 </call>
                 <call method="addDriver">
                   <argument type="service">
-                    <service class="Doctrine\ORM\Mapping\Driver\AnnotationDriver" public="false">
-                      <argument type="service" id="annotation_reader"/>
+                    <service class="Doctrine\ORM\Mapping\Driver\SimplifiedYamlDriver" public="false">
                       <argument type="collection">
-                        <argument>/var/www/html/RO-API/src/Application/ProducerBundle/Entity</argument>
+                        <argument key="/var/www/html/RO-API/src/Application/AdminBundle/Resources/config/doctrine">Application\AdminBundle\Entity</argument>
+                        <argument key="/var/www/html/RO-API/src/Application/ProductBundle/Resources/config/doctrine">Application\ProductBundle\Entity</argument>
+                        <argument key="/var/www/html/RO-API/src/Application/CategoryBundle/Resources/config/doctrine">Application\CategoryBundle\Entity</argument>
+                        <argument key="/var/www/html/RO-API/src/Application/AutoBundle/Resources/config/doctrine">Application\AutoBundle\Entity</argument>
+                        <argument key="/var/www/html/RO-API/src/Application/ProducerBundle/Resources/config/doctrine">Application\ProducerBundle\Entity</argument>
                       </argument>
+                      <call method="setGlobalBasename">
+                        <argument>mapping</argument>
+                      </call>
                     </service>
                   </argument>
                   <argument>Application\ProducerBundle\Entity</argument>

@@ -1,7 +1,6 @@
 Application\AdminBundle\Entity\Group:
     type: entity
-    table: group
-    repositoryClass: Application\AdminBundle\Repository\GroupRepository
+    table: adm_group
     id:
         id:
             type: integer
@@ -21,4 +20,8 @@ Application\AdminBundle\Entity\Group:
         roles:
             type: array
             comment: ''
+    manyToMany:
+        users:
+            targetEntity: User
+            mappedBy: groups
     lifecycleCallbacks: { }

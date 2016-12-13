@@ -1,0 +1,16 @@
+Application\AdminBundle\Entity\Roles:
+    type: entity
+    table: null
+    repositoryClass: Application\AdminBundle\Repository\RolesRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        role:
+            type: string
+            length: '80'
+            nullable: true
+    lifecycleCallbacks: {  }

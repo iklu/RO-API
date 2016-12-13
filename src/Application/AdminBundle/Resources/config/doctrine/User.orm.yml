@@ -157,5 +157,17 @@ Application\AdminBundle\Entity\User:
             column: date_created
             type: datetime
             nullable: true
-            comment: ''           
+            comment: ''
+    manyToMany:
+        groups:
+            targetEntity: Group
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                user_id:
+                    referencedColumnName: id
+            inverseJoinColumns:
+                group_id:
+                    referencedColumnName: id
     lifecycleCallbacks: {  }

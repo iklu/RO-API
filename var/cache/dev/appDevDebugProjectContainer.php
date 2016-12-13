@@ -992,7 +992,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getCache_SystemService()
     {
-        return $this->services['cache.system'] = \Symfony\Component\Cache\Adapter\AbstractAdapter::createSystemCache('89ErCvMU+5', 0, 'dReir2s+-uyvz9VFQr-b1j', (__DIR__.'/pools'), $this->get('monolog.logger.cache', ContainerInterface::NULL_ON_INVALID_REFERENCE));
+        return $this->services['cache.system'] = \Symfony\Component\Cache\Adapter\AbstractAdapter::createSystemCache('89ErCvMU+5', 0, 'nWE8WSNW7LIQA7tYylgMyn', (__DIR__.'/pools'), $this->get('monolog.logger.cache', ContainerInterface::NULL_ON_INVALID_REFERENCE));
     }
 
     /**
@@ -1010,8 +1010,8 @@ class appDevDebugProjectContainer extends Container
         $b = new \Symfony\Component\HttpKernel\CacheClearer\Psr6CacheClearer();
         $b->addPool($this->get('cache.app'));
         $b->addPool($this->get('cache.system'));
-        $b->addPool(\Symfony\Component\Cache\Adapter\AbstractAdapter::createSystemCache('XjpAxhtQa1', 0, 'dReir2s+-uyvz9VFQr-b1j', (__DIR__.'/pools'), $a));
-        $b->addPool(\Symfony\Component\Cache\Adapter\AbstractAdapter::createSystemCache('3RTCZUV4M+', 0, 'dReir2s+-uyvz9VFQr-b1j', (__DIR__.'/pools'), $a));
+        $b->addPool(\Symfony\Component\Cache\Adapter\AbstractAdapter::createSystemCache('XjpAxhtQa1', 0, 'nWE8WSNW7LIQA7tYylgMyn', (__DIR__.'/pools'), $a));
+        $b->addPool(\Symfony\Component\Cache\Adapter\AbstractAdapter::createSystemCache('3RTCZUV4M+', 0, 'nWE8WSNW7LIQA7tYylgMyn', (__DIR__.'/pools'), $a));
 
         return $this->services['cache_clearer'] = new \Symfony\Component\HttpKernel\CacheClearer\ChainCacheClearer(array(0 => $b));
     }
@@ -1308,7 +1308,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getDoctrine_Orm_DefaultEntityManagerService($lazyLoad = true)
     {
-        $a = new \Doctrine\ORM\Mapping\Driver\SimplifiedYamlDriver(array(($this->targetDirs[3].'/src/Application/AdminBundle/Resources/config/doctrine') => 'Application\\AdminBundle\\Entity', ($this->targetDirs[3].'/src/Application/ProductBundle/Resources/config/doctrine') => 'Application\\ProductBundle\\Entity', ($this->targetDirs[3].'/src/Application/CategoryBundle/Resources/config/doctrine') => 'Application\\CategoryBundle\\Entity', ($this->targetDirs[3].'/src/Application/AutoBundle/Resources/config/doctrine') => 'Application\\AutoBundle\\Entity'));
+        $a = new \Doctrine\ORM\Mapping\Driver\SimplifiedYamlDriver(array(($this->targetDirs[3].'/src/Application/AdminBundle/Resources/config/doctrine') => 'Application\\AdminBundle\\Entity', ($this->targetDirs[3].'/src/Application/ProductBundle/Resources/config/doctrine') => 'Application\\ProductBundle\\Entity', ($this->targetDirs[3].'/src/Application/CategoryBundle/Resources/config/doctrine') => 'Application\\CategoryBundle\\Entity', ($this->targetDirs[3].'/src/Application/AutoBundle/Resources/config/doctrine') => 'Application\\AutoBundle\\Entity', ($this->targetDirs[3].'/src/Application/ProducerBundle/Resources/config/doctrine') => 'Application\\ProducerBundle\\Entity'));
         $a->setGlobalBasename('mapping');
 
         $b = new \Doctrine\Common\Persistence\Mapping\Driver\MappingDriverChain();
@@ -1316,7 +1316,7 @@ class appDevDebugProjectContainer extends Container
         $b->addDriver($a, 'Application\\ProductBundle\\Entity');
         $b->addDriver($a, 'Application\\CategoryBundle\\Entity');
         $b->addDriver($a, 'Application\\AutoBundle\\Entity');
-        $b->addDriver(new \Doctrine\ORM\Mapping\Driver\AnnotationDriver($this->get('annotation_reader'), array(0 => ($this->targetDirs[3].'/src/Application/ProducerBundle/Entity'))), 'Application\\ProducerBundle\\Entity');
+        $b->addDriver($a, 'Application\\ProducerBundle\\Entity');
 
         $c = new \Doctrine\ORM\Configuration();
         $c->setEntityNamespaces(array('ApplicationAdminBundle' => 'Application\\AdminBundle\\Entity', 'ApplicationProductBundle' => 'Application\\ProductBundle\\Entity', 'ApplicationCategoryBundle' => 'Application\\CategoryBundle\\Entity', 'ApplicationAutoBundle' => 'Application\\AutoBundle\\Entity', 'ApplicationProducerBundle' => 'Application\\ProducerBundle\\Entity'));
