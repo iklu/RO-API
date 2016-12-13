@@ -1,11 +1,14 @@
 <?php
 namespace Application\AdminBundle\Controller;
 
+use Application\CoreBundle\Controller\Admin\AbstractAdminController;
+use Application\DoctrineBundle\Manager\Manager;
+use Application\DoctrineBundle\Manager\ManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Symfony\Component\HttpFoundation\Request;
 
-class UserController extends Controller
+class UserController extends AbstractAdminController
 {
 
     /**
@@ -30,6 +33,7 @@ class UserController extends Controller
      */
     public function getUserAction($data)
     {
+        $this->getManager();
         //$user = $this->get('security.token_storage')->getToken()->getUser();
 
         $data->getUsername();

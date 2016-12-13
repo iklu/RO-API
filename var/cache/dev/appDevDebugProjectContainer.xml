@@ -38,6 +38,7 @@
       <parameter key="ApplicationBusinessBundle">Application\BusinessBundle\ApplicationBusinessBundle</parameter>
       <parameter key="ApplicationJobsBundle">Application\JobsBundle\ApplicationJobsBundle</parameter>
       <parameter key="ApplicationProducerBundle">Application\ProducerBundle\ApplicationProducerBundle</parameter>
+      <parameter key="ApplicationDoctrineBundle">Application\DoctrineBundle\ApplicationDoctrineBundle</parameter>
       <parameter key="DebugBundle">Symfony\Bundle\DebugBundle\DebugBundle</parameter>
       <parameter key="WebProfilerBundle">Symfony\Bundle\WebProfilerBundle\WebProfilerBundle</parameter>
       <parameter key="SensioDistributionBundle">Sensio\Bundle\DistributionBundle\SensioDistributionBundle</parameter>
@@ -657,7 +658,7 @@
                   <tag name="cache.pool"/>
                   <argument>XjpAxhtQa1</argument>
                   <argument>0</argument>
-                  <argument>nWE8WSNW7LIQA7tYylgMyn</argument>
+                  <argument>wPBPponHYrJFB+oIOhNJBA</argument>
                   <argument>/var/www/html/RO-API/var/cache/dev/pools</argument>
                   <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
                   <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
@@ -670,7 +671,7 @@
                   <tag name="cache.pool"/>
                   <argument>3RTCZUV4M+</argument>
                   <argument>0</argument>
-                  <argument>nWE8WSNW7LIQA7tYylgMyn</argument>
+                  <argument>wPBPponHYrJFB+oIOhNJBA</argument>
                   <argument>/var/www/html/RO-API/var/cache/dev/pools</argument>
                   <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
                   <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
@@ -1002,7 +1003,7 @@
       <tag name="cache.pool"/>
       <argument>89ErCvMU+5</argument>
       <argument>0</argument>
-      <argument>nWE8WSNW7LIQA7tYylgMyn</argument>
+      <argument>wPBPponHYrJFB+oIOhNJBA</argument>
       <argument>/var/www/html/RO-API/var/cache/dev/pools</argument>
       <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
@@ -1996,14 +1997,6 @@
         </argument>
         <argument>0</argument>
       </call>
-      <call method="addListenerService">
-        <argument>kernel.request</argument>
-        <argument type="collection">
-          <argument>app.listener.decorating_deserialize</argument>
-          <argument>onKernelRequest</argument>
-        </argument>
-        <argument>2</argument>
-      </call>
       <call method="addSubscriberService">
         <argument>response_listener</argument>
         <argument>Symfony\Component\HttpKernel\EventListener\ResponseListener</argument>
@@ -2366,6 +2359,14 @@
                 </service>
               </argument>
               <argument type="service" id="security.user.provider.concrete.wsse_provider"/>
+              <argument type="service">
+                <service class="Symfony\Bridge\Doctrine\Security\User\EntityUserProvider" public="false">
+                  <argument type="service" id="doctrine"/>
+                  <argument>Application\CustomerBundle\Entity\Customer</argument>
+                  <argument>null</argument>
+                  <argument>null</argument>
+                </service>
+              </argument>
               <argument type="service" id="security.user.provider.concrete.in_memory"/>
             </argument>
             <argument>secured_area</argument>
@@ -2774,8 +2775,10 @@
               <argument key="ApplicationAdminBundle">Application\AdminBundle\Entity</argument>
               <argument key="ApplicationProductBundle">Application\ProductBundle\Entity</argument>
               <argument key="ApplicationCategoryBundle">Application\CategoryBundle\Entity</argument>
+              <argument key="ApplicationCustomerBundle">Application\CustomerBundle\Entity</argument>
               <argument key="ApplicationAutoBundle">Application\AutoBundle\Entity</argument>
               <argument key="ApplicationProducerBundle">Application\ProducerBundle\Entity</argument>
+              <argument key="ApplicationDoctrineBundle">Application\DoctrineBundle\Entity</argument>
             </argument>
           </call>
           <call method="setMetadataCacheImpl">
@@ -2797,6 +2800,7 @@
                         <argument key="/var/www/html/RO-API/src/Application/AdminBundle/Resources/config/doctrine">Application\AdminBundle\Entity</argument>
                         <argument key="/var/www/html/RO-API/src/Application/ProductBundle/Resources/config/doctrine">Application\ProductBundle\Entity</argument>
                         <argument key="/var/www/html/RO-API/src/Application/CategoryBundle/Resources/config/doctrine">Application\CategoryBundle\Entity</argument>
+                        <argument key="/var/www/html/RO-API/src/Application/CustomerBundle/Resources/config/doctrine">Application\CustomerBundle\Entity</argument>
                         <argument key="/var/www/html/RO-API/src/Application/AutoBundle/Resources/config/doctrine">Application\AutoBundle\Entity</argument>
                         <argument key="/var/www/html/RO-API/src/Application/ProducerBundle/Resources/config/doctrine">Application\ProducerBundle\Entity</argument>
                       </argument>
@@ -2814,6 +2818,7 @@
                         <argument key="/var/www/html/RO-API/src/Application/AdminBundle/Resources/config/doctrine">Application\AdminBundle\Entity</argument>
                         <argument key="/var/www/html/RO-API/src/Application/ProductBundle/Resources/config/doctrine">Application\ProductBundle\Entity</argument>
                         <argument key="/var/www/html/RO-API/src/Application/CategoryBundle/Resources/config/doctrine">Application\CategoryBundle\Entity</argument>
+                        <argument key="/var/www/html/RO-API/src/Application/CustomerBundle/Resources/config/doctrine">Application\CustomerBundle\Entity</argument>
                         <argument key="/var/www/html/RO-API/src/Application/AutoBundle/Resources/config/doctrine">Application\AutoBundle\Entity</argument>
                         <argument key="/var/www/html/RO-API/src/Application/ProducerBundle/Resources/config/doctrine">Application\ProducerBundle\Entity</argument>
                       </argument>
@@ -2831,6 +2836,7 @@
                         <argument key="/var/www/html/RO-API/src/Application/AdminBundle/Resources/config/doctrine">Application\AdminBundle\Entity</argument>
                         <argument key="/var/www/html/RO-API/src/Application/ProductBundle/Resources/config/doctrine">Application\ProductBundle\Entity</argument>
                         <argument key="/var/www/html/RO-API/src/Application/CategoryBundle/Resources/config/doctrine">Application\CategoryBundle\Entity</argument>
+                        <argument key="/var/www/html/RO-API/src/Application/CustomerBundle/Resources/config/doctrine">Application\CustomerBundle\Entity</argument>
                         <argument key="/var/www/html/RO-API/src/Application/AutoBundle/Resources/config/doctrine">Application\AutoBundle\Entity</argument>
                         <argument key="/var/www/html/RO-API/src/Application/ProducerBundle/Resources/config/doctrine">Application\ProducerBundle\Entity</argument>
                       </argument>
@@ -2848,6 +2854,25 @@
                         <argument key="/var/www/html/RO-API/src/Application/AdminBundle/Resources/config/doctrine">Application\AdminBundle\Entity</argument>
                         <argument key="/var/www/html/RO-API/src/Application/ProductBundle/Resources/config/doctrine">Application\ProductBundle\Entity</argument>
                         <argument key="/var/www/html/RO-API/src/Application/CategoryBundle/Resources/config/doctrine">Application\CategoryBundle\Entity</argument>
+                        <argument key="/var/www/html/RO-API/src/Application/CustomerBundle/Resources/config/doctrine">Application\CustomerBundle\Entity</argument>
+                        <argument key="/var/www/html/RO-API/src/Application/AutoBundle/Resources/config/doctrine">Application\AutoBundle\Entity</argument>
+                        <argument key="/var/www/html/RO-API/src/Application/ProducerBundle/Resources/config/doctrine">Application\ProducerBundle\Entity</argument>
+                      </argument>
+                      <call method="setGlobalBasename">
+                        <argument>mapping</argument>
+                      </call>
+                    </service>
+                  </argument>
+                  <argument>Application\CustomerBundle\Entity</argument>
+                </call>
+                <call method="addDriver">
+                  <argument type="service">
+                    <service class="Doctrine\ORM\Mapping\Driver\SimplifiedYamlDriver" public="false">
+                      <argument type="collection">
+                        <argument key="/var/www/html/RO-API/src/Application/AdminBundle/Resources/config/doctrine">Application\AdminBundle\Entity</argument>
+                        <argument key="/var/www/html/RO-API/src/Application/ProductBundle/Resources/config/doctrine">Application\ProductBundle\Entity</argument>
+                        <argument key="/var/www/html/RO-API/src/Application/CategoryBundle/Resources/config/doctrine">Application\CategoryBundle\Entity</argument>
+                        <argument key="/var/www/html/RO-API/src/Application/CustomerBundle/Resources/config/doctrine">Application\CustomerBundle\Entity</argument>
                         <argument key="/var/www/html/RO-API/src/Application/AutoBundle/Resources/config/doctrine">Application\AutoBundle\Entity</argument>
                         <argument key="/var/www/html/RO-API/src/Application/ProducerBundle/Resources/config/doctrine">Application\ProducerBundle\Entity</argument>
                       </argument>
@@ -2865,6 +2890,7 @@
                         <argument key="/var/www/html/RO-API/src/Application/AdminBundle/Resources/config/doctrine">Application\AdminBundle\Entity</argument>
                         <argument key="/var/www/html/RO-API/src/Application/ProductBundle/Resources/config/doctrine">Application\ProductBundle\Entity</argument>
                         <argument key="/var/www/html/RO-API/src/Application/CategoryBundle/Resources/config/doctrine">Application\CategoryBundle\Entity</argument>
+                        <argument key="/var/www/html/RO-API/src/Application/CustomerBundle/Resources/config/doctrine">Application\CustomerBundle\Entity</argument>
                         <argument key="/var/www/html/RO-API/src/Application/AutoBundle/Resources/config/doctrine">Application\AutoBundle\Entity</argument>
                         <argument key="/var/www/html/RO-API/src/Application/ProducerBundle/Resources/config/doctrine">Application\ProducerBundle\Entity</argument>
                       </argument>
@@ -2874,6 +2900,17 @@
                     </service>
                   </argument>
                   <argument>Application\ProducerBundle\Entity</argument>
+                </call>
+                <call method="addDriver">
+                  <argument type="service">
+                    <service class="Doctrine\ORM\Mapping\Driver\AnnotationDriver" public="false">
+                      <argument type="service" id="annotation_reader"/>
+                      <argument type="collection">
+                        <argument>/var/www/html/RO-API/src/Application/DoctrineBundle/Entity</argument>
+                      </argument>
+                    </service>
+                  </argument>
+                  <argument>Application\DoctrineBundle\Entity</argument>
                 </call>
               </service>
             </argument>
@@ -3472,11 +3509,39 @@
       <argument type="service" id="nelmio_api_doc.formatter.html_formatter"/>
       <argument>_doc</argument>
     </service>
-    <service id="app.listener.decorating_deserialize" class="Application\CoreBundle\EventListener\DeserializeListener">
-      <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest" priority="2"/>
-      <argument type="service" id="serializer"/>
-      <argument type="service" id="api_platform.serializer.context_builder"/>
-      <argument type="service" id="api_platform.listener.request.deserialize"/>
+    <service id="flash.helper" class="Application\CoreBundle\Helper\Flash\FlashHelper">
+      <argument type="service" id="session"/>
+      <argument type="service" id="translator.helper"/>
+    </service>
+    <service id="router.helper" class="Application\CoreBundle\Helper\Router\RouterHelper">
+      <argument type="service" id="router"/>
+      <argument type="service" id="request.helper"/>
+    </service>
+    <service id="request.helper" class="Application\CoreBundle\Helper\Request\RequestHelper">
+      <argument type="service" id="request_stack"/>
+    </service>
+    <service id="environment_helper" class="Application\CoreBundle\Helper\Environment\EnvironmentHelper">
+      <argument type="service" id="kernel"/>
+    </service>
+    <service id="validator.helper" class="Application\CoreBundle\Helper\Validator\ValidatorHelper">
+      <argument type="service" id="validator"/>
+    </service>
+    <service id="translator.helper" class="Application\CoreBundle\Helper\Translator\TranslatorHelper">
+      <argument type="service" id="translator"/>
+    </service>
+    <service id="templating.helper" class="Application\CoreBundle\Helper\Templating\TemplatingHelper">
+      <argument type="service" id="templating"/>
+      <argument type="service" id="kernel"/>
+    </service>
+    <service id="mailer.helper" class="Application\CoreBundle\Helper\Mailer\MailerHelper">
+      <argument>true</argument>
+      <call method="setContainer">
+        <argument type="service" id="service_container"/>
+      </call>
+    </service>
+    <service id="security.helper" class="Application\CoreBundle\Helper\Security\SecurityHelper">
+      <argument type="service" id="security.token_storage"/>
+      <argument type="service" id="request.helper"/>
     </service>
     <service id="email.user_confirmation" class="Application\EmailBundle\Mailer\Mailer">
       <argument type="service" id="swiftmailer.mailer.default"/>
@@ -3659,6 +3724,7 @@
           <argument key="ApplicationBusinessBundle">Application\BusinessBundle\ApplicationBusinessBundle</argument>
           <argument key="ApplicationJobsBundle">Application\JobsBundle\ApplicationJobsBundle</argument>
           <argument key="ApplicationProducerBundle">Application\ProducerBundle\ApplicationProducerBundle</argument>
+          <argument key="ApplicationDoctrineBundle">Application\DoctrineBundle\ApplicationDoctrineBundle</argument>
           <argument key="DebugBundle">Symfony\Bundle\DebugBundle\DebugBundle</argument>
           <argument key="WebProfilerBundle">Symfony\Bundle\WebProfilerBundle\WebProfilerBundle</argument>
           <argument key="SensioDistributionBundle">Sensio\Bundle\DistributionBundle\SensioDistributionBundle</argument>
@@ -4524,8 +4590,10 @@
                     <argument>/var/www/html/RO-API/src/Application/AdminBundle/Entity</argument>
                     <argument>/var/www/html/RO-API/src/Application/ProductBundle/Entity</argument>
                     <argument>/var/www/html/RO-API/src/Application/CategoryBundle/Entity</argument>
+                    <argument>/var/www/html/RO-API/src/Application/CustomerBundle/Entity</argument>
                     <argument>/var/www/html/RO-API/src/Application/AutoBundle/Entity</argument>
                     <argument>/var/www/html/RO-API/src/Application/ProducerBundle/Entity</argument>
+                    <argument>/var/www/html/RO-API/src/Application/DoctrineBundle/Entity</argument>
                   </argument>
                 </service>
               </argument>

@@ -13,10 +13,13 @@ security:
     providers:
         chain_provider:
             chain:
-                providers: [in_memory, wsse_provider]
+                providers: [in_memory, wsse_provider,wsse_provider_2]
         wsse_provider:
             entity:
                 class: Application\AdminBundle\Entity\User
+        wsse_provider_2:
+            entity:
+                class: Application\CustomerBundle\Entity\Customer
         in_memory:
             memory:
                 users:
@@ -27,7 +30,7 @@ security:
             pattern: ^/api/secured/.*
             stateless: true
             wsse: true
-            provider: wsse_provider
+            provider: chain_provider
         secured_area:
             pattern: ^/api/doc
             http_basic:

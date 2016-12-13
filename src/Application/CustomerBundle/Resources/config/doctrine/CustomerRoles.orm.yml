@@ -1,0 +1,16 @@
+Application\CustomerBundle\Entity\CustomerRoles:
+    type: entity
+    table: customer_roles
+#    repositoryClass: Application\AdminBundle\Repository\RolesRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        role:
+            type: string
+            length: '80'
+            nullable: true
+    lifecycleCallbacks: {  }

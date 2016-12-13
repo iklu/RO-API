@@ -1,0 +1,173 @@
+Application\CustomerBundle\Entity\Customer:
+    type: entity
+    table: customer
+    repositoryClass: Application\CustomerBundle\Repository\CustomerRepository
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: true
+            comment: ''
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        username:
+            type: string
+            nullable: true
+            length: 180
+            fixed: false
+            comment: ''
+        usernameCanonical:
+            column: username_canonical
+            type: string
+            nullable: true
+            length: 180
+            fixed: false
+            comment: ''
+        email:
+            type: string
+            nullable: true
+            length: 180
+            fixed: false
+            comment: ''
+        emailCanonical:
+            email: email_canonical
+            type: string
+            nullable: true
+            length: 180
+            fixed: false
+            comment: ''
+        salt:
+            type: string
+            nullable: false
+            fixed: fals
+        password:
+            type: string
+            nullable: false
+            fixed: false
+            comment: ''
+        firstName:
+            type: string
+            column: first_name
+            nullable: true
+            length: 180
+            fixed: false
+            comment: ''
+        lastName:
+            type: string
+            column: last_name
+            nullable: true
+            length: 180
+            fixed: false
+            comment: ''
+        phone:
+            type: string
+            nullable: true
+            length: 10
+            fixed: false
+            comment: ''
+        address:
+            type: string
+            nullable: true
+            length: 50
+            fixed: false
+            comment: ''
+        city:
+            type: string
+            nullable: true
+            length: 50
+            fixed: false
+            comment: ''
+        state:
+            type: string
+            nullable: true
+            length: 50
+            fixed: false
+            comment: ''
+        country:
+            type: string
+            nullable: true
+            length: 50
+            fixed: false
+            comment: ''
+        cardNumber:
+            column: card_number
+            type: string
+            nullable: true
+            length: 50
+            fixed: false
+            comment: ''
+        customCardNumber:
+            column: custom_card_number
+            type: string
+            nullable: true
+            length: 50
+            fixed: false
+            comment: ''
+        loyaltyPointsBalance:
+            column: loyalty_points_balance
+            type: string
+            nullable: true
+            length: 50
+            fixed: false
+            comment: ''
+        locked:
+            type: boolean
+            nullable: true
+            comment: ''
+        expired:
+            type: boolean
+            nullable: true
+            comment: ''
+        enabled:
+            type: boolean
+            nullable: true
+            comment: ''
+        confirmationToken:
+            column: confirmation_token
+            type: string
+            unique: true
+            nullable: true
+            length: 180
+        roles:
+            type: array
+            comment: ''
+        passwordRequestedAt:
+            column: password_requested_at
+            type: datetime
+            nullable: true
+            comment: ''      
+        expiresAt:
+            column: expires_at
+            type: datetime
+            nullable: true
+            comment: ''          
+        credentialsExpireAt:
+            column: credentials_expire_at
+            type: datetime
+            nullable: true
+            comment: ''
+        dateUpdated:
+            column: date_updated
+            type: datetime
+            nullable: true
+            comment: ''           
+        dateCreated:
+            column: date_created
+            type: datetime
+            nullable: true
+            comment: ''
+    manyToMany:
+        groups:
+            targetEntity:  CustomerGroup
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                user_id:
+                    referencedColumnName: id
+            inverseJoinColumns:
+                group_id:
+                    referencedColumnName: id
+    lifecycleCallbacks: {  }

@@ -1,7 +1,48 @@
+#imports:
+#    - { resource: 'services/breadcrumb.yml' }
+#    - { resource: 'services/datagrid.yml' }
+#    - { resource: 'services/dataset.yml' }
+#    - { resource: 'services/form.yml' }
+
 services:
-    # ...
-    app.listener.decorating_deserialize:
-        class: 'Application\CoreBundle\EventListener\DeserializeListener'
-        arguments: ['@api_platform.serializer', '@api_platform.serializer.context_builder', '@api_platform.listener.request.deserialize']
-        tags:
-            - { name: 'kernel.event_listener', event: 'kernel.request', method: 'onKernelRequest', priority: 2 }
+    flash.helper:
+        class: Application\CoreBundle\Helper\Flash\FlashHelper
+        arguments: ['@session', '@translator.helper']
+
+#    image.helper:
+#        class: Application\CoreBundle\Helper\Image\ImageHelper
+#        arguments: ['@liip_imagine.cache.manager']
+
+    router.helper:
+        class: Application\CoreBundle\Helper\Router\RouterHelper
+        arguments: ['@router', '@request.helper']
+
+    request.helper:
+        class: Application\CoreBundle\Helper\Request\RequestHelper
+        arguments: ['@request_stack']
+
+    environment_helper:
+        class: Application\CoreBundle\Helper\Environment\EnvironmentHelper
+        arguments: ['@kernel']
+
+    validator.helper:
+        class: Application\CoreBundle\Helper\Validator\ValidatorHelper
+        arguments: ['@validator']
+
+    translator.helper:
+        class: Application\CoreBundle\Helper\Translator\TranslatorHelper
+        arguments: ['@translator']
+
+    templating.helper:
+        class: Application\CoreBundle\Helper\Templating\TemplatingHelper
+        arguments: ['@templating', '@kernel']
+
+    mailer.helper:
+        class: Application\CoreBundle\Helper\Mailer\MailerHelper
+        arguments: ['%kernel.debug%']
+        calls:
+            - [setContainer, ['@service_container']]
+
+    security.helper:
+        class: Application\CoreBundle\Helper\Security\SecurityHelper
+        arguments: ['@security.token_storage', '@request.helper']

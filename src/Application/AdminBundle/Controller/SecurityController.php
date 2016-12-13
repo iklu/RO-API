@@ -16,6 +16,7 @@ use Application\AdminBundle\Event\GetResponseUserEvent;
 use Application\AdminBundle\Event\ValidationEvent;
 use Application\AdminBundle\Model\UserManagerInterface;
 use Application\AdminBundle\Validator\RegisterValidation;
+use Application\CoreBundle\Controller\Admin\AbstractAdminController;
 use Application\CoreBundle\Utils\ApiResponse;
 use Application\CoreBundle\Utils\DataSerializer;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -25,7 +26,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Symfony\Component\HttpFoundation\Response;
 
-class SecurityController extends Controller
+class SecurityController extends AbstractAdminController
 {
     /**
      * Get profile service used to get full profile info.
@@ -50,7 +51,6 @@ class SecurityController extends Controller
      */
     public function loginAction(Request $request)
     {
-
         $validator = $this->container->get("admin.login.validate");
 
         $user = new User();
@@ -162,6 +162,8 @@ class SecurityController extends Controller
      */
     public function getProfileAction(Request $request, $id)
     {
+
+        $admin = $this->getAuthenticatedAdmin()->getRoles();
 
         $em = $this->getDoctrine()->getManager();
         //check permissions
