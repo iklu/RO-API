@@ -96,8 +96,6 @@ class UserController extends Controller
      */
     public function addUserAction($data, Request $request)
     {
-        print_r($request);
-        exit;
         return $data;
     }
 
