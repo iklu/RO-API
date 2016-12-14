@@ -1,0 +1,24 @@
+Application\ProductBundle\Entity\Product:
+    properties:
+        title:
+            - NotBlank:
+#        mileage:
+#            - NotBlank:
+#            - Type:
+#                type: float
+#        engineCapacity:
+#            - NotBlank:
+#        engineCapacity:
+#            - NotBlank:
+#        vehicleType:
+#            - NotBlank:
+#        carCondition:
+#            - NotBlank:
+#        seatsNumber:
+#            - NotBlank:
+#        transmission:
+#            - NotBlank:
+#        exteriorColour:
+#            - NotBlank:
+#        airConditioning:
+#            - NotBlank:

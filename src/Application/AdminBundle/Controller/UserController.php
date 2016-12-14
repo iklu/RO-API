@@ -8,7 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Symfony\Component\HttpFoundation\Request;
 
-class UserController extends AbstractAdminController
+class UserController extends Controller
 {
 
     /**
@@ -94,8 +94,10 @@ class UserController extends AbstractAdminController
      *
      *
      */
-    public function addUserAction($data , Request $request)
+    public function addUserAction($data, Request $request)
     {
+        print_r($request);
+        exit;
         return $data;
     }
 

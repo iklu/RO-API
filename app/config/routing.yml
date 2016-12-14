@@ -1,3 +1,15 @@
+api:
+    resource: '.'
+    type:     'api_platform'
+
+application_app:
+    resource: "@ApplicationAppBundle/Resources/config/routing.yml"
+    prefix:   /api
+
+NelmioApiDocBundle:
+    resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
+    prefix:   /api/doc/
+
 #application_doctrine:
 #    resource: "@ApplicationDoctrineBundle/Resources/config/routing.yml"
 #    prefix:   /
@@ -62,14 +74,4 @@
 #    resource: "@ApplicationProductBundle/Resources/config/routing.yml"
 #    prefix:   /
 
-api:
-    resource: '.'
-    type:     'api_platform'
 
-application_app:
-    resource: "@ApplicationAppBundle/Resources/config/routing.yml"
-    prefix:   /api
-
-NelmioApiDocBundle:
-    resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
-    prefix:   /api/doc/

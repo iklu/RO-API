@@ -2,7 +2,6 @@
 
 namespace Application\AutoBundle\Entity;
 use Application\ProductBundle\Entity\Product;
-use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Car
@@ -53,16 +52,6 @@ class Car extends Product
      * @var bool
      */
     private $airConditioning;
-
-    /**
-     * @var \DateTime
-     */
-    private $dateUpdated;
-
-    /**
-     * @var \DateTime
-     */
-    private $dateCreated;
 
     /**
      * Set fuel
@@ -278,54 +267,6 @@ class Car extends Product
     public function getAirConditioning()
     {
         return $this->airConditioning;
-    }
-
-    /**
-     * Set dateUpdated
-     *
-     * @param \DateTime $dateUpdated
-     *
-     * @return Car
-     */
-    public function setDateUpdated($dateUpdated)
-    {
-        $this->dateUpdated = $dateUpdated;
-
-        return $this;
-    }
-
-    /**
-     * Get dateUpdated
-     *
-     * @return \DateTime
-     */
-    public function getDateUpdated()
-    {
-        return $this->dateUpdated;
-    }
-
-    /**
-     * Set dateCreated
-     *
-     * @param \DateTime $dateCreated
-     *
-     * @return Car
-     */
-    public function setDateCreated($dateCreated)
-    {
-        $this->dateCreated = $dateCreated;
-
-        return $this;
-    }
-
-    /**
-     * Get dateCreated
-     *
-     * @return \DateTime
-     */
-    public function getDateCreated()
-    {
-        return $this->dateCreated;
     }
 }
 

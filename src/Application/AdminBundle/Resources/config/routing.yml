@@ -30,37 +30,37 @@ get_users:
         _api_resource_class: 'Application\AdminBundle\Entity\User'
         _api_collection_operation_name: 'getUsers'
 
-get_group:
-    path: '/group/{id}/'
-    methods:  ['GET']
-    defaults:
-        _controller: 'ApplicationAdminBundle:Group:getGroup'
-        _api_resource_class: 'Application\AdminBundle\Entity\Group'
-        _api_item_operation_name: 'getGroup'
-
-update_group:
-    path: '/group/{id}/'
-    methods:  ['PUT']
-    defaults:
-        _controller: 'ApplicationAdminBundle:Group:updateGroup'
-        _api_resource_class: 'Application\AdminBundle\Entity\Group'
-        _api_item_operation_name: 'updateGroup'
-
-add_group:
-    path: '/groups/'
-    methods:  ['POST']
-    defaults:
-        _controller: 'ApplicationAdminBundle:Group:addGroup'
-        _api_resource_class: 'Application\AdminBundle\Entity\Group'
-        _api_collection_operation_name: 'addGroup'
-
-get_groups:
-    path: '/groups/'
-    methods:  ['get']
-    defaults:
-        _controller: 'ApplicationAdminBundle:Group:getGroups'
-        _api_resource_class: 'Application\AdminBundle\Entity\Group'
-        _api_collection_operation_name: 'getGroups'
+#get_group:
+#    path: '/group/{id}/'
+#    methods:  ['GET']
+#    defaults:
+#        _controller: 'ApplicationAdminBundle:Group:getGroup'
+#        _api_resource_class: 'Application\AdminBundle\Entity\Group'
+#        _api_item_operation_name: 'getGroup'
+#
+#update_group:
+#    path: '/group/{id}/'
+#    methods:  ['PUT']
+#    defaults:
+#        _controller: 'ApplicationAdminBundle:Group:updateGroup'
+#        _api_resource_class: 'Application\AdminBundle\Entity\Group'
+#        _api_item_operation_name: 'updateGroup'
+#
+#add_group:
+#    path: '/groups/'
+#    methods:  ['POST']
+#    defaults:
+#        _controller: 'ApplicationAdminBundle:Group:addGroup'
+#        _api_resource_class: 'Application\AdminBundle\Entity\Group'
+#        _api_collection_operation_name: 'addGroup'
+#
+#get_groups:
+#    path: '/groups/'
+#    methods:  ['get']
+#    defaults:
+#        _controller: 'ApplicationAdminBundle:Group:getGroups'
+#        _api_resource_class: 'Application\AdminBundle\Entity\Group'
+#        _api_collection_operation_name: 'getGroups'
 
 login_action:
     path: '/account/login/'

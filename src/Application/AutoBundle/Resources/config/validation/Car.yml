@@ -1,0 +1,22 @@
+Application\AutoBundle\Entity\Car:
+    properties:
+        fuel:
+            - NotNull: ~
+        mileage:
+            - NotNull: ~
+        engineCapacity:
+            - NotNull: ~
+        engineCapacity:
+            - NotNull: ~
+        vehicleType:
+            - NotNull: ~
+        carCondition:
+            - NotNull: ~
+        seatsNumber:
+            - NotNull: ~
+        transmission:
+            - NotNull: ~
+        exteriorColour:
+            - NotNull: ~
+        airConditioning:
+            - NotNull: ~
