@@ -118,3 +118,5 @@ nelmio_api_doc:
         enabled:              true
         file:                 '%kernel.cache_dir%/api-doc.cache'
 
+api_platform:
+    default_operation_path_resolver: 'app.operation_path_resolver.no_separators'

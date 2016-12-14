@@ -1,3 +1,5 @@
 admin:
     resource: "@ApplicationAdminBundle/Resources/config/routing.yml"
+customer:
+    resource: "@ApplicationCustomerBundle/Resources/config/routing.yml"
 

@@ -6,7 +6,7 @@ use ApiPlatform\Core\Annotation\ApiResource;
 
 use Application\AdminBundle\Model\GroupableInterface;
 use Application\AdminBundle\Model\GroupInterface;
-use Application\CustomerBundle\Model\CustomerInterface;
+use Application\AdminBundle\Model\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -15,133 +15,133 @@ use Doctrine\Common\Collections\Collection;
 /**
  * @ApiResource(
  *     itemOperations={
- *          "getUser"={"route_name"="get_user"},
- *          "updateUser"={"route_name"="update_user"}
+ *          "getCustomer"={"route_name"="get_customer"},
+ *          "updateCustomer"={"route_name"="update_customer"}
  *      },
  *     collectionOperations = {
- *          "addUser"={"route_name"="add_user"},
- *          "getUsers"={"route_name"="get_users"}
+ *          "addCustomer"={"route_name"="add_customer"},
+ *          "getCustomers"={"route_name"="get_customers"}
  *      },
  *     attributes={
- *          "normalization_context"={"groups"={"user", "user-read"}},
- *          "denormalization_context"={"groups"={"user", "user-write"}}
+ *          "normalization_context"={"groups"={"customer", "user-read"}},
+ *          "denormalization_context"={"groups"={"customer", "user-write"}}
  * }
  *  )
  */
-class Customer implements CustomerInterface, GroupableInterface
+class Customer implements UserInterface, GroupableInterface
 {
     /**
-     * @Groups({"user"})
+     * @Groups({"customer"})
      * @var mixed
      */
     protected $id;
 
     /**
-     * @Groups({"user"})
+     * @Groups({"customer"})
      * @var string
      */
     protected $username;
 
     /**
-     * @Groups({"user"})
+     * @Groups({"customer"})
      * @var string
      */
     protected $usernameCanonical;
 
     /**
-     * @Groups({"user"})
+     * @Groups({"customer"})
      * @var string
      */
     protected $email;
 
     /**
-     * @Groups({"user"})
+     * @Groups({"customer"})
      * @var string
      */
     protected $emailCanonical;
 
     /**
-     * @Groups({"user"})
+     * @Groups({"customer"})
      * @var string
      */
     protected $firstName;
 
     /**
-     * @Groups({"user"})
+     * @Groups({"customer"})
      * @var string
      */
     protected $lastName;
 
     /**
-     * @Groups({"user"})
+     * @Groups({"customer"})
      * @var string
      */
     protected $phone;
 
     /**
-     * @Groups({"user"})
+     * @Groups({"customer"})
      * @var string
      */
     protected $address;
 
     /**
-     * @Groups({"user"})
+     * @Groups({"customer"})
      * @var string
      */
     protected $city;
 
     /**
-     * @Groups({"user"})
+     * @Groups({"customer"})
      * @var string
      */
     protected $state;
 
     /**
-     * @Groups({"user"})
+     * @Groups({"customer"})
      * @var string
      */
     protected $country;
 
     /**
-     * @Groups({"user"})
+     * @Groups({"customer"})
      * @var string
      */
     protected $cardNumber;
 
     /**
-     * @Groups({"user"})
+     * @Groups({"customer"})
      * @var string
      */
     protected $customCardNumber;
 
     /**
-     * @Groups({"user"})
+     * @Groups({"customer"})
      * @var string
      */
     protected $loyaltyPointsBalance;
 
     /**
-     * @Groups({"user"})
+     * @Groups({"customer"})
      * @var bool
      */
     protected $enabled;
 
     /**
      * The salt to use for hashing.
-     * @Groups({"user"})
+     * @Groups({"customer"})
      * @var string
      */
     protected $salt;
 
     /**
      * Encrypted password. Must be persisted.
-     * @Groups({"user"})
+     * @Groups({"customer"})
      * @var string
      */
     protected $password;
 
     /**
-     * @Groups({"user"})
+     * @Groups({"customer"})
      * Plain password. Used for model validation. Must not be persisted.
      *
      * @var string
@@ -149,68 +149,68 @@ class Customer implements CustomerInterface, GroupableInterface
     protected $plainPassword;
 
     /**
-     * @Groups({"user"})
+     * @Groups({"customer"})
      * @var \DateTime
      */
     protected $lastLogin;
 
     /**
      * Random string sent to the user email address in order to verify it.
-     * @Groups({"user"})
+     * @Groups({"customer"})
      * @var string
      */
     protected $confirmationToken;
 
     /**
-     * @Groups({"user"})
+     * @Groups({"customer"})
      * @var \DateTime
      */
     protected $passwordRequestedAt;
 
     /**
-     * @Groups({"user"})
+     * @Groups({"customer"})
      * @var Collection
      */
     protected $groups;
 
     /**
-     * @Groups({"user"})
+     * @Groups({"customer"})
      * @var bool
      */
     protected $locked;
 
     /**
-     * @Groups({"user"})
+     * @Groups({"customer"})
      * @var bool
      */
     protected $expired;
 
     /**
-     * @Groups({"user"})
+     * @Groups({"customer"})
      * @var \DateTime
      */
     protected $expiresAt;
 
     /**
-     * @Groups({"user"})
+     * @Groups({"customer"})
      * @var array
      */
     protected $roles;
 
     /**
-     * @Groups({"user"})
+     * @Groups({"customer"})
      * @var bool
      */
     protected $credentialsExpired;
 
     /**
-     * @Groups({"user"})
+     * @Groups({"customer"})
      * @var \DateTime
      */
     protected $credentialsExpireAt;
 
     /**
-     * @Groups({"user"})
+     * @Groups({"customer"})
      * @var \DateTime
      */
     protected $dateUpdated;

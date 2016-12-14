@@ -2,6 +2,7 @@
 
 namespace Application\AdminBundle\Validator;
 use Application\AdminBundle\Entity\User;
+use Application\AdminBundle\Model\UserInterface;
 use JMS\Serializer\SerializerBuilder;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Validator\Constraints\Email;
@@ -37,10 +38,10 @@ class LoginValidation
     }
 
     /**
-     * @param User $user
+     * @param UserInterface $user
      * @return mixed
      */
-    public function validate(User $user) {
+    public function validate(UserInterface $user) {
 
         $usernameNotEmpty = new NotBlank(
             array('message' => 'Username is required')

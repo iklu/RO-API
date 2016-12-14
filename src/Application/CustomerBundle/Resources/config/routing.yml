@@ -2,86 +2,30 @@ get_customer:
     path: '/customer/{id}/'
     methods:  ['GET']
     defaults:
-        _controller: 'ApplicationCustomerBundle:Customer:getCustomer'
-        _api_resource_class: 'Application\AdminBundle\Entity\User'
-        _api_item_operation_name: 'getUser'
+        _controller: 'ApplicationCustomerBundle:Admin/Customer:getCustomer'
+        _api_resource_class: 'Application\CustomerBundle\Entity\Customer'
+        _api_item_operation_name: 'getCustomer'
 
-update_user:
-    path: '/user/{id}/'
+update_customer:
+    path: '/customer/{id}/'
     methods:  ['PUT']
     defaults:
-        _controller: 'ApplicationAdminBundle:User:updateUser'
-        _api_resource_class: 'Application\AdminBundle\Entity\User'
-        _api_item_operation_name: 'updateUser'
+        _controller: 'ApplicationCustomerBundle:Admin/Customer:updateCustomer'
+        _api_resource_class: 'Application\CustomerBundle\Entity\Customer'
+        _api_item_operation_name: 'updateCustomer'
 
-add_user:
-    path: '/users/'
+add_customer:
+    path: '/customers/'
     methods:  ['POST']
     defaults:
-        _controller: 'ApplicationAdminBundle:User:addUser'
-        _api_resource_class: 'Application\AdminBundle\Entity\User'
-        _api_collection_operation_name: 'addUser'
+        _controller: 'ApplicationCustomerBundle:Admin/Customer:addCustomer'
+        _api_resource_class: 'Application\CustomerBundle\Entity\Customer'
+        _api_collection_operation_name: 'addCustomer'
 
-get_users:
-    path: '/users/'
+get_customers:
+    path: '/customers/'
     methods:  ['get']
     defaults:
-        _controller: 'ApplicationAdminBundle:User:getUsers'
-        _api_resource_class: 'Application\AdminBundle\Entity\User'
-        _api_collection_operation_name: 'getUsers'
-
-get_group:
-    path: '/group/{id}/'
-    methods:  ['GET']
-    defaults:
-        _controller: 'ApplicationAdminBundle:Group:getGroup'
-        _api_resource_class: 'Application\AdminBundle\Entity\Group'
-        _api_item_operation_name: 'getGroup'
-
-update_group:
-    path: '/group/{id}/'
-    methods:  ['PUT']
-    defaults:
-        _controller: 'ApplicationAdminBundle:Group:updateGroup'
-        _api_resource_class: 'Application\AdminBundle\Entity\Group'
-        _api_item_operation_name: 'updateGroup'
-
-add_group:
-    path: '/groups/'
-    methods:  ['POST']
-    defaults:
-        _controller: 'ApplicationAdminBundle:Group:addGroup'
-        _api_resource_class: 'Application\AdminBundle\Entity\Group'
-        _api_collection_operation_name: 'addGroup'
-
-get_groups:
-    path: '/groups/'
-    methods:  ['get']
-    defaults:
-        _controller: 'ApplicationAdminBundle:Group:getGroups'
-        _api_resource_class: 'Application\AdminBundle\Entity\Group'
-        _api_collection_operation_name: 'getGroups'
-
-login_action:
-    path: '/customer/login/'
-    methods:  ['POST']
-    defaults:
-        _controller: 'ApplicationAdminBundle:Security:login'
-        _api_resource_class: 'Application\AdminBundle\Entity\User'
-        _api_collection_operation_name: 'addUser'
-
-register_action:
-    path: '/account/register/'
-    methods:  ['POST']
-    defaults:
-        _controller: 'ApplicationAdminBundle:Security:register'
-        _api_resource_class: 'Application\AdminBundle\Entity\User'
-        _api_collection_operation_name: 'addUser'
-
-get_profile_action:
-    path: '/secured/customer/profile/{id}/'
-    methods:  ['GET']
-    defaults:
-        _controller: 'ApplicationAdminBundle:Security:getProfile'
-        _api_resource_class: 'Application\AdminBundle\Entity\User'
-        _api_collection_operation_name: 'addUser'
+        _controller: 'ApplicationCustomerBundle:Admin/Customer:getCustomers'
+        _api_resource_class: 'Application\CustomerBundle\Entity\Customer'
+        _api_collection_operation_name: 'getCustomers'
