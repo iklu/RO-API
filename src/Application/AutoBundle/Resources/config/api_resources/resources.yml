@@ -2,6 +2,27 @@ resources:
     Application\AutoBundle\Entity\Car:
         shortName: 'Car'                   # optional
         description: 'An offer from my shop' # optional
-        iri: 'http://schema.org/Offer'       # optional
+        iri: 'http://schema.org/Car'       # optional
+        attributes:                          # optional
+            pagination_items_per_page: 25    # optional
+
+    Application\AutoBundle\Entity\CarModel:
+        shortName: 'CarModel'                   # optional
+        description: 'An offer from my shop' # optional
+        iri: 'http://schema.org/Car'       # optional
+        attributes:                          # optional
+            pagination_items_per_page: 25    # optional
+
+    Application\AutoBundle\Entity\CarProducer:
+        shortName: 'CarProducer'                   # optional
+        description: 'An offer from my shop' # optional
+        iri: 'http://schema.org/Car'       # optional
+        attributes:                          # optional
+            pagination_items_per_page: 25    # optional
+
+    Application\AutoBundle\Entity\AutoSubCategory:
+        shortName: 'AutoSubCategory'                   # optional
+        description: 'An offer from my shop' # optional
+        iri: 'http://schema.org/Car'       # optional
         attributes:                          # optional
             pagination_items_per_page: 25    # optional

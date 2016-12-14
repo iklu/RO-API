@@ -82,6 +82,7 @@ class appDevDebugProjectContainer extends Container
             'api_platform.swagger.command.swagger_command' => 'getApiPlatform_Swagger_Command_SwaggerCommandService',
             'api_platform.swagger.listener.ui' => 'getApiPlatform_Swagger_Listener_UiService',
             'api_platform.swagger.normalizer.documentation' => 'getApiPlatform_Swagger_Normalizer_DocumentationService',
+            'app.listener.decorating_deserialize' => 'getApp_Listener_DecoratingDeserializeService',
             'assets.context' => 'getAssets_ContextService',
             'assets.packages' => 'getAssets_PackagesService',
             'cache.app' => 'getCache_AppService',
@@ -254,8 +255,10 @@ class appDevDebugProjectContainer extends Container
             'security.rememberme.response_listener' => 'getSecurity_Rememberme_ResponseListenerService',
             'security.role_hierarchy' => 'getSecurity_RoleHierarchyService',
             'security.token_storage' => 'getSecurity_TokenStorageService',
+            'security.user.provider.concrete.chain_provider' => 'getSecurity_User_Provider_Concrete_ChainProviderService',
             'security.user.provider.concrete.in_memory' => 'getSecurity_User_Provider_Concrete_InMemoryService',
             'security.user.provider.concrete.wsse_provider' => 'getSecurity_User_Provider_Concrete_WsseProviderService',
+            'security.user.provider.concrete.wsse_provider_2' => 'getSecurity_User_Provider_Concrete_WsseProvider2Service',
             'security.user_checker.wsse_secured' => 'getSecurity_UserChecker_WsseSecuredService',
             'security.validator.user_password' => 'getSecurity_Validator_UserPasswordService',
             'sensio_distribution.security_checker' => 'getSensioDistribution_SecurityCheckerService',
@@ -920,6 +923,19 @@ class appDevDebugProjectContainer extends Container
     }
 
     /**
+     * Gets the 'app.listener.decorating_deserialize' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \Application\CoreBundle\EventListener\DeserializeListener A Application\CoreBundle\EventListener\DeserializeListener instance
+     */
+    protected function getApp_Listener_DecoratingDeserializeService()
+    {
+        return $this->services['app.listener.decorating_deserialize'] = new \Application\CoreBundle\EventListener\DeserializeListener($this->get('serializer'), $this->get('api_platform.serializer.context_builder'), $this->get('api_platform.listener.request.deserialize'));
+    }
+
+    /**
      * Gets the 'assets.context' service.
      *
      * This service is shared.
@@ -987,7 +1003,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getCache_SystemService()
     {
-        return $this->services['cache.system'] = \Symfony\Component\Cache\Adapter\AbstractAdapter::createSystemCache('89ErCvMU+5', 0, 'wPBPponHYrJFB+oIOhNJBA', (__DIR__.'/pools'), $this->get('monolog.logger.cache', ContainerInterface::NULL_ON_INVALID_REFERENCE));
+        return $this->services['cache.system'] = \Symfony\Component\Cache\Adapter\AbstractAdapter::createSystemCache('89ErCvMU+5', 0, 'vHd22EPPu7ucug1hYEvinC', (__DIR__.'/pools'), $this->get('monolog.logger.cache', ContainerInterface::NULL_ON_INVALID_REFERENCE));
     }
 
     /**
@@ -1005,8 +1021,8 @@ class appDevDebugProjectContainer extends Container
         $b = new \Symfony\Component\HttpKernel\CacheClearer\Psr6CacheClearer();
         $b->addPool($this->get('cache.app'));
         $b->addPool($this->get('cache.system'));
-        $b->addPool(\Symfony\Component\Cache\Adapter\AbstractAdapter::createSystemCache('XjpAxhtQa1', 0, 'wPBPponHYrJFB+oIOhNJBA', (__DIR__.'/pools'), $a));
-        $b->addPool(\Symfony\Component\Cache\Adapter\AbstractAdapter::createSystemCache('3RTCZUV4M+', 0, 'wPBPponHYrJFB+oIOhNJBA', (__DIR__.'/pools'), $a));
+        $b->addPool(\Symfony\Component\Cache\Adapter\AbstractAdapter::createSystemCache('XjpAxhtQa1', 0, 'vHd22EPPu7ucug1hYEvinC', (__DIR__.'/pools'), $a));
+        $b->addPool(\Symfony\Component\Cache\Adapter\AbstractAdapter::createSystemCache('3RTCZUV4M+', 0, 'vHd22EPPu7ucug1hYEvinC', (__DIR__.'/pools'), $a));
 
         return $this->services['cache_clearer'] = new \Symfony\Component\HttpKernel\CacheClearer\ChainCacheClearer(array(0 => $b));
     }
@@ -1184,6 +1200,7 @@ class appDevDebugProjectContainer extends Container
         $instance->addListenerService('kernel.response', array(0 => 'api_platform.hydra.listener.response.add_link_header', 1 => 'onKernelResponse'), 0);
         $instance->addListenerService('kernel.view', array(0 => 'api_platform.doctrine.listener.view.write', 1 => 'onKernelView'), 32);
         $instance->addListenerService('kernel.request', array(0 => 'nelmio_cors.cors_listener', 1 => 'onKernelRequest'), 10000);
+        $instance->addListenerService('kernel.request', array(0 => 'app.listener.decorating_deserialize', 1 => 'onKernelRequest'), 2);
         $instance->addListenerService('kernel.request', array(0 => 'nelmio_api_doc.event_listener.request', 1 => 'onKernelRequest'), 0);
         $instance->addSubscriberService('response_listener', 'Symfony\\Component\\HttpKernel\\EventListener\\ResponseListener');
         $instance->addSubscriberService('streamed_response_listener', 'Symfony\\Component\\HttpKernel\\EventListener\\StreamedResponseListener');
@@ -3339,15 +3356,13 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getSecurity_Firewall_Map_Context_SecuredAreaService()
     {
-        $a = $this->get('security.user.provider.concrete.in_memory');
-        $b = $this->get('security.user.provider.concrete.wsse_provider');
-        $c = $this->get('security.token_storage');
-        $d = $this->get('monolog.logger.security', ContainerInterface::NULL_ON_INVALID_REFERENCE);
-        $e = $this->get('security.authentication.trust_resolver');
+        $a = $this->get('security.token_storage');
+        $b = $this->get('monolog.logger.security', ContainerInterface::NULL_ON_INVALID_REFERENCE);
+        $c = $this->get('security.authentication.trust_resolver');
 
-        $f = new \Symfony\Component\Security\Http\EntryPoint\BasicAuthenticationEntryPoint('API Documentation');
+        $d = new \Symfony\Component\Security\Http\EntryPoint\BasicAuthenticationEntryPoint('API Documentation');
 
-        return $this->services['security.firewall.map.context.secured_area'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => $this->get('security.channel_listener'), 1 => new \Symfony\Component\Security\Http\Firewall\ContextListener($c, array(0 => new \Symfony\Component\Security\Core\User\ChainUserProvider(array(0 => $a, 1 => $b)), 1 => $b, 2 => new \Symfony\Bridge\Doctrine\Security\User\EntityUserProvider($this->get('doctrine'), 'Application\\CustomerBundle\\Entity\\Customer', NULL, NULL), 3 => $a), 'secured_area', $d, $this->get('debug.event_dispatcher', ContainerInterface::NULL_ON_INVALID_REFERENCE), $e), 2 => new \Symfony\Component\Security\Http\Firewall\BasicAuthenticationListener($c, $this->get('security.authentication.manager'), 'secured_area', $f, $d), 3 => $this->get('security.access_listener')), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($c, $e, $this->get('security.http_utils'), 'secured_area', $f, NULL, NULL, $d, false));
+        return $this->services['security.firewall.map.context.secured_area'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => $this->get('security.channel_listener'), 1 => new \Symfony\Component\Security\Http\Firewall\ContextListener($a, array(0 => $this->get('security.user.provider.concrete.chain_provider'), 1 => $this->get('security.user.provider.concrete.wsse_provider'), 2 => $this->get('security.user.provider.concrete.wsse_provider_2'), 3 => $this->get('security.user.provider.concrete.in_memory')), 'secured_area', $b, $this->get('debug.event_dispatcher', ContainerInterface::NULL_ON_INVALID_REFERENCE), $c), 2 => new \Symfony\Component\Security\Http\Firewall\BasicAuthenticationListener($a, $this->get('security.authentication.manager'), 'secured_area', $d, $b), 3 => $this->get('security.access_listener')), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($a, $c, $this->get('security.http_utils'), 'secured_area', $d, NULL, NULL, $b, false));
     }
 
     /**
@@ -4448,7 +4463,6 @@ class appDevDebugProjectContainer extends Container
         $instance->addPath(($this->targetDirs[3].'/vendor/api-platform/core/src/Bridge/Symfony/Bundle/Resources/views'), 'ApiPlatform');
         $instance->addPath(($this->targetDirs[3].'/src/Application/AppBundle/Resources/views'), 'ApplicationApp');
         $instance->addPath(($this->targetDirs[3].'/vendor/nelmio/api-doc-bundle/Nelmio/ApiDocBundle/Resources/views'), 'NelmioApiDoc');
-        $instance->addPath(($this->targetDirs[3].'/src/Application/CoreBundle/Resources/views'), 'ApplicationCore');
         $instance->addPath(($this->targetDirs[3].'/src/Application/EmailBundle/Resources/views'), 'ApplicationEmail');
         $instance->addPath(($this->targetDirs[3].'/src/Application/ProductBundle/Resources/views'), 'ApplicationProduct');
         $instance->addPath(($this->targetDirs[3].'/src/Application/CategoryBundle/Resources/views'), 'ApplicationCategory');
@@ -4553,7 +4567,7 @@ class appDevDebugProjectContainer extends Container
         $instance->setTranslator($this->get('translator'));
         $instance->setTranslationDomain('validators');
         $instance->addXmlMappings(array(0 => ($this->targetDirs[3].'/vendor/symfony/symfony/src/Symfony/Component/Form/Resources/config/validation.xml')));
-        $instance->addYamlMappings(array(0 => ($this->targetDirs[3].'/src/Application/AdminBundle/Resources/config/validation.yml')));
+        $instance->addYamlMappings(array(0 => ($this->targetDirs[3].'/src/Application/AdminBundle/Resources/config/validation.yml'), 1 => ($this->targetDirs[3].'/src/Application/ProductBundle/Resources/config/validation.yml'), 2 => ($this->targetDirs[3].'/src/Application/AutoBundle/Resources/config/validation/Car.yml')));
         $instance->enableAnnotationMapping($this->get('annotation_reader'));
         $instance->addMethodMapping('loadValidatorMetadata');
         $instance->addObjectInitializers(array(0 => $this->get('doctrine.orm.validator_initializer')));
@@ -4765,7 +4779,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getApiPlatform_Metadata_Extractor_YamlService()
     {
-        return $this->services['api_platform.metadata.extractor.yaml'] = new \ApiPlatform\Core\Metadata\Extractor\YamlExtractor(array());
+        return $this->services['api_platform.metadata.extractor.yaml'] = new \ApiPlatform\Core\Metadata\Extractor\YamlExtractor(array(0 => ($this->targetDirs[3].'/src/Application/AutoBundle/Resources/config/api_resources/resources.yml')));
     }
 
     /**
@@ -5029,7 +5043,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getSecurity_Authentication_ManagerService()
     {
-        $this->services['security.authentication.manager'] = $instance = new \Symfony\Component\Security\Core\Authentication\AuthenticationProviderManager(array(0 => new \Application\AdminBundle\Security\Authentication\Provider\WsseProvider($this->get('security.user.provider.concrete.wsse_provider'), $this->get('cache.app')), 1 => new \Symfony\Component\Security\Core\Authentication\Provider\DaoAuthenticationProvider($this->get('security.user.provider.concrete.in_memory'), $this->get('security.user_checker.wsse_secured'), 'secured_area', $this->get('security.encoder_factory'), true)), true);
+        $this->services['security.authentication.manager'] = $instance = new \Symfony\Component\Security\Core\Authentication\AuthenticationProviderManager(array(0 => new \Application\AdminBundle\Security\Authentication\Provider\WsseProvider($this->get('security.user.provider.concrete.chain_provider'), $this->get('cache.app')), 1 => new \Symfony\Component\Security\Core\Authentication\Provider\DaoAuthenticationProvider($this->get('security.user.provider.concrete.in_memory'), $this->get('security.user_checker.wsse_secured'), 'secured_area', $this->get('security.encoder_factory'), true)), true);
 
         $instance->setEventDispatcher($this->get('debug.event_dispatcher'));
 
@@ -5124,6 +5138,23 @@ class appDevDebugProjectContainer extends Container
     }
 
     /**
+     * Gets the 'security.user.provider.concrete.chain_provider' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * This service is private.
+     * If you want to be able to request this service from the container directly,
+     * make it public, otherwise you might end up with broken code.
+     *
+     * @return \Symfony\Component\Security\Core\User\ChainUserProvider A Symfony\Component\Security\Core\User\ChainUserProvider instance
+     */
+    protected function getSecurity_User_Provider_Concrete_ChainProviderService()
+    {
+        return $this->services['security.user.provider.concrete.chain_provider'] = new \Symfony\Component\Security\Core\User\ChainUserProvider(array(0 => $this->get('security.user.provider.concrete.in_memory'), 1 => $this->get('security.user.provider.concrete.wsse_provider'), 2 => $this->get('security.user.provider.concrete.wsse_provider_2')));
+    }
+
+    /**
      * Gets the 'security.user.provider.concrete.in_memory' service.
      *
      * This service is shared.
@@ -5159,6 +5190,23 @@ class appDevDebugProjectContainer extends Container
     protected function getSecurity_User_Provider_Concrete_WsseProviderService()
     {
         return $this->services['security.user.provider.concrete.wsse_provider'] = new \Symfony\Bridge\Doctrine\Security\User\EntityUserProvider($this->get('doctrine'), 'Application\\AdminBundle\\Entity\\User', NULL, NULL);
+    }
+
+    /**
+     * Gets the 'security.user.provider.concrete.wsse_provider_2' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * This service is private.
+     * If you want to be able to request this service from the container directly,
+     * make it public, otherwise you might end up with broken code.
+     *
+     * @return \Symfony\Bridge\Doctrine\Security\User\EntityUserProvider A Symfony\Bridge\Doctrine\Security\User\EntityUserProvider instance
+     */
+    protected function getSecurity_User_Provider_Concrete_WsseProvider2Service()
+    {
+        return $this->services['security.user.provider.concrete.wsse_provider_2'] = new \Symfony\Bridge\Doctrine\Security\User\EntityUserProvider($this->get('doctrine'), 'Application\\CustomerBundle\\Entity\\Customer', NULL, NULL);
     }
 
     /**

@@ -1,0 +1,31 @@
+Application\AutoBundle\Entity\CategoryHasAutoSubCategory:
+    type: entity
+    table: null
+    repositoryClass: Application\AutoBundle\Repository\CategoryHasAutoSubCategoryRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+    manyToOne:
+        categories:
+            targetEntity: Application\CategoryBundle\Entity\Category
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                category_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        subcategories:
+            targetEntity: AutoSubCategory
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                subcategory_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

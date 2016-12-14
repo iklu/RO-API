@@ -1,0 +1,7 @@
+resources:
+    Application\CategoryBundle\Entity\Category:
+        shortName: 'Category'                   # optional
+        description: 'An offer from my shop' # optional
+        iri: 'http://schema.org/Car'       # optional
+        attributes:                          # optional
+            pagination_items_per_page: 25    # optional

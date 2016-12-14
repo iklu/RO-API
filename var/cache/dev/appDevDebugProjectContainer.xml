@@ -658,7 +658,7 @@
                   <tag name="cache.pool"/>
                   <argument>XjpAxhtQa1</argument>
                   <argument>0</argument>
-                  <argument>wPBPponHYrJFB+oIOhNJBA</argument>
+                  <argument>vHd22EPPu7ucug1hYEvinC</argument>
                   <argument>/var/www/html/RO-API/var/cache/dev/pools</argument>
                   <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
                   <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
@@ -671,7 +671,7 @@
                   <tag name="cache.pool"/>
                   <argument>3RTCZUV4M+</argument>
                   <argument>0</argument>
-                  <argument>wPBPponHYrJFB+oIOhNJBA</argument>
+                  <argument>vHd22EPPu7ucug1hYEvinC</argument>
                   <argument>/var/www/html/RO-API/var/cache/dev/pools</argument>
                   <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
                   <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
@@ -1003,7 +1003,7 @@
       <tag name="cache.pool"/>
       <argument>89ErCvMU+5</argument>
       <argument>0</argument>
-      <argument>wPBPponHYrJFB+oIOhNJBA</argument>
+      <argument>vHd22EPPu7ucug1hYEvinC</argument>
       <argument>/var/www/html/RO-API/var/cache/dev/pools</argument>
       <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
@@ -1297,6 +1297,8 @@
       <call method="addYamlMappings">
         <argument type="collection">
           <argument>/var/www/html/RO-API/src/Application/AdminBundle/Resources/config/validation.yml</argument>
+          <argument>/var/www/html/RO-API/src/Application/ProductBundle/Resources/config/validation.yml</argument>
+          <argument>/var/www/html/RO-API/src/Application/AutoBundle/Resources/config/validation/Car.yml</argument>
         </argument>
       </call>
       <call method="enableAnnotationMapping">
@@ -1992,6 +1994,14 @@
       <call method="addListenerService">
         <argument>kernel.request</argument>
         <argument type="collection">
+          <argument>app.listener.decorating_deserialize</argument>
+          <argument>onKernelRequest</argument>
+        </argument>
+        <argument>2</argument>
+      </call>
+      <call method="addListenerService">
+        <argument>kernel.request</argument>
+        <argument type="collection">
           <argument>nelmio_api_doc.event_listener.request</argument>
           <argument>onKernelRequest</argument>
         </argument>
@@ -2157,7 +2167,7 @@
       <argument type="collection">
         <argument type="service">
           <service class="Application\AdminBundle\Security\Authentication\Provider\WsseProvider" public="false">
-            <argument type="service" id="security.user.provider.concrete.wsse_provider"/>
+            <argument type="service" id="security.user.provider.concrete.chain_provider"/>
             <argument type="service" id="cache.app"/>
           </service>
         </argument>
@@ -2301,9 +2311,22 @@
         </argument>
       </call>
     </service>
+    <service id="security.user.provider.concrete.chain_provider" class="Symfony\Component\Security\Core\User\ChainUserProvider" public="false">
+      <argument type="collection">
+        <argument type="service" id="security.user.provider.concrete.in_memory"/>
+        <argument type="service" id="security.user.provider.concrete.wsse_provider"/>
+        <argument type="service" id="security.user.provider.concrete.wsse_provider_2"/>
+      </argument>
+    </service>
     <service id="security.user.provider.concrete.wsse_provider" class="Symfony\Bridge\Doctrine\Security\User\EntityUserProvider" public="false">
       <argument type="service" id="doctrine"/>
       <argument>Application\AdminBundle\Entity\User</argument>
+      <argument>null</argument>
+      <argument>null</argument>
+    </service>
+    <service id="security.user.provider.concrete.wsse_provider_2" class="Symfony\Bridge\Doctrine\Security\User\EntityUserProvider" public="false">
+      <argument type="service" id="doctrine"/>
+      <argument>Application\CustomerBundle\Entity\Customer</argument>
       <argument>null</argument>
       <argument>null</argument>
     </service>
@@ -2350,23 +2373,9 @@
           <service class="Symfony\Component\Security\Http\Firewall\ContextListener" public="false">
             <argument type="service" id="security.token_storage"/>
             <argument type="collection">
-              <argument type="service">
-                <service class="Symfony\Component\Security\Core\User\ChainUserProvider" public="false">
-                  <argument type="collection">
-                    <argument type="service" id="security.user.provider.concrete.in_memory"/>
-                    <argument type="service" id="security.user.provider.concrete.wsse_provider"/>
-                  </argument>
-                </service>
-              </argument>
+              <argument type="service" id="security.user.provider.concrete.chain_provider"/>
               <argument type="service" id="security.user.provider.concrete.wsse_provider"/>
-              <argument type="service">
-                <service class="Symfony\Bridge\Doctrine\Security\User\EntityUserProvider" public="false">
-                  <argument type="service" id="doctrine"/>
-                  <argument>Application\CustomerBundle\Entity\Customer</argument>
-                  <argument>null</argument>
-                  <argument>null</argument>
-                </service>
-              </argument>
+              <argument type="service" id="security.user.provider.concrete.wsse_provider_2"/>
               <argument type="service" id="security.user.provider.concrete.in_memory"/>
             </argument>
             <argument>secured_area</argument>
@@ -3189,7 +3198,9 @@
       <argument type="collection"/>
     </service>
     <service id="api_platform.metadata.extractor.yaml" class="ApiPlatform\Core\Metadata\Extractor\YamlExtractor" public="false">
-      <argument type="collection"/>
+      <argument type="collection">
+        <argument>/var/www/html/RO-API/src/Application/AutoBundle/Resources/config/api_resources/resources.yml</argument>
+      </argument>
     </service>
     <service id="api_platform.metadata.extractor.xml" class="ApiPlatform\Core\Metadata\Extractor\XmlExtractor" public="false">
       <argument type="collection"/>
@@ -3329,6 +3340,12 @@
         <argument key="hosts" type="collection"/>
         <argument key="origin_regex">false</argument>
       </argument>
+    </service>
+    <service id="app.listener.decorating_deserialize" class="Application\CoreBundle\EventListener\DeserializeListener">
+      <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest" priority="2"/>
+      <argument type="service" id="serializer"/>
+      <argument type="service" id="api_platform.serializer.context_builder"/>
+      <argument type="service" id="api_platform.listener.request.deserialize"/>
     </service>
     <service id="admin.user" class="Application\AdminBundle\Entity\User"/>
     <service id="admin.login" class="Application\AdminBundle\Services\Login">
@@ -4415,10 +4432,6 @@
       <call method="addPath">
         <argument>/var/www/html/RO-API/vendor/nelmio/api-doc-bundle/Nelmio/ApiDocBundle/Resources/views</argument>
         <argument>NelmioApiDoc</argument>
-      </call>
-      <call method="addPath">
-        <argument>/var/www/html/RO-API/src/Application/CoreBundle/Resources/views</argument>
-        <argument>ApplicationCore</argument>
       </call>
       <call method="addPath">
         <argument>/var/www/html/RO-API/src/Application/EmailBundle/Resources/views</argument>

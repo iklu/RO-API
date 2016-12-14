@@ -5,28 +5,31 @@ Application\AutoBundle\Entity\Car:
             - NotBlank: ~
         mileage:
             - NotNull: ~
-            - NotNull: ~
+            - NotBlank: ~
+            - Type:
+                type: float
         engineCapacity:
             - NotNull: ~
-            - NotNull: ~
-        engineCapacity:
-            - NotNull: ~
-            - NotNull: ~
+            - NotBlank: ~
+            - Type:
+                type: integer
         vehicleType:
             - NotNull: ~
-            - NotNull: ~
+            - NotBlank: ~
         carCondition:
             - NotNull: ~
-            - NotNull: ~
+            - NotBlank: ~
         seatsNumber:
             - NotNull: ~
-            - NotNull: ~
+            - NotBlank: ~
+            - Type:
+                type: integer
         transmission:
             - NotNull: ~
-            - NotNull: ~
+            - NotBlank: ~
         exteriorColour:
             - NotNull: ~
-            - NotNull: ~
+            - NotBlank: ~
         airConditioning:
             - NotNull: ~
-            - NotNull: ~
+            - NotBlank: ~

@@ -2,6 +2,13 @@ Application\ProductBundle\Entity\Product:
     properties:
         title:
             - NotBlank:
+            - NotNull:
+        price:
+            - Range:
+                min: 0.01
+                max: 12.90
+                minMessage: Price can't be lower than 0,01€
+                maxMessage: Price can't be bigger than 12,90€
 #        mileage:
 #            - NotBlank:
 #            - Type:
