@@ -21,6 +21,9 @@ use Symfony\Component\HttpKernel\KernelInterface;
 
 class AbstractController extends Controller implements ControllerInterface
 {
+
+    public $manager;
+
     public function __construct()
     {
     }
@@ -78,6 +81,10 @@ class AbstractController extends Controller implements ControllerInterface
     public function getEventDispatcher() : EventDispatcherInterface
     {
         return $this->get('event_dispatcher');
+    }
+
+    public function setManager($manager){
+        $this->manager = $manager;
     }
 
     protected function getManager()

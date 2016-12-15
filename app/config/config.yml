@@ -98,10 +98,10 @@ nelmio_api_doc:
         endpoint:             null
         accept_type:          null
         body_format:
-            formats: []
-            default_format: form
+            formats: ['json']
+            default_format: json
         request_format:
-            formats: []
+            formats: ['application/json']
             method: accept_header
     swagger:
         api_base_path:        /api
@@ -120,3 +120,4 @@ nelmio_api_doc:
 
 api_platform:
     default_operation_path_resolver: 'app.operation_path_resolver.no_separators'
+    enable_nelmio_api_doc: true

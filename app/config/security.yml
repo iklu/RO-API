@@ -13,11 +13,11 @@ security:
     providers:
         chain_provider:
             chain:
-                providers: [in_memory, wsse_provider,wsse_provider_2]
-        wsse_provider:
+                providers: [in_memory, admin_provider, customer_provider]
+        admin_provider:
             entity:
                 class: Application\AdminBundle\Entity\User
-        wsse_provider_2:
+        customer_provider:
             entity:
                 class: Application\CustomerBundle\Entity\Customer
         in_memory:
@@ -26,14 +26,21 @@ security:
                     apidoc: { password: $2a$12$77DgS/ul7u4nEC1./69ZP.CwyQ5uCzFPMMuy.m19yIgDb.u0WMe2G }
 
     firewalls:
-        wsse_secured:
+        admin_wsse_secured:
+            pattern: ^/api/admin/.*
+            stateless: true
+            wsse: true
+            provider: admin_provider
+        customer_wsse_secured:
             pattern: ^/api/secured/.*
             stateless: true
             wsse: true
-            provider: chain_provider
+            provider: customer_provider
         secured_area:
             pattern: ^/api/doc
             http_basic:
                 realm: 'API Documentation'
                 provider: in_memory
+    acl:
+        connection: default
 

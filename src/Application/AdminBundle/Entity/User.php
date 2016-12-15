@@ -42,7 +42,6 @@ class User implements UserInterface, GroupableInterface
     protected $username;
 
     /**
-     * @Groups({"user"})
      * @var string
      */
     protected $usernameCanonical;
@@ -54,7 +53,6 @@ class User implements UserInterface, GroupableInterface
     protected $email;
 
     /**
-     * @Groups({"user"})
      * @var string
      */
     protected $emailCanonical;
@@ -120,21 +118,18 @@ class User implements UserInterface, GroupableInterface
     protected $loyaltyPointsBalance;
 
     /**
-     * @Groups({"user"})
      * @var bool
      */
     protected $enabled;
 
     /**
      * The salt to use for hashing.
-     * @Groups({"user"})
      * @var string
      */
     protected $salt;
 
     /**
      * Encrypted password. Must be persisted.
-     * @Groups({"user"})
      * @var string
      */
     protected $password;
@@ -148,44 +143,37 @@ class User implements UserInterface, GroupableInterface
     protected $plainPassword;
 
     /**
-     * @Groups({"user"})
      * @var \DateTime
      */
     protected $lastLogin;
 
     /**
      * Random string sent to the user email address in order to verify it.
-     * @Groups({"user"})
      * @var string
      */
     protected $confirmationToken;
 
     /**
-     * @Groups({"user"})
      * @var \DateTime
      */
     protected $passwordRequestedAt;
 
     /**
-     * @Groups({"user"})
      * @var Collection
      */
     protected $groups;
 
     /**
-     * @Groups({"user"})
      * @var bool
      */
     protected $locked;
 
     /**
-     * @Groups({"user"})
      * @var bool
      */
     protected $expired;
 
     /**
-     * @Groups({"user"})
      * @var \DateTime
      */
     protected $expiresAt;
@@ -197,19 +185,16 @@ class User implements UserInterface, GroupableInterface
     protected $roles;
 
     /**
-     * @Groups({"user"})
      * @var bool
      */
     protected $credentialsExpired;
 
     /**
-     * @Groups({"user"})
      * @var \DateTime
      */
     protected $credentialsExpireAt;
 
     /**
-     * @Groups({"user"})
      * @var \DateTime
      */
     protected $dateUpdated;

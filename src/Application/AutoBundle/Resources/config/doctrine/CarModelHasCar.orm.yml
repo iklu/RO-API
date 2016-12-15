@@ -23,7 +23,7 @@ Application\AutoBundle\Entity\CarModelHasCar:
             targetEntity: Application\AutoBundle\Entity\Car
             cascade: {  }
             mappedBy: null
-            inversedBy: null
+            inversedBy: models
             joinColumns:
                 cars_id:
                     referencedColumnName: id

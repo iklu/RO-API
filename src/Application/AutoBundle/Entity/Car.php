@@ -54,6 +54,11 @@ class Car extends Product
     private $airConditioning;
 
     /**
+     * @var Collection
+     */
+    private $models;
+
+    /**
      * Set fuel
      *
      * @param string $fuel

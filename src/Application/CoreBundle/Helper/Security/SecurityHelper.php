@@ -1,22 +1,13 @@
 <?php
-/*
- * WellCommerce Open-Source E-Commerce Platform
- * 
- * This file is part of the WellCommerce package.
- *
- * (c) Adam Piotrowski <adam@wellcommerce.org>
- * 
- * For the full copyright and license information,
- * please view the LICENSE file that was distributed with this source code.
- */
-
 namespace Application\CoreBundle\Helper\Security;
 
+use Application\AdminBundle\Entity\User;
 use Application\AdminBundle\Model\UserInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Application\CustomerBundle\Model\CustomerInterface;
 use Application\CoreBundle\Helper\Request\RequestHelperInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 
 final class SecurityHelper implements SecurityHelperInterface
@@ -36,18 +27,21 @@ final class SecurityHelper implements SecurityHelperInterface
      */
     private $firewallMap;
 
+    private $authorizationChecker;
+
     /**
      * SecurityHelper constructor.
-     *
-     * @param TokenStorageInterface  $tokenStorage
+     * @param TokenStorageInterface $tokenStorage
      * @param RequestHelperInterface $requestHelper
-     * @param array                  $firewallMap
+     * @param AuthorizationCheckerInterface $authorizationChecker
+     * @param array $firewallMap
      */
-    public function __construct(TokenStorageInterface $tokenStorage, RequestHelperInterface $requestHelper, array $firewallMap = [])
+    public function __construct(TokenStorageInterface $tokenStorage, RequestHelperInterface $requestHelper, AuthorizationCheckerInterface $authorizationChecker, array $firewallMap = [])
     {
         $this->tokenStorage  = $tokenStorage;
         $this->requestHelper = $requestHelper;
         $this->firewallMap   = $firewallMap;
+        $this->authorizationChecker   = $authorizationChecker;
     }
 
     public function getCurrentUser()
@@ -64,7 +58,7 @@ final class SecurityHelper implements SecurityHelperInterface
     {
         $user = $this->getCurrentUser();
 
-        return $user instanceof CustomerInterface ? $user : null;
+        return $user instanceof UserInterface ? $user : null;
     }
 
     public function getCurrentAdmin()
@@ -74,7 +68,7 @@ final class SecurityHelper implements SecurityHelperInterface
         return $user instanceof UserInterface ? $user : null;
     }
 
-    public function getAuthenticatedCustomer() : CustomerInterface
+    public function getAuthenticatedCustomer() : UserInterface
     {
         return $this->getCurrentUser();
     }
@@ -113,5 +107,27 @@ final class SecurityHelper implements SecurityHelperInterface
         $password = substr(str_shuffle($chars), 0, $length);
 
         return $password;
+    }
+
+    /**
+     * @param $entity
+     * @return bool
+     */
+    public function getCustomerAuthorizationChecker($entity){
+        if (false === $this->authorizationChecker->isGranted('EDIT', $entity)) {
+            throw new AccessDeniedException;
+        }
+        return true;
+    }
+
+    /**
+     * @param $entity
+     * @return bool
+     */
+    public function getAdminAuthorizationChecker($entity){
+        if (false === $this->authorizationChecker->isGranted('EDIT', $entity)) {
+            throw new AccessDeniedException;
+        }
+        return true;
     }
 }

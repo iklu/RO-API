@@ -19,8 +19,7 @@ final class NoSeparatorsOperationPathResolver implements OperationPathResolverIn
         if (!$collection) {
             $path .= '/{id}';
         }
-        $path .= '.{_format}';
-
-        return "/api/".$path;
+//        $path .= '.{_format}';
+        return "/api/".$path."/";
     }
 }

@@ -13,7 +13,6 @@
 namespace Application\CoreBundle\Helper\Security;
 
 use Application\AdminBundle\Model\UserInterface;
-use Application\CustomerBundle\Model\CustomerInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 
@@ -30,7 +29,7 @@ interface SecurityHelperInterface
 
     public function getCurrentAdmin();
 
-    public function getAuthenticatedCustomer() : CustomerInterface;
+    public function getAuthenticatedCustomer() : UserInterface;
 
     public function getAuthenticatedAdmin() : UserInterface;
 
@@ -41,4 +40,8 @@ interface SecurityHelperInterface
     public function getFirewallNameForRequest(Request $request);
 
     public function generateRandomPassword(int $length = 8) : string;
+
+    public function getCustomerAuthorizationChecker($entity);
+
+    public function getAdminAuthorizationChecker($entity) ;
 }

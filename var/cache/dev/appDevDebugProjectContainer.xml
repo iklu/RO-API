@@ -121,6 +121,11 @@
     <parameter key="security.authentication.session_strategy.strategy">migrate</parameter>
     <parameter key="security.access.always_authenticate_before_granting">false</parameter>
     <parameter key="security.authentication.hide_user_not_found">true</parameter>
+    <parameter key="security.acl.dbal.class_table_name">acl_classes</parameter>
+    <parameter key="security.acl.dbal.entry_table_name">acl_entries</parameter>
+    <parameter key="security.acl.dbal.oid_table_name">acl_object_identities</parameter>
+    <parameter key="security.acl.dbal.oid_ancestors_table_name">acl_object_identity_ancestors</parameter>
+    <parameter key="security.acl.dbal.sid_table_name">acl_security_identities</parameter>
     <parameter key="twig.exception_listener.controller">twig.controller.exception:showAction</parameter>
     <parameter key="twig.form.resources" type="collection">
       <parameter>form_div_layout.html.twig</parameter>
@@ -421,11 +426,15 @@
     <parameter key="nelmio_api_doc.sandbox.enabled">true</parameter>
     <parameter key="nelmio_api_doc.sandbox.endpoint">null</parameter>
     <parameter key="nelmio_api_doc.sandbox.accept_type">null</parameter>
-    <parameter key="nelmio_api_doc.sandbox.body_format.formats" type="collection"/>
-    <parameter key="nelmio_api_doc.sandbox.body_format.default_format">form</parameter>
+    <parameter key="nelmio_api_doc.sandbox.body_format.formats" type="collection">
+      <parameter>json</parameter>
+    </parameter>
+    <parameter key="nelmio_api_doc.sandbox.body_format.default_format">json</parameter>
     <parameter key="nelmio_api_doc.sandbox.request_format.method">accept_header</parameter>
     <parameter key="nelmio_api_doc.sandbox.request_format.default_format">json</parameter>
-    <parameter key="nelmio_api_doc.sandbox.request_format.formats" type="collection"/>
+    <parameter key="nelmio_api_doc.sandbox.request_format.formats" type="collection">
+      <parameter>application/json</parameter>
+    </parameter>
     <parameter key="nelmio_api_doc.sandbox.entity_to_choice">true</parameter>
     <parameter key="nelmio_api_doc.formatter.abstract_formatter.class">Nelmio\ApiDocBundle\Formatter\AbstractFormatter</parameter>
     <parameter key="nelmio_api_doc.formatter.markdown_formatter.class">Nelmio\ApiDocBundle\Formatter\MarkdownFormatter</parameter>
@@ -658,7 +667,7 @@
                   <tag name="cache.pool"/>
                   <argument>XjpAxhtQa1</argument>
                   <argument>0</argument>
-                  <argument>vHd22EPPu7ucug1hYEvinC</argument>
+                  <argument>V-ET1zhAKJn+odhHTC6ER2</argument>
                   <argument>/var/www/html/RO-API/var/cache/dev/pools</argument>
                   <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
                   <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
@@ -671,7 +680,7 @@
                   <tag name="cache.pool"/>
                   <argument>3RTCZUV4M+</argument>
                   <argument>0</argument>
-                  <argument>vHd22EPPu7ucug1hYEvinC</argument>
+                  <argument>V-ET1zhAKJn+odhHTC6ER2</argument>
                   <argument>/var/www/html/RO-API/var/cache/dev/pools</argument>
                   <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
                   <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
@@ -1003,7 +1012,7 @@
       <tag name="cache.pool"/>
       <argument>89ErCvMU+5</argument>
       <argument>0</argument>
-      <argument>vHd22EPPu7ucug1hYEvinC</argument>
+      <argument>V-ET1zhAKJn+odhHTC6ER2</argument>
       <argument>/var/www/html/RO-API/var/cache/dev/pools</argument>
       <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
@@ -1598,17 +1607,7 @@
             <argument type="service" id="api_platform.router"/>
           </service>
         </argument>
-        <argument type="service">
-          <service class="ApiPlatform\Core\Hydra\Serializer\DocumentationNormalizer" public="false">
-            <tag name="serializer.normalizer" priority="32"/>
-            <argument type="service" id="api_platform.metadata.resource.metadata_factory"/>
-            <argument type="service" id="api_platform.metadata.property.name_collection_factory"/>
-            <argument type="service" id="api_platform.metadata.property.metadata_factory"/>
-            <argument type="service" id="api_platform.resource_class_resolver"/>
-            <argument type="service" id="api_platform.operation_method_resolver"/>
-            <argument type="service" id="api_platform.router"/>
-          </service>
-        </argument>
+        <argument type="service" id="api_platform.hydra.normalizer.documentation"/>
         <argument type="service">
           <service class="ApiPlatform\Core\Hydra\Serializer\EntrypointNormalizer" public="false">
             <tag name="serializer.normalizer" priority="32"/>
@@ -2167,14 +2166,20 @@
       <argument type="collection">
         <argument type="service">
           <service class="Application\AdminBundle\Security\Authentication\Provider\WsseProvider" public="false">
-            <argument type="service" id="security.user.provider.concrete.chain_provider"/>
+            <argument type="service" id="security.user.provider.concrete.admin_provider"/>
+            <argument type="service" id="cache.app"/>
+          </service>
+        </argument>
+        <argument type="service">
+          <service class="Application\AdminBundle\Security\Authentication\Provider\WsseProvider" public="false">
+            <argument type="service" id="security.user.provider.concrete.customer_provider"/>
             <argument type="service" id="cache.app"/>
           </service>
         </argument>
         <argument type="service">
           <service class="Symfony\Component\Security\Core\Authentication\Provider\DaoAuthenticationProvider" public="false">
             <argument type="service" id="security.user.provider.concrete.in_memory"/>
-            <argument type="service" id="security.user_checker.wsse_secured"/>
+            <argument type="service" id="security.user_checker.admin_wsse_secured"/>
             <argument>secured_area</argument>
             <argument type="service" id="security.encoder_factory"/>
             <argument>true</argument>
@@ -2212,7 +2217,12 @@
         <service class="Symfony\Bundle\SecurityBundle\Security\FirewallMap" public="false">
           <argument type="service" id="service_container"/>
           <argument type="collection">
-            <argument key="security.firewall.map.context.wsse_secured" type="service">
+            <argument key="security.firewall.map.context.admin_wsse_secured" type="service">
+              <service class="Symfony\Component\HttpFoundation\RequestMatcher" public="false">
+                <argument>^/api/admin/.*</argument>
+              </service>
+            </argument>
+            <argument key="security.firewall.map.context.customer_wsse_secured" type="service">
               <service class="Symfony\Component\HttpFoundation\RequestMatcher" public="false">
                 <argument>^/api/secured/.*</argument>
               </service>
@@ -2308,23 +2318,37 @@
               <argument type="service" id="security.authentication.trust_resolver"/>
             </service>
           </argument>
+          <argument type="service">
+            <service class="Symfony\Component\Security\Acl\Voter\AclVoter" public="false">
+              <tag name="monolog.logger" channel="security"/>
+              <tag name="security.voter" priority="255"/>
+              <argument type="service" id="security.acl.provider"/>
+              <argument type="service">
+                <service class="Symfony\Component\Security\Acl\Domain\ObjectIdentityRetrievalStrategy" public="false"/>
+              </argument>
+              <argument type="service">
+                <service class="Symfony\Component\Security\Acl\Domain\SecurityIdentityRetrievalStrategy" public="false">
+                  <argument type="service" id="security.role_hierarchy"/>
+                  <argument type="service" id="security.authentication.trust_resolver"/>
+                </service>
+              </argument>
+              <argument type="service">
+                <service class="Symfony\Component\Security\Acl\Permission\BasicPermissionMap" public="false"/>
+              </argument>
+              <argument type="service" id="monolog.logger.security" on-invalid="null"/>
+              <argument>true</argument>
+            </service>
+          </argument>
         </argument>
       </call>
     </service>
-    <service id="security.user.provider.concrete.chain_provider" class="Symfony\Component\Security\Core\User\ChainUserProvider" public="false">
-      <argument type="collection">
-        <argument type="service" id="security.user.provider.concrete.in_memory"/>
-        <argument type="service" id="security.user.provider.concrete.wsse_provider"/>
-        <argument type="service" id="security.user.provider.concrete.wsse_provider_2"/>
-      </argument>
-    </service>
-    <service id="security.user.provider.concrete.wsse_provider" class="Symfony\Bridge\Doctrine\Security\User\EntityUserProvider" public="false">
+    <service id="security.user.provider.concrete.admin_provider" class="Symfony\Bridge\Doctrine\Security\User\EntityUserProvider" public="false">
       <argument type="service" id="doctrine"/>
       <argument>Application\AdminBundle\Entity\User</argument>
       <argument>null</argument>
       <argument>null</argument>
     </service>
-    <service id="security.user.provider.concrete.wsse_provider_2" class="Symfony\Bridge\Doctrine\Security\User\EntityUserProvider" public="false">
+    <service id="security.user.provider.concrete.customer_provider" class="Symfony\Bridge\Doctrine\Security\User\EntityUserProvider" public="false">
       <argument type="service" id="doctrine"/>
       <argument>Application\CustomerBundle\Entity\Customer</argument>
       <argument>null</argument>
@@ -2341,7 +2365,7 @@
         </argument>
       </call>
     </service>
-    <service id="security.firewall.map.context.wsse_secured" class="Symfony\Bundle\SecurityBundle\Security\FirewallContext">
+    <service id="security.firewall.map.context.admin_wsse_secured" class="Symfony\Bundle\SecurityBundle\Security\FirewallContext">
       <argument type="collection">
         <argument type="service" id="security.channel_listener"/>
         <argument type="service">
@@ -2357,7 +2381,32 @@
           <argument type="service" id="security.token_storage"/>
           <argument type="service" id="security.authentication.trust_resolver"/>
           <argument type="service" id="security.http_utils"/>
-          <argument>wsse_secured</argument>
+          <argument>admin_wsse_secured</argument>
+          <argument>null</argument>
+          <argument>null</argument>
+          <argument>null</argument>
+          <argument type="service" id="monolog.logger.security" on-invalid="null"/>
+          <argument>true</argument>
+        </service>
+      </argument>
+    </service>
+    <service id="security.firewall.map.context.customer_wsse_secured" class="Symfony\Bundle\SecurityBundle\Security\FirewallContext">
+      <argument type="collection">
+        <argument type="service" id="security.channel_listener"/>
+        <argument type="service">
+          <service class="Application\AdminBundle\Security\Firewall\WsseListener" public="false">
+            <argument type="service" id="security.token_storage"/>
+            <argument type="service" id="security.authentication.manager"/>
+          </service>
+        </argument>
+        <argument type="service" id="security.access_listener"/>
+      </argument>
+      <argument type="service">
+        <service class="Symfony\Component\Security\Http\Firewall\ExceptionListener" public="false">
+          <argument type="service" id="security.token_storage"/>
+          <argument type="service" id="security.authentication.trust_resolver"/>
+          <argument type="service" id="security.http_utils"/>
+          <argument>customer_wsse_secured</argument>
           <argument>null</argument>
           <argument>null</argument>
           <argument>null</argument>
@@ -2373,9 +2422,17 @@
           <service class="Symfony\Component\Security\Http\Firewall\ContextListener" public="false">
             <argument type="service" id="security.token_storage"/>
             <argument type="collection">
-              <argument type="service" id="security.user.provider.concrete.chain_provider"/>
-              <argument type="service" id="security.user.provider.concrete.wsse_provider"/>
-              <argument type="service" id="security.user.provider.concrete.wsse_provider_2"/>
+              <argument type="service">
+                <service class="Symfony\Component\Security\Core\User\ChainUserProvider" public="false">
+                  <argument type="collection">
+                    <argument type="service" id="security.user.provider.concrete.in_memory"/>
+                    <argument type="service" id="security.user.provider.concrete.admin_provider"/>
+                    <argument type="service" id="security.user.provider.concrete.customer_provider"/>
+                  </argument>
+                </service>
+              </argument>
+              <argument type="service" id="security.user.provider.concrete.admin_provider"/>
+              <argument type="service" id="security.user.provider.concrete.customer_provider"/>
               <argument type="service" id="security.user.provider.concrete.in_memory"/>
             </argument>
             <argument>secured_area</argument>
@@ -2416,6 +2473,20 @@
           <argument>false</argument>
         </service>
       </argument>
+    </service>
+    <service id="security.acl.dbal.schema" class="Symfony\Component\Security\Acl\Dbal\Schema">
+      <argument type="collection">
+        <argument key="class_table_name">acl_classes</argument>
+        <argument key="entry_table_name">acl_entries</argument>
+        <argument key="oid_table_name">acl_object_identities</argument>
+        <argument key="oid_ancestors_table_name">acl_object_identity_ancestors</argument>
+        <argument key="sid_table_name">acl_security_identities</argument>
+      </argument>
+      <argument type="service" id="doctrine.dbal.default_connection"/>
+    </service>
+    <service id="security.acl.dbal.schema_listener" class="Symfony\Bundle\SecurityBundle\EventListener\AclSchemaListener">
+      <tag name="doctrine.event_listener" connection="default" event="postGenerateSchema" lazy="1"/>
+      <argument type="service" id="security.acl.dbal.schema"/>
     </service>
     <service id="twig" class="Twig_Environment">
       <argument type="service" id="twig.loader"/>
@@ -2728,6 +2799,12 @@
               <argument>loadClassMetadata</argument>
             </argument>
             <argument type="service" id="doctrine.orm.default_listeners.attach_entity_listeners"/>
+          </call>
+          <call method="addEventListener">
+            <argument type="collection">
+              <argument>postGenerateSchema</argument>
+            </argument>
+            <argument>security.acl.dbal.schema_listener</argument>
           </call>
         </service>
       </argument>
@@ -3199,6 +3276,7 @@
     </service>
     <service id="api_platform.metadata.extractor.yaml" class="ApiPlatform\Core\Metadata\Extractor\YamlExtractor" public="false">
       <argument type="collection">
+        <argument>/var/www/html/RO-API/src/Application/CategoryBundle/Resources/config/api_resources/resources.yml</argument>
         <argument>/var/www/html/RO-API/src/Application/AutoBundle/Resources/config/api_resources/resources.yml</argument>
       </argument>
     </service>
@@ -3280,6 +3358,15 @@
       <argument type="service" id="api_platform.metadata.resource.name_collection_factory"/>
       <argument type="service" id="api_platform.metadata.resource.metadata_factory"/>
     </service>
+    <service id="api_platform.hydra.normalizer.documentation" class="ApiPlatform\Core\Hydra\Serializer\DocumentationNormalizer" public="false">
+      <tag name="serializer.normalizer" priority="32"/>
+      <argument type="service" id="api_platform.metadata.resource.metadata_factory"/>
+      <argument type="service" id="api_platform.metadata.property.name_collection_factory"/>
+      <argument type="service" id="api_platform.metadata.property.metadata_factory"/>
+      <argument type="service" id="api_platform.resource_class_resolver"/>
+      <argument type="service" id="api_platform.operation_method_resolver"/>
+      <argument type="service" id="api_platform.router"/>
+    </service>
     <service id="api_platform.hydra.listener.response.add_link_header" class="ApiPlatform\Core\Hydra\EventListener\AddLinkHeaderListener">
       <tag name="kernel.event_listener" event="kernel.response" method="onKernelResponse"/>
       <argument type="service" id="api_platform.router"/>
@@ -3296,6 +3383,21 @@
       <argument type="service" id="api_platform.metadata.resource.metadata_factory"/>
       <argument>30</argument>
       <argument>true</argument>
+    </service>
+    <service id="api_platform.nelmio_api_doc.annotations_provider" class="ApiPlatform\Core\Bridge\NelmioApiDoc\Extractor\AnnotationsProvider\ApiPlatformProvider">
+      <tag name="nelmio_api_doc.extractor.annotations_provider"/>
+      <argument type="service" id="api_platform.metadata.resource.name_collection_factory"/>
+      <argument type="service" id="api_platform.hydra.normalizer.documentation"/>
+      <argument type="service" id="api_platform.metadata.resource.metadata_factory"/>
+      <argument type="service" id="api_platform.filters"/>
+      <argument type="service" id="api_platform.operation_method_resolver"/>
+    </service>
+    <service id="api_platform.nelmio_api_doc.parser" class="ApiPlatform\Core\Bridge\NelmioApiDoc\Parser\ApiPlatformParser">
+      <tag name="nelmio_api_doc.extractor.parser"/>
+      <argument type="service" id="api_platform.metadata.resource.metadata_factory"/>
+      <argument type="service" id="api_platform.metadata.property.name_collection_factory"/>
+      <argument type="service" id="api_platform.metadata.property.metadata_factory"/>
+      <argument>null</argument>
     </service>
     <service id="nelmio_cors.cors_listener" class="Nelmio\CorsBundle\EventListener\CorsListener">
       <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest" priority="10000"/>
@@ -3409,7 +3511,9 @@
         <argument>accept_header</argument>
       </call>
       <call method="setRequestFormats">
-        <argument type="collection"/>
+        <argument type="collection">
+          <argument>application/json</argument>
+        </argument>
       </call>
       <call method="setDefaultRequestFormat">
         <argument>json</argument>
@@ -3418,10 +3522,12 @@
         <argument>null</argument>
       </call>
       <call method="setBodyFormats">
-        <argument type="collection"/>
+        <argument type="collection">
+          <argument>json</argument>
+        </argument>
       </call>
       <call method="setDefaultBodyFormat">
-        <argument>form</argument>
+        <argument>json</argument>
       </call>
       <call method="setAuthentication">
         <argument>null</argument>
@@ -3486,11 +3592,16 @@
           </service>
         </argument>
       </argument>
-      <argument type="collection"/>
+      <argument type="collection">
+        <argument type="service" id="api_platform.nelmio_api_doc.annotations_provider"/>
+      </argument>
       <argument>/var/www/html/RO-API/var/cache/dev/api-doc.cache</argument>
       <argument>true</argument>
       <call method="addParser">
         <argument type="service" id="nelmio_api_doc.parser.json_serializable_parser"/>
+      </call>
+      <call method="addParser">
+        <argument type="service" id="api_platform.nelmio_api_doc.parser"/>
       </call>
       <call method="addParser">
         <argument type="service" id="nelmio_api_doc.parser.collection_parser"/>
@@ -3559,6 +3670,7 @@
     <service id="security.helper" class="Application\CoreBundle\Helper\Security\SecurityHelper">
       <argument type="service" id="security.token_storage"/>
       <argument type="service" id="request.helper"/>
+      <argument type="service" id="security.authorization_checker"/>
     </service>
     <service id="email.user_confirmation" class="Application\EmailBundle\Mailer\Mailer">
       <argument type="service" id="swiftmailer.mailer.default"/>
@@ -3824,6 +3936,11 @@
         <argument key="security.authentication.session_strategy.strategy">migrate</argument>
         <argument key="security.access.always_authenticate_before_granting">false</argument>
         <argument key="security.authentication.hide_user_not_found">true</argument>
+        <argument key="security.acl.dbal.class_table_name">acl_classes</argument>
+        <argument key="security.acl.dbal.entry_table_name">acl_entries</argument>
+        <argument key="security.acl.dbal.oid_table_name">acl_object_identities</argument>
+        <argument key="security.acl.dbal.oid_ancestors_table_name">acl_object_identity_ancestors</argument>
+        <argument key="security.acl.dbal.sid_table_name">acl_security_identities</argument>
         <argument key="twig.exception_listener.controller">twig.controller.exception:showAction</argument>
         <argument key="twig.form.resources" type="collection">
           <argument>form_div_layout.html.twig</argument>
@@ -4125,11 +4242,15 @@
         <argument key="nelmio_api_doc.sandbox.enabled">true</argument>
         <argument key="nelmio_api_doc.sandbox.endpoint">null</argument>
         <argument key="nelmio_api_doc.sandbox.accept_type">null</argument>
-        <argument key="nelmio_api_doc.sandbox.body_format.formats" type="collection"/>
-        <argument key="nelmio_api_doc.sandbox.body_format.default_format">form</argument>
+        <argument key="nelmio_api_doc.sandbox.body_format.formats" type="collection">
+          <argument>json</argument>
+        </argument>
+        <argument key="nelmio_api_doc.sandbox.body_format.default_format">json</argument>
         <argument key="nelmio_api_doc.sandbox.request_format.method">accept_header</argument>
         <argument key="nelmio_api_doc.sandbox.request_format.default_format">json</argument>
-        <argument key="nelmio_api_doc.sandbox.request_format.formats" type="collection"/>
+        <argument key="nelmio_api_doc.sandbox.request_format.formats" type="collection">
+          <argument>application/json</argument>
+        </argument>
         <argument key="nelmio_api_doc.sandbox.entity_to_choice">true</argument>
         <argument key="nelmio_api_doc.formatter.abstract_formatter.class">Nelmio\ApiDocBundle\Formatter\AbstractFormatter</argument>
         <argument key="nelmio_api_doc.formatter.markdown_formatter.class">Nelmio\ApiDocBundle\Formatter\MarkdownFormatter</argument>
@@ -4396,7 +4517,21 @@
     <service id="security.password_encoder" class="Symfony\Component\Security\Core\Encoder\UserPasswordEncoder">
       <argument type="service" id="security.encoder_factory"/>
     </service>
-    <service id="security.user_checker.wsse_secured" class="Symfony\Component\Security\Core\User\UserChecker"/>
+    <service id="security.user_checker.admin_wsse_secured" class="Symfony\Component\Security\Core\User\UserChecker"/>
+    <service id="security.acl.provider" class="Symfony\Component\Security\Acl\Dbal\MutableAclProvider">
+      <argument type="service" id="doctrine.dbal.default_connection"/>
+      <argument type="service">
+        <service class="Symfony\Component\Security\Acl\Domain\PermissionGrantingStrategy" public="false"/>
+      </argument>
+      <argument type="collection">
+        <argument key="class_table_name">acl_classes</argument>
+        <argument key="entry_table_name">acl_entries</argument>
+        <argument key="oid_table_name">acl_object_identities</argument>
+        <argument key="oid_ancestors_table_name">acl_object_identity_ancestors</argument>
+        <argument key="sid_table_name">acl_security_identities</argument>
+      </argument>
+      <argument>null</argument>
+    </service>
     <service id="twig.loader" class="Symfony\Bundle\TwigBundle\Loader\FilesystemLoader">
       <tag name="twig.loader"/>
       <argument type="service" id="templating.locator"/>
@@ -4587,7 +4722,7 @@
         </service>
       </configurator>
     </service>
-    <service id="api_platform.operation_path_resolver.default" class="ApiPlatform\Core\PathResolver\UnderscoreOperationPathResolver"/>
+    <service id="api_platform.operation_path_resolver.default" class="Application\CoreBundle\PathResolver\NoSeparatorsOperationPathResolver"/>
     <service id="api_platform.metadata.resource.name_collection_factory" class="ApiPlatform\Core\Metadata\Resource\Factory\CachedResourceNameCollectionFactory">
       <argument type="service" id="api_platform.cache.metadata.resource"/>
       <argument type="service">
@@ -4714,7 +4849,9 @@
     </service>
     <service id="session.storage" alias="session.storage.native"/>
     <service id="event_dispatcher" alias="debug.event_dispatcher"/>
-    <service id="security.user_checker.secured_area" alias="security.user_checker.wsse_secured"/>
+    <service id="security.user_checker.customer_wsse_secured" alias="security.user_checker.admin_wsse_secured"/>
+    <service id="security.user_checker.secured_area" alias="security.user_checker.admin_wsse_secured"/>
+    <service id="security.acl.dbal.connection" alias="doctrine.dbal.default_connection"/>
     <service id="swiftmailer.spool" alias="swiftmailer.mailer.default.spool"/>
     <service id="swiftmailer.transport.real" alias="swiftmailer.mailer.default.transport.real"/>
     <service id="swiftmailer.plugin.messagelogger" alias="swiftmailer.mailer.default.plugin.messagelogger"/>

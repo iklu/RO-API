@@ -2,6 +2,8 @@
 
 namespace Application\CoreBundle\Controller\Front;
 use Application\CoreBundle\Controller\AbstractController;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+
 
 /**
  * Created by PhpStorm.
@@ -40,4 +42,10 @@ class AbstractFrontController extends AbstractController implements FrontControl
     {
         return $this->getSecurityHelper()->getAuthenticatedClient();
     }
+
+    public function getCustomerAuthorizationChecker($entity)
+    {
+        return $this->getSecurityHelper()->getCustomerAuthorizationChecker($entity);
+    }
+
 }

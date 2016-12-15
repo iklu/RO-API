@@ -55,6 +55,7 @@ class appDevDebugProjectContainer extends Container
             'api_platform.doctrine.orm.query_extension.eager_loading' => 'getApiPlatform_Doctrine_Orm_QueryExtension_EagerLoadingService',
             'api_platform.filters' => 'getApiPlatform_FiltersService',
             'api_platform.hydra.listener.response.add_link_header' => 'getApiPlatform_Hydra_Listener_Response_AddLinkHeaderService',
+            'api_platform.hydra.normalizer.documentation' => 'getApiPlatform_Hydra_Normalizer_DocumentationService',
             'api_platform.item_data_provider' => 'getApiPlatform_ItemDataProviderService',
             'api_platform.jsonld.action.context' => 'getApiPlatform_Jsonld_Action_ContextService',
             'api_platform.jsonld.context_builder' => 'getApiPlatform_Jsonld_ContextBuilderService',
@@ -72,6 +73,8 @@ class appDevDebugProjectContainer extends Container
             'api_platform.metadata.property.name_collection_factory' => 'getApiPlatform_Metadata_Property_NameCollectionFactoryService',
             'api_platform.metadata.resource.metadata_factory' => 'getApiPlatform_Metadata_Resource_MetadataFactoryService',
             'api_platform.metadata.resource.name_collection_factory' => 'getApiPlatform_Metadata_Resource_NameCollectionFactoryService',
+            'api_platform.nelmio_api_doc.annotations_provider' => 'getApiPlatform_NelmioApiDoc_AnnotationsProviderService',
+            'api_platform.nelmio_api_doc.parser' => 'getApiPlatform_NelmioApiDoc_ParserService',
             'api_platform.operation_method_resolver' => 'getApiPlatform_OperationMethodResolverService',
             'api_platform.operation_path_resolver.custom' => 'getApiPlatform_OperationPathResolver_CustomService',
             'api_platform.operation_path_resolver.default' => 'getApiPlatform_OperationPathResolver_DefaultService',
@@ -237,6 +240,9 @@ class appDevDebugProjectContainer extends Container
             'routing.loader' => 'getRouting_LoaderService',
             'security.access_listener' => 'getSecurity_AccessListenerService',
             'security.access_map' => 'getSecurity_AccessMapService',
+            'security.acl.dbal.schema' => 'getSecurity_Acl_Dbal_SchemaService',
+            'security.acl.dbal.schema_listener' => 'getSecurity_Acl_Dbal_SchemaListenerService',
+            'security.acl.provider' => 'getSecurity_Acl_ProviderService',
             'security.authentication.guard_handler' => 'getSecurity_Authentication_GuardHandlerService',
             'security.authentication.manager' => 'getSecurity_Authentication_ManagerService',
             'security.authentication.trust_resolver' => 'getSecurity_Authentication_TrustResolverService',
@@ -246,8 +252,9 @@ class appDevDebugProjectContainer extends Container
             'security.csrf.token_manager' => 'getSecurity_Csrf_TokenManagerService',
             'security.encoder_factory' => 'getSecurity_EncoderFactoryService',
             'security.firewall' => 'getSecurity_FirewallService',
+            'security.firewall.map.context.admin_wsse_secured' => 'getSecurity_Firewall_Map_Context_AdminWsseSecuredService',
+            'security.firewall.map.context.customer_wsse_secured' => 'getSecurity_Firewall_Map_Context_CustomerWsseSecuredService',
             'security.firewall.map.context.secured_area' => 'getSecurity_Firewall_Map_Context_SecuredAreaService',
-            'security.firewall.map.context.wsse_secured' => 'getSecurity_Firewall_Map_Context_WsseSecuredService',
             'security.helper' => 'getSecurity_HelperService',
             'security.http_utils' => 'getSecurity_HttpUtilsService',
             'security.logout_url_generator' => 'getSecurity_LogoutUrlGeneratorService',
@@ -255,11 +262,10 @@ class appDevDebugProjectContainer extends Container
             'security.rememberme.response_listener' => 'getSecurity_Rememberme_ResponseListenerService',
             'security.role_hierarchy' => 'getSecurity_RoleHierarchyService',
             'security.token_storage' => 'getSecurity_TokenStorageService',
-            'security.user.provider.concrete.chain_provider' => 'getSecurity_User_Provider_Concrete_ChainProviderService',
+            'security.user.provider.concrete.admin_provider' => 'getSecurity_User_Provider_Concrete_AdminProviderService',
+            'security.user.provider.concrete.customer_provider' => 'getSecurity_User_Provider_Concrete_CustomerProviderService',
             'security.user.provider.concrete.in_memory' => 'getSecurity_User_Provider_Concrete_InMemoryService',
-            'security.user.provider.concrete.wsse_provider' => 'getSecurity_User_Provider_Concrete_WsseProviderService',
-            'security.user.provider.concrete.wsse_provider_2' => 'getSecurity_User_Provider_Concrete_WsseProvider2Service',
-            'security.user_checker.wsse_secured' => 'getSecurity_UserChecker_WsseSecuredService',
+            'security.user_checker.admin_wsse_secured' => 'getSecurity_UserChecker_AdminWsseSecuredService',
             'security.validator.user_password' => 'getSecurity_Validator_UserPasswordService',
             'sensio_distribution.security_checker' => 'getSensioDistribution_SecurityCheckerService',
             'sensio_distribution.security_checker.command' => 'getSensioDistribution_SecurityChecker_CommandService',
@@ -369,7 +375,9 @@ class appDevDebugProjectContainer extends Container
             'doctrine.orm.entity_manager' => 'doctrine.orm.default_entity_manager',
             'event_dispatcher' => 'debug.event_dispatcher',
             'mailer' => 'swiftmailer.mailer.default',
-            'security.user_checker.secured_area' => 'security.user_checker.wsse_secured',
+            'security.acl.dbal.connection' => 'doctrine.dbal.default_connection',
+            'security.user_checker.customer_wsse_secured' => 'security.user_checker.admin_wsse_secured',
+            'security.user_checker.secured_area' => 'security.user_checker.admin_wsse_secured',
             'session.storage' => 'session.storage.native',
             'swiftmailer.mailer' => 'swiftmailer.mailer.default',
             'swiftmailer.plugin.messagelogger' => 'swiftmailer.mailer.default.plugin.messagelogger',
@@ -871,16 +879,42 @@ class appDevDebugProjectContainer extends Container
     }
 
     /**
+     * Gets the 'api_platform.nelmio_api_doc.annotations_provider' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \ApiPlatform\Core\Bridge\NelmioApiDoc\Extractor\AnnotationsProvider\ApiPlatformProvider A ApiPlatform\Core\Bridge\NelmioApiDoc\Extractor\AnnotationsProvider\ApiPlatformProvider instance
+     */
+    protected function getApiPlatform_NelmioApiDoc_AnnotationsProviderService()
+    {
+        return $this->services['api_platform.nelmio_api_doc.annotations_provider'] = new \ApiPlatform\Core\Bridge\NelmioApiDoc\Extractor\AnnotationsProvider\ApiPlatformProvider($this->get('api_platform.metadata.resource.name_collection_factory'), $this->get('api_platform.hydra.normalizer.documentation'), $this->get('api_platform.metadata.resource.metadata_factory'), $this->get('api_platform.filters'), $this->get('api_platform.operation_method_resolver'));
+    }
+
+    /**
+     * Gets the 'api_platform.nelmio_api_doc.parser' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \ApiPlatform\Core\Bridge\NelmioApiDoc\Parser\ApiPlatformParser A ApiPlatform\Core\Bridge\NelmioApiDoc\Parser\ApiPlatformParser instance
+     */
+    protected function getApiPlatform_NelmioApiDoc_ParserService()
+    {
+        return $this->services['api_platform.nelmio_api_doc.parser'] = new \ApiPlatform\Core\Bridge\NelmioApiDoc\Parser\ApiPlatformParser($this->get('api_platform.metadata.resource.metadata_factory'), $this->get('api_platform.metadata.property.name_collection_factory'), $this->get('api_platform.metadata.property.metadata_factory'), NULL);
+    }
+
+    /**
      * Gets the 'api_platform.operation_path_resolver.default' service.
      *
      * This service is shared.
      * This method always returns the same instance of the service.
      *
-     * @return \ApiPlatform\Core\PathResolver\UnderscoreOperationPathResolver A ApiPlatform\Core\PathResolver\UnderscoreOperationPathResolver instance
+     * @return \Application\CoreBundle\PathResolver\NoSeparatorsOperationPathResolver A Application\CoreBundle\PathResolver\NoSeparatorsOperationPathResolver instance
      */
     protected function getApiPlatform_OperationPathResolver_DefaultService()
     {
-        return $this->services['api_platform.operation_path_resolver.default'] = new \ApiPlatform\Core\PathResolver\UnderscoreOperationPathResolver();
+        return $this->services['api_platform.operation_path_resolver.default'] = new \Application\CoreBundle\PathResolver\NoSeparatorsOperationPathResolver();
     }
 
     /**
@@ -1003,7 +1037,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getCache_SystemService()
     {
-        return $this->services['cache.system'] = \Symfony\Component\Cache\Adapter\AbstractAdapter::createSystemCache('89ErCvMU+5', 0, 'vHd22EPPu7ucug1hYEvinC', (__DIR__.'/pools'), $this->get('monolog.logger.cache', ContainerInterface::NULL_ON_INVALID_REFERENCE));
+        return $this->services['cache.system'] = \Symfony\Component\Cache\Adapter\AbstractAdapter::createSystemCache('89ErCvMU+5', 0, 'V-ET1zhAKJn+odhHTC6ER2', (__DIR__.'/pools'), $this->get('monolog.logger.cache', ContainerInterface::NULL_ON_INVALID_REFERENCE));
     }
 
     /**
@@ -1021,8 +1055,8 @@ class appDevDebugProjectContainer extends Container
         $b = new \Symfony\Component\HttpKernel\CacheClearer\Psr6CacheClearer();
         $b->addPool($this->get('cache.app'));
         $b->addPool($this->get('cache.system'));
-        $b->addPool(\Symfony\Component\Cache\Adapter\AbstractAdapter::createSystemCache('XjpAxhtQa1', 0, 'vHd22EPPu7ucug1hYEvinC', (__DIR__.'/pools'), $a));
-        $b->addPool(\Symfony\Component\Cache\Adapter\AbstractAdapter::createSystemCache('3RTCZUV4M+', 0, 'vHd22EPPu7ucug1hYEvinC', (__DIR__.'/pools'), $a));
+        $b->addPool(\Symfony\Component\Cache\Adapter\AbstractAdapter::createSystemCache('XjpAxhtQa1', 0, 'V-ET1zhAKJn+odhHTC6ER2', (__DIR__.'/pools'), $a));
+        $b->addPool(\Symfony\Component\Cache\Adapter\AbstractAdapter::createSystemCache('3RTCZUV4M+', 0, 'V-ET1zhAKJn+odhHTC6ER2', (__DIR__.'/pools'), $a));
 
         return $this->services['cache_clearer'] = new \Symfony\Component\HttpKernel\CacheClearer\ChainCacheClearer(array(0 => $b));
     }
@@ -1290,6 +1324,7 @@ class appDevDebugProjectContainer extends Container
 
         $c = new \Symfony\Bridge\Doctrine\ContainerAwareEventManager($this);
         $c->addEventListener(array(0 => 'loadClassMetadata'), $this->get('doctrine.orm.default_listeners.attach_entity_listeners'));
+        $c->addEventListener(array(0 => 'postGenerateSchema'), 'security.acl.dbal.schema_listener');
 
         return $this->services['doctrine.dbal.default_connection'] = $this->get('doctrine.dbal.connection_factory')->createConnection(array('driver' => 'pdo_mysql', 'host' => 'localhost', 'port' => 3306, 'dbname' => 'apiplatform', 'user' => 'root', 'password' => 'parola86', 'charset' => 'UTF8', 'driverOptions' => array(), 'defaultTableOptions' => array()), $b, $c, array('enum' => 'string'));
     }
@@ -2334,7 +2369,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getHautelookAlice_Alice_Fixtures_LoaderService()
     {
-        $this->services['hautelook_alice.alice.fixtures.loader'] = $instance = new \Hautelook\AliceBundle\Alice\DataFixtures\Fixtures\Loader('en_US', $this->get('hautelook_alice.faker.provider_chain'), 1, array('kernel.root_dir' => ($this->targetDirs[3].'/app'), 'kernel.environment' => 'dev', 'kernel.debug' => true, 'kernel.name' => 'app', 'kernel.cache_dir' => __DIR__, 'kernel.logs_dir' => ($this->targetDirs[2].'/logs'), 'kernel.bundles' => array('FrameworkBundle' => 'Symfony\\Bundle\\FrameworkBundle\\FrameworkBundle', 'SecurityBundle' => 'Symfony\\Bundle\\SecurityBundle\\SecurityBundle', 'TwigBundle' => 'Symfony\\Bundle\\TwigBundle\\TwigBundle', 'MonologBundle' => 'Symfony\\Bundle\\MonologBundle\\MonologBundle', 'SwiftmailerBundle' => 'Symfony\\Bundle\\SwiftmailerBundle\\SwiftmailerBundle', 'DoctrineBundle' => 'Doctrine\\Bundle\\DoctrineBundle\\DoctrineBundle', 'SensioFrameworkExtraBundle' => 'Sensio\\Bundle\\FrameworkExtraBundle\\SensioFrameworkExtraBundle', 'DunglasActionBundle' => 'Dunglas\\ActionBundle\\DunglasActionBundle', 'ApiPlatformBundle' => 'ApiPlatform\\Core\\Bridge\\Symfony\\Bundle\\ApiPlatformBundle', 'NelmioCorsBundle' => 'Nelmio\\CorsBundle\\NelmioCorsBundle', 'ApplicationAdminBundle' => 'Application\\AdminBundle\\ApplicationAdminBundle', 'ApplicationAppBundle' => 'Application\\AppBundle\\ApplicationAppBundle', 'NelmioApiDocBundle' => 'Nelmio\\ApiDocBundle\\NelmioApiDocBundle', 'ApplicationCoreBundle' => 'Application\\CoreBundle\\ApplicationCoreBundle', 'ApplicationEmailBundle' => 'Application\\EmailBundle\\ApplicationEmailBundle', 'ApplicationProductBundle' => 'Application\\ProductBundle\\ApplicationProductBundle', 'ApplicationCategoryBundle' => 'Application\\CategoryBundle\\ApplicationCategoryBundle', 'ApplicationCustomerBundle' => 'Application\\CustomerBundle\\ApplicationCustomerBundle', 'ApplicationAutoBundle' => 'Application\\AutoBundle\\ApplicationAutoBundle', 'ApplicationRealEstateBundle' => 'Application\\RealEstateBundle\\ApplicationRealEstateBundle', 'ApplicationElectronicsBundle' => 'Application\\ElectronicsBundle\\ApplicationElectronicsBundle', 'ApplicationFashionBundle' => 'Application\\FashionBundle\\ApplicationFashionBundle', 'ApplicationHouseGardeningBundle' => 'Application\\HouseGardeningBundle\\ApplicationHouseGardeningBundle', 'ApplicationFamilyBundle' => 'Application\\FamilyBundle\\ApplicationFamilyBundle', 'ApplicationSportBundle' => 'Application\\SportBundle\\ApplicationSportBundle', 'ApplicationPetsBundle' => 'Application\\PetsBundle\\ApplicationPetsBundle', 'ApplicationIndustryBundle' => 'Application\\IndustryBundle\\ApplicationIndustryBundle', 'ApplicationBusinessBundle' => 'Application\\BusinessBundle\\ApplicationBusinessBundle', 'ApplicationJobsBundle' => 'Application\\JobsBundle\\ApplicationJobsBundle', 'ApplicationProducerBundle' => 'Application\\ProducerBundle\\ApplicationProducerBundle', 'ApplicationDoctrineBundle' => 'Application\\DoctrineBundle\\ApplicationDoctrineBundle', 'DebugBundle' => 'Symfony\\Bundle\\DebugBundle\\DebugBundle', 'WebProfilerBundle' => 'Symfony\\Bundle\\WebProfilerBundle\\WebProfilerBundle', 'SensioDistributionBundle' => 'Sensio\\Bundle\\DistributionBundle\\SensioDistributionBundle', 'SensioGeneratorBundle' => 'Sensio\\Bundle\\GeneratorBundle\\SensioGeneratorBundle', 'HautelookAliceBundle' => 'Hautelook\\AliceBundle\\HautelookAliceBundle'), 'kernel.charset' => 'UTF-8', 'kernel.container_class' => 'appDevDebugProjectContainer', 'database_host' => 'localhost', 'database_port' => 3306, 'database_name' => 'apiplatform', 'database_user' => 'root', 'database_password' => 'parola86', 'mailer_transport' => 'smtp', 'mailer_host' => '127.0.0.1', 'mailer_user' => NULL, 'mailer_password' => NULL, 'secret' => 'ThisTokenIsNotSoSecretChangeIt', 'cors_allow_origin' => 'http://localhost', 'locale' => 'en', 'fragment.renderer.hinclude.global_template' => NULL, 'fragment.path' => '/_fragment', 'kernel.secret' => 'ThisTokenIsNotSoSecretChangeIt', 'kernel.http_method_override' => true, 'kernel.trusted_hosts' => array(), 'kernel.trusted_proxies' => array(), 'kernel.default_locale' => 'en', 'session.metadata.storage_key' => '_sf2_meta', 'session.storage.options' => array('cookie_httponly' => true, 'gc_probability' => 1), 'session.save_path' => ($this->targetDirs[3].'/app/../var/sessions/dev'), 'session.metadata.update_threshold' => '0', 'form.type_extension.csrf.enabled' => true, 'form.type_extension.csrf.field_name' => '_token', 'templating.helper.code.file_link_format' => NULL, 'templating.loader.cache.path' => NULL, 'templating.engines' => array(0 => 'twig'), 'validator.mapping.cache.prefix' => '', 'validator.translation_domain' => 'validators', 'profiler_listener.only_exceptions' => false, 'profiler_listener.only_master_requests' => false, 'profiler.storage.dsn' => ('file:'.__DIR__.'/profiler'), 'router.options.generator_class' => 'Symfony\\Component\\Routing\\Generator\\UrlGenerator', 'router.options.generator_base_class' => 'Symfony\\Component\\Routing\\Generator\\UrlGenerator', 'router.options.generator_dumper_class' => 'Symfony\\Component\\Routing\\Generator\\Dumper\\PhpGeneratorDumper', 'router.options.matcher_class' => 'Symfony\\Bundle\\FrameworkBundle\\Routing\\RedirectableUrlMatcher', 'router.options.matcher_base_class' => 'Symfony\\Bundle\\FrameworkBundle\\Routing\\RedirectableUrlMatcher', 'router.options.matcher_dumper_class' => 'Symfony\\Component\\Routing\\Matcher\\Dumper\\PhpMatcherDumper', 'router.options.matcher.cache_class' => 'appDevDebugProjectContainerUrlMatcher', 'router.options.generator.cache_class' => 'appDevDebugProjectContainerUrlGenerator', 'router.request_context.host' => 'localhost', 'router.request_context.scheme' => 'http', 'router.request_context.base_url' => '', 'router.resource' => ($this->targetDirs[3].'/app/config/routing_dev.yml'), 'router.cache_class_prefix' => 'appDevDebugProjectContainer', 'request_listener.http_port' => 80, 'request_listener.https_port' => 443, 'serializer.mapping.cache.prefix' => '', 'debug.error_handler.throw_at' => -1, 'debug.container.dump' => (__DIR__.'/appDevDebugProjectContainer.xml'), 'security.authentication.trust_resolver.anonymous_class' => 'Symfony\\Component\\Security\\Core\\Authentication\\Token\\AnonymousToken', 'security.authentication.trust_resolver.rememberme_class' => 'Symfony\\Component\\Security\\Core\\Authentication\\Token\\RememberMeToken', 'security.role_hierarchy.roles' => array('ROLE_SUPER_ADMIN' => array(0 => 'ROLE_SUPER_ADMIN'), 'ROLE_ADMIN' => array(0 => 'ROLE_ADMIN'), 'ROLE_MEINEKE' => array(0 => 'ROLE_MEINEKE')), 'security.access.denied_url' => NULL, 'security.authentication.manager.erase_credentials' => true, 'security.authentication.session_strategy.strategy' => 'migrate', 'security.access.always_authenticate_before_granting' => false, 'security.authentication.hide_user_not_found' => true, 'twig.exception_listener.controller' => 'twig.controller.exception:showAction', 'twig.form.resources' => array(0 => 'form_div_layout.html.twig'), 'monolog.logger.class' => 'Symfony\\Bridge\\Monolog\\Logger', 'monolog.gelf.publisher.class' => 'Gelf\\MessagePublisher', 'monolog.gelfphp.publisher.class' => 'Gelf\\Publisher', 'monolog.handler.stream.class' => 'Monolog\\Handler\\StreamHandler', 'monolog.handler.console.class' => 'Symfony\\Bridge\\Monolog\\Handler\\ConsoleHandler', 'monolog.handler.group.class' => 'Monolog\\Handler\\GroupHandler', 'monolog.handler.buffer.class' => 'Monolog\\Handler\\BufferHandler', 'monolog.handler.deduplication.class' => 'Monolog\\Handler\\DeduplicationHandler', 'monolog.handler.rotating_file.class' => 'Monolog\\Handler\\RotatingFileHandler', 'monolog.handler.syslog.class' => 'Monolog\\Handler\\SyslogHandler', 'monolog.handler.syslogudp.class' => 'Monolog\\Handler\\SyslogUdpHandler', 'monolog.handler.null.class' => 'Monolog\\Handler\\NullHandler', 'monolog.handler.test.class' => 'Monolog\\Handler\\TestHandler', 'monolog.handler.gelf.class' => 'Monolog\\Handler\\GelfHandler', 'monolog.handler.rollbar.class' => 'Monolog\\Handler\\RollbarHandler', 'monolog.handler.flowdock.class' => 'Monolog\\Handler\\FlowdockHandler', 'monolog.handler.browser_console.class' => 'Monolog\\Handler\\BrowserConsoleHandler', 'monolog.handler.firephp.class' => 'Symfony\\Bridge\\Monolog\\Handler\\FirePHPHandler', 'monolog.handler.chromephp.class' => 'Symfony\\Bridge\\Monolog\\Handler\\ChromePhpHandler', 'monolog.handler.debug.class' => 'Symfony\\Bridge\\Monolog\\Handler\\DebugHandler', 'monolog.handler.swift_mailer.class' => 'Symfony\\Bridge\\Monolog\\Handler\\SwiftMailerHandler', 'monolog.handler.native_mailer.class' => 'Monolog\\Handler\\NativeMailerHandler', 'monolog.handler.socket.class' => 'Monolog\\Handler\\SocketHandler', 'monolog.handler.pushover.class' => 'Monolog\\Handler\\PushoverHandler', 'monolog.handler.raven.class' => 'Monolog\\Handler\\RavenHandler', 'monolog.handler.newrelic.class' => 'Monolog\\Handler\\NewRelicHandler', 'monolog.handler.hipchat.class' => 'Monolog\\Handler\\HipChatHandler', 'monolog.handler.slack.class' => 'Monolog\\Handler\\SlackHandler', 'monolog.handler.cube.class' => 'Monolog\\Handler\\CubeHandler', 'monolog.handler.amqp.class' => 'Monolog\\Handler\\AmqpHandler', 'monolog.handler.error_log.class' => 'Monolog\\Handler\\ErrorLogHandler', 'monolog.handler.loggly.class' => 'Monolog\\Handler\\LogglyHandler', 'monolog.handler.logentries.class' => 'Monolog\\Handler\\LogEntriesHandler', 'monolog.handler.whatfailuregroup.class' => 'Monolog\\Handler\\WhatFailureGroupHandler', 'monolog.activation_strategy.not_found.class' => 'Symfony\\Bundle\\MonologBundle\\NotFoundActivationStrategy', 'monolog.handler.fingers_crossed.class' => 'Monolog\\Handler\\FingersCrossedHandler', 'monolog.handler.fingers_crossed.error_level_activation_strategy.class' => 'Monolog\\Handler\\FingersCrossed\\ErrorLevelActivationStrategy', 'monolog.handler.filter.class' => 'Monolog\\Handler\\FilterHandler', 'monolog.handler.mongo.class' => 'Monolog\\Handler\\MongoDBHandler', 'monolog.mongo.client.class' => 'MongoClient', 'monolog.handler.elasticsearch.class' => 'Monolog\\Handler\\ElasticSearchHandler', 'monolog.elastica.client.class' => 'Elastica\\Client', 'monolog.use_microseconds' => true, 'monolog.swift_mailer.handlers' => array(), 'monolog.handlers_to_channels' => array('monolog.handler.console' => array('type' => 'exclusive', 'elements' => array(0 => 'event', 1 => 'doctrine')), 'monolog.handler.main' => array('type' => 'exclusive', 'elements' => array(0 => 'event'))), 'monolog.additional_channels' => array(), 'swiftmailer.class' => 'Swift_Mailer', 'swiftmailer.transport.sendmail.class' => 'Swift_Transport_SendmailTransport', 'swiftmailer.transport.mail.class' => 'Swift_Transport_MailTransport', 'swiftmailer.transport.failover.class' => 'Swift_Transport_FailoverTransport', 'swiftmailer.plugin.redirecting.class' => 'Swift_Plugins_RedirectingPlugin', 'swiftmailer.plugin.impersonate.class' => 'Swift_Plugins_ImpersonatePlugin', 'swiftmailer.plugin.messagelogger.class' => 'Swift_Plugins_MessageLogger', 'swiftmailer.plugin.antiflood.class' => 'Swift_Plugins_AntiFloodPlugin', 'swiftmailer.transport.smtp.class' => 'Swift_Transport_EsmtpTransport', 'swiftmailer.plugin.blackhole.class' => 'Swift_Plugins_BlackholePlugin', 'swiftmailer.spool.file.class' => 'Swift_FileSpool', 'swiftmailer.spool.memory.class' => 'Swift_MemorySpool', 'swiftmailer.email_sender.listener.class' => 'Symfony\\Bundle\\SwiftmailerBundle\\EventListener\\EmailSenderListener', 'swiftmailer.data_collector.class' => 'Symfony\\Bundle\\SwiftmailerBundle\\DataCollector\\MessageDataCollector', 'swiftmailer.mailer.default.transport.name' => 'smtp', 'swiftmailer.mailer.default.delivery.enabled' => true, 'swiftmailer.mailer.default.transport.smtp.encryption' => NULL, 'swiftmailer.mailer.default.transport.smtp.port' => 25, 'swiftmailer.mailer.default.transport.smtp.host' => '127.0.0.1', 'swiftmailer.mailer.default.transport.smtp.username' => NULL, 'swiftmailer.mailer.default.transport.smtp.password' => NULL, 'swiftmailer.mailer.default.transport.smtp.auth_mode' => NULL, 'swiftmailer.mailer.default.transport.smtp.timeout' => 30, 'swiftmailer.mailer.default.transport.smtp.source_ip' => NULL, 'swiftmailer.mailer.default.transport.smtp.local_domain' => NULL, 'swiftmailer.spool.default.memory.path' => (__DIR__.'/swiftmailer/spool/default'), 'swiftmailer.mailer.default.spool.enabled' => true, 'swiftmailer.mailer.default.plugin.impersonate' => NULL, 'swiftmailer.mailer.default.single_address' => NULL, 'swiftmailer.spool.enabled' => true, 'swiftmailer.delivery.enabled' => true, 'swiftmailer.single_address' => NULL, 'swiftmailer.mailers' => array('default' => 'swiftmailer.mailer.default'), 'swiftmailer.default_mailer' => 'default', 'doctrine_cache.apc.class' => 'Doctrine\\Common\\Cache\\ApcCache', 'doctrine_cache.apcu.class' => 'Doctrine\\Common\\Cache\\ApcuCache', 'doctrine_cache.array.class' => 'Doctrine\\Common\\Cache\\ArrayCache', 'doctrine_cache.chain.class' => 'Doctrine\\Common\\Cache\\ChainCache', 'doctrine_cache.couchbase.class' => 'Doctrine\\Common\\Cache\\CouchbaseCache', 'doctrine_cache.couchbase.connection.class' => 'Couchbase', 'doctrine_cache.couchbase.hostnames' => 'localhost:8091', 'doctrine_cache.file_system.class' => 'Doctrine\\Common\\Cache\\FilesystemCache', 'doctrine_cache.php_file.class' => 'Doctrine\\Common\\Cache\\PhpFileCache', 'doctrine_cache.memcache.class' => 'Doctrine\\Common\\Cache\\MemcacheCache', 'doctrine_cache.memcache.connection.class' => 'Memcache', 'doctrine_cache.memcache.host' => 'localhost', 'doctrine_cache.memcache.port' => 11211, 'doctrine_cache.memcached.class' => 'Doctrine\\Common\\Cache\\MemcachedCache', 'doctrine_cache.memcached.connection.class' => 'Memcached', 'doctrine_cache.memcached.host' => 'localhost', 'doctrine_cache.memcached.port' => 11211, 'doctrine_cache.mongodb.class' => 'Doctrine\\Common\\Cache\\MongoDBCache', 'doctrine_cache.mongodb.collection.class' => 'MongoCollection', 'doctrine_cache.mongodb.connection.class' => 'MongoClient', 'doctrine_cache.mongodb.server' => 'localhost:27017', 'doctrine_cache.predis.client.class' => 'Predis\\Client', 'doctrine_cache.predis.scheme' => 'tcp', 'doctrine_cache.predis.host' => 'localhost', 'doctrine_cache.predis.port' => 6379, 'doctrine_cache.redis.class' => 'Doctrine\\Common\\Cache\\RedisCache', 'doctrine_cache.redis.connection.class' => 'Redis', 'doctrine_cache.redis.host' => 'localhost', 'doctrine_cache.redis.port' => 6379, 'doctrine_cache.riak.class' => 'Doctrine\\Common\\Cache\\RiakCache', 'doctrine_cache.riak.bucket.class' => 'Riak\\Bucket', 'doctrine_cache.riak.connection.class' => 'Riak\\Connection', 'doctrine_cache.riak.bucket_property_list.class' => 'Riak\\BucketPropertyList', 'doctrine_cache.riak.host' => 'localhost', 'doctrine_cache.riak.port' => 8087, 'doctrine_cache.sqlite3.class' => 'Doctrine\\Common\\Cache\\SQLite3Cache', 'doctrine_cache.sqlite3.connection.class' => 'SQLite3', 'doctrine_cache.void.class' => 'Doctrine\\Common\\Cache\\VoidCache', 'doctrine_cache.wincache.class' => 'Doctrine\\Common\\Cache\\WinCacheCache', 'doctrine_cache.xcache.class' => 'Doctrine\\Common\\Cache\\XcacheCache', 'doctrine_cache.zenddata.class' => 'Doctrine\\Common\\Cache\\ZendDataCache', 'doctrine_cache.security.acl.cache.class' => 'Doctrine\\Bundle\\DoctrineCacheBundle\\Acl\\Model\\AclCache', 'doctrine.dbal.logger.chain.class' => 'Doctrine\\DBAL\\Logging\\LoggerChain', 'doctrine.dbal.logger.profiling.class' => 'Doctrine\\DBAL\\Logging\\DebugStack', 'doctrine.dbal.logger.class' => 'Symfony\\Bridge\\Doctrine\\Logger\\DbalLogger', 'doctrine.dbal.configuration.class' => 'Doctrine\\DBAL\\Configuration', 'doctrine.data_collector.class' => 'Doctrine\\Bundle\\DoctrineBundle\\DataCollector\\DoctrineDataCollector', 'doctrine.dbal.connection.event_manager.class' => 'Symfony\\Bridge\\Doctrine\\ContainerAwareEventManager', 'doctrine.dbal.connection_factory.class' => 'Doctrine\\Bundle\\DoctrineBundle\\ConnectionFactory', 'doctrine.dbal.events.mysql_session_init.class' => 'Doctrine\\DBAL\\Event\\Listeners\\MysqlSessionInit', 'doctrine.dbal.events.oracle_session_init.class' => 'Doctrine\\DBAL\\Event\\Listeners\\OracleSessionInit', 'doctrine.class' => 'Doctrine\\Bundle\\DoctrineBundle\\Registry', 'doctrine.entity_managers' => array('default' => 'doctrine.orm.default_entity_manager'), 'doctrine.default_entity_manager' => 'default', 'doctrine.dbal.connection_factory.types' => array(), 'doctrine.connections' => array('default' => 'doctrine.dbal.default_connection'), 'doctrine.default_connection' => 'default', 'doctrine.orm.configuration.class' => 'Doctrine\\ORM\\Configuration', 'doctrine.orm.entity_manager.class' => 'Doctrine\\ORM\\EntityManager', 'doctrine.orm.manager_configurator.class' => 'Doctrine\\Bundle\\DoctrineBundle\\ManagerConfigurator', 'doctrine.orm.cache.array.class' => 'Doctrine\\Common\\Cache\\ArrayCache', 'doctrine.orm.cache.apc.class' => 'Doctrine\\Common\\Cache\\ApcCache', 'doctrine.orm.cache.memcache.class' => 'Doctrine\\Common\\Cache\\MemcacheCache', 'doctrine.orm.cache.memcache_host' => 'localhost', 'doctrine.orm.cache.memcache_port' => 11211, 'doctrine.orm.cache.memcache_instance.class' => 'Memcache', 'doctrine.orm.cache.memcached.class' => 'Doctrine\\Common\\Cache\\MemcachedCache', 'doctrine.orm.cache.memcached_host' => 'localhost', 'doctrine.orm.cache.memcached_port' => 11211, 'doctrine.orm.cache.memcached_instance.class' => 'Memcached', 'doctrine.orm.cache.redis.class' => 'Doctrine\\Common\\Cache\\RedisCache', 'doctrine.orm.cache.redis_host' => 'localhost', 'doctrine.orm.cache.redis_port' => 6379, 'doctrine.orm.cache.redis_instance.class' => 'Redis', 'doctrine.orm.cache.xcache.class' => 'Doctrine\\Common\\Cache\\XcacheCache', 'doctrine.orm.cache.wincache.class' => 'Doctrine\\Common\\Cache\\WinCacheCache', 'doctrine.orm.cache.zenddata.class' => 'Doctrine\\Common\\Cache\\ZendDataCache', 'doctrine.orm.metadata.driver_chain.class' => 'Doctrine\\Common\\Persistence\\Mapping\\Driver\\MappingDriverChain', 'doctrine.orm.metadata.annotation.class' => 'Doctrine\\ORM\\Mapping\\Driver\\AnnotationDriver', 'doctrine.orm.metadata.xml.class' => 'Doctrine\\ORM\\Mapping\\Driver\\SimplifiedXmlDriver', 'doctrine.orm.metadata.yml.class' => 'Doctrine\\ORM\\Mapping\\Driver\\SimplifiedYamlDriver', 'doctrine.orm.metadata.php.class' => 'Doctrine\\ORM\\Mapping\\Driver\\PHPDriver', 'doctrine.orm.metadata.staticphp.class' => 'Doctrine\\ORM\\Mapping\\Driver\\StaticPHPDriver', 'doctrine.orm.proxy_cache_warmer.class' => 'Symfony\\Bridge\\Doctrine\\CacheWarmer\\ProxyCacheWarmer', 'form.type_guesser.doctrine.class' => 'Symfony\\Bridge\\Doctrine\\Form\\DoctrineOrmTypeGuesser', 'doctrine.orm.validator.unique.class' => 'Symfony\\Bridge\\Doctrine\\Validator\\Constraints\\UniqueEntityValidator', 'doctrine.orm.validator_initializer.class' => 'Symfony\\Bridge\\Doctrine\\Validator\\DoctrineInitializer', 'doctrine.orm.security.user.provider.class' => 'Symfony\\Bridge\\Doctrine\\Security\\User\\EntityUserProvider', 'doctrine.orm.listeners.resolve_target_entity.class' => 'Doctrine\\ORM\\Tools\\ResolveTargetEntityListener', 'doctrine.orm.listeners.attach_entity_listeners.class' => 'Doctrine\\ORM\\Tools\\AttachEntityListenersListener', 'doctrine.orm.naming_strategy.default.class' => 'Doctrine\\ORM\\Mapping\\DefaultNamingStrategy', 'doctrine.orm.naming_strategy.underscore.class' => 'Doctrine\\ORM\\Mapping\\UnderscoreNamingStrategy', 'doctrine.orm.quote_strategy.default.class' => 'Doctrine\\ORM\\Mapping\\DefaultQuoteStrategy', 'doctrine.orm.quote_strategy.ansi.class' => 'Doctrine\\ORM\\Mapping\\AnsiQuoteStrategy', 'doctrine.orm.entity_listener_resolver.class' => 'Doctrine\\ORM\\Mapping\\DefaultEntityListenerResolver', 'doctrine.orm.second_level_cache.default_cache_factory.class' => 'Doctrine\\ORM\\Cache\\DefaultCacheFactory', 'doctrine.orm.second_level_cache.default_region.class' => 'Doctrine\\ORM\\Cache\\Region\\DefaultRegion', 'doctrine.orm.second_level_cache.filelock_region.class' => 'Doctrine\\ORM\\Cache\\Region\\FileLockRegion', 'doctrine.orm.second_level_cache.logger_chain.class' => 'Doctrine\\ORM\\Cache\\Logging\\CacheLoggerChain', 'doctrine.orm.second_level_cache.logger_statistics.class' => 'Doctrine\\ORM\\Cache\\Logging\\StatisticsCacheLogger', 'doctrine.orm.second_level_cache.cache_configuration.class' => 'Doctrine\\ORM\\Cache\\CacheConfiguration', 'doctrine.orm.second_level_cache.regions_configuration.class' => 'Doctrine\\ORM\\Cache\\RegionsConfiguration', 'doctrine.orm.auto_generate_proxy_classes' => true, 'doctrine.orm.proxy_dir' => (__DIR__.'/doctrine/orm/Proxies'), 'doctrine.orm.proxy_namespace' => 'Proxies', 'sensio_framework_extra.view.guesser.class' => 'Sensio\\Bundle\\FrameworkExtraBundle\\Templating\\TemplateGuesser', 'sensio_framework_extra.controller.listener.class' => 'Sensio\\Bundle\\FrameworkExtraBundle\\EventListener\\ControllerListener', 'sensio_framework_extra.routing.loader.annot_dir.class' => 'Symfony\\Component\\Routing\\Loader\\AnnotationDirectoryLoader', 'sensio_framework_extra.routing.loader.annot_file.class' => 'Symfony\\Component\\Routing\\Loader\\AnnotationFileLoader', 'sensio_framework_extra.routing.loader.annot_class.class' => 'Sensio\\Bundle\\FrameworkExtraBundle\\Routing\\AnnotatedRouteControllerLoader', 'sensio_framework_extra.converter.listener.class' => 'Sensio\\Bundle\\FrameworkExtraBundle\\EventListener\\ParamConverterListener', 'sensio_framework_extra.converter.manager.class' => 'Sensio\\Bundle\\FrameworkExtraBundle\\Request\\ParamConverter\\ParamConverterManager', 'sensio_framework_extra.converter.doctrine.class' => 'Sensio\\Bundle\\FrameworkExtraBundle\\Request\\ParamConverter\\DoctrineParamConverter', 'sensio_framework_extra.converter.datetime.class' => 'Sensio\\Bundle\\FrameworkExtraBundle\\Request\\ParamConverter\\DateTimeParamConverter', 'sensio_framework_extra.view.listener.class' => 'Sensio\\Bundle\\FrameworkExtraBundle\\EventListener\\TemplateListener', 'dunglas_action.directories' => array(), 'api_platform.title' => '', 'api_platform.description' => '', 'api_platform.version' => '0.0.0', 'api_platform.exception_to_status' => array('Symfony\\Component\\Serializer\\Exception\\ExceptionInterface' => 400, 'ApiPlatform\\Core\\Exception\\InvalidArgumentException' => 400), 'api_platform.formats' => array('jsonld' => array(0 => 'application/ld+json'), 'json' => array(0 => 'application/json'), 'html' => array(0 => 'text/html')), 'api_platform.error_formats' => array('jsonproblem' => array(0 => 'application/problem+json'), 'jsonld' => array(0 => 'application/ld+json')), 'api_platform.eager_loading.enabled' => true, 'api_platform.eager_loading.max_joins' => 30, 'api_platform.eager_loading.force_eager' => true, 'api_platform.collection.order' => NULL, 'api_platform.collection.order_parameter_name' => 'order', 'api_platform.collection.pagination.enabled' => true, 'api_platform.collection.pagination.client_enabled' => false, 'api_platform.collection.pagination.client_items_per_page' => false, 'api_platform.collection.pagination.items_per_page' => 30, 'api_platform.collection.pagination.maximum_items_per_page' => NULL, 'api_platform.collection.pagination.page_parameter_name' => 'page', 'api_platform.collection.pagination.enabled_parameter_name' => 'pagination', 'api_platform.collection.pagination.items_per_page_parameter_name' => 'itemsPerPage', 'api_platform.enable_swagger_ui' => true, 'api_platform.enable_swagger' => true, 'nelmio_cors.defaults' => array('allow_origin' => array(), 'allow_credentials' => false, 'allow_headers' => array(), 'expose_headers' => array(), 'allow_methods' => array(), 'max_age' => 0, 'hosts' => array(), 'origin_regex' => false), 'nelmio_cors.map' => array('^/api/' => array('allow_origin' => true, 'allow_headers' => array(0 => 'x-wsse', 1 => 'content-type', 2 => 'accept-encoding', 3 => 'cache-control', 4 => 'x-requested-with', 5 => 'dnt'), 'allow_methods' => array(0 => 'POST', 1 => 'PUT', 2 => 'GET', 3 => 'DELETE'), 'max_age' => 3600)), 'nelmio_cors.cors_listener.class' => 'Nelmio\\CorsBundle\\EventListener\\CorsListener', 'nelmio_cors.options_resolver.class' => 'Nelmio\\CorsBundle\\Options\\Resolver', 'nelmio_cors.options_provider.config.class' => 'Nelmio\\CorsBundle\\Options\\ConfigProvider', 'nelmio_api_doc.motd.template' => 'NelmioApiDocBundle::Components/motd.html.twig', 'nelmio_api_doc.exclude_sections' => array(), 'nelmio_api_doc.default_sections_opened' => true, 'nelmio_api_doc.api_name' => 'Application', 'nelmio_api_doc.sandbox.enabled' => true, 'nelmio_api_doc.sandbox.endpoint' => NULL, 'nelmio_api_doc.sandbox.accept_type' => NULL, 'nelmio_api_doc.sandbox.body_format.formats' => array(), 'nelmio_api_doc.sandbox.body_format.default_format' => 'form', 'nelmio_api_doc.sandbox.request_format.method' => 'accept_header', 'nelmio_api_doc.sandbox.request_format.default_format' => 'json', 'nelmio_api_doc.sandbox.request_format.formats' => array(), 'nelmio_api_doc.sandbox.entity_to_choice' => true, 'nelmio_api_doc.formatter.abstract_formatter.class' => 'Nelmio\\ApiDocBundle\\Formatter\\AbstractFormatter', 'nelmio_api_doc.formatter.markdown_formatter.class' => 'Nelmio\\ApiDocBundle\\Formatter\\MarkdownFormatter', 'nelmio_api_doc.formatter.simple_formatter.class' => 'Nelmio\\ApiDocBundle\\Formatter\\SimpleFormatter', 'nelmio_api_doc.formatter.html_formatter.class' => 'Nelmio\\ApiDocBundle\\Formatter\\HtmlFormatter', 'nelmio_api_doc.formatter.swagger_formatter.class' => 'Nelmio\\ApiDocBundle\\Formatter\\SwaggerFormatter', 'nelmio_api_doc.sandbox.authentication' => NULL, 'nelmio_api_doc.extractor.api_doc_extractor.class' => 'Nelmio\\ApiDocBundle\\Extractor\\ApiDocExtractor', 'nelmio_api_doc.form.extension.description_form_type_extension.class' => 'Nelmio\\ApiDocBundle\\Form\\Extension\\DescriptionFormTypeExtension', 'nelmio_api_doc.twig.extension.extra_markdown.class' => 'Nelmio\\ApiDocBundle\\Twig\\Extension\\MarkdownExtension', 'nelmio_api_doc.doc_comment_extractor.class' => 'Nelmio\\ApiDocBundle\\Util\\DocCommentExtractor', 'nelmio_api_doc.extractor.handler.fos_rest.class' => 'Nelmio\\ApiDocBundle\\Extractor\\Handler\\FosRestHandler', 'nelmio_api_doc.extractor.handler.jms_security.class' => 'Nelmio\\ApiDocBundle\\Extractor\\Handler\\JmsSecurityExtraHandler', 'nelmio_api_doc.extractor.handler.sensio_framework_extra.class' => 'Nelmio\\ApiDocBundle\\Extractor\\Handler\\SensioFrameworkExtraHandler', 'nelmio_api_doc.extractor.handler.phpdoc.class' => 'Nelmio\\ApiDocBundle\\Extractor\\Handler\\PhpDocHandler', 'nelmio_api_doc.parser.collection_parser.class' => 'Nelmio\\ApiDocBundle\\Parser\\CollectionParser', 'nelmio_api_doc.parser.form_errors_parser.class' => 'Nelmio\\ApiDocBundle\\Parser\\FormErrorsParser', 'nelmio_api_doc.parser.json_serializable_parser.class' => 'Nelmio\\ApiDocBundle\\Parser\\JsonSerializableParser', 'nelmio_api_doc.request_listener.parameter' => '_doc', 'nelmio_api_doc.event_listener.request.class' => 'Nelmio\\ApiDocBundle\\EventListener\\RequestListener', 'nelmio_api_doc.parser.validation_parser.class' => 'Nelmio\\ApiDocBundle\\Parser\\ValidationParserLegacy', 'nelmio_api_doc.swagger.base_path' => '/api', 'nelmio_api_doc.swagger.swagger_version' => '1.2', 'nelmio_api_doc.swagger.api_version' => '0.1', 'nelmio_api_doc.swagger.info' => array('title' => 'Application', 'description' => 'Application', 'TermsOfServiceUrl' => NULL, 'contact' => NULL, 'license' => NULL, 'licenseUrl' => NULL), 'nelmio_api_doc.swagger.model_naming_strategy' => 'dot_notation', 'admin.registration.confirmation.template' => 'ApplicationEmailBundle:Registration:email.txt.twig', 'web_profiler.debug_toolbar.position' => 'bottom', 'web_profiler.debug_toolbar.intercept_redirects' => false, 'web_profiler.debug_toolbar.mode' => 2, 'hautelook_alice.db_drivers' => array('orm' => NULL, 'mongodb' => NULL, 'phpcr' => NULL), 'hautelook_alice.locale' => 'en_US', 'hautelook_alice.seed' => 1, 'hautelook_alice.persist_once' => false, 'hautelook_alice.loading_limit' => 5));
+        $this->services['hautelook_alice.alice.fixtures.loader'] = $instance = new \Hautelook\AliceBundle\Alice\DataFixtures\Fixtures\Loader('en_US', $this->get('hautelook_alice.faker.provider_chain'), 1, array('kernel.root_dir' => ($this->targetDirs[3].'/app'), 'kernel.environment' => 'dev', 'kernel.debug' => true, 'kernel.name' => 'app', 'kernel.cache_dir' => __DIR__, 'kernel.logs_dir' => ($this->targetDirs[2].'/logs'), 'kernel.bundles' => array('FrameworkBundle' => 'Symfony\\Bundle\\FrameworkBundle\\FrameworkBundle', 'SecurityBundle' => 'Symfony\\Bundle\\SecurityBundle\\SecurityBundle', 'TwigBundle' => 'Symfony\\Bundle\\TwigBundle\\TwigBundle', 'MonologBundle' => 'Symfony\\Bundle\\MonologBundle\\MonologBundle', 'SwiftmailerBundle' => 'Symfony\\Bundle\\SwiftmailerBundle\\SwiftmailerBundle', 'DoctrineBundle' => 'Doctrine\\Bundle\\DoctrineBundle\\DoctrineBundle', 'SensioFrameworkExtraBundle' => 'Sensio\\Bundle\\FrameworkExtraBundle\\SensioFrameworkExtraBundle', 'DunglasActionBundle' => 'Dunglas\\ActionBundle\\DunglasActionBundle', 'ApiPlatformBundle' => 'ApiPlatform\\Core\\Bridge\\Symfony\\Bundle\\ApiPlatformBundle', 'NelmioCorsBundle' => 'Nelmio\\CorsBundle\\NelmioCorsBundle', 'ApplicationAdminBundle' => 'Application\\AdminBundle\\ApplicationAdminBundle', 'ApplicationAppBundle' => 'Application\\AppBundle\\ApplicationAppBundle', 'NelmioApiDocBundle' => 'Nelmio\\ApiDocBundle\\NelmioApiDocBundle', 'ApplicationCoreBundle' => 'Application\\CoreBundle\\ApplicationCoreBundle', 'ApplicationEmailBundle' => 'Application\\EmailBundle\\ApplicationEmailBundle', 'ApplicationProductBundle' => 'Application\\ProductBundle\\ApplicationProductBundle', 'ApplicationCategoryBundle' => 'Application\\CategoryBundle\\ApplicationCategoryBundle', 'ApplicationCustomerBundle' => 'Application\\CustomerBundle\\ApplicationCustomerBundle', 'ApplicationAutoBundle' => 'Application\\AutoBundle\\ApplicationAutoBundle', 'ApplicationRealEstateBundle' => 'Application\\RealEstateBundle\\ApplicationRealEstateBundle', 'ApplicationElectronicsBundle' => 'Application\\ElectronicsBundle\\ApplicationElectronicsBundle', 'ApplicationFashionBundle' => 'Application\\FashionBundle\\ApplicationFashionBundle', 'ApplicationHouseGardeningBundle' => 'Application\\HouseGardeningBundle\\ApplicationHouseGardeningBundle', 'ApplicationFamilyBundle' => 'Application\\FamilyBundle\\ApplicationFamilyBundle', 'ApplicationSportBundle' => 'Application\\SportBundle\\ApplicationSportBundle', 'ApplicationPetsBundle' => 'Application\\PetsBundle\\ApplicationPetsBundle', 'ApplicationIndustryBundle' => 'Application\\IndustryBundle\\ApplicationIndustryBundle', 'ApplicationBusinessBundle' => 'Application\\BusinessBundle\\ApplicationBusinessBundle', 'ApplicationJobsBundle' => 'Application\\JobsBundle\\ApplicationJobsBundle', 'ApplicationProducerBundle' => 'Application\\ProducerBundle\\ApplicationProducerBundle', 'ApplicationDoctrineBundle' => 'Application\\DoctrineBundle\\ApplicationDoctrineBundle', 'DebugBundle' => 'Symfony\\Bundle\\DebugBundle\\DebugBundle', 'WebProfilerBundle' => 'Symfony\\Bundle\\WebProfilerBundle\\WebProfilerBundle', 'SensioDistributionBundle' => 'Sensio\\Bundle\\DistributionBundle\\SensioDistributionBundle', 'SensioGeneratorBundle' => 'Sensio\\Bundle\\GeneratorBundle\\SensioGeneratorBundle', 'HautelookAliceBundle' => 'Hautelook\\AliceBundle\\HautelookAliceBundle'), 'kernel.charset' => 'UTF-8', 'kernel.container_class' => 'appDevDebugProjectContainer', 'database_host' => 'localhost', 'database_port' => 3306, 'database_name' => 'apiplatform', 'database_user' => 'root', 'database_password' => 'parola86', 'mailer_transport' => 'smtp', 'mailer_host' => '127.0.0.1', 'mailer_user' => NULL, 'mailer_password' => NULL, 'secret' => 'ThisTokenIsNotSoSecretChangeIt', 'cors_allow_origin' => 'http://localhost', 'locale' => 'en', 'fragment.renderer.hinclude.global_template' => NULL, 'fragment.path' => '/_fragment', 'kernel.secret' => 'ThisTokenIsNotSoSecretChangeIt', 'kernel.http_method_override' => true, 'kernel.trusted_hosts' => array(), 'kernel.trusted_proxies' => array(), 'kernel.default_locale' => 'en', 'session.metadata.storage_key' => '_sf2_meta', 'session.storage.options' => array('cookie_httponly' => true, 'gc_probability' => 1), 'session.save_path' => ($this->targetDirs[3].'/app/../var/sessions/dev'), 'session.metadata.update_threshold' => '0', 'form.type_extension.csrf.enabled' => true, 'form.type_extension.csrf.field_name' => '_token', 'templating.helper.code.file_link_format' => NULL, 'templating.loader.cache.path' => NULL, 'templating.engines' => array(0 => 'twig'), 'validator.mapping.cache.prefix' => '', 'validator.translation_domain' => 'validators', 'profiler_listener.only_exceptions' => false, 'profiler_listener.only_master_requests' => false, 'profiler.storage.dsn' => ('file:'.__DIR__.'/profiler'), 'router.options.generator_class' => 'Symfony\\Component\\Routing\\Generator\\UrlGenerator', 'router.options.generator_base_class' => 'Symfony\\Component\\Routing\\Generator\\UrlGenerator', 'router.options.generator_dumper_class' => 'Symfony\\Component\\Routing\\Generator\\Dumper\\PhpGeneratorDumper', 'router.options.matcher_class' => 'Symfony\\Bundle\\FrameworkBundle\\Routing\\RedirectableUrlMatcher', 'router.options.matcher_base_class' => 'Symfony\\Bundle\\FrameworkBundle\\Routing\\RedirectableUrlMatcher', 'router.options.matcher_dumper_class' => 'Symfony\\Component\\Routing\\Matcher\\Dumper\\PhpMatcherDumper', 'router.options.matcher.cache_class' => 'appDevDebugProjectContainerUrlMatcher', 'router.options.generator.cache_class' => 'appDevDebugProjectContainerUrlGenerator', 'router.request_context.host' => 'localhost', 'router.request_context.scheme' => 'http', 'router.request_context.base_url' => '', 'router.resource' => ($this->targetDirs[3].'/app/config/routing_dev.yml'), 'router.cache_class_prefix' => 'appDevDebugProjectContainer', 'request_listener.http_port' => 80, 'request_listener.https_port' => 443, 'serializer.mapping.cache.prefix' => '', 'debug.error_handler.throw_at' => -1, 'debug.container.dump' => (__DIR__.'/appDevDebugProjectContainer.xml'), 'security.authentication.trust_resolver.anonymous_class' => 'Symfony\\Component\\Security\\Core\\Authentication\\Token\\AnonymousToken', 'security.authentication.trust_resolver.rememberme_class' => 'Symfony\\Component\\Security\\Core\\Authentication\\Token\\RememberMeToken', 'security.role_hierarchy.roles' => array('ROLE_SUPER_ADMIN' => array(0 => 'ROLE_SUPER_ADMIN'), 'ROLE_ADMIN' => array(0 => 'ROLE_ADMIN'), 'ROLE_MEINEKE' => array(0 => 'ROLE_MEINEKE')), 'security.access.denied_url' => NULL, 'security.authentication.manager.erase_credentials' => true, 'security.authentication.session_strategy.strategy' => 'migrate', 'security.access.always_authenticate_before_granting' => false, 'security.authentication.hide_user_not_found' => true, 'security.acl.dbal.class_table_name' => 'acl_classes', 'security.acl.dbal.entry_table_name' => 'acl_entries', 'security.acl.dbal.oid_table_name' => 'acl_object_identities', 'security.acl.dbal.oid_ancestors_table_name' => 'acl_object_identity_ancestors', 'security.acl.dbal.sid_table_name' => 'acl_security_identities', 'twig.exception_listener.controller' => 'twig.controller.exception:showAction', 'twig.form.resources' => array(0 => 'form_div_layout.html.twig'), 'monolog.logger.class' => 'Symfony\\Bridge\\Monolog\\Logger', 'monolog.gelf.publisher.class' => 'Gelf\\MessagePublisher', 'monolog.gelfphp.publisher.class' => 'Gelf\\Publisher', 'monolog.handler.stream.class' => 'Monolog\\Handler\\StreamHandler', 'monolog.handler.console.class' => 'Symfony\\Bridge\\Monolog\\Handler\\ConsoleHandler', 'monolog.handler.group.class' => 'Monolog\\Handler\\GroupHandler', 'monolog.handler.buffer.class' => 'Monolog\\Handler\\BufferHandler', 'monolog.handler.deduplication.class' => 'Monolog\\Handler\\DeduplicationHandler', 'monolog.handler.rotating_file.class' => 'Monolog\\Handler\\RotatingFileHandler', 'monolog.handler.syslog.class' => 'Monolog\\Handler\\SyslogHandler', 'monolog.handler.syslogudp.class' => 'Monolog\\Handler\\SyslogUdpHandler', 'monolog.handler.null.class' => 'Monolog\\Handler\\NullHandler', 'monolog.handler.test.class' => 'Monolog\\Handler\\TestHandler', 'monolog.handler.gelf.class' => 'Monolog\\Handler\\GelfHandler', 'monolog.handler.rollbar.class' => 'Monolog\\Handler\\RollbarHandler', 'monolog.handler.flowdock.class' => 'Monolog\\Handler\\FlowdockHandler', 'monolog.handler.browser_console.class' => 'Monolog\\Handler\\BrowserConsoleHandler', 'monolog.handler.firephp.class' => 'Symfony\\Bridge\\Monolog\\Handler\\FirePHPHandler', 'monolog.handler.chromephp.class' => 'Symfony\\Bridge\\Monolog\\Handler\\ChromePhpHandler', 'monolog.handler.debug.class' => 'Symfony\\Bridge\\Monolog\\Handler\\DebugHandler', 'monolog.handler.swift_mailer.class' => 'Symfony\\Bridge\\Monolog\\Handler\\SwiftMailerHandler', 'monolog.handler.native_mailer.class' => 'Monolog\\Handler\\NativeMailerHandler', 'monolog.handler.socket.class' => 'Monolog\\Handler\\SocketHandler', 'monolog.handler.pushover.class' => 'Monolog\\Handler\\PushoverHandler', 'monolog.handler.raven.class' => 'Monolog\\Handler\\RavenHandler', 'monolog.handler.newrelic.class' => 'Monolog\\Handler\\NewRelicHandler', 'monolog.handler.hipchat.class' => 'Monolog\\Handler\\HipChatHandler', 'monolog.handler.slack.class' => 'Monolog\\Handler\\SlackHandler', 'monolog.handler.cube.class' => 'Monolog\\Handler\\CubeHandler', 'monolog.handler.amqp.class' => 'Monolog\\Handler\\AmqpHandler', 'monolog.handler.error_log.class' => 'Monolog\\Handler\\ErrorLogHandler', 'monolog.handler.loggly.class' => 'Monolog\\Handler\\LogglyHandler', 'monolog.handler.logentries.class' => 'Monolog\\Handler\\LogEntriesHandler', 'monolog.handler.whatfailuregroup.class' => 'Monolog\\Handler\\WhatFailureGroupHandler', 'monolog.activation_strategy.not_found.class' => 'Symfony\\Bundle\\MonologBundle\\NotFoundActivationStrategy', 'monolog.handler.fingers_crossed.class' => 'Monolog\\Handler\\FingersCrossedHandler', 'monolog.handler.fingers_crossed.error_level_activation_strategy.class' => 'Monolog\\Handler\\FingersCrossed\\ErrorLevelActivationStrategy', 'monolog.handler.filter.class' => 'Monolog\\Handler\\FilterHandler', 'monolog.handler.mongo.class' => 'Monolog\\Handler\\MongoDBHandler', 'monolog.mongo.client.class' => 'MongoClient', 'monolog.handler.elasticsearch.class' => 'Monolog\\Handler\\ElasticSearchHandler', 'monolog.elastica.client.class' => 'Elastica\\Client', 'monolog.use_microseconds' => true, 'monolog.swift_mailer.handlers' => array(), 'monolog.handlers_to_channels' => array('monolog.handler.console' => array('type' => 'exclusive', 'elements' => array(0 => 'event', 1 => 'doctrine')), 'monolog.handler.main' => array('type' => 'exclusive', 'elements' => array(0 => 'event'))), 'monolog.additional_channels' => array(), 'swiftmailer.class' => 'Swift_Mailer', 'swiftmailer.transport.sendmail.class' => 'Swift_Transport_SendmailTransport', 'swiftmailer.transport.mail.class' => 'Swift_Transport_MailTransport', 'swiftmailer.transport.failover.class' => 'Swift_Transport_FailoverTransport', 'swiftmailer.plugin.redirecting.class' => 'Swift_Plugins_RedirectingPlugin', 'swiftmailer.plugin.impersonate.class' => 'Swift_Plugins_ImpersonatePlugin', 'swiftmailer.plugin.messagelogger.class' => 'Swift_Plugins_MessageLogger', 'swiftmailer.plugin.antiflood.class' => 'Swift_Plugins_AntiFloodPlugin', 'swiftmailer.transport.smtp.class' => 'Swift_Transport_EsmtpTransport', 'swiftmailer.plugin.blackhole.class' => 'Swift_Plugins_BlackholePlugin', 'swiftmailer.spool.file.class' => 'Swift_FileSpool', 'swiftmailer.spool.memory.class' => 'Swift_MemorySpool', 'swiftmailer.email_sender.listener.class' => 'Symfony\\Bundle\\SwiftmailerBundle\\EventListener\\EmailSenderListener', 'swiftmailer.data_collector.class' => 'Symfony\\Bundle\\SwiftmailerBundle\\DataCollector\\MessageDataCollector', 'swiftmailer.mailer.default.transport.name' => 'smtp', 'swiftmailer.mailer.default.delivery.enabled' => true, 'swiftmailer.mailer.default.transport.smtp.encryption' => NULL, 'swiftmailer.mailer.default.transport.smtp.port' => 25, 'swiftmailer.mailer.default.transport.smtp.host' => '127.0.0.1', 'swiftmailer.mailer.default.transport.smtp.username' => NULL, 'swiftmailer.mailer.default.transport.smtp.password' => NULL, 'swiftmailer.mailer.default.transport.smtp.auth_mode' => NULL, 'swiftmailer.mailer.default.transport.smtp.timeout' => 30, 'swiftmailer.mailer.default.transport.smtp.source_ip' => NULL, 'swiftmailer.mailer.default.transport.smtp.local_domain' => NULL, 'swiftmailer.spool.default.memory.path' => (__DIR__.'/swiftmailer/spool/default'), 'swiftmailer.mailer.default.spool.enabled' => true, 'swiftmailer.mailer.default.plugin.impersonate' => NULL, 'swiftmailer.mailer.default.single_address' => NULL, 'swiftmailer.spool.enabled' => true, 'swiftmailer.delivery.enabled' => true, 'swiftmailer.single_address' => NULL, 'swiftmailer.mailers' => array('default' => 'swiftmailer.mailer.default'), 'swiftmailer.default_mailer' => 'default', 'doctrine_cache.apc.class' => 'Doctrine\\Common\\Cache\\ApcCache', 'doctrine_cache.apcu.class' => 'Doctrine\\Common\\Cache\\ApcuCache', 'doctrine_cache.array.class' => 'Doctrine\\Common\\Cache\\ArrayCache', 'doctrine_cache.chain.class' => 'Doctrine\\Common\\Cache\\ChainCache', 'doctrine_cache.couchbase.class' => 'Doctrine\\Common\\Cache\\CouchbaseCache', 'doctrine_cache.couchbase.connection.class' => 'Couchbase', 'doctrine_cache.couchbase.hostnames' => 'localhost:8091', 'doctrine_cache.file_system.class' => 'Doctrine\\Common\\Cache\\FilesystemCache', 'doctrine_cache.php_file.class' => 'Doctrine\\Common\\Cache\\PhpFileCache', 'doctrine_cache.memcache.class' => 'Doctrine\\Common\\Cache\\MemcacheCache', 'doctrine_cache.memcache.connection.class' => 'Memcache', 'doctrine_cache.memcache.host' => 'localhost', 'doctrine_cache.memcache.port' => 11211, 'doctrine_cache.memcached.class' => 'Doctrine\\Common\\Cache\\MemcachedCache', 'doctrine_cache.memcached.connection.class' => 'Memcached', 'doctrine_cache.memcached.host' => 'localhost', 'doctrine_cache.memcached.port' => 11211, 'doctrine_cache.mongodb.class' => 'Doctrine\\Common\\Cache\\MongoDBCache', 'doctrine_cache.mongodb.collection.class' => 'MongoCollection', 'doctrine_cache.mongodb.connection.class' => 'MongoClient', 'doctrine_cache.mongodb.server' => 'localhost:27017', 'doctrine_cache.predis.client.class' => 'Predis\\Client', 'doctrine_cache.predis.scheme' => 'tcp', 'doctrine_cache.predis.host' => 'localhost', 'doctrine_cache.predis.port' => 6379, 'doctrine_cache.redis.class' => 'Doctrine\\Common\\Cache\\RedisCache', 'doctrine_cache.redis.connection.class' => 'Redis', 'doctrine_cache.redis.host' => 'localhost', 'doctrine_cache.redis.port' => 6379, 'doctrine_cache.riak.class' => 'Doctrine\\Common\\Cache\\RiakCache', 'doctrine_cache.riak.bucket.class' => 'Riak\\Bucket', 'doctrine_cache.riak.connection.class' => 'Riak\\Connection', 'doctrine_cache.riak.bucket_property_list.class' => 'Riak\\BucketPropertyList', 'doctrine_cache.riak.host' => 'localhost', 'doctrine_cache.riak.port' => 8087, 'doctrine_cache.sqlite3.class' => 'Doctrine\\Common\\Cache\\SQLite3Cache', 'doctrine_cache.sqlite3.connection.class' => 'SQLite3', 'doctrine_cache.void.class' => 'Doctrine\\Common\\Cache\\VoidCache', 'doctrine_cache.wincache.class' => 'Doctrine\\Common\\Cache\\WinCacheCache', 'doctrine_cache.xcache.class' => 'Doctrine\\Common\\Cache\\XcacheCache', 'doctrine_cache.zenddata.class' => 'Doctrine\\Common\\Cache\\ZendDataCache', 'doctrine_cache.security.acl.cache.class' => 'Doctrine\\Bundle\\DoctrineCacheBundle\\Acl\\Model\\AclCache', 'doctrine.dbal.logger.chain.class' => 'Doctrine\\DBAL\\Logging\\LoggerChain', 'doctrine.dbal.logger.profiling.class' => 'Doctrine\\DBAL\\Logging\\DebugStack', 'doctrine.dbal.logger.class' => 'Symfony\\Bridge\\Doctrine\\Logger\\DbalLogger', 'doctrine.dbal.configuration.class' => 'Doctrine\\DBAL\\Configuration', 'doctrine.data_collector.class' => 'Doctrine\\Bundle\\DoctrineBundle\\DataCollector\\DoctrineDataCollector', 'doctrine.dbal.connection.event_manager.class' => 'Symfony\\Bridge\\Doctrine\\ContainerAwareEventManager', 'doctrine.dbal.connection_factory.class' => 'Doctrine\\Bundle\\DoctrineBundle\\ConnectionFactory', 'doctrine.dbal.events.mysql_session_init.class' => 'Doctrine\\DBAL\\Event\\Listeners\\MysqlSessionInit', 'doctrine.dbal.events.oracle_session_init.class' => 'Doctrine\\DBAL\\Event\\Listeners\\OracleSessionInit', 'doctrine.class' => 'Doctrine\\Bundle\\DoctrineBundle\\Registry', 'doctrine.entity_managers' => array('default' => 'doctrine.orm.default_entity_manager'), 'doctrine.default_entity_manager' => 'default', 'doctrine.dbal.connection_factory.types' => array(), 'doctrine.connections' => array('default' => 'doctrine.dbal.default_connection'), 'doctrine.default_connection' => 'default', 'doctrine.orm.configuration.class' => 'Doctrine\\ORM\\Configuration', 'doctrine.orm.entity_manager.class' => 'Doctrine\\ORM\\EntityManager', 'doctrine.orm.manager_configurator.class' => 'Doctrine\\Bundle\\DoctrineBundle\\ManagerConfigurator', 'doctrine.orm.cache.array.class' => 'Doctrine\\Common\\Cache\\ArrayCache', 'doctrine.orm.cache.apc.class' => 'Doctrine\\Common\\Cache\\ApcCache', 'doctrine.orm.cache.memcache.class' => 'Doctrine\\Common\\Cache\\MemcacheCache', 'doctrine.orm.cache.memcache_host' => 'localhost', 'doctrine.orm.cache.memcache_port' => 11211, 'doctrine.orm.cache.memcache_instance.class' => 'Memcache', 'doctrine.orm.cache.memcached.class' => 'Doctrine\\Common\\Cache\\MemcachedCache', 'doctrine.orm.cache.memcached_host' => 'localhost', 'doctrine.orm.cache.memcached_port' => 11211, 'doctrine.orm.cache.memcached_instance.class' => 'Memcached', 'doctrine.orm.cache.redis.class' => 'Doctrine\\Common\\Cache\\RedisCache', 'doctrine.orm.cache.redis_host' => 'localhost', 'doctrine.orm.cache.redis_port' => 6379, 'doctrine.orm.cache.redis_instance.class' => 'Redis', 'doctrine.orm.cache.xcache.class' => 'Doctrine\\Common\\Cache\\XcacheCache', 'doctrine.orm.cache.wincache.class' => 'Doctrine\\Common\\Cache\\WinCacheCache', 'doctrine.orm.cache.zenddata.class' => 'Doctrine\\Common\\Cache\\ZendDataCache', 'doctrine.orm.metadata.driver_chain.class' => 'Doctrine\\Common\\Persistence\\Mapping\\Driver\\MappingDriverChain', 'doctrine.orm.metadata.annotation.class' => 'Doctrine\\ORM\\Mapping\\Driver\\AnnotationDriver', 'doctrine.orm.metadata.xml.class' => 'Doctrine\\ORM\\Mapping\\Driver\\SimplifiedXmlDriver', 'doctrine.orm.metadata.yml.class' => 'Doctrine\\ORM\\Mapping\\Driver\\SimplifiedYamlDriver', 'doctrine.orm.metadata.php.class' => 'Doctrine\\ORM\\Mapping\\Driver\\PHPDriver', 'doctrine.orm.metadata.staticphp.class' => 'Doctrine\\ORM\\Mapping\\Driver\\StaticPHPDriver', 'doctrine.orm.proxy_cache_warmer.class' => 'Symfony\\Bridge\\Doctrine\\CacheWarmer\\ProxyCacheWarmer', 'form.type_guesser.doctrine.class' => 'Symfony\\Bridge\\Doctrine\\Form\\DoctrineOrmTypeGuesser', 'doctrine.orm.validator.unique.class' => 'Symfony\\Bridge\\Doctrine\\Validator\\Constraints\\UniqueEntityValidator', 'doctrine.orm.validator_initializer.class' => 'Symfony\\Bridge\\Doctrine\\Validator\\DoctrineInitializer', 'doctrine.orm.security.user.provider.class' => 'Symfony\\Bridge\\Doctrine\\Security\\User\\EntityUserProvider', 'doctrine.orm.listeners.resolve_target_entity.class' => 'Doctrine\\ORM\\Tools\\ResolveTargetEntityListener', 'doctrine.orm.listeners.attach_entity_listeners.class' => 'Doctrine\\ORM\\Tools\\AttachEntityListenersListener', 'doctrine.orm.naming_strategy.default.class' => 'Doctrine\\ORM\\Mapping\\DefaultNamingStrategy', 'doctrine.orm.naming_strategy.underscore.class' => 'Doctrine\\ORM\\Mapping\\UnderscoreNamingStrategy', 'doctrine.orm.quote_strategy.default.class' => 'Doctrine\\ORM\\Mapping\\DefaultQuoteStrategy', 'doctrine.orm.quote_strategy.ansi.class' => 'Doctrine\\ORM\\Mapping\\AnsiQuoteStrategy', 'doctrine.orm.entity_listener_resolver.class' => 'Doctrine\\ORM\\Mapping\\DefaultEntityListenerResolver', 'doctrine.orm.second_level_cache.default_cache_factory.class' => 'Doctrine\\ORM\\Cache\\DefaultCacheFactory', 'doctrine.orm.second_level_cache.default_region.class' => 'Doctrine\\ORM\\Cache\\Region\\DefaultRegion', 'doctrine.orm.second_level_cache.filelock_region.class' => 'Doctrine\\ORM\\Cache\\Region\\FileLockRegion', 'doctrine.orm.second_level_cache.logger_chain.class' => 'Doctrine\\ORM\\Cache\\Logging\\CacheLoggerChain', 'doctrine.orm.second_level_cache.logger_statistics.class' => 'Doctrine\\ORM\\Cache\\Logging\\StatisticsCacheLogger', 'doctrine.orm.second_level_cache.cache_configuration.class' => 'Doctrine\\ORM\\Cache\\CacheConfiguration', 'doctrine.orm.second_level_cache.regions_configuration.class' => 'Doctrine\\ORM\\Cache\\RegionsConfiguration', 'doctrine.orm.auto_generate_proxy_classes' => true, 'doctrine.orm.proxy_dir' => (__DIR__.'/doctrine/orm/Proxies'), 'doctrine.orm.proxy_namespace' => 'Proxies', 'sensio_framework_extra.view.guesser.class' => 'Sensio\\Bundle\\FrameworkExtraBundle\\Templating\\TemplateGuesser', 'sensio_framework_extra.controller.listener.class' => 'Sensio\\Bundle\\FrameworkExtraBundle\\EventListener\\ControllerListener', 'sensio_framework_extra.routing.loader.annot_dir.class' => 'Symfony\\Component\\Routing\\Loader\\AnnotationDirectoryLoader', 'sensio_framework_extra.routing.loader.annot_file.class' => 'Symfony\\Component\\Routing\\Loader\\AnnotationFileLoader', 'sensio_framework_extra.routing.loader.annot_class.class' => 'Sensio\\Bundle\\FrameworkExtraBundle\\Routing\\AnnotatedRouteControllerLoader', 'sensio_framework_extra.converter.listener.class' => 'Sensio\\Bundle\\FrameworkExtraBundle\\EventListener\\ParamConverterListener', 'sensio_framework_extra.converter.manager.class' => 'Sensio\\Bundle\\FrameworkExtraBundle\\Request\\ParamConverter\\ParamConverterManager', 'sensio_framework_extra.converter.doctrine.class' => 'Sensio\\Bundle\\FrameworkExtraBundle\\Request\\ParamConverter\\DoctrineParamConverter', 'sensio_framework_extra.converter.datetime.class' => 'Sensio\\Bundle\\FrameworkExtraBundle\\Request\\ParamConverter\\DateTimeParamConverter', 'sensio_framework_extra.view.listener.class' => 'Sensio\\Bundle\\FrameworkExtraBundle\\EventListener\\TemplateListener', 'dunglas_action.directories' => array(), 'api_platform.title' => '', 'api_platform.description' => '', 'api_platform.version' => '0.0.0', 'api_platform.exception_to_status' => array('Symfony\\Component\\Serializer\\Exception\\ExceptionInterface' => 400, 'ApiPlatform\\Core\\Exception\\InvalidArgumentException' => 400), 'api_platform.formats' => array('jsonld' => array(0 => 'application/ld+json'), 'json' => array(0 => 'application/json'), 'html' => array(0 => 'text/html')), 'api_platform.error_formats' => array('jsonproblem' => array(0 => 'application/problem+json'), 'jsonld' => array(0 => 'application/ld+json')), 'api_platform.eager_loading.enabled' => true, 'api_platform.eager_loading.max_joins' => 30, 'api_platform.eager_loading.force_eager' => true, 'api_platform.collection.order' => NULL, 'api_platform.collection.order_parameter_name' => 'order', 'api_platform.collection.pagination.enabled' => true, 'api_platform.collection.pagination.client_enabled' => false, 'api_platform.collection.pagination.client_items_per_page' => false, 'api_platform.collection.pagination.items_per_page' => 30, 'api_platform.collection.pagination.maximum_items_per_page' => NULL, 'api_platform.collection.pagination.page_parameter_name' => 'page', 'api_platform.collection.pagination.enabled_parameter_name' => 'pagination', 'api_platform.collection.pagination.items_per_page_parameter_name' => 'itemsPerPage', 'api_platform.enable_swagger_ui' => true, 'api_platform.enable_swagger' => true, 'nelmio_cors.defaults' => array('allow_origin' => array(), 'allow_credentials' => false, 'allow_headers' => array(), 'expose_headers' => array(), 'allow_methods' => array(), 'max_age' => 0, 'hosts' => array(), 'origin_regex' => false), 'nelmio_cors.map' => array('^/api/' => array('allow_origin' => true, 'allow_headers' => array(0 => 'x-wsse', 1 => 'content-type', 2 => 'accept-encoding', 3 => 'cache-control', 4 => 'x-requested-with', 5 => 'dnt'), 'allow_methods' => array(0 => 'POST', 1 => 'PUT', 2 => 'GET', 3 => 'DELETE'), 'max_age' => 3600)), 'nelmio_cors.cors_listener.class' => 'Nelmio\\CorsBundle\\EventListener\\CorsListener', 'nelmio_cors.options_resolver.class' => 'Nelmio\\CorsBundle\\Options\\Resolver', 'nelmio_cors.options_provider.config.class' => 'Nelmio\\CorsBundle\\Options\\ConfigProvider', 'nelmio_api_doc.motd.template' => 'NelmioApiDocBundle::Components/motd.html.twig', 'nelmio_api_doc.exclude_sections' => array(), 'nelmio_api_doc.default_sections_opened' => true, 'nelmio_api_doc.api_name' => 'Application', 'nelmio_api_doc.sandbox.enabled' => true, 'nelmio_api_doc.sandbox.endpoint' => NULL, 'nelmio_api_doc.sandbox.accept_type' => NULL, 'nelmio_api_doc.sandbox.body_format.formats' => array(0 => 'json'), 'nelmio_api_doc.sandbox.body_format.default_format' => 'json', 'nelmio_api_doc.sandbox.request_format.method' => 'accept_header', 'nelmio_api_doc.sandbox.request_format.default_format' => 'json', 'nelmio_api_doc.sandbox.request_format.formats' => array(0 => 'application/json'), 'nelmio_api_doc.sandbox.entity_to_choice' => true, 'nelmio_api_doc.formatter.abstract_formatter.class' => 'Nelmio\\ApiDocBundle\\Formatter\\AbstractFormatter', 'nelmio_api_doc.formatter.markdown_formatter.class' => 'Nelmio\\ApiDocBundle\\Formatter\\MarkdownFormatter', 'nelmio_api_doc.formatter.simple_formatter.class' => 'Nelmio\\ApiDocBundle\\Formatter\\SimpleFormatter', 'nelmio_api_doc.formatter.html_formatter.class' => 'Nelmio\\ApiDocBundle\\Formatter\\HtmlFormatter', 'nelmio_api_doc.formatter.swagger_formatter.class' => 'Nelmio\\ApiDocBundle\\Formatter\\SwaggerFormatter', 'nelmio_api_doc.sandbox.authentication' => NULL, 'nelmio_api_doc.extractor.api_doc_extractor.class' => 'Nelmio\\ApiDocBundle\\Extractor\\ApiDocExtractor', 'nelmio_api_doc.form.extension.description_form_type_extension.class' => 'Nelmio\\ApiDocBundle\\Form\\Extension\\DescriptionFormTypeExtension', 'nelmio_api_doc.twig.extension.extra_markdown.class' => 'Nelmio\\ApiDocBundle\\Twig\\Extension\\MarkdownExtension', 'nelmio_api_doc.doc_comment_extractor.class' => 'Nelmio\\ApiDocBundle\\Util\\DocCommentExtractor', 'nelmio_api_doc.extractor.handler.fos_rest.class' => 'Nelmio\\ApiDocBundle\\Extractor\\Handler\\FosRestHandler', 'nelmio_api_doc.extractor.handler.jms_security.class' => 'Nelmio\\ApiDocBundle\\Extractor\\Handler\\JmsSecurityExtraHandler', 'nelmio_api_doc.extractor.handler.sensio_framework_extra.class' => 'Nelmio\\ApiDocBundle\\Extractor\\Handler\\SensioFrameworkExtraHandler', 'nelmio_api_doc.extractor.handler.phpdoc.class' => 'Nelmio\\ApiDocBundle\\Extractor\\Handler\\PhpDocHandler', 'nelmio_api_doc.parser.collection_parser.class' => 'Nelmio\\ApiDocBundle\\Parser\\CollectionParser', 'nelmio_api_doc.parser.form_errors_parser.class' => 'Nelmio\\ApiDocBundle\\Parser\\FormErrorsParser', 'nelmio_api_doc.parser.json_serializable_parser.class' => 'Nelmio\\ApiDocBundle\\Parser\\JsonSerializableParser', 'nelmio_api_doc.request_listener.parameter' => '_doc', 'nelmio_api_doc.event_listener.request.class' => 'Nelmio\\ApiDocBundle\\EventListener\\RequestListener', 'nelmio_api_doc.parser.validation_parser.class' => 'Nelmio\\ApiDocBundle\\Parser\\ValidationParserLegacy', 'nelmio_api_doc.swagger.base_path' => '/api', 'nelmio_api_doc.swagger.swagger_version' => '1.2', 'nelmio_api_doc.swagger.api_version' => '0.1', 'nelmio_api_doc.swagger.info' => array('title' => 'Application', 'description' => 'Application', 'TermsOfServiceUrl' => NULL, 'contact' => NULL, 'license' => NULL, 'licenseUrl' => NULL), 'nelmio_api_doc.swagger.model_naming_strategy' => 'dot_notation', 'admin.registration.confirmation.template' => 'ApplicationEmailBundle:Registration:email.txt.twig', 'web_profiler.debug_toolbar.position' => 'bottom', 'web_profiler.debug_toolbar.intercept_redirects' => false, 'web_profiler.debug_toolbar.mode' => 2, 'hautelook_alice.db_drivers' => array('orm' => NULL, 'mongodb' => NULL, 'phpcr' => NULL), 'hautelook_alice.locale' => 'en_US', 'hautelook_alice.seed' => 1, 'hautelook_alice.persist_once' => false, 'hautelook_alice.loading_limit' => 5));
 
         if ($this->has('logger')) {
             $instance->setLogger($this->get('logger', ContainerInterface::NULL_ON_INVALID_REFERENCE));
@@ -2855,9 +2890,10 @@ class appDevDebugProjectContainer extends Container
     {
         $a = $this->get('nelmio_api_doc.doc_comment_extractor');
 
-        $this->services['nelmio_api_doc.extractor.api_doc_extractor'] = $instance = new \Nelmio\ApiDocBundle\Extractor\CachingApiDocExtractor($this, $this->get('router'), $this->get('annotation_reader'), $a, new \Symfony\Bundle\FrameworkBundle\Controller\ControllerNameParser($this->get('kernel')), array(0 => new \Nelmio\ApiDocBundle\Extractor\Handler\FosRestHandler(), 1 => new \Nelmio\ApiDocBundle\Extractor\Handler\JmsSecurityExtraHandler(), 2 => new \Nelmio\ApiDocBundle\Extractor\Handler\SensioFrameworkExtraHandler(), 3 => new \Nelmio\ApiDocBundle\Extractor\Handler\PhpDocHandler($a)), array(), (__DIR__.'/api-doc.cache'), true);
+        $this->services['nelmio_api_doc.extractor.api_doc_extractor'] = $instance = new \Nelmio\ApiDocBundle\Extractor\CachingApiDocExtractor($this, $this->get('router'), $this->get('annotation_reader'), $a, new \Symfony\Bundle\FrameworkBundle\Controller\ControllerNameParser($this->get('kernel')), array(0 => new \Nelmio\ApiDocBundle\Extractor\Handler\FosRestHandler(), 1 => new \Nelmio\ApiDocBundle\Extractor\Handler\JmsSecurityExtraHandler(), 2 => new \Nelmio\ApiDocBundle\Extractor\Handler\SensioFrameworkExtraHandler(), 3 => new \Nelmio\ApiDocBundle\Extractor\Handler\PhpDocHandler($a)), array(0 => $this->get('api_platform.nelmio_api_doc.annotations_provider')), (__DIR__.'/api-doc.cache'), true);
 
         $instance->addParser($this->get('nelmio_api_doc.parser.json_serializable_parser'));
+        $instance->addParser($this->get('api_platform.nelmio_api_doc.parser'));
         $instance->addParser($this->get('nelmio_api_doc.parser.collection_parser'));
         $instance->addParser($this->get('nelmio_api_doc.parser.form_errors_parser'));
         $instance->addParser($this->get('nelmio_api_doc.parser.form_type_parser'));
@@ -2897,11 +2933,11 @@ class appDevDebugProjectContainer extends Container
         $instance->setEnableSandbox(true);
         $instance->setEndpoint(NULL);
         $instance->setRequestFormatMethod('accept_header');
-        $instance->setRequestFormats(array());
+        $instance->setRequestFormats(array(0 => 'application/json'));
         $instance->setDefaultRequestFormat('json');
         $instance->setAcceptType(NULL);
-        $instance->setBodyFormats(array());
-        $instance->setDefaultBodyFormat('form');
+        $instance->setBodyFormats(array(0 => 'json'));
+        $instance->setDefaultBodyFormat('json');
         $instance->setAuthentication(NULL);
         $instance->setDefaultSectionsOpened(true);
 
@@ -3269,6 +3305,45 @@ class appDevDebugProjectContainer extends Container
     }
 
     /**
+     * Gets the 'security.acl.dbal.schema' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \Symfony\Component\Security\Acl\Dbal\Schema A Symfony\Component\Security\Acl\Dbal\Schema instance
+     */
+    protected function getSecurity_Acl_Dbal_SchemaService()
+    {
+        return $this->services['security.acl.dbal.schema'] = new \Symfony\Component\Security\Acl\Dbal\Schema(array('class_table_name' => 'acl_classes', 'entry_table_name' => 'acl_entries', 'oid_table_name' => 'acl_object_identities', 'oid_ancestors_table_name' => 'acl_object_identity_ancestors', 'sid_table_name' => 'acl_security_identities'), $this->get('doctrine.dbal.default_connection'));
+    }
+
+    /**
+     * Gets the 'security.acl.dbal.schema_listener' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \Symfony\Bundle\SecurityBundle\EventListener\AclSchemaListener A Symfony\Bundle\SecurityBundle\EventListener\AclSchemaListener instance
+     */
+    protected function getSecurity_Acl_Dbal_SchemaListenerService()
+    {
+        return $this->services['security.acl.dbal.schema_listener'] = new \Symfony\Bundle\SecurityBundle\EventListener\AclSchemaListener($this->get('security.acl.dbal.schema'));
+    }
+
+    /**
+     * Gets the 'security.acl.provider' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \Symfony\Component\Security\Acl\Dbal\MutableAclProvider A Symfony\Component\Security\Acl\Dbal\MutableAclProvider instance
+     */
+    protected function getSecurity_Acl_ProviderService()
+    {
+        return $this->services['security.acl.provider'] = new \Symfony\Component\Security\Acl\Dbal\MutableAclProvider($this->get('doctrine.dbal.default_connection'), new \Symfony\Component\Security\Acl\Domain\PermissionGrantingStrategy(), array('class_table_name' => 'acl_classes', 'entry_table_name' => 'acl_entries', 'oid_table_name' => 'acl_object_identities', 'oid_ancestors_table_name' => 'acl_object_identity_ancestors', 'sid_table_name' => 'acl_security_identities'), NULL);
+    }
+
+    /**
      * Gets the 'security.authentication.guard_handler' service.
      *
      * This service is shared.
@@ -3343,7 +3418,37 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getSecurity_FirewallService()
     {
-        return $this->services['security.firewall'] = new \Symfony\Component\Security\Http\Firewall(new \Symfony\Bundle\SecurityBundle\Security\FirewallMap($this, array('security.firewall.map.context.wsse_secured' => new \Symfony\Component\HttpFoundation\RequestMatcher('^/api/secured/.*'), 'security.firewall.map.context.secured_area' => new \Symfony\Component\HttpFoundation\RequestMatcher('^/api/doc'))), $this->get('debug.event_dispatcher'));
+        return $this->services['security.firewall'] = new \Symfony\Component\Security\Http\Firewall(new \Symfony\Bundle\SecurityBundle\Security\FirewallMap($this, array('security.firewall.map.context.admin_wsse_secured' => new \Symfony\Component\HttpFoundation\RequestMatcher('^/api/admin/.*'), 'security.firewall.map.context.customer_wsse_secured' => new \Symfony\Component\HttpFoundation\RequestMatcher('^/api/secured/.*'), 'security.firewall.map.context.secured_area' => new \Symfony\Component\HttpFoundation\RequestMatcher('^/api/doc'))), $this->get('debug.event_dispatcher'));
+    }
+
+    /**
+     * Gets the 'security.firewall.map.context.admin_wsse_secured' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \Symfony\Bundle\SecurityBundle\Security\FirewallContext A Symfony\Bundle\SecurityBundle\Security\FirewallContext instance
+     */
+    protected function getSecurity_Firewall_Map_Context_AdminWsseSecuredService()
+    {
+        $a = $this->get('security.token_storage');
+
+        return $this->services['security.firewall.map.context.admin_wsse_secured'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => $this->get('security.channel_listener'), 1 => new \Application\AdminBundle\Security\Firewall\WsseListener($a, $this->get('security.authentication.manager')), 2 => $this->get('security.access_listener')), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($a, $this->get('security.authentication.trust_resolver'), $this->get('security.http_utils'), 'admin_wsse_secured', NULL, NULL, NULL, $this->get('monolog.logger.security', ContainerInterface::NULL_ON_INVALID_REFERENCE), true));
+    }
+
+    /**
+     * Gets the 'security.firewall.map.context.customer_wsse_secured' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return \Symfony\Bundle\SecurityBundle\Security\FirewallContext A Symfony\Bundle\SecurityBundle\Security\FirewallContext instance
+     */
+    protected function getSecurity_Firewall_Map_Context_CustomerWsseSecuredService()
+    {
+        $a = $this->get('security.token_storage');
+
+        return $this->services['security.firewall.map.context.customer_wsse_secured'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => $this->get('security.channel_listener'), 1 => new \Application\AdminBundle\Security\Firewall\WsseListener($a, $this->get('security.authentication.manager')), 2 => $this->get('security.access_listener')), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($a, $this->get('security.authentication.trust_resolver'), $this->get('security.http_utils'), 'customer_wsse_secured', NULL, NULL, NULL, $this->get('monolog.logger.security', ContainerInterface::NULL_ON_INVALID_REFERENCE), true));
     }
 
     /**
@@ -3356,28 +3461,16 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getSecurity_Firewall_Map_Context_SecuredAreaService()
     {
-        $a = $this->get('security.token_storage');
-        $b = $this->get('monolog.logger.security', ContainerInterface::NULL_ON_INVALID_REFERENCE);
-        $c = $this->get('security.authentication.trust_resolver');
+        $a = $this->get('security.user.provider.concrete.in_memory');
+        $b = $this->get('security.user.provider.concrete.admin_provider');
+        $c = $this->get('security.user.provider.concrete.customer_provider');
+        $d = $this->get('security.token_storage');
+        $e = $this->get('monolog.logger.security', ContainerInterface::NULL_ON_INVALID_REFERENCE);
+        $f = $this->get('security.authentication.trust_resolver');
 
-        $d = new \Symfony\Component\Security\Http\EntryPoint\BasicAuthenticationEntryPoint('API Documentation');
+        $g = new \Symfony\Component\Security\Http\EntryPoint\BasicAuthenticationEntryPoint('API Documentation');
 
-        return $this->services['security.firewall.map.context.secured_area'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => $this->get('security.channel_listener'), 1 => new \Symfony\Component\Security\Http\Firewall\ContextListener($a, array(0 => $this->get('security.user.provider.concrete.chain_provider'), 1 => $this->get('security.user.provider.concrete.wsse_provider'), 2 => $this->get('security.user.provider.concrete.wsse_provider_2'), 3 => $this->get('security.user.provider.concrete.in_memory')), 'secured_area', $b, $this->get('debug.event_dispatcher', ContainerInterface::NULL_ON_INVALID_REFERENCE), $c), 2 => new \Symfony\Component\Security\Http\Firewall\BasicAuthenticationListener($a, $this->get('security.authentication.manager'), 'secured_area', $d, $b), 3 => $this->get('security.access_listener')), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($a, $c, $this->get('security.http_utils'), 'secured_area', $d, NULL, NULL, $b, false));
-    }
-
-    /**
-     * Gets the 'security.firewall.map.context.wsse_secured' service.
-     *
-     * This service is shared.
-     * This method always returns the same instance of the service.
-     *
-     * @return \Symfony\Bundle\SecurityBundle\Security\FirewallContext A Symfony\Bundle\SecurityBundle\Security\FirewallContext instance
-     */
-    protected function getSecurity_Firewall_Map_Context_WsseSecuredService()
-    {
-        $a = $this->get('security.token_storage');
-
-        return $this->services['security.firewall.map.context.wsse_secured'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => $this->get('security.channel_listener'), 1 => new \Application\AdminBundle\Security\Firewall\WsseListener($a, $this->get('security.authentication.manager')), 2 => $this->get('security.access_listener')), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($a, $this->get('security.authentication.trust_resolver'), $this->get('security.http_utils'), 'wsse_secured', NULL, NULL, NULL, $this->get('monolog.logger.security', ContainerInterface::NULL_ON_INVALID_REFERENCE), true));
+        return $this->services['security.firewall.map.context.secured_area'] = new \Symfony\Bundle\SecurityBundle\Security\FirewallContext(array(0 => $this->get('security.channel_listener'), 1 => new \Symfony\Component\Security\Http\Firewall\ContextListener($d, array(0 => new \Symfony\Component\Security\Core\User\ChainUserProvider(array(0 => $a, 1 => $b, 2 => $c)), 1 => $b, 2 => $c, 3 => $a), 'secured_area', $e, $this->get('debug.event_dispatcher', ContainerInterface::NULL_ON_INVALID_REFERENCE), $f), 2 => new \Symfony\Component\Security\Http\Firewall\BasicAuthenticationListener($d, $this->get('security.authentication.manager'), 'secured_area', $g, $e), 3 => $this->get('security.access_listener')), new \Symfony\Component\Security\Http\Firewall\ExceptionListener($d, $f, $this->get('security.http_utils'), 'secured_area', $g, NULL, NULL, $e, false));
     }
 
     /**
@@ -3390,7 +3483,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getSecurity_HelperService()
     {
-        return $this->services['security.helper'] = new \Application\CoreBundle\Helper\Security\SecurityHelper($this->get('security.token_storage'), $this->get('request.helper'));
+        return $this->services['security.helper'] = new \Application\CoreBundle\Helper\Security\SecurityHelper($this->get('security.token_storage'), $this->get('request.helper'), $this->get('security.authorization_checker'));
     }
 
     /**
@@ -3433,16 +3526,16 @@ class appDevDebugProjectContainer extends Container
     }
 
     /**
-     * Gets the 'security.user_checker.wsse_secured' service.
+     * Gets the 'security.user_checker.admin_wsse_secured' service.
      *
      * This service is shared.
      * This method always returns the same instance of the service.
      *
      * @return \Symfony\Component\Security\Core\User\UserChecker A Symfony\Component\Security\Core\User\UserChecker instance
      */
-    protected function getSecurity_UserChecker_WsseSecuredService()
+    protected function getSecurity_UserChecker_AdminWsseSecuredService()
     {
-        return $this->services['security.user_checker.wsse_secured'] = new \Symfony\Component\Security\Core\User\UserChecker();
+        return $this->services['security.user_checker.admin_wsse_secured'] = new \Symfony\Component\Security\Core\User\UserChecker();
     }
 
     /**
@@ -3617,22 +3710,22 @@ class appDevDebugProjectContainer extends Container
     protected function getSerializerService()
     {
         $a = $this->get('api_platform.router');
-        $b = $this->get('api_platform.metadata.resource.metadata_factory');
+        $b = $this->get('api_platform.cache.route_name_resolver');
         $c = $this->get('api_platform.metadata.property.name_collection_factory');
         $d = $this->get('api_platform.metadata.property.metadata_factory');
-        $e = $this->get('api_platform.resource_class_resolver');
-        $f = $this->get('api_platform.cache.route_name_resolver');
-        $g = $this->get('api_platform.item_data_provider');
-        $h = $this->get('property_accessor');
-        $i = $this->get('api_platform.jsonld.context_builder');
+        $e = $this->get('api_platform.item_data_provider');
+        $f = $this->get('property_accessor');
+        $g = $this->get('api_platform.metadata.resource.metadata_factory');
+        $h = $this->get('api_platform.jsonld.context_builder');
+        $i = $this->get('api_platform.resource_class_resolver');
 
         $j = new \ApiPlatform\Core\Bridge\Symfony\Routing\RouteNameResolver($a);
 
-        $k = new \ApiPlatform\Core\Bridge\Symfony\Routing\CachedRouteNameResolver($f, $j);
+        $k = new \ApiPlatform\Core\Bridge\Symfony\Routing\CachedRouteNameResolver($b, $j);
 
-        $l = new \ApiPlatform\Core\Bridge\Symfony\Routing\IriConverter($c, $d, $g, $k, $a, $h);
+        $l = new \ApiPlatform\Core\Bridge\Symfony\Routing\IriConverter($c, $d, $e, $k, $a, $f);
 
-        return $this->services['serializer'] = new \Symfony\Component\Serializer\Serializer(array(0 => new \ApiPlatform\Core\Hydra\Serializer\ConstraintViolationListNormalizer($a), 1 => new \ApiPlatform\Core\Hydra\Serializer\DocumentationNormalizer($b, $c, $d, $e, $this->get('api_platform.operation_method_resolver'), $a), 2 => new \ApiPlatform\Core\Hydra\Serializer\EntrypointNormalizer($b, $l, $a), 3 => new \ApiPlatform\Core\Hydra\Serializer\ErrorNormalizer($a, true), 4 => $this->get('api_platform.swagger.normalizer.documentation'), 5 => new \ApiPlatform\Core\Hydra\Serializer\CollectionFiltersNormalizer(new \ApiPlatform\Core\Hydra\Serializer\PartialCollectionViewNormalizer(new \ApiPlatform\Core\Hydra\Serializer\CollectionNormalizer($i, $e, $l), 'page', 'pagination'), $b, $e, $this->get('api_platform.filters')), 6 => new \ApiPlatform\Core\Problem\Serializer\ConstraintViolationListNormalizer(), 7 => new \ApiPlatform\Core\JsonLd\Serializer\ItemNormalizer($b, $c, $d, $l, $e, $i, $h, NULL), 8 => new \ApiPlatform\Core\Problem\Serializer\ErrorNormalizer(true), 9 => new \ApiPlatform\Core\Serializer\ItemNormalizer($c, $d, $l, $e, $h, NULL), 10 => new \Symfony\Component\Serializer\Normalizer\JsonSerializableNormalizer(), 11 => new \Symfony\Component\Serializer\Normalizer\DateTimeNormalizer(), 12 => new \Symfony\Component\Serializer\Normalizer\DataUriNormalizer(), 13 => new \Symfony\Component\Serializer\Normalizer\ArrayDenormalizer(), 14 => new \Symfony\Component\Serializer\Normalizer\ObjectNormalizer($this->get('serializer.mapping.class_metadata_factory'), NULL, $h, $this->get('property_info', ContainerInterface::NULL_ON_INVALID_REFERENCE))), array(0 => new \Symfony\Component\Serializer\Encoder\XmlEncoder(), 1 => new \Symfony\Component\Serializer\Encoder\JsonEncoder(), 2 => new \ApiPlatform\Core\Serializer\JsonEncoder('jsonld'), 3 => new \ApiPlatform\Core\Serializer\JsonEncoder('jsonproblem')));
+        return $this->services['serializer'] = new \Symfony\Component\Serializer\Serializer(array(0 => new \ApiPlatform\Core\Hydra\Serializer\ConstraintViolationListNormalizer($a), 1 => $this->get('api_platform.hydra.normalizer.documentation'), 2 => new \ApiPlatform\Core\Hydra\Serializer\EntrypointNormalizer($g, $l, $a), 3 => new \ApiPlatform\Core\Hydra\Serializer\ErrorNormalizer($a, true), 4 => $this->get('api_platform.swagger.normalizer.documentation'), 5 => new \ApiPlatform\Core\Hydra\Serializer\CollectionFiltersNormalizer(new \ApiPlatform\Core\Hydra\Serializer\PartialCollectionViewNormalizer(new \ApiPlatform\Core\Hydra\Serializer\CollectionNormalizer($h, $i, $l), 'page', 'pagination'), $g, $i, $this->get('api_platform.filters')), 6 => new \ApiPlatform\Core\Problem\Serializer\ConstraintViolationListNormalizer(), 7 => new \ApiPlatform\Core\JsonLd\Serializer\ItemNormalizer($g, $c, $d, $l, $i, $h, $f, NULL), 8 => new \ApiPlatform\Core\Problem\Serializer\ErrorNormalizer(true), 9 => new \ApiPlatform\Core\Serializer\ItemNormalizer($c, $d, $l, $i, $f, NULL), 10 => new \Symfony\Component\Serializer\Normalizer\JsonSerializableNormalizer(), 11 => new \Symfony\Component\Serializer\Normalizer\DateTimeNormalizer(), 12 => new \Symfony\Component\Serializer\Normalizer\DataUriNormalizer(), 13 => new \Symfony\Component\Serializer\Normalizer\ArrayDenormalizer(), 14 => new \Symfony\Component\Serializer\Normalizer\ObjectNormalizer($this->get('serializer.mapping.class_metadata_factory'), NULL, $f, $this->get('property_info', ContainerInterface::NULL_ON_INVALID_REFERENCE))), array(0 => new \Symfony\Component\Serializer\Encoder\XmlEncoder(), 1 => new \Symfony\Component\Serializer\Encoder\JsonEncoder(), 2 => new \ApiPlatform\Core\Serializer\JsonEncoder('jsonld'), 3 => new \ApiPlatform\Core\Serializer\JsonEncoder('jsonproblem')));
     }
 
     /**
@@ -4732,6 +4825,23 @@ class appDevDebugProjectContainer extends Container
     }
 
     /**
+     * Gets the 'api_platform.hydra.normalizer.documentation' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * This service is private.
+     * If you want to be able to request this service from the container directly,
+     * make it public, otherwise you might end up with broken code.
+     *
+     * @return \ApiPlatform\Core\Hydra\Serializer\DocumentationNormalizer A ApiPlatform\Core\Hydra\Serializer\DocumentationNormalizer instance
+     */
+    protected function getApiPlatform_Hydra_Normalizer_DocumentationService()
+    {
+        return $this->services['api_platform.hydra.normalizer.documentation'] = new \ApiPlatform\Core\Hydra\Serializer\DocumentationNormalizer($this->get('api_platform.metadata.resource.metadata_factory'), $this->get('api_platform.metadata.property.name_collection_factory'), $this->get('api_platform.metadata.property.metadata_factory'), $this->get('api_platform.resource_class_resolver'), $this->get('api_platform.operation_method_resolver'), $this->get('api_platform.router'));
+    }
+
+    /**
      * Gets the 'api_platform.jsonld.context_builder' service.
      *
      * This service is shared.
@@ -4779,7 +4889,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getApiPlatform_Metadata_Extractor_YamlService()
     {
-        return $this->services['api_platform.metadata.extractor.yaml'] = new \ApiPlatform\Core\Metadata\Extractor\YamlExtractor(array(0 => ($this->targetDirs[3].'/src/Application/AutoBundle/Resources/config/api_resources/resources.yml')));
+        return $this->services['api_platform.metadata.extractor.yaml'] = new \ApiPlatform\Core\Metadata\Extractor\YamlExtractor(array(0 => ($this->targetDirs[3].'/src/Application/CategoryBundle/Resources/config/api_resources/resources.yml'), 1 => ($this->targetDirs[3].'/src/Application/AutoBundle/Resources/config/api_resources/resources.yml')));
     }
 
     /**
@@ -4922,7 +5032,7 @@ class appDevDebugProjectContainer extends Container
 
         $this->services['debug.security.access.decision_manager'] = $instance = new \Symfony\Component\Security\Core\Authorization\DebugAccessDecisionManager(new \Symfony\Component\Security\Core\Authorization\AccessDecisionManager(array(), 'affirmative', false, true));
 
-        $instance->setVoters(array(0 => new \Symfony\Component\Security\Core\Authorization\Voter\RoleHierarchyVoter($a), 1 => new \Symfony\Component\Security\Core\Authorization\Voter\ExpressionVoter(new \Symfony\Component\Security\Core\Authorization\ExpressionLanguage(), $b, $a), 2 => new \Symfony\Component\Security\Core\Authorization\Voter\AuthenticatedVoter($b)));
+        $instance->setVoters(array(0 => new \Symfony\Component\Security\Core\Authorization\Voter\RoleHierarchyVoter($a), 1 => new \Symfony\Component\Security\Core\Authorization\Voter\ExpressionVoter(new \Symfony\Component\Security\Core\Authorization\ExpressionLanguage(), $b, $a), 2 => new \Symfony\Component\Security\Core\Authorization\Voter\AuthenticatedVoter($b), 3 => new \Symfony\Component\Security\Acl\Voter\AclVoter($this->get('security.acl.provider'), new \Symfony\Component\Security\Acl\Domain\ObjectIdentityRetrievalStrategy(), new \Symfony\Component\Security\Acl\Domain\SecurityIdentityRetrievalStrategy($a, $b), new \Symfony\Component\Security\Acl\Permission\BasicPermissionMap(), $this->get('monolog.logger.security', ContainerInterface::NULL_ON_INVALID_REFERENCE), true)));
 
         return $instance;
     }
@@ -5043,7 +5153,9 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getSecurity_Authentication_ManagerService()
     {
-        $this->services['security.authentication.manager'] = $instance = new \Symfony\Component\Security\Core\Authentication\AuthenticationProviderManager(array(0 => new \Application\AdminBundle\Security\Authentication\Provider\WsseProvider($this->get('security.user.provider.concrete.chain_provider'), $this->get('cache.app')), 1 => new \Symfony\Component\Security\Core\Authentication\Provider\DaoAuthenticationProvider($this->get('security.user.provider.concrete.in_memory'), $this->get('security.user_checker.wsse_secured'), 'secured_area', $this->get('security.encoder_factory'), true)), true);
+        $a = $this->get('cache.app');
+
+        $this->services['security.authentication.manager'] = $instance = new \Symfony\Component\Security\Core\Authentication\AuthenticationProviderManager(array(0 => new \Application\AdminBundle\Security\Authentication\Provider\WsseProvider($this->get('security.user.provider.concrete.admin_provider'), $a), 1 => new \Application\AdminBundle\Security\Authentication\Provider\WsseProvider($this->get('security.user.provider.concrete.customer_provider'), $a), 2 => new \Symfony\Component\Security\Core\Authentication\Provider\DaoAuthenticationProvider($this->get('security.user.provider.concrete.in_memory'), $this->get('security.user_checker.admin_wsse_secured'), 'secured_area', $this->get('security.encoder_factory'), true)), true);
 
         $instance->setEventDispatcher($this->get('debug.event_dispatcher'));
 
@@ -5138,7 +5250,7 @@ class appDevDebugProjectContainer extends Container
     }
 
     /**
-     * Gets the 'security.user.provider.concrete.chain_provider' service.
+     * Gets the 'security.user.provider.concrete.admin_provider' service.
      *
      * This service is shared.
      * This method always returns the same instance of the service.
@@ -5147,11 +5259,28 @@ class appDevDebugProjectContainer extends Container
      * If you want to be able to request this service from the container directly,
      * make it public, otherwise you might end up with broken code.
      *
-     * @return \Symfony\Component\Security\Core\User\ChainUserProvider A Symfony\Component\Security\Core\User\ChainUserProvider instance
+     * @return \Symfony\Bridge\Doctrine\Security\User\EntityUserProvider A Symfony\Bridge\Doctrine\Security\User\EntityUserProvider instance
      */
-    protected function getSecurity_User_Provider_Concrete_ChainProviderService()
+    protected function getSecurity_User_Provider_Concrete_AdminProviderService()
     {
-        return $this->services['security.user.provider.concrete.chain_provider'] = new \Symfony\Component\Security\Core\User\ChainUserProvider(array(0 => $this->get('security.user.provider.concrete.in_memory'), 1 => $this->get('security.user.provider.concrete.wsse_provider'), 2 => $this->get('security.user.provider.concrete.wsse_provider_2')));
+        return $this->services['security.user.provider.concrete.admin_provider'] = new \Symfony\Bridge\Doctrine\Security\User\EntityUserProvider($this->get('doctrine'), 'Application\\AdminBundle\\Entity\\User', NULL, NULL);
+    }
+
+    /**
+     * Gets the 'security.user.provider.concrete.customer_provider' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * This service is private.
+     * If you want to be able to request this service from the container directly,
+     * make it public, otherwise you might end up with broken code.
+     *
+     * @return \Symfony\Bridge\Doctrine\Security\User\EntityUserProvider A Symfony\Bridge\Doctrine\Security\User\EntityUserProvider instance
+     */
+    protected function getSecurity_User_Provider_Concrete_CustomerProviderService()
+    {
+        return $this->services['security.user.provider.concrete.customer_provider'] = new \Symfony\Bridge\Doctrine\Security\User\EntityUserProvider($this->get('doctrine'), 'Application\\CustomerBundle\\Entity\\Customer', NULL, NULL);
     }
 
     /**
@@ -5173,40 +5302,6 @@ class appDevDebugProjectContainer extends Container
         $instance->createUser(new \Symfony\Component\Security\Core\User\User('apidoc', '$2a$12$77DgS/ul7u4nEC1./69ZP.CwyQ5uCzFPMMuy.m19yIgDb.u0WMe2G', array()));
 
         return $instance;
-    }
-
-    /**
-     * Gets the 'security.user.provider.concrete.wsse_provider' service.
-     *
-     * This service is shared.
-     * This method always returns the same instance of the service.
-     *
-     * This service is private.
-     * If you want to be able to request this service from the container directly,
-     * make it public, otherwise you might end up with broken code.
-     *
-     * @return \Symfony\Bridge\Doctrine\Security\User\EntityUserProvider A Symfony\Bridge\Doctrine\Security\User\EntityUserProvider instance
-     */
-    protected function getSecurity_User_Provider_Concrete_WsseProviderService()
-    {
-        return $this->services['security.user.provider.concrete.wsse_provider'] = new \Symfony\Bridge\Doctrine\Security\User\EntityUserProvider($this->get('doctrine'), 'Application\\AdminBundle\\Entity\\User', NULL, NULL);
-    }
-
-    /**
-     * Gets the 'security.user.provider.concrete.wsse_provider_2' service.
-     *
-     * This service is shared.
-     * This method always returns the same instance of the service.
-     *
-     * This service is private.
-     * If you want to be able to request this service from the container directly,
-     * make it public, otherwise you might end up with broken code.
-     *
-     * @return \Symfony\Bridge\Doctrine\Security\User\EntityUserProvider A Symfony\Bridge\Doctrine\Security\User\EntityUserProvider instance
-     */
-    protected function getSecurity_User_Provider_Concrete_WsseProvider2Service()
-    {
-        return $this->services['security.user.provider.concrete.wsse_provider_2'] = new \Symfony\Bridge\Doctrine\Security\User\EntityUserProvider($this->get('doctrine'), 'Application\\CustomerBundle\\Entity\\Customer', NULL, NULL);
     }
 
     /**
@@ -5470,6 +5565,11 @@ class appDevDebugProjectContainer extends Container
             'security.authentication.session_strategy.strategy' => 'migrate',
             'security.access.always_authenticate_before_granting' => false,
             'security.authentication.hide_user_not_found' => true,
+            'security.acl.dbal.class_table_name' => 'acl_classes',
+            'security.acl.dbal.entry_table_name' => 'acl_entries',
+            'security.acl.dbal.oid_table_name' => 'acl_object_identities',
+            'security.acl.dbal.oid_ancestors_table_name' => 'acl_object_identity_ancestors',
+            'security.acl.dbal.sid_table_name' => 'acl_security_identities',
             'twig.exception_listener.controller' => 'twig.controller.exception:showAction',
             'twig.form.resources' => array(
                 0 => 'form_div_layout.html.twig',
@@ -5789,13 +5889,13 @@ class appDevDebugProjectContainer extends Container
             'nelmio_api_doc.sandbox.endpoint' => NULL,
             'nelmio_api_doc.sandbox.accept_type' => NULL,
             'nelmio_api_doc.sandbox.body_format.formats' => array(
-
+                0 => 'json',
             ),
-            'nelmio_api_doc.sandbox.body_format.default_format' => 'form',
+            'nelmio_api_doc.sandbox.body_format.default_format' => 'json',
             'nelmio_api_doc.sandbox.request_format.method' => 'accept_header',
             'nelmio_api_doc.sandbox.request_format.default_format' => 'json',
             'nelmio_api_doc.sandbox.request_format.formats' => array(
-
+                0 => 'application/json',
             ),
             'nelmio_api_doc.sandbox.entity_to_choice' => true,
             'nelmio_api_doc.formatter.abstract_formatter.class' => 'Nelmio\\ApiDocBundle\\Formatter\\AbstractFormatter',

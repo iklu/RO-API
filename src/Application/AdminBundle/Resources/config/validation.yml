@@ -6,5 +6,5 @@ Application\AdminBundle\Entity\User:
         email:
             - NotBlank:
             - Email:
-        password:
+        plainPassword:
             - NotBlank:
