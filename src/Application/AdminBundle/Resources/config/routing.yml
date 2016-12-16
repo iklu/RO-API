@@ -15,7 +15,7 @@ update_user:
         _api_item_operation_name: 'updateUser'
 
 add_user:
-    path: '/admin/users/'
+    path: '/users/'
     methods:  ['POST']
     defaults:
         _controller: 'ApplicationAdminBundle:User:add'

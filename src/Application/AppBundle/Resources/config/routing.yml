@@ -2,4 +2,8 @@ admin:
     resource: "@ApplicationAdminBundle/Resources/config/routing.yml"
 customer:
     resource: "@ApplicationCustomerBundle/Resources/config/routing.yml"
+category:
+    resource: "@ApplicationCategoryBundle/Resources/config/routing.yml"
+auto:
+    resource: "@ApplicationAutoBundle/Resources/config/routing.yml"
 

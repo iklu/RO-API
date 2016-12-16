@@ -1,3 +1,31 @@
-application_category_homepage:
-    path:     /
-    defaults: { _controller: ApplicationCategoryBundle:Default:index }
+get_category:
+    path: '/category/{id}/'
+    methods:  ['GET']
+    defaults:
+        _controller: 'ApplicationCategoryBundle:Front/Default:getCategory'
+        _api_resource_class: 'Application\CategoryBundle\Entity\User'
+        _api_item_operation_name: 'getCategory'
+
+update_category:
+    path: '/admin/category/{id}/'
+    methods:  ['PUT']
+    defaults:
+        _controller: 'ApplicationCategoryBundle:Admin/Default:edit'
+        _api_resource_class: 'Application\CategoryBundle\Entity\Category'
+        _api_item_operation_name: 'updateCategory'
+
+add_category:
+    path: '/admin/category/'
+    methods:  ['POST']
+    defaults:
+        _controller: 'ApplicationCategoryBundle:Admin/Default:add'
+        _api_resource_class: 'Application\CategoryBundle\Entity\Category'
+        _api_collection_operation_name: 'addCategory'
+
+get_categories:
+    path: '/categories/'
+    methods:  ['get']
+    defaults:
+        _controller: 'ApplicationCategoryBundle:Front/Default:getCategories'
+        _api_resource_class: 'Application\CategoryBundle\Entity\Category'
+        _api_collection_operation_name: 'getCategories'

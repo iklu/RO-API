@@ -1,6 +1,7 @@
 <?php
 
 namespace Application\AutoBundle\Entity;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * CarModel
@@ -67,6 +68,18 @@ class CarModel
      */
     private $dateCreated;
 
+    /**
+     * @var array
+     */
+    protected $cars;
+
+    /**
+     * CarModel constructor.
+     */
+    public function __construct()
+    {
+        $this->cars = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -340,6 +353,14 @@ class CarModel
     public function getDateCreated()
     {
         return $this->dateCreated;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCars()
+    {
+        return $this->cars;
     }
 }
 

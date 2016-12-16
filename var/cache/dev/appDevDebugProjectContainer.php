@@ -1037,7 +1037,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getCache_SystemService()
     {
-        return $this->services['cache.system'] = \Symfony\Component\Cache\Adapter\AbstractAdapter::createSystemCache('89ErCvMU+5', 0, 'V-ET1zhAKJn+odhHTC6ER2', (__DIR__.'/pools'), $this->get('monolog.logger.cache', ContainerInterface::NULL_ON_INVALID_REFERENCE));
+        return $this->services['cache.system'] = \Symfony\Component\Cache\Adapter\AbstractAdapter::createSystemCache('89ErCvMU+5', 0, 'MVR7sde9BpRoH+FK1s0ANk', (__DIR__.'/pools'), $this->get('monolog.logger.cache', ContainerInterface::NULL_ON_INVALID_REFERENCE));
     }
 
     /**
@@ -1055,8 +1055,8 @@ class appDevDebugProjectContainer extends Container
         $b = new \Symfony\Component\HttpKernel\CacheClearer\Psr6CacheClearer();
         $b->addPool($this->get('cache.app'));
         $b->addPool($this->get('cache.system'));
-        $b->addPool(\Symfony\Component\Cache\Adapter\AbstractAdapter::createSystemCache('XjpAxhtQa1', 0, 'V-ET1zhAKJn+odhHTC6ER2', (__DIR__.'/pools'), $a));
-        $b->addPool(\Symfony\Component\Cache\Adapter\AbstractAdapter::createSystemCache('3RTCZUV4M+', 0, 'V-ET1zhAKJn+odhHTC6ER2', (__DIR__.'/pools'), $a));
+        $b->addPool(\Symfony\Component\Cache\Adapter\AbstractAdapter::createSystemCache('XjpAxhtQa1', 0, 'MVR7sde9BpRoH+FK1s0ANk', (__DIR__.'/pools'), $a));
+        $b->addPool(\Symfony\Component\Cache\Adapter\AbstractAdapter::createSystemCache('3RTCZUV4M+', 0, 'MVR7sde9BpRoH+FK1s0ANk', (__DIR__.'/pools'), $a));
 
         return $this->services['cache_clearer'] = new \Symfony\Component\HttpKernel\CacheClearer\ChainCacheClearer(array(0 => $b));
     }
@@ -4889,7 +4889,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getApiPlatform_Metadata_Extractor_YamlService()
     {
-        return $this->services['api_platform.metadata.extractor.yaml'] = new \ApiPlatform\Core\Metadata\Extractor\YamlExtractor(array(0 => ($this->targetDirs[3].'/src/Application/CategoryBundle/Resources/config/api_resources/resources.yml'), 1 => ($this->targetDirs[3].'/src/Application/AutoBundle/Resources/config/api_resources/resources.yml')));
+        return $this->services['api_platform.metadata.extractor.yaml'] = new \ApiPlatform\Core\Metadata\Extractor\YamlExtractor(array(0 => ($this->targetDirs[3].'/src/Application/AdminBundle/Resources/config/api_resources/roles.yml'), 1 => ($this->targetDirs[3].'/src/Application/AdminBundle/Resources/config/api_resources/user.yml'), 2 => ($this->targetDirs[3].'/src/Application/AdminBundle/Resources/config/api_resources/group.yml'), 3 => ($this->targetDirs[3].'/src/Application/CategoryBundle/Resources/config/api_resources/category.yml')));
     }
 
     /**

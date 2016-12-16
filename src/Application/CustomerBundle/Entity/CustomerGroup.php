@@ -4,7 +4,6 @@
 
 namespace Application\CustomerBundle\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource;
 use Application\AdminBundle\Model\GroupableInterface;
 use Application\AdminBundle\Model\GroupInterface;
 use Application\AdminBundle\Model\UserInterface;
@@ -14,44 +13,24 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
 
-/**
- * @ApiResource(
- *     itemOperations={
- *          "getGroup"={"route_name"="get_group"},
- *          "updateGroup"={"route_name"="update_group"}
- *      },
- *     collectionOperations = {
- *          "addGroup"={"route_name"="add_group"},
- *          "getGroups"={"route_name"="get_groups"}
- *      },
- *     attributes={
- *          "normalization_context"={"groups"={"group", "user-read"}},
- *          "denormalization_context"={"groups"={"group", "user-write"}}
- * }
- *  )
- */
 class CustomerGroup implements GroupInterface
 {
     /**
-     * @Groups({"group"})
      * @var mixed
      */
     protected $id;
 
     /**
-     * @Groups({"group"})
      * @var string
      */
     protected $name;
 
     /**
-     * @Groups({"group"})
      * @var array
      */
     protected $roles;
 
     /**
-     * @Groups({"group"})
      * @var array
      */
     protected $users;

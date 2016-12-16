@@ -2,92 +2,120 @@
 
 namespace Application\ProductBundle\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+
 /**
- * Product
+ * @ApiResource(
+ *     attributes={
+ *          "normalization_context"={"groups"={"product", "user-read"}},
+ *          "denormalization_context"={"groups"={"product", "user-write"}}
+ * }
+ *  )
  */
 class Product
 {
     /**
+     * @Groups({"car", "product"})
      * @var int
      */
     private $id;
 
     /**
+     * @Groups({"car", "product"})
      * @var string
      */
     private $title;
 
     /**
+     * @Groups({"car", "product"})
      * @var string
      */
     private $description;
 
     /**
+     * @Groups({"car", "product"})
      * @var float
      */
     private $price;
 
     /**
+     * @Groups({"car", "product"})
      * @var boolean
      */
     private $isNegotiable;
 
     /**
+     * @Groups({"car", "product"})
      * @var string
      */
     private $country;
 
     /**
+     * @Groups({"car", "product"})
      * @var string
      */
     private $county;
 
     /**
+     * @Groups({"car", "product"})
      * @var string
      */
     private $village;
 
     /**
+     * @Groups({"car", "product"})
      * @var string
      */
     private $address1;
 
     /**
+     * @Groups({"car", "product"})
      * @var string
      */
     private $address2;
 
     /**
+     * @Groups({"car", "product"})
      * @var string
      */
     private $contactPerson;
 
     /**
+     * @Groups({"car", "product"})
      * @var int
      */
     private $contactPhone;
 
     /**
+     * @Groups({"car", "product"})
      * @var string
      */
     private $contactEmail;
 
     /**
+     * @Groups({"car", "product"})
      * @var float
      */
     private $lng;
 
     /**
+     * @Groups({"car", "product"})
      * @var float
      */
     private $lat;
 
     /**
+     * @Groups({"car", "product"})
      * @var \DateTime
      */
     private $addedDate;
 
     /**
+     * @Groups({"car", "product"})
      * @var bool
      */
     private $isFeatured;

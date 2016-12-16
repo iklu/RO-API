@@ -1,6 +1,6 @@
 <?php
 
-namespace Application\AutoBundle\Controller\Front;
+namespace Application\CategoryBundle\Controller\Front;
 
 use Application\CoreBundle\Controller\Front\AbstractFrontController;
 
@@ -12,11 +12,11 @@ use Application\CoreBundle\Controller\Front\AbstractFrontController;
  */
 class DefaultController extends AbstractFrontController
 {
-    public function getCarAction($data){
+    public function getCategoryAction($data){
         return $data;
     }
 
-    public function getCarsAction($data){
+    public function getCategoriesAction($data){
         return $data;
     }
 }

@@ -1,0 +1,130 @@
+resources:
+    Application\CategoryBundle\Entity\Category:
+        itemOperations:
+            getCategory:
+                route_name: get_category
+            updateCategory:
+                route_name: update_category
+        collectionOperations:
+            addCategory:
+                route_name: add_category
+            getCategories:
+                route_name: get_categories
+        shortName: 'Category'                   # optional
+        description: 'An offer from my shop' # optional
+        iri: 'http://schema.org/Car'       # optional
+        attributes:                          # optional
+            pagination_items_per_page: 25    # optional
+            normalization_context:
+                groups: [category, user-read]
+            denormalization_context:
+                groups: [category, user-write]
+        properties:
+            name:
+                description: 'The name of the category'
+                #type: I would let this away for now, as the PropertyInfo loader already do the job
+                readable: true
+                writeable: true
+                readableLink: true
+                writeableLink: true
+                required: true
+                iri: 'http://example.com'
+                identifier: false
+                attributes: {} # An associate array, still without constraints
+                groups: [ category ]
+            shortDescription:
+                description: 'The password of the user'
+                #type: I would let this away for now, as the PropertyInfo loader already do the job
+                readable: true
+                writeable: true
+                readableLink: true
+                writeableLink: true
+                required: true
+                iri: 'http://example.com'
+                identifier: false
+                attributes: {} # An associate array, still without constraints
+                groups: [ category ]
+            description:
+                description: 'The roles of the user'
+                #type: I would let this away for now, as the PropertyInfo loader already do the job
+                readable: true
+                writeable: true
+                readableLink: true
+                writeableLink: true
+                required: true
+                iri: 'http://example.com'
+                identifier: false
+                attributes: {} # An associate array, still without constraints
+                groups: [ category ]
+            photo:
+                description: 'The group of the user'
+                #type: I would let this away for now, as the PropertyInfo loader already do the job
+                readable: true
+                writeable: true
+                readableLink: true
+                writeableLink: true
+                required: true
+                iri: 'http://example.com'
+                identifier: false
+                attributes: {} # An associate array, still without constraints
+                groups: [ category ]
+            slug:
+                description: 'The email of the user'
+                #type: I would let this away for now, as the PropertyInfo loader already do the job
+                readable: true
+                writeable: true
+                readableLink: true
+                writeableLink: true
+                required: true
+                iri: 'http://example.com'
+                identifier: false
+                attributes: {} # An associate array, still without constraints
+                groups: [ category ]
+            metaTitle:
+                description: 'First name of the user'
+                #type: I would let this away for now, as the PropertyInfo loader already do the job
+                readable: true
+                writeable: true
+                readableLink: true
+                writeableLink: true
+                required: true
+                iri: 'http://example.com'
+                identifier: false
+                attributes: {} # An associate array, still without constraints
+                groups: [ category ]
+            metaDescription:
+                description: 'The last name of the user'
+                #type: I would let this away for now, as the PropertyInfo loader already do the job
+                readable: true
+                writeable: true
+                readableLink: true
+                writeableLink: true
+                required: true
+                iri: 'http://example.com'
+                identifier: false
+                attributes: {} # An associate array, still without constraints
+                groups: [ category ]
+            metaKeywords:
+                description: 'Phone number of the user'
+                #type: I would let this away for now, as the PropertyInfo loader already do the job
+                readable: true
+                writeable: true
+                readableLink: true
+                writeableLink: true
+                required: true
+                iri: 'http://example.com'
+                identifier: false
+                attributes: {} # An associate array, still without constraints
+                groups: [ category ]
+            orderIdx:
+                description: 'Address of the user'
+                #type: I would let this away for now, as the PropertyInfo loader already do the job
+                readable: true
+                writeable: true
+                readableLink: true
+                writeableLink: true
+                required: true
+                iri: 'http://example.com'
+                identifier: false
+                attributes: {} # An associate array, still without constraints
+                groups: [ category ]

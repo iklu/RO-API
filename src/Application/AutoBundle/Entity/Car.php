@@ -3,57 +3,86 @@
 namespace Application\AutoBundle\Entity;
 use Application\ProductBundle\Entity\Product;
 
+use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+
 /**
- * Car
+ * @ApiResource(
+ *     itemOperations={
+ *          "getCar"={"route_name"="get_car"},
+ *          "updateCar"={"route_name"="update_car"}
+ *      },
+ *     collectionOperations = {
+ *          "addCar"={"route_name"="add_car"},
+ *          "getCars"={"route_name"="get_cars"}
+ *      },
+ *     attributes={
+ *          "normalization_context"={"groups"={"car", "user-read"}},
+ *          "denormalization_context"={"groups"={"car", "user-write"}}
+ * }
+ *  )
  */
 class Car extends Product
 {
     /**
+     * @Groups({"car"})
      * @var string
      */
     private $fuel;
 
     /**
+     * @Groups({"car"})
      * @var float
      */
     private $mileage;
 
     /**
+     * @Groups({"car"})
      * @var float
      */
     private $engineCapacity;
 
     /**
+     * @Groups({"car"})
      * @var string
      */
     private $vehicleType;
 
     /**
+     * @Groups({"car"})
      * @var string
      */
     private $carCondition;
 
     /**
+     * @Groups({"car"})
      * @var int
      */
     private $seatsNumber;
 
     /**
+     * @Groups({"car"})
      * @var string
      */
     private $transmission;
 
     /**
+     * @Groups({"car"})
      * @var string
      */
     private $exteriorColour;
 
     /**
+     * @Groups({"car"})
      * @var bool
      */
     private $airConditioning;
 
     /**
+     * @Groups({"car"})
      * @var Collection
      */
     private $models;
@@ -272,6 +301,14 @@ class Car extends Product
     public function getAirConditioning()
     {
         return $this->airConditioning;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getModels()
+    {
+        return $this->models ?: $this->models = new ArrayCollection();
     }
 }
 

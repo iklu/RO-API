@@ -39,4 +39,16 @@ Application\AutoBundle\Entity\Car:
         airConditioning:
             type: boolean
             nullable: true
+    manyToOne:
+        models:
+            targetEntity: Application\AutoBundle\Entity\CarModel
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                cars_id:
+                    referencedColumnName: id
+            inverseJoinColumns:
+                models_id:
+                    referencedColumnName: id
     lifecycleCallbacks: {  }
