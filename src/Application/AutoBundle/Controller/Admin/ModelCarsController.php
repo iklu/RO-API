@@ -10,7 +10,7 @@ use Application\CoreBundle\Controller\Admin\AbstractAdminController;
  * Date: 16.12.2016
  * Time: 15:35
  */
-class DefaultController extends AbstractAdminController
+class ModelCarsController extends AbstractAdminController
 {
 
 }

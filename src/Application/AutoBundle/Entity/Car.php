@@ -80,11 +80,6 @@ class Car extends Product
      */
     private $airConditioning;
 
-    /**
-     * @Groups({"car"})
-     * @var Collection
-     */
-    private $models;
 
     /**
      * Set fuel
@@ -302,12 +297,5 @@ class Car extends Product
         return $this->airConditioning;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getModels()
-    {
-        return $this->models ?: $this->models = new ArrayCollection();
-    }
 }
 

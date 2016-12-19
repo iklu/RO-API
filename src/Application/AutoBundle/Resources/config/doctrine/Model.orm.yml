@@ -1,7 +1,7 @@
-Application\AutoBundle\Entity\CarModel:
+Application\AutoBundle\Entity\Model:
     type: entity
-    table: null
-    repositoryClass: Application\AutoBundle\Repository\CarModelRepository
+    table: carmodel
+    repositoryClass: Application\AutoBundle\Repository\ModelRepository
     id:
         id:
             type: integer
@@ -49,8 +49,4 @@ Application\AutoBundle\Entity\CarModel:
         dateCreated:
             type: datetime
             nullable: true
-    oneToMany:
-        cars:
-            targetEntity: Application\AutoBundle\Entity\Car
-            mappedBy: models
     lifecycleCallbacks: {  }

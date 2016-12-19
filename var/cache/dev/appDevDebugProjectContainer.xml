@@ -667,7 +667,7 @@
                   <tag name="cache.pool"/>
                   <argument>XjpAxhtQa1</argument>
                   <argument>0</argument>
-                  <argument>MVR7sde9BpRoH+FK1s0ANk</argument>
+                  <argument>RqjMJvnV10g5MV0WOPOi0h</argument>
                   <argument>/var/www/html/RO-API/var/cache/dev/pools</argument>
                   <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
                   <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
@@ -680,7 +680,7 @@
                   <tag name="cache.pool"/>
                   <argument>3RTCZUV4M+</argument>
                   <argument>0</argument>
-                  <argument>MVR7sde9BpRoH+FK1s0ANk</argument>
+                  <argument>RqjMJvnV10g5MV0WOPOi0h</argument>
                   <argument>/var/www/html/RO-API/var/cache/dev/pools</argument>
                   <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
                   <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
@@ -1012,7 +1012,7 @@
       <tag name="cache.pool"/>
       <argument>89ErCvMU+5</argument>
       <argument>0</argument>
-      <argument>MVR7sde9BpRoH+FK1s0ANk</argument>
+      <argument>RqjMJvnV10g5MV0WOPOi0h</argument>
       <argument>/var/www/html/RO-API/var/cache/dev/pools</argument>
       <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
@@ -3276,9 +3276,6 @@
     </service>
     <service id="api_platform.metadata.extractor.yaml" class="ApiPlatform\Core\Metadata\Extractor\YamlExtractor" public="false">
       <argument type="collection">
-        <argument>/var/www/html/RO-API/src/Application/AdminBundle/Resources/config/api_resources/roles.yml</argument>
-        <argument>/var/www/html/RO-API/src/Application/AdminBundle/Resources/config/api_resources/user.yml</argument>
-        <argument>/var/www/html/RO-API/src/Application/AdminBundle/Resources/config/api_resources/group.yml</argument>
         <argument>/var/www/html/RO-API/src/Application/CategoryBundle/Resources/config/api_resources/category.yml</argument>
       </argument>
     </service>

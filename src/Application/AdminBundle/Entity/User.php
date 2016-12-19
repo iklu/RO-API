@@ -159,6 +159,7 @@ class User implements UserInterface, GroupableInterface
     protected $passwordRequestedAt;
 
     /**
+     * @Groups({"user"})
      * @var Collection
      */
     protected $groups;

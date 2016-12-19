@@ -3,9 +3,9 @@
 namespace Application\AutoBundle\Entity;
 
 /**
- * CarProducer
+ * Producer
  */
-class CarProducer
+class Producer
 {
     /**
      * @var int
@@ -83,7 +83,7 @@ class CarProducer
      *
      * @param string $name
      *
-     * @return CarProducer
+     * @return Producer
      */
     public function setName($name)
     {
@@ -107,7 +107,7 @@ class CarProducer
      *
      * @param string $shortDescription
      *
-     * @return CarProducer
+     * @return Producer
      */
     public function setShortDescription($shortDescription)
     {
@@ -131,7 +131,7 @@ class CarProducer
      *
      * @param string $description
      *
-     * @return CarProducer
+     * @return Producer
      */
     public function setDescription($description)
     {
@@ -155,7 +155,7 @@ class CarProducer
      *
      * @param string $photo
      *
-     * @return CarProducer
+     * @return Producer
      */
     public function setPhoto($photo)
     {
@@ -179,7 +179,7 @@ class CarProducer
      *
      * @param string $slug
      *
-     * @return CarProducer
+     * @return Producer
      */
     public function setSlug($slug)
     {
@@ -203,7 +203,7 @@ class CarProducer
      *
      * @param string $metaTitle
      *
-     * @return CarProducer
+     * @return Producer
      */
     public function setMetaTitle($metaTitle)
     {
@@ -227,7 +227,7 @@ class CarProducer
      *
      * @param string $metaKeywords
      *
-     * @return CarProducer
+     * @return Producer
      */
     public function setMetaKeywords($metaKeywords)
     {
@@ -251,7 +251,7 @@ class CarProducer
      *
      * @param string $metaDescription
      *
-     * @return CarProducer
+     * @return Producer
      */
     public function setMetaDescription($metaDescription)
     {
@@ -275,7 +275,7 @@ class CarProducer
      *
      * @param integer $orderIdx
      *
-     * @return CarProducer
+     * @return Producer
      */
     public function setOrderIdx($orderIdx)
     {
@@ -299,7 +299,7 @@ class CarProducer
      *
      * @param \DateTime $dateUpdated
      *
-     * @return CarProducer
+     * @return Producer
      */
     public function setDateUpdated($dateUpdated)
     {
@@ -323,7 +323,7 @@ class CarProducer
      *
      * @param \DateTime $dateCreated
      *
-     * @return CarProducer
+     * @return Producer
      */
     public function setDateCreated($dateCreated)
     {

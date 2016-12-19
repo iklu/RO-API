@@ -1,7 +1,7 @@
-Application\AutoBundle\Entity\CarProducer:
+Application\AutoBundle\Entity\Producer:
     type: entity
-    table: null
-    repositoryClass: Application\AutoBundle\Repository\CarProducerRepository
+    table: carproducer
+    repositoryClass: Application\AutoBundle\Repository\ProducerRepository
     id:
         id:
             type: integer

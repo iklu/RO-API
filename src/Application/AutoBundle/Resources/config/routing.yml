@@ -2,7 +2,7 @@ get_car:
     path: '/car/{id}/'
     methods:  ['GET']
     defaults:
-        _controller: 'ApplicationAutoBundle:Front/Default:getCar'
+        _controller: 'ApplicationAutoBundle:Front/Car:getCar'
         _api_resource_class: 'Application\AutoBundle\Entity\Car'
         _api_item_operation_name: 'getCar'
 
@@ -10,7 +10,7 @@ update_car:
     path: '/user/car/{id}/'
     methods:  ['PUT']
     defaults:
-        _controller: 'ApplicationAutoBundle:Admin/Default:edit'
+        _controller: 'ApplicationAutoBundle:Admin/Car:edit'
         _api_resource_class: 'Application\AutoBundle\Entity\Car'
         _api_item_operation_name: 'updateCar'
 
@@ -18,7 +18,7 @@ add_car:
     path: '/user/car/'
     methods:  ['POST']
     defaults:
-        _controller: 'ApplicationAutoBundle:Admin/Default:add'
+        _controller: 'ApplicationAutoBundle:Admin/Car:add'
         _api_resource_class: 'Application\AutoBundle\Entity\Car'
         _api_collection_operation_name: 'addCar'
 
@@ -26,6 +26,62 @@ get_cars:
     path: '/cars/'
     methods:  ['get']
     defaults:
-        _controller: 'ApplicationAutoBundle:Front/Default:getCars'
+        _controller: 'ApplicationAutoBundle:Front/Car:getCars'
         _api_resource_class: 'Application\AutoBundle\Entity\Car'
         _api_collection_operation_name: 'getCars'
+
+get_model:
+    path: '/carmodel/{id}/'
+    methods:  ['GET']
+    defaults:
+        _controller: 'ApplicationAutoBundle:Front/Model:getModel'
+        _api_resource_class: 'Application\AutoBundle\Entity\Model'
+        _api_item_operation_name: 'getCar'
+
+update_model:
+    path: '/user/carmodel/{id}/'
+    methods:  ['PUT']
+    defaults:
+        _controller: 'ApplicationAutoBundle:Admin/Model:edit'
+        _api_resource_class: 'Application\AutoBundle\Entity\Model'
+        _api_item_operation_name: 'updateModel'
+
+add_model:
+    path: '/user/carmodel/'
+    methods:  ['POST']
+    defaults:
+        _controller: 'ApplicationAutoBundle:Admin/Model:add'
+        _api_resource_class: 'Application\AutoBundle\Entity\Model'
+        _api_collection_operation_name: 'addModel'
+
+get_models:
+    path: '/carmodels/'
+    methods:  ['get']
+    defaults:
+        _controller: 'ApplicationAutoBundle:Front/Model:getModels'
+        _api_resource_class: 'Application\AutoBundle\Entity\Model'
+        _api_collection_operation_name: 'getModels'
+
+get_model_cars:
+    path: '/carmodel-cars/{id}/'
+    methods:  ['GET']
+    defaults:
+        _controller: 'ApplicationAutoBundle:Front/ModelCars:getModelCars'
+
+update_model_cars:
+    path: '/user/carmodel-cars/{id}/'
+    methods:  ['PUT']
+    defaults:
+        _controller: 'ApplicationAutoBundle:Admin/ModelCars:edit'
+
+add_model_cars:
+    path: '/user/carmodel-cars/'
+    methods:  ['POST']
+    defaults:
+        _controller: 'ApplicationAutoBundle:Admin/ModelCars:add'
+
+get_models_cars:
+    path: '/carmodels-cars/'
+    methods:  ['get']
+    defaults:
+        _controller: 'ApplicationAutoBundle:Front/ModelCars:getModelsCars'

@@ -3,6 +3,7 @@
 namespace Application\AutoBundle\Controller\Front;
 
 use Application\CoreBundle\Controller\Front\AbstractFrontController;
+use Application\CoreBundle\Utils\DataSerializer;
 
 /**
  * Created by PhpStorm.
@@ -10,13 +11,15 @@ use Application\CoreBundle\Controller\Front\AbstractFrontController;
  * Date: 16.12.2016
  * Time: 15:35
  */
-class DefaultController extends AbstractFrontController
+class CarController extends AbstractFrontController
 {
     public function getCarAction($data){
         return $data;
     }
 
     public function getCarsAction($data){
+
+        //DataSerializer::deserializeWithCamelCaseEntityToArray($data);
         return $data;
     }
 }
