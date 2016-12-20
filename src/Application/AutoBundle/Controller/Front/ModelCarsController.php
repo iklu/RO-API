@@ -41,15 +41,18 @@ class ModelCarsController extends AbstractFrontController
      *
      *
      */
-    public function getModelCarsAction($id, Request $request){
+    public function getModelCarsAction($data){
         //DataSerializer::deserializeWithCamelCaseEntityToArray($data);
         $em = $this->getDoctrine()->getManager();
-        
-        $cars = $em->getRepository("ApplicationAutoBundle:ModelHasCars")->getModelCars($id);
-        
+
+        $cars = $em->getRepository("ApplicationAutoBundle:ModelHasCars")->getModelCars($data->getId());
+
         $c = DataSerializer::deserializeWithCamelCaseEntityToArray($cars);
 
-        return ApiResponse::setResponse($c);
+        print_r($data);
+
+
+        return $data;
     }
 
     public function getModelsCarsAction(Request $request){

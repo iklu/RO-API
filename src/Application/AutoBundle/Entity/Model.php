@@ -88,6 +88,20 @@ class Model
     private $dateCreated;
 
     /**
+     * @var array
+     */
+    protected $cars;
+
+    /**
+     * Model constructor.
+     *
+     */
+    public function __construct()
+    {
+        $this->cars = new ArrayCollection();
+    }
+
+    /**
      * Get id
      *
      * @return int
@@ -359,6 +373,14 @@ class Model
     public function getDateCreated()
     {
         return $this->dateCreated;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCars()
+    {
+        return $this->cars;
     }
 
 }

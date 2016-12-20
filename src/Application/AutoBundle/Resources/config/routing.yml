@@ -67,6 +67,8 @@ get_model_cars:
     methods:  ['GET']
     defaults:
         _controller: 'ApplicationAutoBundle:Front/ModelCars:getModelCars'
+        _api_resource_class: 'Application\AutoBundle\Entity\ModelHasCars'
+        _api_item_operation_name: 'getModelCars'
 
 update_model_cars:
     path: '/user/carmodel-cars/{id}/'

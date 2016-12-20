@@ -89,7 +89,6 @@ class appDevDebugProjectContainer extends Container
             'assets.context' => 'getAssets_ContextService',
             'assets.packages' => 'getAssets_PackagesService',
             'cache.app' => 'getCache_AppService',
-            'cache.default_redis_provider' => 'getCache_DefaultRedisProviderService',
             'cache.system' => 'getCache_SystemService',
             'cache_clearer' => 'getCacheClearerService',
             'cache_warmer' => 'getCacheWarmerService',
@@ -1005,26 +1004,13 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getCache_AppService()
     {
-        $this->services['cache.app'] = $instance = new \Symfony\Component\Cache\Adapter\FilesystemAdapter('GQaxNQaB2K', 0, (__DIR__.'/pools'));
+        $this->services['cache.app'] = $instance = new \Symfony\Component\Cache\Adapter\FilesystemAdapter('n4tXhMS4os', 0, (__DIR__.'/pools'));
 
         if ($this->has('monolog.logger.cache')) {
             $instance->setLogger($this->get('monolog.logger.cache', ContainerInterface::NULL_ON_INVALID_REFERENCE));
         }
 
         return $instance;
-    }
-
-    /**
-     * Gets the 'cache.default_redis_provider' service.
-     *
-     * This service is shared.
-     * This method always returns the same instance of the service.
-     *
-     * @return \Redis A Redis instance
-     */
-    protected function getCache_DefaultRedisProviderService()
-    {
-        return $this->services['cache.default_redis_provider'] = \Symfony\Component\Cache\Adapter\RedisAdapter::createConnection('redis://localhost');
     }
 
     /**
@@ -1037,7 +1023,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getCache_SystemService()
     {
-        return $this->services['cache.system'] = \Symfony\Component\Cache\Adapter\AbstractAdapter::createSystemCache('89ErCvMU+5', 0, 'RqjMJvnV10g5MV0WOPOi0h', (__DIR__.'/pools'), $this->get('monolog.logger.cache', ContainerInterface::NULL_ON_INVALID_REFERENCE));
+        return $this->services['cache.system'] = \Symfony\Component\Cache\Adapter\AbstractAdapter::createSystemCache('AVMKJgq+Ye', 0, 'NaSgXlzTcZPFYH5KUeFGLl', (__DIR__.'/pools'), $this->get('monolog.logger.cache', ContainerInterface::NULL_ON_INVALID_REFERENCE));
     }
 
     /**
@@ -1055,8 +1041,8 @@ class appDevDebugProjectContainer extends Container
         $b = new \Symfony\Component\HttpKernel\CacheClearer\Psr6CacheClearer();
         $b->addPool($this->get('cache.app'));
         $b->addPool($this->get('cache.system'));
-        $b->addPool(\Symfony\Component\Cache\Adapter\AbstractAdapter::createSystemCache('XjpAxhtQa1', 0, 'RqjMJvnV10g5MV0WOPOi0h', (__DIR__.'/pools'), $a));
-        $b->addPool(\Symfony\Component\Cache\Adapter\AbstractAdapter::createSystemCache('3RTCZUV4M+', 0, 'RqjMJvnV10g5MV0WOPOi0h', (__DIR__.'/pools'), $a));
+        $b->addPool(\Symfony\Component\Cache\Adapter\AbstractAdapter::createSystemCache('Q3gl8yr+A8', 0, 'NaSgXlzTcZPFYH5KUeFGLl', (__DIR__.'/pools'), $a));
+        $b->addPool(\Symfony\Component\Cache\Adapter\AbstractAdapter::createSystemCache('P7EJNj7kMI', 0, 'NaSgXlzTcZPFYH5KUeFGLl', (__DIR__.'/pools'), $a));
 
         return $this->services['cache_clearer'] = new \Symfony\Component\HttpKernel\CacheClearer\ChainCacheClearer(array(0 => $b));
     }
@@ -1354,34 +1340,37 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getDoctrine_Orm_DefaultEntityManagerService($lazyLoad = true)
     {
-        $a = new \Doctrine\ORM\Mapping\Driver\SimplifiedYamlDriver(array(($this->targetDirs[3].'/src/Application/AdminBundle/Resources/config/doctrine') => 'Application\\AdminBundle\\Entity', ($this->targetDirs[3].'/src/Application/ProductBundle/Resources/config/doctrine') => 'Application\\ProductBundle\\Entity', ($this->targetDirs[3].'/src/Application/CategoryBundle/Resources/config/doctrine') => 'Application\\CategoryBundle\\Entity', ($this->targetDirs[3].'/src/Application/CustomerBundle/Resources/config/doctrine') => 'Application\\CustomerBundle\\Entity', ($this->targetDirs[3].'/src/Application/AutoBundle/Resources/config/doctrine') => 'Application\\AutoBundle\\Entity', ($this->targetDirs[3].'/src/Application/ProducerBundle/Resources/config/doctrine') => 'Application\\ProducerBundle\\Entity'));
+        $a = new \Doctrine\ORM\Mapping\Driver\SimplifiedYamlDriver(array(($this->targetDirs[3].'/src/Application/AdminBundle/Resources/config/doctrine') => 'Application\\AdminBundle\\Entity', ($this->targetDirs[3].'/src/Application/CategoryBundle/Resources/config/doctrine') => 'Application\\CategoryBundle\\Entity', ($this->targetDirs[3].'/src/Application/CustomerBundle/Resources/config/doctrine') => 'Application\\CustomerBundle\\Entity', ($this->targetDirs[3].'/src/Application/AutoBundle/Resources/config/doctrine') => 'Application\\AutoBundle\\Entity', ($this->targetDirs[3].'/src/Application/ProducerBundle/Resources/config/doctrine') => 'Application\\ProducerBundle\\Entity'));
         $a->setGlobalBasename('mapping');
 
-        $b = new \Doctrine\Common\Persistence\Mapping\Driver\MappingDriverChain();
-        $b->addDriver($a, 'Application\\AdminBundle\\Entity');
-        $b->addDriver($a, 'Application\\ProductBundle\\Entity');
-        $b->addDriver($a, 'Application\\CategoryBundle\\Entity');
-        $b->addDriver($a, 'Application\\CustomerBundle\\Entity');
-        $b->addDriver($a, 'Application\\AutoBundle\\Entity');
-        $b->addDriver($a, 'Application\\ProducerBundle\\Entity');
-        $b->addDriver(new \Doctrine\ORM\Mapping\Driver\AnnotationDriver($this->get('annotation_reader'), array(0 => ($this->targetDirs[3].'/src/Application/DoctrineBundle/Entity'))), 'Application\\DoctrineBundle\\Entity');
+        $b = new \Doctrine\ORM\Mapping\Driver\SimplifiedXmlDriver(array(($this->targetDirs[3].'/src/Application/ProductBundle/Resources/config/doctrine') => 'Application\\ProductBundle\\Entity'));
+        $b->setGlobalBasename('mapping');
 
-        $c = new \Doctrine\ORM\Configuration();
-        $c->setEntityNamespaces(array('ApplicationAdminBundle' => 'Application\\AdminBundle\\Entity', 'ApplicationProductBundle' => 'Application\\ProductBundle\\Entity', 'ApplicationCategoryBundle' => 'Application\\CategoryBundle\\Entity', 'ApplicationCustomerBundle' => 'Application\\CustomerBundle\\Entity', 'ApplicationAutoBundle' => 'Application\\AutoBundle\\Entity', 'ApplicationProducerBundle' => 'Application\\ProducerBundle\\Entity', 'ApplicationDoctrineBundle' => 'Application\\DoctrineBundle\\Entity'));
-        $c->setMetadataCacheImpl($this->get('doctrine_cache.providers.doctrine.orm.default_metadata_cache'));
-        $c->setQueryCacheImpl($this->get('doctrine_cache.providers.doctrine.orm.default_query_cache'));
-        $c->setResultCacheImpl($this->get('doctrine_cache.providers.doctrine.orm.default_result_cache'));
-        $c->setMetadataDriverImpl($b);
-        $c->setProxyDir((__DIR__.'/doctrine/orm/Proxies'));
-        $c->setProxyNamespace('Proxies');
-        $c->setAutoGenerateProxyClasses(true);
-        $c->setClassMetadataFactoryName('Doctrine\\ORM\\Mapping\\ClassMetadataFactory');
-        $c->setDefaultRepositoryClassName('Doctrine\\ORM\\EntityRepository');
-        $c->setNamingStrategy(new \Doctrine\ORM\Mapping\UnderscoreNamingStrategy());
-        $c->setQuoteStrategy(new \Doctrine\ORM\Mapping\DefaultQuoteStrategy());
-        $c->setEntityListenerResolver($this->get('doctrine.orm.default_entity_listener_resolver'));
+        $c = new \Doctrine\Common\Persistence\Mapping\Driver\MappingDriverChain();
+        $c->addDriver($a, 'Application\\AdminBundle\\Entity');
+        $c->addDriver($a, 'Application\\CategoryBundle\\Entity');
+        $c->addDriver($a, 'Application\\CustomerBundle\\Entity');
+        $c->addDriver($a, 'Application\\AutoBundle\\Entity');
+        $c->addDriver($a, 'Application\\ProducerBundle\\Entity');
+        $c->addDriver($b, 'Application\\ProductBundle\\Entity');
+        $c->addDriver(new \Doctrine\ORM\Mapping\Driver\AnnotationDriver($this->get('annotation_reader'), array(0 => ($this->targetDirs[3].'/src/Application/DoctrineBundle/Entity'))), 'Application\\DoctrineBundle\\Entity');
 
-        $this->services['doctrine.orm.default_entity_manager'] = $instance = \Doctrine\ORM\EntityManager::create($this->get('doctrine.dbal.default_connection'), $c);
+        $d = new \Doctrine\ORM\Configuration();
+        $d->setEntityNamespaces(array('ApplicationAdminBundle' => 'Application\\AdminBundle\\Entity', 'ApplicationProductBundle' => 'Application\\ProductBundle\\Entity', 'ApplicationCategoryBundle' => 'Application\\CategoryBundle\\Entity', 'ApplicationCustomerBundle' => 'Application\\CustomerBundle\\Entity', 'ApplicationAutoBundle' => 'Application\\AutoBundle\\Entity', 'ApplicationProducerBundle' => 'Application\\ProducerBundle\\Entity', 'ApplicationDoctrineBundle' => 'Application\\DoctrineBundle\\Entity'));
+        $d->setMetadataCacheImpl($this->get('doctrine_cache.providers.doctrine.orm.default_metadata_cache'));
+        $d->setQueryCacheImpl($this->get('doctrine_cache.providers.doctrine.orm.default_query_cache'));
+        $d->setResultCacheImpl($this->get('doctrine_cache.providers.doctrine.orm.default_result_cache'));
+        $d->setMetadataDriverImpl($c);
+        $d->setProxyDir((__DIR__.'/doctrine/orm/Proxies'));
+        $d->setProxyNamespace('Proxies');
+        $d->setAutoGenerateProxyClasses(true);
+        $d->setClassMetadataFactoryName('Doctrine\\ORM\\Mapping\\ClassMetadataFactory');
+        $d->setDefaultRepositoryClassName('Doctrine\\ORM\\EntityRepository');
+        $d->setNamingStrategy(new \Doctrine\ORM\Mapping\UnderscoreNamingStrategy());
+        $d->setQuoteStrategy(new \Doctrine\ORM\Mapping\DefaultQuoteStrategy());
+        $d->setEntityListenerResolver($this->get('doctrine.orm.default_entity_listener_resolver'));
+
+        $this->services['doctrine.orm.default_entity_manager'] = $instance = \Doctrine\ORM\EntityManager::create($this->get('doctrine.dbal.default_connection'), $d);
 
         $this->get('doctrine.orm.default_manager_configurator')->configure($instance);
 
@@ -4559,7 +4548,6 @@ class appDevDebugProjectContainer extends Container
         $instance->addPath(($this->targetDirs[3].'/src/Application/EmailBundle/Resources/views'), 'ApplicationEmail');
         $instance->addPath(($this->targetDirs[3].'/src/Application/ProductBundle/Resources/views'), 'ApplicationProduct');
         $instance->addPath(($this->targetDirs[3].'/src/Application/CategoryBundle/Resources/views'), 'ApplicationCategory');
-        $instance->addPath(($this->targetDirs[3].'/src/Application/CustomerBundle/Resources/views'), 'ApplicationCustomer');
         $instance->addPath(($this->targetDirs[3].'/src/Application/AutoBundle/Resources/views'), 'ApplicationAuto');
         $instance->addPath(($this->targetDirs[3].'/src/Application/RealEstateBundle/Resources/views'), 'ApplicationRealEstate');
         $instance->addPath(($this->targetDirs[3].'/src/Application/ElectronicsBundle/Resources/views'), 'ApplicationElectronics');

@@ -665,9 +665,9 @@
               <argument type="service">
                 <service class="Symfony\Component\Cache\Adapter\AdapterInterface" public="false">
                   <tag name="cache.pool"/>
-                  <argument>XjpAxhtQa1</argument>
+                  <argument>Q3gl8yr+A8</argument>
                   <argument>0</argument>
-                  <argument>RqjMJvnV10g5MV0WOPOi0h</argument>
+                  <argument>NaSgXlzTcZPFYH5KUeFGLl</argument>
                   <argument>/var/www/html/RO-API/var/cache/dev/pools</argument>
                   <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
                   <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
@@ -678,9 +678,9 @@
               <argument type="service">
                 <service class="Symfony\Component\Cache\Adapter\AdapterInterface" public="false">
                   <tag name="cache.pool"/>
-                  <argument>3RTCZUV4M+</argument>
+                  <argument>P7EJNj7kMI</argument>
                   <argument>0</argument>
-                  <argument>RqjMJvnV10g5MV0WOPOi0h</argument>
+                  <argument>NaSgXlzTcZPFYH5KUeFGLl</argument>
                   <argument>/var/www/html/RO-API/var/cache/dev/pools</argument>
                   <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
                   <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
@@ -1001,7 +1001,7 @@
     </service>
     <service id="cache.app" class="Symfony\Component\Cache\Adapter\FilesystemAdapter">
       <tag name="cache.pool"/>
-      <argument>GQaxNQaB2K</argument>
+      <argument>n4tXhMS4os</argument>
       <argument>0</argument>
       <argument>/var/www/html/RO-API/var/cache/dev/pools</argument>
       <call method="setLogger">
@@ -1010,9 +1010,9 @@
     </service>
     <service id="cache.system" class="Symfony\Component\Cache\Adapter\AdapterInterface">
       <tag name="cache.pool"/>
-      <argument>89ErCvMU+5</argument>
+      <argument>AVMKJgq+Ye</argument>
       <argument>0</argument>
-      <argument>RqjMJvnV10g5MV0WOPOi0h</argument>
+      <argument>NaSgXlzTcZPFYH5KUeFGLl</argument>
       <argument>/var/www/html/RO-API/var/cache/dev/pools</argument>
       <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
@@ -2884,7 +2884,6 @@
                     <service class="Doctrine\ORM\Mapping\Driver\SimplifiedYamlDriver" public="false">
                       <argument type="collection">
                         <argument key="/var/www/html/RO-API/src/Application/AdminBundle/Resources/config/doctrine">Application\AdminBundle\Entity</argument>
-                        <argument key="/var/www/html/RO-API/src/Application/ProductBundle/Resources/config/doctrine">Application\ProductBundle\Entity</argument>
                         <argument key="/var/www/html/RO-API/src/Application/CategoryBundle/Resources/config/doctrine">Application\CategoryBundle\Entity</argument>
                         <argument key="/var/www/html/RO-API/src/Application/CustomerBundle/Resources/config/doctrine">Application\CustomerBundle\Entity</argument>
                         <argument key="/var/www/html/RO-API/src/Application/AutoBundle/Resources/config/doctrine">Application\AutoBundle\Entity</argument>
@@ -2902,25 +2901,6 @@
                     <service class="Doctrine\ORM\Mapping\Driver\SimplifiedYamlDriver" public="false">
                       <argument type="collection">
                         <argument key="/var/www/html/RO-API/src/Application/AdminBundle/Resources/config/doctrine">Application\AdminBundle\Entity</argument>
-                        <argument key="/var/www/html/RO-API/src/Application/ProductBundle/Resources/config/doctrine">Application\ProductBundle\Entity</argument>
-                        <argument key="/var/www/html/RO-API/src/Application/CategoryBundle/Resources/config/doctrine">Application\CategoryBundle\Entity</argument>
-                        <argument key="/var/www/html/RO-API/src/Application/CustomerBundle/Resources/config/doctrine">Application\CustomerBundle\Entity</argument>
-                        <argument key="/var/www/html/RO-API/src/Application/AutoBundle/Resources/config/doctrine">Application\AutoBundle\Entity</argument>
-                        <argument key="/var/www/html/RO-API/src/Application/ProducerBundle/Resources/config/doctrine">Application\ProducerBundle\Entity</argument>
-                      </argument>
-                      <call method="setGlobalBasename">
-                        <argument>mapping</argument>
-                      </call>
-                    </service>
-                  </argument>
-                  <argument>Application\ProductBundle\Entity</argument>
-                </call>
-                <call method="addDriver">
-                  <argument type="service">
-                    <service class="Doctrine\ORM\Mapping\Driver\SimplifiedYamlDriver" public="false">
-                      <argument type="collection">
-                        <argument key="/var/www/html/RO-API/src/Application/AdminBundle/Resources/config/doctrine">Application\AdminBundle\Entity</argument>
-                        <argument key="/var/www/html/RO-API/src/Application/ProductBundle/Resources/config/doctrine">Application\ProductBundle\Entity</argument>
                         <argument key="/var/www/html/RO-API/src/Application/CategoryBundle/Resources/config/doctrine">Application\CategoryBundle\Entity</argument>
                         <argument key="/var/www/html/RO-API/src/Application/CustomerBundle/Resources/config/doctrine">Application\CustomerBundle\Entity</argument>
                         <argument key="/var/www/html/RO-API/src/Application/AutoBundle/Resources/config/doctrine">Application\AutoBundle\Entity</argument>
@@ -2938,7 +2918,6 @@
                     <service class="Doctrine\ORM\Mapping\Driver\SimplifiedYamlDriver" public="false">
                       <argument type="collection">
                         <argument key="/var/www/html/RO-API/src/Application/AdminBundle/Resources/config/doctrine">Application\AdminBundle\Entity</argument>
-                        <argument key="/var/www/html/RO-API/src/Application/ProductBundle/Resources/config/doctrine">Application\ProductBundle\Entity</argument>
                         <argument key="/var/www/html/RO-API/src/Application/CategoryBundle/Resources/config/doctrine">Application\CategoryBundle\Entity</argument>
                         <argument key="/var/www/html/RO-API/src/Application/CustomerBundle/Resources/config/doctrine">Application\CustomerBundle\Entity</argument>
                         <argument key="/var/www/html/RO-API/src/Application/AutoBundle/Resources/config/doctrine">Application\AutoBundle\Entity</argument>
@@ -2956,7 +2935,6 @@
                     <service class="Doctrine\ORM\Mapping\Driver\SimplifiedYamlDriver" public="false">
                       <argument type="collection">
                         <argument key="/var/www/html/RO-API/src/Application/AdminBundle/Resources/config/doctrine">Application\AdminBundle\Entity</argument>
-                        <argument key="/var/www/html/RO-API/src/Application/ProductBundle/Resources/config/doctrine">Application\ProductBundle\Entity</argument>
                         <argument key="/var/www/html/RO-API/src/Application/CategoryBundle/Resources/config/doctrine">Application\CategoryBundle\Entity</argument>
                         <argument key="/var/www/html/RO-API/src/Application/CustomerBundle/Resources/config/doctrine">Application\CustomerBundle\Entity</argument>
                         <argument key="/var/www/html/RO-API/src/Application/AutoBundle/Resources/config/doctrine">Application\AutoBundle\Entity</argument>
@@ -2974,7 +2952,6 @@
                     <service class="Doctrine\ORM\Mapping\Driver\SimplifiedYamlDriver" public="false">
                       <argument type="collection">
                         <argument key="/var/www/html/RO-API/src/Application/AdminBundle/Resources/config/doctrine">Application\AdminBundle\Entity</argument>
-                        <argument key="/var/www/html/RO-API/src/Application/ProductBundle/Resources/config/doctrine">Application\ProductBundle\Entity</argument>
                         <argument key="/var/www/html/RO-API/src/Application/CategoryBundle/Resources/config/doctrine">Application\CategoryBundle\Entity</argument>
                         <argument key="/var/www/html/RO-API/src/Application/CustomerBundle/Resources/config/doctrine">Application\CustomerBundle\Entity</argument>
                         <argument key="/var/www/html/RO-API/src/Application/AutoBundle/Resources/config/doctrine">Application\AutoBundle\Entity</argument>
@@ -2986,6 +2963,19 @@
                     </service>
                   </argument>
                   <argument>Application\ProducerBundle\Entity</argument>
+                </call>
+                <call method="addDriver">
+                  <argument type="service">
+                    <service class="Doctrine\ORM\Mapping\Driver\SimplifiedXmlDriver" public="false">
+                      <argument type="collection">
+                        <argument key="/var/www/html/RO-API/src/Application/ProductBundle/Resources/config/doctrine">Application\ProductBundle\Entity</argument>
+                      </argument>
+                      <call method="setGlobalBasename">
+                        <argument>mapping</argument>
+                      </call>
+                    </service>
+                  </argument>
+                  <argument>Application\ProductBundle\Entity</argument>
                 </call>
                 <call method="addDriver">
                   <argument type="service">
@@ -4454,10 +4444,6 @@
       <autowiring-type>Symfony\Component\Templating\EngineInterface</autowiring-type>
       <autowiring-type>Symfony\Bundle\FrameworkBundle\Templating\EngineInterface</autowiring-type>
     </service>
-    <service id="cache.default_redis_provider" class="Redis">
-      <argument>redis://localhost</argument>
-      <factory class="Symfony\Component\Cache\Adapter\RedisAdapter" method="createConnection"/>
-    </service>
     <service id="router" class="Symfony\Bundle\FrameworkBundle\Routing\Router">
       <tag name="monolog.logger" channel="router"/>
       <argument type="service" id="service_container"/>
@@ -4578,10 +4564,6 @@
       <call method="addPath">
         <argument>/var/www/html/RO-API/src/Application/CategoryBundle/Resources/views</argument>
         <argument>ApplicationCategory</argument>
-      </call>
-      <call method="addPath">
-        <argument>/var/www/html/RO-API/src/Application/CustomerBundle/Resources/views</argument>
-        <argument>ApplicationCustomer</argument>
       </call>
       <call method="addPath">
         <argument>/var/www/html/RO-API/src/Application/AutoBundle/Resources/views</argument>

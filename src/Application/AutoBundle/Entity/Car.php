@@ -30,6 +30,12 @@ class Car extends Product
      * @Groups({"car"})
      * @var string
      */
+    protected $id;
+
+    /**
+     * @Groups({"car"})
+     * @var string
+     */
     private $fuel;
 
     /**
@@ -79,6 +85,24 @@ class Car extends Product
      * @var bool
      */
     private $airConditioning;
+
+    /**
+     * @Groups({"car"})
+     * @var integer
+     */
+    private $models;
+
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
 
 
     /**

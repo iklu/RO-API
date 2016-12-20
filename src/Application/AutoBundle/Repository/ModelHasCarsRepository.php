@@ -13,13 +13,14 @@ class ModelHasCarsRepository extends \Doctrine\ORM\EntityRepository
     public function getModelCars($id) {
 
         $qb = $this->getEntityManager()->createQueryBuilder();
-        $qb->select('modelHasCars', 'cars', 'models');
-        $qb->from('ApplicationAutoBundle:ModelHasCars', 'modelHasCars');
-        $qb->leftJoin('ApplicationAutoBundle:Model', 'models', 'WITH', 'models.id = modelHasCars.models');
+
+        $qb->select('model, cars');
+        $qb->from('ApplicationAutoBundle:Model', 'model');
+        $qb->leftJoin('ApplicationAutoBundle:ModelHasCars', 'modelHasCars', 'WITH', 'model.id = modelHasCars.models');
         $qb->leftJoin('ApplicationAutoBundle:Car', 'cars', 'WITH', 'cars.id = modelHasCars.cars');
-        $qb->where('models.id = :id');
+        $qb->where('model.id = :id');
         $qb->setParameter('id', $id);
-        $qb->groupBy('modelHasCars.models');
+       // $qb->groupBy('modelHasCars.models');
 
         return $qb->getQuery()->getResult();
 

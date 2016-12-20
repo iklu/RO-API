@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                  http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <mapped-superclass name="Application\ProductBundle\Entity\Product">
+
+        <field name="title" column="title" type="string" length="180" />
+
+        <field name="description" column="description" type="text"  />
+
+        <field name="price" column="price" type="float" nullable="true" />
+
+        <field name="country" column="country" type="string" length="180" unique="true" />
+
+        <field name="county" column="county" type="string" length="180" />
+
+        <field name="village" column="village" type="string" length="180" />
+
+        <field name="address1" column="address1" type="string" length="180"  />
+
+        <field name="address2" column="address2" type="string" length="180" />
+
+        <field name="contactPerson" column="contact_person" type="string" length="180" unique="true" />
+
+        <field name="contactEmail" column="contact_email" type="string" length="180" />
+
+        <field name="lng" column="lng" type="float" />
+
+        <field name="lat" column="lat" type="float"  />
+
+        <field name="addedDate" column="added_date" type="datetime" nullable="true" />
+
+        <field name="isFeatured" column="is_featured" type="boolean"  />
+
+        <field name="isNegotiable" column="is_negotiable" type="boolean" nullable="true" />
+
+        <field name="dateUpdated" column="date_updated" type="datetime" nullable="true"  />
+
+        <field name="dateCreated" column="date_created" type="datetime" nullable="true"  />
+
+    </mapped-superclass>
+
+</doctrine-mapping>

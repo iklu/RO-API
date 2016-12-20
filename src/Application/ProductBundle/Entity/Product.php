@@ -19,113 +19,113 @@ class Product
      * @Groups({"car", "product"})
      * @var int
      */
-    private $id;
+    protected $id;
 
     /**
      * @Groups({"car", "product"})
      * @var string
      */
-    private $title;
+    protected $title;
 
     /**
      * @Groups({"car", "product"})
      * @var string
      */
-    private $description;
+    protected $description;
 
     /**
      * @Groups({"car", "product"})
      * @var float
      */
-    private $price;
+    protected $price;
 
     /**
      * @Groups({"car", "product"})
      * @var boolean
      */
-    private $isNegotiable;
+    protected $isNegotiable;
 
     /**
      * @Groups({"car", "product"})
      * @var string
      */
-    private $country;
+    protected $country;
 
     /**
      * @Groups({"car", "product"})
      * @var string
      */
-    private $county;
+    protected $county;
 
     /**
      * @Groups({"car", "product"})
      * @var string
      */
-    private $village;
+    protected $village;
 
     /**
      * @Groups({"car", "product"})
      * @var string
      */
-    private $address1;
+    protected $address1;
 
     /**
      * @Groups({"car", "product"})
      * @var string
      */
-    private $address2;
+    protected $address2;
 
     /**
      * @Groups({"car", "product"})
      * @var string
      */
-    private $contactPerson;
+    protected $contactPerson;
 
     /**
      * @Groups({"car", "product"})
      * @var int
      */
-    private $contactPhone;
+    protected $contactPhone;
 
     /**
      * @Groups({"car", "product"})
      * @var string
      */
-    private $contactEmail;
+    protected $contactEmail;
 
     /**
      * @Groups({"car", "product"})
      * @var float
      */
-    private $lng;
+    protected $lng;
 
     /**
      * @Groups({"car", "product"})
      * @var float
      */
-    private $lat;
+    protected $lat;
 
     /**
      * @Groups({"car", "product"})
      * @var \DateTime
      */
-    private $addedDate;
+    protected $addedDate;
 
     /**
      * @Groups({"car", "product"})
      * @var bool
      */
-    private $isFeatured;
+    protected $isFeatured;
 
     /**
      * @var \DateTime
      */
-    private $dateUpdated;
+    protected $dateUpdated;
 
     /**
      * @var \DateTime
      */
-    private $dateCreated;
+    protected $dateCreated;
 
 
     /**

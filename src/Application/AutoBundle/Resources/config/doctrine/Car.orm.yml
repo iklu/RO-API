@@ -1,11 +1,20 @@
 Application\AutoBundle\Entity\Car:
     type: entity
-    table: cars
+    table: car
     repositoryClass: Application\AutoBundle\Repository\CarRepository
     indexes:
         fk_cars_title_idx:
             columns:
                 - title
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: true
+            comment: ''
+            id: true
+            generator:
+                strategy: IDENTITY
     fields:
         fuel:
             type: string
@@ -39,4 +48,14 @@ Application\AutoBundle\Entity\Car:
         airConditioning:
             type: boolean
             nullable: true
+    manyToOne:
+        models:
+            targetEntity: Application\AutoBundle\Entity\Model
+            cascade: {  }
+            mappedBy:
+            inversedBy: cars
+            joinColumns:
+                model_id:
+                    referencedColumnName: id
+            orphanRemoval: false
     lifecycleCallbacks: {  }
