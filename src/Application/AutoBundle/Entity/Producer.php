@@ -2,8 +2,26 @@
 
 namespace Application\AutoBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Doctrine\Common\Collections\Collection;
+
 /**
- * Producer
+ * @ApiResource(
+ *     itemOperations={
+ *          "getCarProducer"={"route_name"="get_car_producer"},
+ *          "updateCarProducer"={"route_name"="update_car_producer"}
+ *      },
+ *     collectionOperations = {
+ *          "addCarProducer"={"route_name"="add_car_producer"},
+ *          "getCarProducers"={"route_name"="get_car_producers"}
+ *      },
+ *     attributes={
+ *          "normalization_context"={"groups"={"producer", "user-read"}},
+ *          "denormalization_context"={"groups"={"producer", "user-write"}}
+ * }
+ *  )
  */
 class Producer
 {
@@ -13,59 +31,76 @@ class Producer
     private $id;
 
     /**
+     * @Groups({"producer"})
      * @var string
      */
     private $name;
 
     /**
+     * @Groups({"producer"})
      * @var string
      */
     private $shortDescription;
 
     /**
+     * @Groups({"producer"})
      * @var string
      */
     private $description;
 
     /**
+     * @Groups({"producer"})
      * @var string
      */
     private $photo;
 
     /**
+     * @Groups({"producer"})
      * @var string
      */
     private $slug;
 
     /**
+     * @Groups({"producer"})
      * @var string
      */
     private $metaTitle;
 
     /**
+     * @Groups({"producer"})
      * @var string
      */
     private $metaKeywords;
 
     /**
+     * @Groups({"producer"})
      * @var string
      */
     private $metaDescription;
 
     /**
+     * @Groups({"producer"})
      * @var int
      */
     private $orderIdx;
 
     /**
+     * @Groups({"producer"})
      * @var \DateTime
      */
     private $dateUpdated;
 
     /**
+     * @Groups({"producer"})
      * @var \DateTime
      */
     private $dateCreated;
+
+    /**
+     * @Groups({"producer"})
+     * @var array
+     */
+    protected $models;
 
 
     /**
@@ -341,5 +376,45 @@ class Producer
     {
         return $this->dateCreated;
     }
-}
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->models = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
+    /**
+     * Add model
+     *
+     * @param \Application\AutoBundle\Entity\Model $model
+     *
+     * @return Producer
+     */
+    public function addModel(\Application\AutoBundle\Entity\Model $model)
+    {
+        $this->models[] = $model;
+
+        return $this;
+    }
+
+    /**
+     * Remove model
+     *
+     * @param \Application\AutoBundle\Entity\Model $model
+     */
+    public function removeModel(\Application\AutoBundle\Entity\Model $model)
+    {
+        $this->models->removeElement($model);
+    }
+
+    /**
+     * Get models
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getModels()
+    {
+        return $this->models;
+    }
+}

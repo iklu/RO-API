@@ -667,7 +667,7 @@
                   <tag name="cache.pool"/>
                   <argument>Q3gl8yr+A8</argument>
                   <argument>0</argument>
-                  <argument>NaSgXlzTcZPFYH5KUeFGLl</argument>
+                  <argument>c3BOPJO6scbWbiK+3vwBlj</argument>
                   <argument>/var/www/html/RO-API/var/cache/dev/pools</argument>
                   <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
                   <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
@@ -680,7 +680,7 @@
                   <tag name="cache.pool"/>
                   <argument>P7EJNj7kMI</argument>
                   <argument>0</argument>
-                  <argument>NaSgXlzTcZPFYH5KUeFGLl</argument>
+                  <argument>c3BOPJO6scbWbiK+3vwBlj</argument>
                   <argument>/var/www/html/RO-API/var/cache/dev/pools</argument>
                   <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
                   <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
@@ -1012,7 +1012,7 @@
       <tag name="cache.pool"/>
       <argument>AVMKJgq+Ye</argument>
       <argument>0</argument>
-      <argument>NaSgXlzTcZPFYH5KUeFGLl</argument>
+      <argument>c3BOPJO6scbWbiK+3vwBlj</argument>
       <argument>/var/www/html/RO-API/var/cache/dev/pools</argument>
       <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
@@ -4564,6 +4564,10 @@
       <call method="addPath">
         <argument>/var/www/html/RO-API/src/Application/CategoryBundle/Resources/views</argument>
         <argument>ApplicationCategory</argument>
+      </call>
+      <call method="addPath">
+        <argument>/var/www/html/RO-API/src/Application/CustomerBundle/Resources/views</argument>
+        <argument>ApplicationCustomer</argument>
       </call>
       <call method="addPath">
         <argument>/var/www/html/RO-API/src/Application/AutoBundle/Resources/views</argument>

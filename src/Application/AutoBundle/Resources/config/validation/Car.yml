@@ -7,7 +7,7 @@ Application\AutoBundle\Entity\Car:
             - NotNull: ~
             - NotBlank: ~
             - Type:
-                type: float
+                type: integer
         engineCapacity:
             - NotNull: ~
             - NotBlank: ~

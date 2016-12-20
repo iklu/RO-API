@@ -1,3 +1,4 @@
+# CAR
 get_car:
     path: '/car/{id}/'
     methods:  ['GET']
@@ -30,6 +31,8 @@ get_cars:
         _api_resource_class: 'Application\AutoBundle\Entity\Car'
         _api_collection_operation_name: 'getCars'
 
+
+# CAR MODEL
 get_model:
     path: '/carmodel/{id}/'
     methods:  ['GET']
@@ -62,28 +65,35 @@ get_models:
         _api_resource_class: 'Application\AutoBundle\Entity\Model'
         _api_collection_operation_name: 'getModels'
 
-get_model_cars:
-    path: '/carmodel-cars/{id}/'
+# CAR MODEL PRODUCERS
+get_car_producer:
+    path: '/carproducer/{id}/'
     methods:  ['GET']
     defaults:
-        _controller: 'ApplicationAutoBundle:Front/ModelCars:getModelCars'
-        _api_resource_class: 'Application\AutoBundle\Entity\ModelHasCars'
-        _api_item_operation_name: 'getModelCars'
+        _controller: 'ApplicationAutoBundle:Front/Producer:getProducer'
+        _api_resource_class: 'Application\AutoBundle\Entity\Producer'
+        _api_item_operation_name: 'getCarProducer'
 
-update_model_cars:
-    path: '/user/carmodel-cars/{id}/'
+update_car_producer:
+    path: '/user/carproducer/{id}/'
     methods:  ['PUT']
     defaults:
-        _controller: 'ApplicationAutoBundle:Admin/ModelCars:edit'
+        _controller: 'ApplicationAutoBundle:Admin/Producer:edit'
+        _api_resource_class: 'Application\AutoBundle\Entity\Producer'
+        _api_item_operation_name: 'updateCarProducer'
 
-add_model_cars:
-    path: '/user/carmodel-cars/'
+add_car_producer:
+    path: '/user/carproducer/'
     methods:  ['POST']
     defaults:
-        _controller: 'ApplicationAutoBundle:Admin/ModelCars:add'
+        _controller: 'ApplicationAutoBundle:Admin/Producer:add'
+        _api_resource_class: 'Application\AutoBundle\Entity\Producer'
+        _api_collection_operation_name: 'addCarProducer'
 
-get_models_cars:
-    path: '/carmodels-cars/'
+get_car_producers:
+    path: '/carproducers/'
     methods:  ['get']
     defaults:
-        _controller: 'ApplicationAutoBundle:Front/ModelCars:getModelsCars'
+        _controller: 'ApplicationAutoBundle:Front/Producer:getProducers'
+        _api_resource_class: 'Application\AutoBundle\Entity\Producer'
+        _api_collection_operation_name: 'getCarProducers'

@@ -11,13 +11,14 @@ use Application\CoreBundle\Utils\DataSerializer;
  * Date: 16.12.2016
  * Time: 15:35
  */
-class ModelController extends AbstractFrontController
+class ProducerController extends AbstractFrontController
 {
-    public function getModelAction($data){
+    public function getProducerAction($data){
         return $data;
     }
 
-    public function getModelsAction($data){
+    public function getProducersAction($data){
+        
         return $data;
     }
 }

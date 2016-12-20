@@ -21,10 +21,10 @@ Application\AutoBundle\Entity\Car:
             length: 255
             nullable: true
         mileage:
-            type: float
+            type: integer
             nullable: true
         engineCapacity:
-            type: float
+            type: integer
             nullable: true
         vehicleType:
             type: string
@@ -53,7 +53,7 @@ Application\AutoBundle\Entity\Car:
             targetEntity: Application\AutoBundle\Entity\Model
             cascade: {  }
             mappedBy:
-            inversedBy: cars
+            inversedBy:
             joinColumns:
                 model_id:
                     referencedColumnName: id

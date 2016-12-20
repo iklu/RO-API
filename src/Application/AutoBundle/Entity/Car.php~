@@ -321,28 +321,5 @@ class Car extends Product
         return $this->airConditioning;
     }
 
-
-    /**
-     * Set models
-     *
-     * @param \Application\AutoBundle\Entity\Model $models
-     *
-     * @return Car
-     */
-    public function setModels(\Application\AutoBundle\Entity\Model $models = null)
-    {
-        $this->models = $models;
-
-        return $this;
-    }
-
-    /**
-     * Get models
-     *
-     * @return \Application\AutoBundle\Entity\Model
-     */
-    public function getModels()
-    {
-        return $this->models;
-    }
 }
+

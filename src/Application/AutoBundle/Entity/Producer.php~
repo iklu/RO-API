@@ -1,28 +1,11 @@
 <?php
 
 namespace Application\AutoBundle\Entity;
-use Doctrine\Common\Collections\ArrayCollection;
-use ApiPlatform\Core\Annotation\ApiResource;
-use Symfony\Component\Serializer\Annotation\Groups;
-use Doctrine\Common\Collections\Collection;
 
 /**
- * @ApiResource(
- *     itemOperations={
- *          "getModel"={"route_name"="get_model"},
- *          "updateModel"={"route_name"="update_model"}
- *      },
- *     collectionOperations = {
- *          "addModel"={"route_name"="add_model"},
- *          "getModels"={"route_name"="get_models"}
- *      },
- *     attributes={
- *          "normalization_context"={"groups"={"model", "user-read"}},
- *          "denormalization_context"={"groups"={"model", "user-write"}}
- * }
- *  )
+ * Producer
  */
-class Model
+class Producer
 {
     /**
      * @var int
@@ -30,85 +13,66 @@ class Model
     private $id;
 
     /**
-     * @Groups({"model"})
      * @var string
      */
     private $name;
 
     /**
-     * @Groups({"model"})
      * @var string
      */
     private $shortDescription;
 
     /**
-     * @Groups({"model"})
      * @var string
      */
     private $description;
 
     /**
-     * @Groups({"model"})
      * @var string
      */
     private $photo;
 
     /**
-     * @Groups({"model"})
      * @var string
      */
     private $slug;
 
     /**
-     * @Groups({"model"})
      * @var string
      */
     private $metaTitle;
 
     /**
-     * @Groups({"model"})
      * @var string
      */
     private $metaKeywords;
 
     /**
-     * @Groups({"model"})
      * @var string
      */
     private $metaDescription;
 
     /**
-     * @Groups({"model"})
      * @var int
      */
     private $orderIdx;
 
     /**
-     * @Groups({"model"})
      * @var \DateTime
      */
     private $dateUpdated;
 
     /**
-     * @Groups({"model"})
      * @var \DateTime
      */
     private $dateCreated;
 
     /**
-     * @Groups({"model"})
+     * @Groups({"producer"})
      * @var array
      */
-    protected $cars;
+    protected $models;
 
-    /**
-     * Model constructor.
-     *
-     */
-    public function __construct()
-    {
-        $this->cars = new ArrayCollection();
-    }
 
     /**
      * Get id
@@ -125,7 +89,7 @@ class Model
      *
      * @param string $name
      *
-     * @return Model
+     * @return Producer
      */
     public function setName($name)
     {
@@ -149,7 +113,7 @@ class Model
      *
      * @param string $shortDescription
      *
-     * @return Model
+     * @return Producer
      */
     public function setShortDescription($shortDescription)
     {
@@ -173,7 +137,7 @@ class Model
      *
      * @param string $description
      *
-     * @return Model
+     * @return Producer
      */
     public function setDescription($description)
     {
@@ -197,7 +161,7 @@ class Model
      *
      * @param string $photo
      *
-     * @return Model
+     * @return Producer
      */
     public function setPhoto($photo)
     {
@@ -221,7 +185,7 @@ class Model
      *
      * @param string $slug
      *
-     * @return Model
+     * @return Producer
      */
     public function setSlug($slug)
     {
@@ -245,7 +209,7 @@ class Model
      *
      * @param string $metaTitle
      *
-     * @return Model
+     * @return Producer
      */
     public function setMetaTitle($metaTitle)
     {
@@ -269,7 +233,7 @@ class Model
      *
      * @param string $metaKeywords
      *
-     * @return Model
+     * @return Producer
      */
     public function setMetaKeywords($metaKeywords)
     {
@@ -293,7 +257,7 @@ class Model
      *
      * @param string $metaDescription
      *
-     * @return Model
+     * @return Producer
      */
     public function setMetaDescription($metaDescription)
     {
@@ -317,7 +281,7 @@ class Model
      *
      * @param integer $orderIdx
      *
-     * @return Model
+     * @return Producer
      */
     public function setOrderIdx($orderIdx)
     {
@@ -341,7 +305,7 @@ class Model
      *
      * @param \DateTime $dateUpdated
      *
-     * @return Model
+     * @return Producer
      */
     public function setDateUpdated($dateUpdated)
     {
@@ -365,7 +329,7 @@ class Model
      *
      * @param \DateTime $dateCreated
      *
-     * @return Model
+     * @return Producer
      */
     public function setDateCreated($dateCreated)
     {
@@ -383,27 +347,5 @@ class Model
     {
         return $this->dateCreated;
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCars()
-    {
-        return $this->cars;
-    }
-
-
-    /**
-     * Set cars
-     *
-     * @param \Application\AutoBundle\Entity\Car $cars
-     *
-     * @return Model
-     */
-    public function setCars(\Application\AutoBundle\Entity\Car $cars = null)
-    {
-        $this->cars = $cars;
-
-        return $this;
-    }
 }
+

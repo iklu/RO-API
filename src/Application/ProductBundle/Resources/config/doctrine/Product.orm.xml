@@ -12,7 +12,7 @@
 
         <field name="price" column="price" type="float" nullable="true" />
 
-        <field name="country" column="country" type="string" length="180" unique="true" />
+        <field name="country" column="country" type="string" length="180"  />
 
         <field name="county" column="county" type="string" length="180" />
 
@@ -25,6 +25,8 @@
         <field name="contactPerson" column="contact_person" type="string" length="180" unique="true" />
 
         <field name="contactEmail" column="contact_email" type="string" length="180" />
+
+        <field name="contactPhone" column="contact_phone" type="string" length="180" />
 
         <field name="lng" column="lng" type="float" />
 

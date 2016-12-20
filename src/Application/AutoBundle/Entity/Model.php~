@@ -97,7 +97,7 @@ class Model
 
     /**
      * @Groups({"model"})
-     * @var array
+     * @var Collection
      */
     protected $cars;
 
@@ -389,7 +389,7 @@ class Model
      */
     public function getCars()
     {
-        return $this->cars;
+        return $this->cars ?: $this->cars = new ArrayCollection();
     }
 
 

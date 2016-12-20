@@ -1023,7 +1023,7 @@ class appDevDebugProjectContainer extends Container
      */
     protected function getCache_SystemService()
     {
-        return $this->services['cache.system'] = \Symfony\Component\Cache\Adapter\AbstractAdapter::createSystemCache('AVMKJgq+Ye', 0, 'NaSgXlzTcZPFYH5KUeFGLl', (__DIR__.'/pools'), $this->get('monolog.logger.cache', ContainerInterface::NULL_ON_INVALID_REFERENCE));
+        return $this->services['cache.system'] = \Symfony\Component\Cache\Adapter\AbstractAdapter::createSystemCache('AVMKJgq+Ye', 0, 'c3BOPJO6scbWbiK+3vwBlj', (__DIR__.'/pools'), $this->get('monolog.logger.cache', ContainerInterface::NULL_ON_INVALID_REFERENCE));
     }
 
     /**
@@ -1041,8 +1041,8 @@ class appDevDebugProjectContainer extends Container
         $b = new \Symfony\Component\HttpKernel\CacheClearer\Psr6CacheClearer();
         $b->addPool($this->get('cache.app'));
         $b->addPool($this->get('cache.system'));
-        $b->addPool(\Symfony\Component\Cache\Adapter\AbstractAdapter::createSystemCache('Q3gl8yr+A8', 0, 'NaSgXlzTcZPFYH5KUeFGLl', (__DIR__.'/pools'), $a));
-        $b->addPool(\Symfony\Component\Cache\Adapter\AbstractAdapter::createSystemCache('P7EJNj7kMI', 0, 'NaSgXlzTcZPFYH5KUeFGLl', (__DIR__.'/pools'), $a));
+        $b->addPool(\Symfony\Component\Cache\Adapter\AbstractAdapter::createSystemCache('Q3gl8yr+A8', 0, 'c3BOPJO6scbWbiK+3vwBlj', (__DIR__.'/pools'), $a));
+        $b->addPool(\Symfony\Component\Cache\Adapter\AbstractAdapter::createSystemCache('P7EJNj7kMI', 0, 'c3BOPJO6scbWbiK+3vwBlj', (__DIR__.'/pools'), $a));
 
         return $this->services['cache_clearer'] = new \Symfony\Component\HttpKernel\CacheClearer\ChainCacheClearer(array(0 => $b));
     }
@@ -4548,6 +4548,7 @@ class appDevDebugProjectContainer extends Container
         $instance->addPath(($this->targetDirs[3].'/src/Application/EmailBundle/Resources/views'), 'ApplicationEmail');
         $instance->addPath(($this->targetDirs[3].'/src/Application/ProductBundle/Resources/views'), 'ApplicationProduct');
         $instance->addPath(($this->targetDirs[3].'/src/Application/CategoryBundle/Resources/views'), 'ApplicationCategory');
+        $instance->addPath(($this->targetDirs[3].'/src/Application/CustomerBundle/Resources/views'), 'ApplicationCustomer');
         $instance->addPath(($this->targetDirs[3].'/src/Application/AutoBundle/Resources/views'), 'ApplicationAuto');
         $instance->addPath(($this->targetDirs[3].'/src/Application/RealEstateBundle/Resources/views'), 'ApplicationRealEstate');
         $instance->addPath(($this->targetDirs[3].'/src/Application/ElectronicsBundle/Resources/views'), 'ApplicationElectronics');

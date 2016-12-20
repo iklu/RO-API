@@ -49,4 +49,8 @@ Application\AutoBundle\Entity\Model:
         dateCreated:
             type: datetime
             nullable: true
+    oneToMany:
+        cars:
+            targetEntity: Application\AutoBundle\Entity\Car
+            mappedBy: models
     lifecycleCallbacks: {  }
