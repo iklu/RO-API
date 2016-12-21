@@ -39,6 +39,7 @@
       <parameter key="ApplicationJobsBundle">Application\JobsBundle\ApplicationJobsBundle</parameter>
       <parameter key="ApplicationProducerBundle">Application\ProducerBundle\ApplicationProducerBundle</parameter>
       <parameter key="ApplicationDoctrineBundle">Application\DoctrineBundle\ApplicationDoctrineBundle</parameter>
+      <parameter key="DoctrineMigrationsBundle">Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle</parameter>
       <parameter key="DebugBundle">Symfony\Bundle\DebugBundle\DebugBundle</parameter>
       <parameter key="WebProfilerBundle">Symfony\Bundle\WebProfilerBundle\WebProfilerBundle</parameter>
       <parameter key="SensioDistributionBundle">Sensio\Bundle\DistributionBundle\SensioDistributionBundle</parameter>
@@ -469,6 +470,11 @@
     </parameter>
     <parameter key="nelmio_api_doc.swagger.model_naming_strategy">dot_notation</parameter>
     <parameter key="admin.registration.confirmation.template">ApplicationEmailBundle:Registration:email.txt.twig</parameter>
+    <parameter key="doctrine_migrations.dir_name">/var/www/html/RO-API/app/DoctrineMigrations</parameter>
+    <parameter key="doctrine_migrations.namespace">Application\Migrations</parameter>
+    <parameter key="doctrine_migrations.table_name">migration_versions</parameter>
+    <parameter key="doctrine_migrations.name">Application Migrations</parameter>
+    <parameter key="doctrine_migrations.organize_migrations">false</parameter>
     <parameter key="web_profiler.debug_toolbar.position">bottom</parameter>
     <parameter key="web_profiler.debug_toolbar.intercept_redirects">false</parameter>
     <parameter key="web_profiler.debug_toolbar.mode">2</parameter>
@@ -667,7 +673,7 @@
                   <tag name="cache.pool"/>
                   <argument>Q3gl8yr+A8</argument>
                   <argument>0</argument>
-                  <argument>c3BOPJO6scbWbiK+3vwBlj</argument>
+                  <argument>02BnOwaNayS0zpVrvYqyse</argument>
                   <argument>/var/www/html/RO-API/var/cache/dev/pools</argument>
                   <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
                   <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
@@ -680,7 +686,7 @@
                   <tag name="cache.pool"/>
                   <argument>P7EJNj7kMI</argument>
                   <argument>0</argument>
-                  <argument>c3BOPJO6scbWbiK+3vwBlj</argument>
+                  <argument>02BnOwaNayS0zpVrvYqyse</argument>
                   <argument>/var/www/html/RO-API/var/cache/dev/pools</argument>
                   <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
                   <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
@@ -1012,7 +1018,7 @@
       <tag name="cache.pool"/>
       <argument>AVMKJgq+Ye</argument>
       <argument>0</argument>
-      <argument>c3BOPJO6scbWbiK+3vwBlj</argument>
+      <argument>02BnOwaNayS0zpVrvYqyse</argument>
       <argument>/var/www/html/RO-API/var/cache/dev/pools</argument>
       <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
@@ -3843,6 +3849,7 @@
           <argument key="ApplicationJobsBundle">Application\JobsBundle\ApplicationJobsBundle</argument>
           <argument key="ApplicationProducerBundle">Application\ProducerBundle\ApplicationProducerBundle</argument>
           <argument key="ApplicationDoctrineBundle">Application\DoctrineBundle\ApplicationDoctrineBundle</argument>
+          <argument key="DoctrineMigrationsBundle">Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle</argument>
           <argument key="DebugBundle">Symfony\Bundle\DebugBundle\DebugBundle</argument>
           <argument key="WebProfilerBundle">Symfony\Bundle\WebProfilerBundle\WebProfilerBundle</argument>
           <argument key="SensioDistributionBundle">Sensio\Bundle\DistributionBundle\SensioDistributionBundle</argument>
@@ -4274,6 +4281,11 @@
         </argument>
         <argument key="nelmio_api_doc.swagger.model_naming_strategy">dot_notation</argument>
         <argument key="admin.registration.confirmation.template">ApplicationEmailBundle:Registration:email.txt.twig</argument>
+        <argument key="doctrine_migrations.dir_name">/var/www/html/RO-API/app/DoctrineMigrations</argument>
+        <argument key="doctrine_migrations.namespace">Application\Migrations</argument>
+        <argument key="doctrine_migrations.table_name">migration_versions</argument>
+        <argument key="doctrine_migrations.name">Application Migrations</argument>
+        <argument key="doctrine_migrations.organize_migrations">false</argument>
         <argument key="web_profiler.debug_toolbar.position">bottom</argument>
         <argument key="web_profiler.debug_toolbar.intercept_redirects">false</argument>
         <argument key="web_profiler.debug_toolbar.mode">2</argument>

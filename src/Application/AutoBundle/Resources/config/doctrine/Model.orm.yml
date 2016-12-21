@@ -53,4 +53,16 @@ Application\AutoBundle\Entity\Model:
         cars:
             targetEntity: Application\AutoBundle\Entity\Car
             mappedBy: models
+    manyToMany:
+        producers:
+            targetEntity: Application\AutoBundle\Entity\Producer
+            inversedBy: models
+            joinTable:
+                name: car_producer_has_models
+                joinColumns:
+                    model_id:
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    producer_id:
+                        referencedColumnName: id
     lifecycleCallbacks: {  }

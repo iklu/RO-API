@@ -2,8 +2,26 @@
 
 namespace Application\AutoBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Doctrine\Common\Collections\Collection;
+
 /**
- * AutoSubCategory
+ * @ApiResource(
+ *     itemOperations={
+ *          "getAutoSubCategory"={"route_name"="get_auto_sub_category"},
+ *          "updateAutoSubCategory"={"route_name"="update_auto_sub_category"}
+ *      },
+ *     collectionOperations = {
+ *          "addAutoSubCategory"={"route_name"="add_auto_sub_category"},
+ *          "getAutoSubCategories"={"route_name"="get_auto_sub_categories"}
+ *      },
+ *     attributes={
+ *          "normalization_context"={"groups"={"subcategory", "user-read"}},
+ *          "denormalization_context"={"groups"={"subcategory", "user-write"}}
+ * }
+ *  )
  */
 class AutoSubCategory
 {
@@ -13,46 +31,55 @@ class AutoSubCategory
     private $id;
 
     /**
+     * @Groups({"subcategory"})
      * @var string
      */
     private $name;
 
     /**
+     * @Groups({"subcategory"})
      * @var string
      */
     private $shortDescription;
 
     /**
+     * @Groups({"subcategory"})
      * @var string
      */
     private $description;
 
     /**
+     * @Groups({"subcategory"})
      * @var string
      */
     private $photo;
 
     /**
+     * @Groups({"subcategory"})
      * @var string
      */
     private $slug;
 
     /**
+     * @Groups({"subcategory"})
      * @var string
      */
     private $metaTitle;
 
     /**
+     * @Groups({"subcategory"})
      * @var string
      */
     private $metaKeywords;
 
     /**
+     * @Groups({"subcategory"})
      * @var string
      */
     private $metaDescription;
 
     /**
+     * @Groups({"subcategory"})
      * @var int
      */
     private $orderIdx;
@@ -66,6 +93,12 @@ class AutoSubCategory
      * @var \DateTime
      */
     private $dateCreated;
+
+    /**
+     * @Groups({"subcategory"})
+     * @var array
+     */
+    protected $producers;
 
 
     /**
@@ -341,5 +374,45 @@ class AutoSubCategory
     {
         return $this->dateCreated;
     }
-}
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->producers = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
+    /**
+     * Add producer
+     *
+     * @param \Application\AutoBundle\Entity\Producer $producer
+     *
+     * @return AutoSubCategory
+     */
+    public function addProducer(\Application\AutoBundle\Entity\Producer $producer)
+    {
+        $this->producers[] = $producer;
+
+        return $this;
+    }
+
+    /**
+     * Remove producer
+     *
+     * @param \Application\AutoBundle\Entity\Producer $producer
+     */
+    public function removeProducer(\Application\AutoBundle\Entity\Producer $producer)
+    {
+        $this->producers->removeElement($producer);
+    }
+
+    /**
+     * Get producers
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getProducers()
+    {
+        return $this->producers;
+    }
+}

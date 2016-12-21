@@ -4,4 +4,4 @@ parameters:
 services:
     email.user_confirmation:
         class: Application\EmailBundle\Mailer\Mailer
-        arguments: ["@mailer", "@router", "@templating", {"confirmation.template": %admin.registration.confirmation.template% }]
+        arguments: ["@mailer", "@router", "@templating", {"confirmation.template": %admin.registration.confirmation.template%, "email":%from_email%}]

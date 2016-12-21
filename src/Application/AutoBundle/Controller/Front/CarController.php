@@ -18,8 +18,6 @@ class CarController extends AbstractFrontController
     }
 
     public function getCarsAction($data){
-
-        //DataSerializer::deserializeWithCamelCaseEntityToArray($data);
         return $data;
     }
 }

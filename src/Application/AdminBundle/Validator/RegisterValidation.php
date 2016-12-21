@@ -75,7 +75,6 @@ class RegisterValidation
             array('message' => 'Email is invalid')
         );
 
-
         $validations[] = $this->validator->validate($user->getUsername(), $usernameNotEmpty);
         $validations[] = $this->validator->validate($user->getPlainPassword(), $passwordNotEmpty);
         $validations[] = $this->validator->validate($user->getConfirmationToken(), $confirmPassword);

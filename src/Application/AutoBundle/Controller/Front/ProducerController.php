@@ -3,7 +3,6 @@
 namespace Application\AutoBundle\Controller\Front;
 
 use Application\CoreBundle\Controller\Front\AbstractFrontController;
-use Application\CoreBundle\Utils\DataSerializer;
 
 /**
  * Created by PhpStorm.
@@ -18,7 +17,6 @@ class ProducerController extends AbstractFrontController
     }
 
     public function getProducersAction($data){
-        
         return $data;
     }
 }

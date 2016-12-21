@@ -50,12 +50,14 @@ class Mailer implements MailerInterface
     public function sendConfirmationEmailMessage(UserInterface $user)
     {
         $template = $this->parameters['confirmation.template'];
-        $url = $this->router->generate('fos_user_registration_confirm', array('token' => $user->getConfirmationToken()), UrlGeneratorInterface::ABSOLUTE_URL);
+        //$url = $this->router->generate('fos_user_registration_confirm', array('token' => $user->getConfirmationToken()), UrlGeneratorInterface::ABSOLUTE_URL);
+        $url = "care vreii";
         $rendered = $this->templating->render($template, array(
             'user' => $user,
             'confirmationUrl' => $url,
         ));
-        $this->sendEmailMessage($rendered, $this->parameters['from_email']['confirmation'], (string) $user->getEmail());
+
+        $this->sendEmailMessage($rendered, $this->parameters['email']['confirmation'], (string) $user->getEmail());
     }
     /**
      * {@inheritdoc}
@@ -81,6 +83,7 @@ class Mailer implements MailerInterface
         $renderedLines = explode("\n", trim($renderedTemplate));
         $subject = array_shift($renderedLines);
         $body = implode("\n", $renderedLines);
+
         $message = \Swift_Message::newInstance()
             ->setSubject($subject)
             ->setFrom($fromEmail)

@@ -49,15 +49,34 @@ Application\AutoBundle\Entity\Producer:
         dateCreated:
             type: datetime
             nullable: true
+# UNIDIRECTIONAL:
+#    manyToMany:
+#        models:
+#            targetEntity: Application\AutoBundle\Entity\Model
+#            joinTable:
+#                name: producer_has_models
+#                joinColumns:
+#                    producer_id:
+#                        referencedColumnName: id
+#                inverseJoinColumns:
+#                    model_id:
+#                        referencedColumnName: id
+
     manyToMany:
+    #BIDIRECTIONAL TO MODELS
         models:
             targetEntity: Application\AutoBundle\Entity\Model
+            mappedBy: producers
+        #BIDIRECTIONAL FROM AUTO SUB CATEGORY
+        autoSubCategories:
+            targetEntity: Application\AutoBundle\Entity\AutoSubCategory
+            inversedBy: producers
             joinTable:
-                name: producer_has_models
+                name: auto_sub_category_has_producers
                 joinColumns:
                     producer_id:
                         referencedColumnName: id
                 inverseJoinColumns:
-                    model_id:
+                    subcategory_id:
                         referencedColumnName: id
     lifecycleCallbacks: {  }

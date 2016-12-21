@@ -112,7 +112,7 @@ class SecurityController extends AbstractAdminController
             $event = new GetResponseUserEvent($user, $request);
             $dispatcher->dispatch(ApplicationAdminEvents::REGISTRATION_INITIALIZE, $event);
 
-            $validator->validate($user);
+            $validator->validate($event->getResponse());
 
             if ($validator->getValidationMessage() == "") {
 

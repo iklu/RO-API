@@ -49,4 +49,10 @@ Application\AutoBundle\Entity\AutoSubCategory:
         dateCreated:
             type: datetime
             nullable: true
+
+#BIDIRECTIONAL TO PRODUCER
+    manyToMany:
+        producers:
+            targetEntity: Application\AutoBundle\Entity\Producer
+            mappedBy: autoSubCategories
     lifecycleCallbacks: {  }

@@ -97,3 +97,37 @@ get_car_producers:
         _controller: 'ApplicationAutoBundle:Front/Producer:getProducers'
         _api_resource_class: 'Application\AutoBundle\Entity\Producer'
         _api_collection_operation_name: 'getCarProducers'
+
+###########################################################################
+# CAR MODEL PRODUCERS SUBCATEGORY
+get_auto_sub_category:
+    path: '/autosubcategory/{id}/'
+    methods:  ['GET']
+    defaults:
+        _controller: 'ApplicationAutoBundle:Front/AutoSubCategory:getAutoSubCategory'
+        _api_resource_class: 'Application\AutoBundle\Entity\AutoSubCategory'
+        _api_item_operation_name: 'getAutoSubCategory'
+
+update_auto_sub_category:
+    path: '/user/autosubcategory/{id}/'
+    methods:  ['PUT']
+    defaults:
+        _controller: 'ApplicationAutoBundle:Admin/AutoSubCategory:edit'
+        _api_resource_class: 'Application\AutoBundle\Entity\AutoSubCategory'
+        _api_item_operation_name: 'updateAutoSubCategory'
+
+add_auto_sub_category:
+    path: '/user/autosubcategory/'
+    methods:  ['POST']
+    defaults:
+        _controller: 'ApplicationAutoBundle:Admin/AutoSubCategory:add'
+        _api_resource_class: 'Application\AutoBundle\Entity\AutoSubCategory'
+        _api_collection_operation_name: 'addAutoSubCategory'
+
+get_auto_sub_categories:
+    path: '/autosubcategories/'
+    methods:  ['get']
+    defaults:
+        _controller: 'ApplicationAutoBundle:Front/AutoSubCategory:getAutoSubCategories'
+        _api_resource_class: 'Application\AutoBundle\Entity\AutoSubCategory'
+        _api_collection_operation_name: 'getAutoSubCategories'

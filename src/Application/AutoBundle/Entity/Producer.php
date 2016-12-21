@@ -102,6 +102,12 @@ class Producer
      */
     protected $models;
 
+    /**
+     * @Groups({"producer"})
+     * @var integer
+     */
+    protected $autoSubCategories;
+
 
     /**
      * Get id
@@ -416,5 +422,39 @@ class Producer
     public function getModels()
     {
         return $this->models;
+    }
+
+    /**
+     * Add autoSubCategory
+     *
+     * @param \Application\AutoBundle\Entity\AutoSubCategory $autoSubCategory
+     *
+     * @return Producer
+     */
+    public function addAutoSubCategory(\Application\AutoBundle\Entity\AutoSubCategory $autoSubCategory)
+    {
+        $this->autoSubCategories[] = $autoSubCategory;
+
+        return $this;
+    }
+
+    /**
+     * Remove autoSubCategory
+     *
+     * @param \Application\AutoBundle\Entity\AutoSubCategory $autoSubCategory
+     */
+    public function removeAutoSubCategory(\Application\AutoBundle\Entity\AutoSubCategory $autoSubCategory)
+    {
+        $this->autoSubCategories->removeElement($autoSubCategory);
+    }
+
+    /**
+     * Get autoSubCategories
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAutoSubCategories()
+    {
+        return $this->autoSubCategories;
     }
 }

@@ -63,10 +63,13 @@ doctrine:
 
 # Swiftmailer Configuration
 swiftmailer:
+    disable_delivery:  false
     transport: "%mailer_transport%"
     host:      "%mailer_host%"
     username:  "%mailer_user%"
     password:  "%mailer_password%"
+    port:      "%mailer_port%"
+    encryption: "%mailer_encryption%"
     spool:     { type: memory }
 
 # Nelmio CORS
@@ -98,10 +101,10 @@ nelmio_api_doc:
         endpoint:             null
         accept_type:          null
         body_format:
-            formats: ['json']
-            default_format: json
+            formats: []
+            default_format: form
         request_format:
-            formats: ['application/json']
+            formats: []
             method: accept_header
     swagger:
         api_base_path:        /api
@@ -121,3 +124,9 @@ nelmio_api_doc:
 api_platform:
     default_operation_path_resolver: 'app.operation_path_resolver.no_separators'
     enable_nelmio_api_doc: true
+
+doctrine_migrations:
+    dir_name: "%kernel.root_dir%/DoctrineMigrations"
+    namespace: Application\Migrations
+    table_name: migration_versions
+    name: Application Migrations

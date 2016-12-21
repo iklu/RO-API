@@ -102,6 +102,12 @@ class Model
     protected $cars;
 
     /**
+     * @Groups({"model"})
+     * @var integer
+     */
+    private $producers;
+
+    /**
      * Model constructor.
      *
      */
@@ -405,5 +411,63 @@ class Model
         $this->cars = $cars;
 
         return $this;
+    }
+
+    /**
+     * Add car
+     *
+     * @param \Application\AutoBundle\Entity\Car $car
+     *
+     * @return Model
+     */
+    public function addCar(\Application\AutoBundle\Entity\Car $car)
+    {
+        $this->cars[] = $car;
+
+        return $this;
+    }
+
+    /**
+     * Remove car
+     *
+     * @param \Application\AutoBundle\Entity\Car $car
+     */
+    public function removeCar(\Application\AutoBundle\Entity\Car $car)
+    {
+        $this->cars->removeElement($car);
+    }
+
+    /**
+     * Add producer
+     *
+     * @param \Application\AutoBundle\Entity\Producer $producer
+     *
+     * @return Model
+     */
+    public function addProducer(\Application\AutoBundle\Entity\Producer $producer)
+    {
+        $this->producers[] = $producer;
+
+        return $this;
+    }
+
+    /**
+     * Remove producer
+     *
+     * @param \Application\AutoBundle\Entity\Producer $producer
+     */
+    public function removeProducer(\Application\AutoBundle\Entity\Producer $producer)
+    {
+        $this->producers->removeElement($producer);
+    }
+
+    /**
+     * Get producers
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getProducers()
+    {
+        return $this->producers;
     }
 }
