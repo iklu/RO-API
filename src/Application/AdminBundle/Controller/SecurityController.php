@@ -14,6 +14,7 @@ use Application\AdminBundle\Event\FilterUserResponseEvent;
 use Application\AdminBundle\Event\FormEvent;
 use Application\AdminBundle\Event\GetResponseUserEvent;
 use Application\AdminBundle\Event\ValidationEvent;
+use Application\AdminBundle\Form\RegisterType;
 use Application\AdminBundle\Model\UserManagerInterface;
 use Application\AdminBundle\Validator\RegisterValidation;
 use Application\CoreBundle\Controller\Admin\AbstractAdminController;
@@ -96,6 +97,24 @@ class SecurityController extends AbstractAdminController
      */
     public function registerAction(Request $request) {
 
+        $user = new User();
+
+        $data = $request->request->all();
+
+         $data["password"] = array("first"=> $data["password"], "second"=> $data["confirmPassword"]);
+
+
+        $form = $this->createForm("Application\AdminBundle\Form\RegisterType", $user);
+        $form->submit($data);
+
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            echo "hola";
+        } else {
+            return ApiResponse::setResponse((string)$form->getErrors(true,false),200);
+        }
+
+
         /** @var $userManager UserManagerInterface */
         $userManager = $this->get('admin.user_manager');
 
@@ -123,8 +142,10 @@ class SecurityController extends AbstractAdminController
                     echo $event->getResponse();
                 }
 
-                $dispatcher->dispatch(ApplicationAdminEvents::REGISTRATION_COMPLETED, new FilterUserResponseEvent($user, $request, $response));
-                return $response;
+                $event = new FilterUserResponseEvent($user, $request, $response);
+                $dispatcher->dispatch(ApplicationAdminEvents::REGISTRATION_COMPLETED, $event );
+
+                return  $event->getResponse();
             } else {
                 $event = new ValidationEvent($validator, $request);
                 $dispatcher->dispatch(ApplicationAdminEvents::REGISTRATION_FAILURE, $event);

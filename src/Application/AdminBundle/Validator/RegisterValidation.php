@@ -85,7 +85,8 @@ class RegisterValidation
 
         foreach($validations as $deserialize) {
             $deserialized =  $serializer->toArray($deserialize);
-            if($deserialized["violations"][0]["message"] != null){
+
+            if(!empty($deserialized["violations"]) && $deserialized["violations"][0]["message"] != null){
                 return $this->validationMessage = ApiResponse::setResponse($deserialized["violations"][0]["message"],Response::HTTP_BAD_REQUEST );
             }
         }

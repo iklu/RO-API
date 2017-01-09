@@ -142,6 +142,8 @@ class User implements UserInterface, GroupableInterface
      */
     protected $plainPassword;
 
+    protected $confirmPassword;
+
     /**
      * @var \DateTime
      */
@@ -1029,5 +1031,21 @@ class User implements UserInterface, GroupableInterface
     public function __toString()
     {
         return (string)$this->getUsername();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getConfirmPassword()
+    {
+        return $this->confirmPassword;
+    }
+
+    /**
+     * @param mixed $confirmPassword
+     */
+    public function setConfirmPassword($confirmPassword)
+    {
+        $this->confirmPassword = $confirmPassword;
     }
 }

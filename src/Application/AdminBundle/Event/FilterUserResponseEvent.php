@@ -11,6 +11,7 @@
 
 namespace Application\AdminBundle\Event;
 
+use Application\AdminBundle\Model\UserInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -25,7 +26,7 @@ class FilterUserResponseEvent extends UserEvent
      * @param Request       $request
      * @param Response      $response
      */
-    public function __construct(UserInterface $user, Request $request, Response $response)
+    public function __construct(UserInterface $user, Request $request,  $response)
     {
         parent::__construct($user, $request);
         $this->response = $response;
@@ -37,5 +38,13 @@ class FilterUserResponseEvent extends UserEvent
     public function getResponse()
     {
         return $this->response;
+    }
+
+    /**
+     * @param $response
+     */
+    public function setResponse($response)
+    {
+        $this->response = $response;
     }
 }
