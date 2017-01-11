@@ -97,43 +97,25 @@ class SecurityController extends AbstractAdminController
      */
     public function registerAction(Request $request) {
 
-        $user = new User();
-
-        $data = $request->request->all();
-
-         $data["password"] = array("first"=> $data["password"], "second"=> $data["confirmPassword"]);
-
-
-        $form = $this->createForm("Application\AdminBundle\Form\RegisterType", $user);
-        $form->submit($data);
-
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            echo "hola";
-        } else {
-            return ApiResponse::setResponse((string)$form->getErrors(true,false),200);
-        }
-
-
         /** @var $userManager UserManagerInterface */
         $userManager = $this->get('admin.user_manager');
 
         /** @var $dispatcher EventDispatcherInterface */
         $dispatcher = $this->get('event_dispatcher');
 
-        /** @var  $validator RegisterValidation*/
-        $validator = $this->container->get("admin.register.validate");
-
         try {
 
             $user = $userManager->createUser();
 
+            $data = $request->request->all();
+
+            $form = $this->createForm("Application\AdminBundle\Form\Type\RegisterType", $user);
+            $form->submit($data);
+
             $event = new GetResponseUserEvent($user, $request);
             $dispatcher->dispatch(ApplicationAdminEvents::REGISTRATION_INITIALIZE, $event);
 
-            $validator->validate($event->getResponse());
-
-            if ($validator->getValidationMessage() == "") {
+            if ($form->isSubmitted() && $form->isValid()) {
 
                 $dispatcher->dispatch(ApplicationAdminEvents::REGISTRATION_SUCCESS, $event);
                 $userManager->updateUser($user);
@@ -147,10 +129,10 @@ class SecurityController extends AbstractAdminController
 
                 return  $event->getResponse();
             } else {
-                $event = new ValidationEvent($validator, $request);
+                $event = new ValidationEvent($form, $request);
                 $dispatcher->dispatch(ApplicationAdminEvents::REGISTRATION_FAILURE, $event);
                 if (null !== $response = $event->getResponse()) {
-                    return $response;
+                    return ApiResponse::setResponse($response,400);
                 }
             }
 

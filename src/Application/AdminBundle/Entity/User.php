@@ -10,6 +10,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Validator\Constraints;
 
 /**
  * @ApiResource(
@@ -142,6 +143,12 @@ class User implements UserInterface, GroupableInterface
      */
     protected $plainPassword;
 
+    /**
+     * @Groups({"user"})
+     * Repeat password. Must not be persisted.
+     *
+     * @var string
+     */
     protected $confirmPassword;
 
     /**
@@ -300,6 +307,16 @@ class User implements UserInterface, GroupableInterface
     public function getId()
     {
         return $this->id;
+    }
+
+    public function isPasswordEqual()
+    {
+        return $this->confirmPassword !== $this->password;
+    }
+
+    public function isPasswordLegal()
+    {
+        return $this->firstName !== $this->password;
     }
 
     /**

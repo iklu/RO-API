@@ -1,6 +1,6 @@
 <?php
 
-namespace Application\AdminBundle\Form;
+namespace Application\AdminBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
@@ -23,13 +23,7 @@ class RegisterType extends AbstractType
         $builder
             ->add('username')
             ->add('email')
-            ->add('password', RepeatedType::class, array(
-                'invalid_message' => 'The password fields must match.',
-                'options' => array('attr' => array('class' => 'password-field')),
-                'first_name'  => 'first',
-                'second_name' =>  'second',
-                'type' => PasswordType::class
-            ))
+            ->add('password')
             ->add('firstName')
             ->add('lastName')
             ->add('confirmPassword')

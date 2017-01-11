@@ -47,8 +47,16 @@ class RegistrationListener implements EventSubscriberInterface
      * @param ValidationEvent $event
      */
     public function onRegistrationFailure(ValidationEvent $event){
-        $message = $event->getValidation()->getValidationMessage();
 
-         return $event->setResponse($message);
+        $errors = $event->getValidation()->getErrors(true,true);
+
+        $errorCollection = array();
+        foreach($errors as $error){
+            $errorCollection[] = $error->getMessage();
+        }
+
+        $array = array( 'status' => 400, 'errorMsg' => 'Bad Request', 'errorReport' => $errorCollection);
+
+         return $event->setResponse($array);
     }
 }

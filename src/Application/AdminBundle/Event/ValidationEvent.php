@@ -14,14 +14,15 @@ namespace Application\AdminBundle\Event;
 use Application\AdminBundle\Validator\RegisterValidation;
 use Application\CoreBundle\Utils\ApiResponse;
 use Symfony\Component\EventDispatcher\Event;
+use Symfony\Component\Form\Form;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class ValidationEvent extends Event
 {
-
     /**
-     * @var RegisterValidation
+     * @var FormInterface
      */
     private $validation;
 
@@ -37,17 +38,17 @@ class ValidationEvent extends Event
 
     /**
      * ValidationEvent constructor.
-     * @param RegisterValidation $validation
+     * @param FormInterface $validation
      * @param Request $request
      */
-    public function __construct(RegisterValidation $validation, Request $request)
+    public function __construct(FormInterface $validation, Request $request)
     {
         $this->validation = $validation;
         $this->request = $request;
     }
 
     /**
-     * @return RegisterValidation
+     * @return FormInterface
      */
     public function getValidation()
     {

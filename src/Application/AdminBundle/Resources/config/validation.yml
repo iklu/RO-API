@@ -6,3 +6,18 @@ Application\AdminBundle\Entity\User:
         email:
             - NotBlank:
             - Email:
+                message: "Not good email"
+        password:
+            - NotBlank:
+                message: "Pass required"
+            - Length:
+                min: 2
+                max: 30
+                minMessage: "at least"
+                maxMessage: "max ch"
+        confirmPassword:
+            - NotBlank:
+                message: "required"
+    getters:
+        passwordEqual:
+            - 'IsFalse': { message: 'The repeated password fields must match.' }
