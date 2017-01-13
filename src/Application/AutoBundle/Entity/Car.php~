@@ -87,6 +87,16 @@ class Car extends Product
     private $airConditioning;
 
     /**
+     * @var \DateTime
+     */
+    protected $dateUpdated;
+
+    /**
+     * @var \DateTime
+     */
+    protected $dateCreated;
+
+    /**
      * @Groups({"car"})
      * @var integer
      */

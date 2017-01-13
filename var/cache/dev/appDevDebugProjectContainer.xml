@@ -54,11 +54,18 @@
     <parameter key="database_user">root</parameter>
     <parameter key="database_password">parola86</parameter>
     <parameter key="mailer_transport">smtp</parameter>
-    <parameter key="mailer_host">127.0.0.1</parameter>
-    <parameter key="mailer_user">null</parameter>
-    <parameter key="mailer_password">null</parameter>
+    <parameter key="mailer_host">smtp.gmail.com</parameter>
+    <parameter key="mailer_user">dragoiovidiu2011@gmail.com</parameter>
+    <parameter key="mailer_password">parolist</parameter>
+    <parameter key="mailer_port">465</parameter>
+    <parameter key="mailer_encryption">ssl</parameter>
     <parameter key="secret">ThisTokenIsNotSoSecretChangeIt</parameter>
     <parameter key="cors_allow_origin">http://localhost</parameter>
+    <parameter key="from_email" type="collection">
+      <parameter key="address">noreply@example.com</parameter>
+      <parameter key="sender_name">Demo App</parameter>
+      <parameter key="confirmation">dragoiovidiu2011@gmail.com</parameter>
+    </parameter>
     <parameter key="locale">en</parameter>
     <parameter key="fragment.renderer.hinclude.global_template">null</parameter>
     <parameter key="fragment.path">/_fragment</parameter>
@@ -206,11 +213,11 @@
     <parameter key="swiftmailer.data_collector.class">Symfony\Bundle\SwiftmailerBundle\DataCollector\MessageDataCollector</parameter>
     <parameter key="swiftmailer.mailer.default.transport.name">smtp</parameter>
     <parameter key="swiftmailer.mailer.default.delivery.enabled">true</parameter>
-    <parameter key="swiftmailer.mailer.default.transport.smtp.encryption">null</parameter>
-    <parameter key="swiftmailer.mailer.default.transport.smtp.port">25</parameter>
-    <parameter key="swiftmailer.mailer.default.transport.smtp.host">127.0.0.1</parameter>
-    <parameter key="swiftmailer.mailer.default.transport.smtp.username">null</parameter>
-    <parameter key="swiftmailer.mailer.default.transport.smtp.password">null</parameter>
+    <parameter key="swiftmailer.mailer.default.transport.smtp.encryption">ssl</parameter>
+    <parameter key="swiftmailer.mailer.default.transport.smtp.port">465</parameter>
+    <parameter key="swiftmailer.mailer.default.transport.smtp.host">smtp.gmail.com</parameter>
+    <parameter key="swiftmailer.mailer.default.transport.smtp.username">dragoiovidiu2011@gmail.com</parameter>
+    <parameter key="swiftmailer.mailer.default.transport.smtp.password">parolist</parameter>
     <parameter key="swiftmailer.mailer.default.transport.smtp.auth_mode">null</parameter>
     <parameter key="swiftmailer.mailer.default.transport.smtp.timeout">30</parameter>
     <parameter key="swiftmailer.mailer.default.transport.smtp.source_ip">null</parameter>
@@ -324,7 +331,7 @@
     <parameter key="doctrine.orm.naming_strategy.underscore.class">Doctrine\ORM\Mapping\UnderscoreNamingStrategy</parameter>
     <parameter key="doctrine.orm.quote_strategy.default.class">Doctrine\ORM\Mapping\DefaultQuoteStrategy</parameter>
     <parameter key="doctrine.orm.quote_strategy.ansi.class">Doctrine\ORM\Mapping\AnsiQuoteStrategy</parameter>
-    <parameter key="doctrine.orm.entity_listener_resolver.class">Doctrine\ORM\Mapping\DefaultEntityListenerResolver</parameter>
+    <parameter key="doctrine.orm.entity_listener_resolver.class">Doctrine\Bundle\DoctrineBundle\Mapping\ContainerAwareEntityListenerResolver</parameter>
     <parameter key="doctrine.orm.second_level_cache.default_cache_factory.class">Doctrine\ORM\Cache\DefaultCacheFactory</parameter>
     <parameter key="doctrine.orm.second_level_cache.default_region.class">Doctrine\ORM\Cache\Region\DefaultRegion</parameter>
     <parameter key="doctrine.orm.second_level_cache.filelock_region.class">Doctrine\ORM\Cache\Region\FileLockRegion</parameter>
@@ -396,6 +403,7 @@
       <parameter key="max_age">0</parameter>
       <parameter key="hosts" type="collection"/>
       <parameter key="origin_regex">false</parameter>
+      <parameter key="forced_allow_origin_value">null</parameter>
     </parameter>
     <parameter key="nelmio_cors.map" type="collection">
       <parameter key="^/api/" type="collection">
@@ -427,15 +435,11 @@
     <parameter key="nelmio_api_doc.sandbox.enabled">true</parameter>
     <parameter key="nelmio_api_doc.sandbox.endpoint">null</parameter>
     <parameter key="nelmio_api_doc.sandbox.accept_type">null</parameter>
-    <parameter key="nelmio_api_doc.sandbox.body_format.formats" type="collection">
-      <parameter>json</parameter>
-    </parameter>
-    <parameter key="nelmio_api_doc.sandbox.body_format.default_format">json</parameter>
+    <parameter key="nelmio_api_doc.sandbox.body_format.formats" type="collection"/>
+    <parameter key="nelmio_api_doc.sandbox.body_format.default_format">form</parameter>
     <parameter key="nelmio_api_doc.sandbox.request_format.method">accept_header</parameter>
     <parameter key="nelmio_api_doc.sandbox.request_format.default_format">json</parameter>
-    <parameter key="nelmio_api_doc.sandbox.request_format.formats" type="collection">
-      <parameter>application/json</parameter>
-    </parameter>
+    <parameter key="nelmio_api_doc.sandbox.request_format.formats" type="collection"/>
     <parameter key="nelmio_api_doc.sandbox.entity_to_choice">true</parameter>
     <parameter key="nelmio_api_doc.formatter.abstract_formatter.class">Nelmio\ApiDocBundle\Formatter\AbstractFormatter</parameter>
     <parameter key="nelmio_api_doc.formatter.markdown_formatter.class">Nelmio\ApiDocBundle\Formatter\MarkdownFormatter</parameter>
@@ -673,7 +677,7 @@
                   <tag name="cache.pool"/>
                   <argument>Q3gl8yr+A8</argument>
                   <argument>0</argument>
-                  <argument>02BnOwaNayS0zpVrvYqyse</argument>
+                  <argument>0VPnFpNcA8CTQlpc2MZaRQ</argument>
                   <argument>/var/www/html/RO-API/var/cache/dev/pools</argument>
                   <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
                   <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
@@ -686,7 +690,7 @@
                   <tag name="cache.pool"/>
                   <argument>P7EJNj7kMI</argument>
                   <argument>0</argument>
-                  <argument>02BnOwaNayS0zpVrvYqyse</argument>
+                  <argument>0VPnFpNcA8CTQlpc2MZaRQ</argument>
                   <argument>/var/www/html/RO-API/var/cache/dev/pools</argument>
                   <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
                   <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
@@ -1018,7 +1022,7 @@
       <tag name="cache.pool"/>
       <argument>AVMKJgq+Ye</argument>
       <argument>0</argument>
-      <argument>02BnOwaNayS0zpVrvYqyse</argument>
+      <argument>0VPnFpNcA8CTQlpc2MZaRQ</argument>
       <argument>/var/www/html/RO-API/var/cache/dev/pools</argument>
       <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
@@ -1721,6 +1725,7 @@
             <argument type="service" id="api_platform.jsonld.context_builder"/>
             <argument type="service" id="property_accessor"/>
             <argument>null</argument>
+            <argument type="service" id="serializer.mapping.class_metadata_factory" on-invalid="ignore"/>
           </service>
         </argument>
         <argument type="service">
@@ -1756,6 +1761,7 @@
             <argument type="service" id="api_platform.resource_class_resolver"/>
             <argument type="service" id="property_accessor"/>
             <argument>null</argument>
+            <argument type="service" id="serializer.mapping.class_metadata_factory" on-invalid="ignore"/>
           </service>
         </argument>
         <argument type="service">
@@ -1994,7 +2000,7 @@
           <argument>nelmio_cors.cors_listener</argument>
           <argument>onKernelRequest</argument>
         </argument>
-        <argument>10000</argument>
+        <argument>250</argument>
       </call>
       <call method="addListenerService">
         <argument>kernel.request</argument>
@@ -2107,6 +2113,10 @@
       <call method="addSubscriberService">
         <argument>admin.confirm_user_registration.listener</argument>
         <argument>Application\AdminBundle\EventListener\EmailConfirmationListener</argument>
+      </call>
+      <call method="addSubscriberService">
+        <argument>admin.completed_user_registration.listener</argument>
+        <argument>Application\AdminBundle\EventListener\ApiResponseListener</argument>
       </call>
       <call method="addSubscriberService">
         <argument>debug.dump_listener</argument>
@@ -2850,7 +2860,9 @@
         <argument>sf2orm_default_1de873d45aa917c1e01da2e3f0264f1445e000fa122e18ca56bbcc15bc070bba</argument>
       </call>
     </service>
-    <service id="doctrine.orm.default_entity_listener_resolver" class="Doctrine\ORM\Mapping\DefaultEntityListenerResolver"/>
+    <service id="doctrine.orm.default_entity_listener_resolver" class="Doctrine\Bundle\DoctrineBundle\Mapping\ContainerAwareEntityListenerResolver">
+      <argument type="service" id="service_container"/>
+    </service>
     <service id="doctrine.orm.default_listeners.attach_entity_listeners" class="Doctrine\ORM\Tools\AttachEntityListenersListener">
       <tag name="doctrine.event_listener" event="loadClassMetadata"/>
     </service>
@@ -3395,7 +3407,7 @@
       <argument>null</argument>
     </service>
     <service id="nelmio_cors.cors_listener" class="Nelmio\CorsBundle\EventListener\CorsListener">
-      <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest" priority="10000"/>
+      <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest" priority="250"/>
       <argument type="service" id="debug.event_dispatcher"/>
       <argument type="service">
         <service class="Nelmio\CorsBundle\Options\Resolver" public="false">
@@ -3436,6 +3448,7 @@
         <argument key="max_age">0</argument>
         <argument key="hosts" type="collection"/>
         <argument key="origin_regex">false</argument>
+        <argument key="forced_allow_origin_value">null</argument>
       </argument>
     </service>
     <service id="app.listener.decorating_deserialize" class="Application\CoreBundle\EventListener\DeserializeListener">
@@ -3484,6 +3497,11 @@
       <argument type="service" id="email.user_confirmation"/>
       <argument type="service" id="admin.util_token_generator"/>
     </service>
+    <service id="admin.completed_user_registration.listener" class="Application\AdminBundle\EventListener\ApiResponseListener">
+      <tag name="kernel.event_subscriber"/>
+      <argument type="service" id="email.user_confirmation"/>
+      <argument type="service" id="admin.util_token_generator"/>
+    </service>
     <service id="nelmio_api_doc.formatter.markdown_formatter" class="Nelmio\ApiDocBundle\Formatter\MarkdownFormatter"/>
     <service id="nelmio_api_doc.formatter.simple_formatter" class="Nelmio\ApiDocBundle\Formatter\SimpleFormatter"/>
     <service id="nelmio_api_doc.formatter.html_formatter" class="Nelmio\ApiDocBundle\Formatter\HtmlFormatter">
@@ -3506,9 +3524,7 @@
         <argument>accept_header</argument>
       </call>
       <call method="setRequestFormats">
-        <argument type="collection">
-          <argument>application/json</argument>
-        </argument>
+        <argument type="collection"/>
       </call>
       <call method="setDefaultRequestFormat">
         <argument>json</argument>
@@ -3517,12 +3533,10 @@
         <argument>null</argument>
       </call>
       <call method="setBodyFormats">
-        <argument type="collection">
-          <argument>json</argument>
-        </argument>
+        <argument type="collection"/>
       </call>
       <call method="setDefaultBodyFormat">
-        <argument>json</argument>
+        <argument>form</argument>
       </call>
       <call method="setAuthentication">
         <argument>null</argument>
@@ -3673,6 +3687,11 @@
       <argument type="service" id="templating"/>
       <argument type="collection">
         <argument key="confirmation.template">ApplicationEmailBundle:Registration:email.txt.twig</argument>
+        <argument key="email" type="collection">
+          <argument key="address">noreply@example.com</argument>
+          <argument key="sender_name">Demo App</argument>
+          <argument key="confirmation">dragoiovidiu2011@gmail.com</argument>
+        </argument>
       </argument>
     </service>
     <service id="data_collector.dump" class="Symfony\Component\HttpKernel\DataCollector\DumpDataCollector">
@@ -3864,11 +3883,18 @@
         <argument key="database_user">root</argument>
         <argument key="database_password">parola86</argument>
         <argument key="mailer_transport">smtp</argument>
-        <argument key="mailer_host">127.0.0.1</argument>
-        <argument key="mailer_user">null</argument>
-        <argument key="mailer_password">null</argument>
+        <argument key="mailer_host">smtp.gmail.com</argument>
+        <argument key="mailer_user">dragoiovidiu2011@gmail.com</argument>
+        <argument key="mailer_password">parolist</argument>
+        <argument key="mailer_port">465</argument>
+        <argument key="mailer_encryption">ssl</argument>
         <argument key="secret">ThisTokenIsNotSoSecretChangeIt</argument>
         <argument key="cors_allow_origin">http://localhost</argument>
+        <argument key="from_email" type="collection">
+          <argument key="address">noreply@example.com</argument>
+          <argument key="sender_name">Demo App</argument>
+          <argument key="confirmation">dragoiovidiu2011@gmail.com</argument>
+        </argument>
         <argument key="locale">en</argument>
         <argument key="fragment.renderer.hinclude.global_template">null</argument>
         <argument key="fragment.path">/_fragment</argument>
@@ -4017,11 +4043,11 @@
         <argument key="swiftmailer.data_collector.class">Symfony\Bundle\SwiftmailerBundle\DataCollector\MessageDataCollector</argument>
         <argument key="swiftmailer.mailer.default.transport.name">smtp</argument>
         <argument key="swiftmailer.mailer.default.delivery.enabled">true</argument>
-        <argument key="swiftmailer.mailer.default.transport.smtp.encryption">null</argument>
-        <argument key="swiftmailer.mailer.default.transport.smtp.port">25</argument>
-        <argument key="swiftmailer.mailer.default.transport.smtp.host">127.0.0.1</argument>
-        <argument key="swiftmailer.mailer.default.transport.smtp.username">null</argument>
-        <argument key="swiftmailer.mailer.default.transport.smtp.password">null</argument>
+        <argument key="swiftmailer.mailer.default.transport.smtp.encryption">ssl</argument>
+        <argument key="swiftmailer.mailer.default.transport.smtp.port">465</argument>
+        <argument key="swiftmailer.mailer.default.transport.smtp.host">smtp.gmail.com</argument>
+        <argument key="swiftmailer.mailer.default.transport.smtp.username">dragoiovidiu2011@gmail.com</argument>
+        <argument key="swiftmailer.mailer.default.transport.smtp.password">parolist</argument>
         <argument key="swiftmailer.mailer.default.transport.smtp.auth_mode">null</argument>
         <argument key="swiftmailer.mailer.default.transport.smtp.timeout">30</argument>
         <argument key="swiftmailer.mailer.default.transport.smtp.source_ip">null</argument>
@@ -4135,7 +4161,7 @@
         <argument key="doctrine.orm.naming_strategy.underscore.class">Doctrine\ORM\Mapping\UnderscoreNamingStrategy</argument>
         <argument key="doctrine.orm.quote_strategy.default.class">Doctrine\ORM\Mapping\DefaultQuoteStrategy</argument>
         <argument key="doctrine.orm.quote_strategy.ansi.class">Doctrine\ORM\Mapping\AnsiQuoteStrategy</argument>
-        <argument key="doctrine.orm.entity_listener_resolver.class">Doctrine\ORM\Mapping\DefaultEntityListenerResolver</argument>
+        <argument key="doctrine.orm.entity_listener_resolver.class">Doctrine\Bundle\DoctrineBundle\Mapping\ContainerAwareEntityListenerResolver</argument>
         <argument key="doctrine.orm.second_level_cache.default_cache_factory.class">Doctrine\ORM\Cache\DefaultCacheFactory</argument>
         <argument key="doctrine.orm.second_level_cache.default_region.class">Doctrine\ORM\Cache\Region\DefaultRegion</argument>
         <argument key="doctrine.orm.second_level_cache.filelock_region.class">Doctrine\ORM\Cache\Region\FileLockRegion</argument>
@@ -4207,6 +4233,7 @@
           <argument key="max_age">0</argument>
           <argument key="hosts" type="collection"/>
           <argument key="origin_regex">false</argument>
+          <argument key="forced_allow_origin_value">null</argument>
         </argument>
         <argument key="nelmio_cors.map" type="collection">
           <argument key="^/api/" type="collection">
@@ -4238,15 +4265,11 @@
         <argument key="nelmio_api_doc.sandbox.enabled">true</argument>
         <argument key="nelmio_api_doc.sandbox.endpoint">null</argument>
         <argument key="nelmio_api_doc.sandbox.accept_type">null</argument>
-        <argument key="nelmio_api_doc.sandbox.body_format.formats" type="collection">
-          <argument>json</argument>
-        </argument>
-        <argument key="nelmio_api_doc.sandbox.body_format.default_format">json</argument>
+        <argument key="nelmio_api_doc.sandbox.body_format.formats" type="collection"/>
+        <argument key="nelmio_api_doc.sandbox.body_format.default_format">form</argument>
         <argument key="nelmio_api_doc.sandbox.request_format.method">accept_header</argument>
         <argument key="nelmio_api_doc.sandbox.request_format.default_format">json</argument>
-        <argument key="nelmio_api_doc.sandbox.request_format.formats" type="collection">
-          <argument>application/json</argument>
-        </argument>
+        <argument key="nelmio_api_doc.sandbox.request_format.formats" type="collection"/>
         <argument key="nelmio_api_doc.sandbox.entity_to_choice">true</argument>
         <argument key="nelmio_api_doc.formatter.abstract_formatter.class">Nelmio\ApiDocBundle\Formatter\AbstractFormatter</argument>
         <argument key="nelmio_api_doc.formatter.markdown_formatter.class">Nelmio\ApiDocBundle\Formatter\MarkdownFormatter</argument>
@@ -4352,6 +4375,9 @@
       <call method="pushHandler">
         <argument type="service" id="monolog.handler.main"/>
       </call>
+      <call method="pushHandler">
+        <argument type="service" id="monolog.handler.debug"/>
+      </call>
     </service>
     <service id="monolog.logger.translation" class="Symfony\Bridge\Monolog\Logger">
       <argument>translation</argument>
@@ -4360,6 +4386,9 @@
       </call>
       <call method="pushHandler">
         <argument type="service" id="monolog.handler.main"/>
+      </call>
+      <call method="pushHandler">
+        <argument type="service" id="monolog.handler.debug"/>
       </call>
     </service>
     <service id="monolog.logger.cache" class="Symfony\Bridge\Monolog\Logger">
@@ -4370,6 +4399,9 @@
       <call method="pushHandler">
         <argument type="service" id="monolog.handler.main"/>
       </call>
+      <call method="pushHandler">
+        <argument type="service" id="monolog.handler.debug"/>
+      </call>
     </service>
     <service id="monolog.logger.templating" class="Symfony\Bridge\Monolog\Logger">
       <argument>templating</argument>
@@ -4378,6 +4410,9 @@
       </call>
       <call method="pushHandler">
         <argument type="service" id="monolog.handler.main"/>
+      </call>
+      <call method="pushHandler">
+        <argument type="service" id="monolog.handler.debug"/>
       </call>
     </service>
     <service id="monolog.logger.profiler" class="Symfony\Bridge\Monolog\Logger">
@@ -4388,6 +4423,9 @@
       <call method="pushHandler">
         <argument type="service" id="monolog.handler.main"/>
       </call>
+      <call method="pushHandler">
+        <argument type="service" id="monolog.handler.debug"/>
+      </call>
     </service>
     <service id="monolog.logger.router" class="Symfony\Bridge\Monolog\Logger">
       <argument>router</argument>
@@ -4396,6 +4434,9 @@
       </call>
       <call method="pushHandler">
         <argument type="service" id="monolog.handler.main"/>
+      </call>
+      <call method="pushHandler">
+        <argument type="service" id="monolog.handler.debug"/>
       </call>
     </service>
     <service id="monolog.logger.php" class="Symfony\Bridge\Monolog\Logger">
@@ -4406,11 +4447,14 @@
       <call method="pushHandler">
         <argument type="service" id="monolog.handler.main"/>
       </call>
+      <call method="pushHandler">
+        <argument type="service" id="monolog.handler.debug"/>
+      </call>
     </service>
     <service id="monolog.logger.event" class="Symfony\Bridge\Monolog\Logger">
       <argument>event</argument>
       <call method="pushHandler">
-        <argument type="service" id="monolog.handler.null_internal"/>
+        <argument type="service" id="monolog.handler.debug"/>
       </call>
     </service>
     <service id="monolog.logger.security" class="Symfony\Bridge\Monolog\Logger">
@@ -4421,12 +4465,22 @@
       <call method="pushHandler">
         <argument type="service" id="monolog.handler.main"/>
       </call>
+      <call method="pushHandler">
+        <argument type="service" id="monolog.handler.debug"/>
+      </call>
     </service>
     <service id="monolog.logger.doctrine" class="Symfony\Bridge\Monolog\Logger">
       <argument>doctrine</argument>
       <call method="pushHandler">
         <argument type="service" id="monolog.handler.main"/>
       </call>
+      <call method="pushHandler">
+        <argument type="service" id="monolog.handler.debug"/>
+      </call>
+    </service>
+    <service id="monolog.handler.debug" class="Symfony\Bridge\Monolog\Handler\DebugHandler">
+      <argument>100</argument>
+      <argument>true</argument>
     </service>
     <service id="monolog.handler.null_internal" class="Monolog\Handler\NullHandler"/>
     <service id="nelmio_api_doc.parser.form_type_parser" class="Nelmio\ApiDocBundle\Parser\FormTypeParser">
@@ -4652,6 +4706,9 @@
       <call method="pushHandler">
         <argument type="service" id="monolog.handler.main"/>
       </call>
+      <call method="pushHandler">
+        <argument type="service" id="monolog.handler.debug"/>
+      </call>
       <autowiring-type>Psr\Log\LoggerInterface</autowiring-type>
     </service>
     <service id="swiftmailer.mailer.default.transport" class="Swift_Transport_SpoolTransport">
@@ -4685,10 +4742,10 @@
               </argument>
             </argument>
             <call method="setUsername">
-              <argument>null</argument>
+              <argument>dragoiovidiu2011@gmail.com</argument>
             </call>
             <call method="setPassword">
-              <argument>null</argument>
+              <argument>parolist</argument>
             </call>
             <call method="setAuthMode">
               <argument>null</argument>
@@ -4698,13 +4755,13 @@
       </argument>
       <argument type="service" id="swiftmailer.mailer.default.transport.eventdispatcher"/>
       <call method="setHost">
-        <argument>127.0.0.1</argument>
+        <argument>smtp.gmail.com</argument>
       </call>
       <call method="setPort">
-        <argument>25</argument>
+        <argument>465</argument>
       </call>
       <call method="setEncryption">
-        <argument>null</argument>
+        <argument>ssl</argument>
       </call>
       <call method="setTimeout">
         <argument>30</argument>

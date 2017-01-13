@@ -118,17 +118,6 @@ class Product
     protected $isFeatured;
 
     /**
-     * @var \DateTime
-     */
-    protected $dateUpdated;
-
-    /**
-     * @var \DateTime
-     */
-    protected $dateCreated;
-
-
-    /**
      * Get id
      *
      * @return int
@@ -472,54 +461,6 @@ class Product
     public function getIsFeatured()
     {
         return $this->isFeatured;
-    }
-
-    /**
-     * Set dateUpdated
-     *
-     * @param \DateTime $dateUpdated
-     *
-     * @return Product
-     */
-    public function setDateUpdated($dateUpdated)
-    {
-        $this->dateUpdated = $dateUpdated;
-
-        return $this;
-    }
-
-    /**
-     * Get dateUpdated
-     *
-     * @return \DateTime
-     */
-    public function getDateUpdated()
-    {
-        return $this->dateUpdated;
-    }
-
-    /**
-     * Set dateCreated
-     *
-     * @param \DateTime $dateCreated
-     *
-     * @return Product
-     */
-    public function setDateCreated($dateCreated)
-    {
-        $this->dateCreated = $dateCreated;
-
-        return $this;
-    }
-
-    /**
-     * Get dateCreated
-     *
-     * @return \DateTime
-     */
-    public function getDateCreated()
-    {
-        return $this->dateCreated;
     }
 
     /**

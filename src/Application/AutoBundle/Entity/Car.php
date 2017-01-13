@@ -88,6 +88,18 @@ class Car extends Product
 
     /**
      * @Groups({"car"})
+     * @var \DateTime
+     */
+    protected $dateUpdated;
+
+    /**
+     * @Groups({"car"})
+     * @var \DateTime
+     */
+    protected $dateCreated;
+
+    /**
+     * @Groups({"car"})
      * @var integer
      */
     private $models;
@@ -344,5 +356,64 @@ class Car extends Product
     public function getModels()
     {
         return $this->models;
+    }
+
+    /**
+     * Set dateUpdated
+     *
+     * @param \DateTime $dateUpdated
+     *
+     * @return Car
+     */
+    public function setDateUpdated($dateUpdated)
+    {
+        $this->dateUpdated = $dateUpdated;
+
+        return $this;
+    }
+
+    /**
+     * Get dateUpdated
+     *
+     * @return \DateTime
+     */
+    public function getDateUpdated()
+    {
+        return $this->dateUpdated;
+    }
+
+    /**
+     * Set dateCreated
+     *
+     * @param \DateTime $dateCreated
+     *
+     * @return Car
+     */
+    public function setDateCreated($dateCreated)
+    {
+        $this->dateCreated = $dateCreated;
+
+        return $this;
+    }
+
+    /**
+     * Get dateCreated
+     *
+     * @return \DateTime
+     */
+    public function getDateCreated()
+    {
+        return $this->dateCreated;
+    }
+
+    public function prePersist()
+    {
+        $this->dateCreated = new \DateTime();
+    }
+
+
+    public function preUpdate()
+    {
+        $this->dateUpdated = new \DateTime();
     }
 }

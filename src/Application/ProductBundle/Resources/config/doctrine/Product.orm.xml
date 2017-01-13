@@ -38,10 +38,6 @@
 
         <field name="isNegotiable" column="is_negotiable" type="boolean" nullable="true" />
 
-        <field name="dateUpdated" column="date_updated" type="datetime" nullable="true"  />
-
-        <field name="dateCreated" column="date_created" type="datetime" nullable="true"  />
-
     </mapped-superclass>
 
 </doctrine-mapping>

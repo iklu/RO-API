@@ -48,6 +48,16 @@ Application\AutoBundle\Entity\Car:
         airConditioning:
             type: boolean
             nullable: true
+        dateUpdated:
+            type: datetime
+            nullable: true
+            comment: ''
+            column: date_updated
+        dateCreated:
+            type: datetime
+            nullable: true
+            comment: ''
+            column: date_created
     manyToOne:
         models:
             targetEntity: Application\AutoBundle\Entity\Model
@@ -58,4 +68,6 @@ Application\AutoBundle\Entity\Car:
                 model_id:
                     referencedColumnName: id
             orphanRemoval: false
-    lifecycleCallbacks: {  }
+    lifecycleCallbacks:
+        prePersist: [prePersist]
+        preUpdate: [preUpdate]
