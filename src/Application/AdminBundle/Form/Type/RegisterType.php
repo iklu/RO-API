@@ -18,8 +18,6 @@ class RegisterType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-
-
         $builder
             ->add('username')
             ->add('email')
@@ -28,9 +26,6 @@ class RegisterType extends AbstractType
             ->add('lastName')
             ->add('confirmPassword')
             ->add('phone');
-
-
-
     }
 
     public function configureOptions(OptionsResolver $resolver)

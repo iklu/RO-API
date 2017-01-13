@@ -1,4 +1,11 @@
 Application\AdminBundle\Entity\User:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+            fields: email
+            message: "The email already exists."
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+            fields: username
+            message: "The username already exists."
     properties:
         username:
             - NotBlank:

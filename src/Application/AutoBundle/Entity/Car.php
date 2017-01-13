@@ -2,6 +2,7 @@
 
 namespace Application\AutoBundle\Entity;
 use Application\ProductBundle\Entity\Product;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Component\Serializer\Annotation\Groups;
