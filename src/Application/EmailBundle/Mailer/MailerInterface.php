@@ -10,6 +10,7 @@ namespace Application\EmailBundle\Mailer;
 
 
 use Application\AdminBundle\Model\UserInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 interface MailerInterface
 {
@@ -18,7 +19,7 @@ interface MailerInterface
      *
      * @param UserInterface $user
      */
-    public function sendConfirmationEmailMessage(UserInterface $user);
+    public function sendConfirmationEmailMessage(UserInterface $user, Request $request);
     /**
      * Send an email to a user to confirm the password reset.
      *

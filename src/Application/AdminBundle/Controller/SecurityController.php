@@ -83,7 +83,8 @@ class SecurityController extends AbstractAdminController
      *         {"name"="email", "dataType"="string", "required"=true, "description"="user email address"},
      *         {"name"="firstName", "dataType"="string", "required"=false, "description"="user first name"},
      *         {"name"="lastName", "dataType"="string", "required"=false, "description"="user last name"},
-     *         {"name"="phone", "dataType"="string", "required"=true, "description"="user phone number"}
+     *         {"name"="phone", "dataType"="string", "required"=true, "description"="user phone number"},
+     *         {"name"="activateURL", "dataType"="string", "required"=true, "description"="Activate link in the email"}
      *     },
      *     statusCodes={
      *         200="Returned when successful.",

@@ -46,6 +46,193 @@
       <parameter key="SensioGeneratorBundle">Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle</parameter>
       <parameter key="HautelookAliceBundle">Hautelook\AliceBundle\HautelookAliceBundle</parameter>
     </parameter>
+    <parameter key="kernel.bundles_metadata" type="collection">
+      <parameter key="FrameworkBundle" type="collection">
+        <parameter key="parent">null</parameter>
+        <parameter key="path">/var/www/html/RO-API/vendor/symfony/symfony/src/Symfony/Bundle/FrameworkBundle</parameter>
+        <parameter key="namespace">Symfony\Bundle\FrameworkBundle</parameter>
+      </parameter>
+      <parameter key="SecurityBundle" type="collection">
+        <parameter key="parent">null</parameter>
+        <parameter key="path">/var/www/html/RO-API/vendor/symfony/symfony/src/Symfony/Bundle/SecurityBundle</parameter>
+        <parameter key="namespace">Symfony\Bundle\SecurityBundle</parameter>
+      </parameter>
+      <parameter key="TwigBundle" type="collection">
+        <parameter key="parent">null</parameter>
+        <parameter key="path">/var/www/html/RO-API/vendor/symfony/symfony/src/Symfony/Bundle/TwigBundle</parameter>
+        <parameter key="namespace">Symfony\Bundle\TwigBundle</parameter>
+      </parameter>
+      <parameter key="MonologBundle" type="collection">
+        <parameter key="parent">null</parameter>
+        <parameter key="path">/var/www/html/RO-API/vendor/symfony/monolog-bundle</parameter>
+        <parameter key="namespace">Symfony\Bundle\MonologBundle</parameter>
+      </parameter>
+      <parameter key="SwiftmailerBundle" type="collection">
+        <parameter key="parent">null</parameter>
+        <parameter key="path">/var/www/html/RO-API/vendor/symfony/swiftmailer-bundle</parameter>
+        <parameter key="namespace">Symfony\Bundle\SwiftmailerBundle</parameter>
+      </parameter>
+      <parameter key="DoctrineBundle" type="collection">
+        <parameter key="parent">null</parameter>
+        <parameter key="path">/var/www/html/RO-API/vendor/doctrine/doctrine-bundle</parameter>
+        <parameter key="namespace">Doctrine\Bundle\DoctrineBundle</parameter>
+      </parameter>
+      <parameter key="SensioFrameworkExtraBundle" type="collection">
+        <parameter key="parent">null</parameter>
+        <parameter key="path">/var/www/html/RO-API/vendor/sensio/framework-extra-bundle</parameter>
+        <parameter key="namespace">Sensio\Bundle\FrameworkExtraBundle</parameter>
+      </parameter>
+      <parameter key="DunglasActionBundle" type="collection">
+        <parameter key="parent">null</parameter>
+        <parameter key="path">/var/www/html/RO-API/vendor/dunglas/action-bundle</parameter>
+        <parameter key="namespace">Dunglas\ActionBundle</parameter>
+      </parameter>
+      <parameter key="ApiPlatformBundle" type="collection">
+        <parameter key="parent">null</parameter>
+        <parameter key="path">/var/www/html/RO-API/vendor/api-platform/core/src/Bridge/Symfony/Bundle</parameter>
+        <parameter key="namespace">ApiPlatform\Core\Bridge\Symfony\Bundle</parameter>
+      </parameter>
+      <parameter key="NelmioCorsBundle" type="collection">
+        <parameter key="parent">null</parameter>
+        <parameter key="path">/var/www/html/RO-API/vendor/nelmio/cors-bundle</parameter>
+        <parameter key="namespace">Nelmio\CorsBundle</parameter>
+      </parameter>
+      <parameter key="ApplicationAdminBundle" type="collection">
+        <parameter key="parent">null</parameter>
+        <parameter key="path">/var/www/html/RO-API/src/Application/AdminBundle</parameter>
+        <parameter key="namespace">Application\AdminBundle</parameter>
+      </parameter>
+      <parameter key="ApplicationAppBundle" type="collection">
+        <parameter key="parent">null</parameter>
+        <parameter key="path">/var/www/html/RO-API/src/Application/AppBundle</parameter>
+        <parameter key="namespace">Application\AppBundle</parameter>
+      </parameter>
+      <parameter key="NelmioApiDocBundle" type="collection">
+        <parameter key="parent">null</parameter>
+        <parameter key="path">/var/www/html/RO-API/vendor/nelmio/api-doc-bundle/Nelmio/ApiDocBundle</parameter>
+        <parameter key="namespace">Nelmio\ApiDocBundle</parameter>
+      </parameter>
+      <parameter key="ApplicationCoreBundle" type="collection">
+        <parameter key="parent">null</parameter>
+        <parameter key="path">/var/www/html/RO-API/src/Application/CoreBundle</parameter>
+        <parameter key="namespace">Application\CoreBundle</parameter>
+      </parameter>
+      <parameter key="ApplicationEmailBundle" type="collection">
+        <parameter key="parent">null</parameter>
+        <parameter key="path">/var/www/html/RO-API/src/Application/EmailBundle</parameter>
+        <parameter key="namespace">Application\EmailBundle</parameter>
+      </parameter>
+      <parameter key="ApplicationProductBundle" type="collection">
+        <parameter key="parent">null</parameter>
+        <parameter key="path">/var/www/html/RO-API/src/Application/ProductBundle</parameter>
+        <parameter key="namespace">Application\ProductBundle</parameter>
+      </parameter>
+      <parameter key="ApplicationCategoryBundle" type="collection">
+        <parameter key="parent">null</parameter>
+        <parameter key="path">/var/www/html/RO-API/src/Application/CategoryBundle</parameter>
+        <parameter key="namespace">Application\CategoryBundle</parameter>
+      </parameter>
+      <parameter key="ApplicationCustomerBundle" type="collection">
+        <parameter key="parent">null</parameter>
+        <parameter key="path">/var/www/html/RO-API/src/Application/CustomerBundle</parameter>
+        <parameter key="namespace">Application\CustomerBundle</parameter>
+      </parameter>
+      <parameter key="ApplicationAutoBundle" type="collection">
+        <parameter key="parent">null</parameter>
+        <parameter key="path">/var/www/html/RO-API/src/Application/AutoBundle</parameter>
+        <parameter key="namespace">Application\AutoBundle</parameter>
+      </parameter>
+      <parameter key="ApplicationRealEstateBundle" type="collection">
+        <parameter key="parent">null</parameter>
+        <parameter key="path">/var/www/html/RO-API/src/Application/RealEstateBundle</parameter>
+        <parameter key="namespace">Application\RealEstateBundle</parameter>
+      </parameter>
+      <parameter key="ApplicationElectronicsBundle" type="collection">
+        <parameter key="parent">null</parameter>
+        <parameter key="path">/var/www/html/RO-API/src/Application/ElectronicsBundle</parameter>
+        <parameter key="namespace">Application\ElectronicsBundle</parameter>
+      </parameter>
+      <parameter key="ApplicationFashionBundle" type="collection">
+        <parameter key="parent">null</parameter>
+        <parameter key="path">/var/www/html/RO-API/src/Application/FashionBundle</parameter>
+        <parameter key="namespace">Application\FashionBundle</parameter>
+      </parameter>
+      <parameter key="ApplicationHouseGardeningBundle" type="collection">
+        <parameter key="parent">null</parameter>
+        <parameter key="path">/var/www/html/RO-API/src/Application/HouseGardeningBundle</parameter>
+        <parameter key="namespace">Application\HouseGardeningBundle</parameter>
+      </parameter>
+      <parameter key="ApplicationFamilyBundle" type="collection">
+        <parameter key="parent">null</parameter>
+        <parameter key="path">/var/www/html/RO-API/src/Application/FamilyBundle</parameter>
+        <parameter key="namespace">Application\FamilyBundle</parameter>
+      </parameter>
+      <parameter key="ApplicationSportBundle" type="collection">
+        <parameter key="parent">null</parameter>
+        <parameter key="path">/var/www/html/RO-API/src/Application/SportBundle</parameter>
+        <parameter key="namespace">Application\SportBundle</parameter>
+      </parameter>
+      <parameter key="ApplicationPetsBundle" type="collection">
+        <parameter key="parent">null</parameter>
+        <parameter key="path">/var/www/html/RO-API/src/Application/PetsBundle</parameter>
+        <parameter key="namespace">Application\PetsBundle</parameter>
+      </parameter>
+      <parameter key="ApplicationIndustryBundle" type="collection">
+        <parameter key="parent">null</parameter>
+        <parameter key="path">/var/www/html/RO-API/src/Application/IndustryBundle</parameter>
+        <parameter key="namespace">Application\IndustryBundle</parameter>
+      </parameter>
+      <parameter key="ApplicationBusinessBundle" type="collection">
+        <parameter key="parent">null</parameter>
+        <parameter key="path">/var/www/html/RO-API/src/Application/BusinessBundle</parameter>
+        <parameter key="namespace">Application\BusinessBundle</parameter>
+      </parameter>
+      <parameter key="ApplicationJobsBundle" type="collection">
+        <parameter key="parent">null</parameter>
+        <parameter key="path">/var/www/html/RO-API/src/Application/JobsBundle</parameter>
+        <parameter key="namespace">Application\JobsBundle</parameter>
+      </parameter>
+      <parameter key="ApplicationProducerBundle" type="collection">
+        <parameter key="parent">null</parameter>
+        <parameter key="path">/var/www/html/RO-API/src/Application/ProducerBundle</parameter>
+        <parameter key="namespace">Application\ProducerBundle</parameter>
+      </parameter>
+      <parameter key="ApplicationDoctrineBundle" type="collection">
+        <parameter key="parent">null</parameter>
+        <parameter key="path">/var/www/html/RO-API/src/Application/DoctrineBundle</parameter>
+        <parameter key="namespace">Application\DoctrineBundle</parameter>
+      </parameter>
+      <parameter key="DoctrineMigrationsBundle" type="collection">
+        <parameter key="parent">null</parameter>
+        <parameter key="path">/var/www/html/RO-API/vendor/doctrine/doctrine-migrations-bundle</parameter>
+        <parameter key="namespace">Doctrine\Bundle\MigrationsBundle</parameter>
+      </parameter>
+      <parameter key="DebugBundle" type="collection">
+        <parameter key="parent">null</parameter>
+        <parameter key="path">/var/www/html/RO-API/vendor/symfony/symfony/src/Symfony/Bundle/DebugBundle</parameter>
+        <parameter key="namespace">Symfony\Bundle\DebugBundle</parameter>
+      </parameter>
+      <parameter key="WebProfilerBundle" type="collection">
+        <parameter key="parent">null</parameter>
+        <parameter key="path">/var/www/html/RO-API/vendor/symfony/symfony/src/Symfony/Bundle/WebProfilerBundle</parameter>
+        <parameter key="namespace">Symfony\Bundle\WebProfilerBundle</parameter>
+      </parameter>
+      <parameter key="SensioDistributionBundle" type="collection">
+        <parameter key="parent">null</parameter>
+        <parameter key="path">/var/www/html/RO-API/vendor/sensio/distribution-bundle</parameter>
+        <parameter key="namespace">Sensio\Bundle\DistributionBundle</parameter>
+      </parameter>
+      <parameter key="SensioGeneratorBundle" type="collection">
+        <parameter key="parent">null</parameter>
+        <parameter key="path">/var/www/html/RO-API/vendor/sensio/generator-bundle</parameter>
+        <parameter key="namespace">Sensio\Bundle\GeneratorBundle</parameter>
+      </parameter>
+      <parameter key="HautelookAliceBundle" type="collection">
+        <parameter key="parent">null</parameter>
+        <parameter key="path">/var/www/html/RO-API/vendor/hautelook/alice-bundle/src</parameter>
+        <parameter key="namespace">Hautelook\AliceBundle</parameter>
+      </parameter>
+    </parameter>
     <parameter key="kernel.charset">UTF-8</parameter>
     <parameter key="kernel.container_class">appDevDebugProjectContainer</parameter>
     <parameter key="database_host">localhost</parameter>
@@ -677,7 +864,7 @@
                   <tag name="cache.pool"/>
                   <argument>Q3gl8yr+A8</argument>
                   <argument>0</argument>
-                  <argument>0VPnFpNcA8CTQlpc2MZaRQ</argument>
+                  <argument>7bwBHlzCmxWsW-hJSlp8Ph</argument>
                   <argument>/var/www/html/RO-API/var/cache/dev/pools</argument>
                   <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
                   <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
@@ -690,7 +877,7 @@
                   <tag name="cache.pool"/>
                   <argument>P7EJNj7kMI</argument>
                   <argument>0</argument>
-                  <argument>0VPnFpNcA8CTQlpc2MZaRQ</argument>
+                  <argument>7bwBHlzCmxWsW-hJSlp8Ph</argument>
                   <argument>/var/www/html/RO-API/var/cache/dev/pools</argument>
                   <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
                   <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
@@ -1022,7 +1209,7 @@
       <tag name="cache.pool"/>
       <argument>AVMKJgq+Ye</argument>
       <argument>0</argument>
-      <argument>0VPnFpNcA8CTQlpc2MZaRQ</argument>
+      <argument>7bwBHlzCmxWsW-hJSlp8Ph</argument>
       <argument>/var/www/html/RO-API/var/cache/dev/pools</argument>
       <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
@@ -2629,6 +2816,13 @@
       </call>
       <call method="addExtension">
         <argument type="service">
+          <service class="Twig_Extension_Debug" public="false">
+            <tag name="twig.extension"/>
+          </service>
+        </argument>
+      </call>
+      <call method="addExtension">
+        <argument type="service">
           <service class="Symfony\Bridge\Twig\Extension\FormExtension" public="false">
             <tag name="twig.extension"/>
             <argument type="service">
@@ -2643,13 +2837,6 @@
                 <argument type="service" id="security.csrf.token_manager" on-invalid="null"/>
               </service>
             </argument>
-          </service>
-        </argument>
-      </call>
-      <call method="addExtension">
-        <argument type="service">
-          <service class="Twig_Extension_Debug" public="false">
-            <tag name="twig.extension"/>
           </service>
         </argument>
       </call>
@@ -3875,6 +4062,193 @@
           <argument key="SensioGeneratorBundle">Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle</argument>
           <argument key="HautelookAliceBundle">Hautelook\AliceBundle\HautelookAliceBundle</argument>
         </argument>
+        <argument key="kernel.bundles_metadata" type="collection">
+          <argument key="FrameworkBundle" type="collection">
+            <argument key="parent">null</argument>
+            <argument key="path">/var/www/html/RO-API/vendor/symfony/symfony/src/Symfony/Bundle/FrameworkBundle</argument>
+            <argument key="namespace">Symfony\Bundle\FrameworkBundle</argument>
+          </argument>
+          <argument key="SecurityBundle" type="collection">
+            <argument key="parent">null</argument>
+            <argument key="path">/var/www/html/RO-API/vendor/symfony/symfony/src/Symfony/Bundle/SecurityBundle</argument>
+            <argument key="namespace">Symfony\Bundle\SecurityBundle</argument>
+          </argument>
+          <argument key="TwigBundle" type="collection">
+            <argument key="parent">null</argument>
+            <argument key="path">/var/www/html/RO-API/vendor/symfony/symfony/src/Symfony/Bundle/TwigBundle</argument>
+            <argument key="namespace">Symfony\Bundle\TwigBundle</argument>
+          </argument>
+          <argument key="MonologBundle" type="collection">
+            <argument key="parent">null</argument>
+            <argument key="path">/var/www/html/RO-API/vendor/symfony/monolog-bundle</argument>
+            <argument key="namespace">Symfony\Bundle\MonologBundle</argument>
+          </argument>
+          <argument key="SwiftmailerBundle" type="collection">
+            <argument key="parent">null</argument>
+            <argument key="path">/var/www/html/RO-API/vendor/symfony/swiftmailer-bundle</argument>
+            <argument key="namespace">Symfony\Bundle\SwiftmailerBundle</argument>
+          </argument>
+          <argument key="DoctrineBundle" type="collection">
+            <argument key="parent">null</argument>
+            <argument key="path">/var/www/html/RO-API/vendor/doctrine/doctrine-bundle</argument>
+            <argument key="namespace">Doctrine\Bundle\DoctrineBundle</argument>
+          </argument>
+          <argument key="SensioFrameworkExtraBundle" type="collection">
+            <argument key="parent">null</argument>
+            <argument key="path">/var/www/html/RO-API/vendor/sensio/framework-extra-bundle</argument>
+            <argument key="namespace">Sensio\Bundle\FrameworkExtraBundle</argument>
+          </argument>
+          <argument key="DunglasActionBundle" type="collection">
+            <argument key="parent">null</argument>
+            <argument key="path">/var/www/html/RO-API/vendor/dunglas/action-bundle</argument>
+            <argument key="namespace">Dunglas\ActionBundle</argument>
+          </argument>
+          <argument key="ApiPlatformBundle" type="collection">
+            <argument key="parent">null</argument>
+            <argument key="path">/var/www/html/RO-API/vendor/api-platform/core/src/Bridge/Symfony/Bundle</argument>
+            <argument key="namespace">ApiPlatform\Core\Bridge\Symfony\Bundle</argument>
+          </argument>
+          <argument key="NelmioCorsBundle" type="collection">
+            <argument key="parent">null</argument>
+            <argument key="path">/var/www/html/RO-API/vendor/nelmio/cors-bundle</argument>
+            <argument key="namespace">Nelmio\CorsBundle</argument>
+          </argument>
+          <argument key="ApplicationAdminBundle" type="collection">
+            <argument key="parent">null</argument>
+            <argument key="path">/var/www/html/RO-API/src/Application/AdminBundle</argument>
+            <argument key="namespace">Application\AdminBundle</argument>
+          </argument>
+          <argument key="ApplicationAppBundle" type="collection">
+            <argument key="parent">null</argument>
+            <argument key="path">/var/www/html/RO-API/src/Application/AppBundle</argument>
+            <argument key="namespace">Application\AppBundle</argument>
+          </argument>
+          <argument key="NelmioApiDocBundle" type="collection">
+            <argument key="parent">null</argument>
+            <argument key="path">/var/www/html/RO-API/vendor/nelmio/api-doc-bundle/Nelmio/ApiDocBundle</argument>
+            <argument key="namespace">Nelmio\ApiDocBundle</argument>
+          </argument>
+          <argument key="ApplicationCoreBundle" type="collection">
+            <argument key="parent">null</argument>
+            <argument key="path">/var/www/html/RO-API/src/Application/CoreBundle</argument>
+            <argument key="namespace">Application\CoreBundle</argument>
+          </argument>
+          <argument key="ApplicationEmailBundle" type="collection">
+            <argument key="parent">null</argument>
+            <argument key="path">/var/www/html/RO-API/src/Application/EmailBundle</argument>
+            <argument key="namespace">Application\EmailBundle</argument>
+          </argument>
+          <argument key="ApplicationProductBundle" type="collection">
+            <argument key="parent">null</argument>
+            <argument key="path">/var/www/html/RO-API/src/Application/ProductBundle</argument>
+            <argument key="namespace">Application\ProductBundle</argument>
+          </argument>
+          <argument key="ApplicationCategoryBundle" type="collection">
+            <argument key="parent">null</argument>
+            <argument key="path">/var/www/html/RO-API/src/Application/CategoryBundle</argument>
+            <argument key="namespace">Application\CategoryBundle</argument>
+          </argument>
+          <argument key="ApplicationCustomerBundle" type="collection">
+            <argument key="parent">null</argument>
+            <argument key="path">/var/www/html/RO-API/src/Application/CustomerBundle</argument>
+            <argument key="namespace">Application\CustomerBundle</argument>
+          </argument>
+          <argument key="ApplicationAutoBundle" type="collection">
+            <argument key="parent">null</argument>
+            <argument key="path">/var/www/html/RO-API/src/Application/AutoBundle</argument>
+            <argument key="namespace">Application\AutoBundle</argument>
+          </argument>
+          <argument key="ApplicationRealEstateBundle" type="collection">
+            <argument key="parent">null</argument>
+            <argument key="path">/var/www/html/RO-API/src/Application/RealEstateBundle</argument>
+            <argument key="namespace">Application\RealEstateBundle</argument>
+          </argument>
+          <argument key="ApplicationElectronicsBundle" type="collection">
+            <argument key="parent">null</argument>
+            <argument key="path">/var/www/html/RO-API/src/Application/ElectronicsBundle</argument>
+            <argument key="namespace">Application\ElectronicsBundle</argument>
+          </argument>
+          <argument key="ApplicationFashionBundle" type="collection">
+            <argument key="parent">null</argument>
+            <argument key="path">/var/www/html/RO-API/src/Application/FashionBundle</argument>
+            <argument key="namespace">Application\FashionBundle</argument>
+          </argument>
+          <argument key="ApplicationHouseGardeningBundle" type="collection">
+            <argument key="parent">null</argument>
+            <argument key="path">/var/www/html/RO-API/src/Application/HouseGardeningBundle</argument>
+            <argument key="namespace">Application\HouseGardeningBundle</argument>
+          </argument>
+          <argument key="ApplicationFamilyBundle" type="collection">
+            <argument key="parent">null</argument>
+            <argument key="path">/var/www/html/RO-API/src/Application/FamilyBundle</argument>
+            <argument key="namespace">Application\FamilyBundle</argument>
+          </argument>
+          <argument key="ApplicationSportBundle" type="collection">
+            <argument key="parent">null</argument>
+            <argument key="path">/var/www/html/RO-API/src/Application/SportBundle</argument>
+            <argument key="namespace">Application\SportBundle</argument>
+          </argument>
+          <argument key="ApplicationPetsBundle" type="collection">
+            <argument key="parent">null</argument>
+            <argument key="path">/var/www/html/RO-API/src/Application/PetsBundle</argument>
+            <argument key="namespace">Application\PetsBundle</argument>
+          </argument>
+          <argument key="ApplicationIndustryBundle" type="collection">
+            <argument key="parent">null</argument>
+            <argument key="path">/var/www/html/RO-API/src/Application/IndustryBundle</argument>
+            <argument key="namespace">Application\IndustryBundle</argument>
+          </argument>
+          <argument key="ApplicationBusinessBundle" type="collection">
+            <argument key="parent">null</argument>
+            <argument key="path">/var/www/html/RO-API/src/Application/BusinessBundle</argument>
+            <argument key="namespace">Application\BusinessBundle</argument>
+          </argument>
+          <argument key="ApplicationJobsBundle" type="collection">
+            <argument key="parent">null</argument>
+            <argument key="path">/var/www/html/RO-API/src/Application/JobsBundle</argument>
+            <argument key="namespace">Application\JobsBundle</argument>
+          </argument>
+          <argument key="ApplicationProducerBundle" type="collection">
+            <argument key="parent">null</argument>
+            <argument key="path">/var/www/html/RO-API/src/Application/ProducerBundle</argument>
+            <argument key="namespace">Application\ProducerBundle</argument>
+          </argument>
+          <argument key="ApplicationDoctrineBundle" type="collection">
+            <argument key="parent">null</argument>
+            <argument key="path">/var/www/html/RO-API/src/Application/DoctrineBundle</argument>
+            <argument key="namespace">Application\DoctrineBundle</argument>
+          </argument>
+          <argument key="DoctrineMigrationsBundle" type="collection">
+            <argument key="parent">null</argument>
+            <argument key="path">/var/www/html/RO-API/vendor/doctrine/doctrine-migrations-bundle</argument>
+            <argument key="namespace">Doctrine\Bundle\MigrationsBundle</argument>
+          </argument>
+          <argument key="DebugBundle" type="collection">
+            <argument key="parent">null</argument>
+            <argument key="path">/var/www/html/RO-API/vendor/symfony/symfony/src/Symfony/Bundle/DebugBundle</argument>
+            <argument key="namespace">Symfony\Bundle\DebugBundle</argument>
+          </argument>
+          <argument key="WebProfilerBundle" type="collection">
+            <argument key="parent">null</argument>
+            <argument key="path">/var/www/html/RO-API/vendor/symfony/symfony/src/Symfony/Bundle/WebProfilerBundle</argument>
+            <argument key="namespace">Symfony\Bundle\WebProfilerBundle</argument>
+          </argument>
+          <argument key="SensioDistributionBundle" type="collection">
+            <argument key="parent">null</argument>
+            <argument key="path">/var/www/html/RO-API/vendor/sensio/distribution-bundle</argument>
+            <argument key="namespace">Sensio\Bundle\DistributionBundle</argument>
+          </argument>
+          <argument key="SensioGeneratorBundle" type="collection">
+            <argument key="parent">null</argument>
+            <argument key="path">/var/www/html/RO-API/vendor/sensio/generator-bundle</argument>
+            <argument key="namespace">Sensio\Bundle\GeneratorBundle</argument>
+          </argument>
+          <argument key="HautelookAliceBundle" type="collection">
+            <argument key="parent">null</argument>
+            <argument key="path">/var/www/html/RO-API/vendor/hautelook/alice-bundle/src</argument>
+            <argument key="namespace">Hautelook\AliceBundle</argument>
+          </argument>
+        </argument>
         <argument key="kernel.charset">UTF-8</argument>
         <argument key="kernel.container_class">appDevDebugProjectContainer</argument>
         <argument key="database_host">localhost</argument>
@@ -4583,118 +4957,6 @@
       </argument>
       <argument>null</argument>
     </service>
-    <service id="twig.loader" class="Symfony\Bundle\TwigBundle\Loader\FilesystemLoader">
-      <tag name="twig.loader"/>
-      <argument type="service" id="templating.locator"/>
-      <argument type="service" id="templating.name_parser"/>
-      <call method="addPath">
-        <argument>/var/www/html/RO-API/vendor/symfony/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/views</argument>
-        <argument>Framework</argument>
-      </call>
-      <call method="addPath">
-        <argument>/var/www/html/RO-API/vendor/symfony/symfony/src/Symfony/Bundle/SecurityBundle/Resources/views</argument>
-        <argument>Security</argument>
-      </call>
-      <call method="addPath">
-        <argument>/var/www/html/RO-API/vendor/symfony/symfony/src/Symfony/Bundle/TwigBundle/Resources/views</argument>
-        <argument>Twig</argument>
-      </call>
-      <call method="addPath">
-        <argument>/var/www/html/RO-API/vendor/symfony/swiftmailer-bundle/Resources/views</argument>
-        <argument>Swiftmailer</argument>
-      </call>
-      <call method="addPath">
-        <argument>/var/www/html/RO-API/vendor/doctrine/doctrine-bundle/Resources/views</argument>
-        <argument>Doctrine</argument>
-      </call>
-      <call method="addPath">
-        <argument>/var/www/html/RO-API/vendor/api-platform/core/src/Bridge/Symfony/Bundle/Resources/views</argument>
-        <argument>ApiPlatform</argument>
-      </call>
-      <call method="addPath">
-        <argument>/var/www/html/RO-API/src/Application/AppBundle/Resources/views</argument>
-        <argument>ApplicationApp</argument>
-      </call>
-      <call method="addPath">
-        <argument>/var/www/html/RO-API/vendor/nelmio/api-doc-bundle/Nelmio/ApiDocBundle/Resources/views</argument>
-        <argument>NelmioApiDoc</argument>
-      </call>
-      <call method="addPath">
-        <argument>/var/www/html/RO-API/src/Application/EmailBundle/Resources/views</argument>
-        <argument>ApplicationEmail</argument>
-      </call>
-      <call method="addPath">
-        <argument>/var/www/html/RO-API/src/Application/ProductBundle/Resources/views</argument>
-        <argument>ApplicationProduct</argument>
-      </call>
-      <call method="addPath">
-        <argument>/var/www/html/RO-API/src/Application/CategoryBundle/Resources/views</argument>
-        <argument>ApplicationCategory</argument>
-      </call>
-      <call method="addPath">
-        <argument>/var/www/html/RO-API/src/Application/CustomerBundle/Resources/views</argument>
-        <argument>ApplicationCustomer</argument>
-      </call>
-      <call method="addPath">
-        <argument>/var/www/html/RO-API/src/Application/AutoBundle/Resources/views</argument>
-        <argument>ApplicationAuto</argument>
-      </call>
-      <call method="addPath">
-        <argument>/var/www/html/RO-API/src/Application/RealEstateBundle/Resources/views</argument>
-        <argument>ApplicationRealEstate</argument>
-      </call>
-      <call method="addPath">
-        <argument>/var/www/html/RO-API/src/Application/ElectronicsBundle/Resources/views</argument>
-        <argument>ApplicationElectronics</argument>
-      </call>
-      <call method="addPath">
-        <argument>/var/www/html/RO-API/src/Application/FashionBundle/Resources/views</argument>
-        <argument>ApplicationFashion</argument>
-      </call>
-      <call method="addPath">
-        <argument>/var/www/html/RO-API/src/Application/HouseGardeningBundle/Resources/views</argument>
-        <argument>ApplicationHouseGardening</argument>
-      </call>
-      <call method="addPath">
-        <argument>/var/www/html/RO-API/src/Application/FamilyBundle/Resources/views</argument>
-        <argument>ApplicationFamily</argument>
-      </call>
-      <call method="addPath">
-        <argument>/var/www/html/RO-API/src/Application/SportBundle/Resources/views</argument>
-        <argument>ApplicationSport</argument>
-      </call>
-      <call method="addPath">
-        <argument>/var/www/html/RO-API/src/Application/PetsBundle/Resources/views</argument>
-        <argument>ApplicationPets</argument>
-      </call>
-      <call method="addPath">
-        <argument>/var/www/html/RO-API/src/Application/IndustryBundle/Resources/views</argument>
-        <argument>ApplicationIndustry</argument>
-      </call>
-      <call method="addPath">
-        <argument>/var/www/html/RO-API/src/Application/BusinessBundle/Resources/views</argument>
-        <argument>ApplicationBusiness</argument>
-      </call>
-      <call method="addPath">
-        <argument>/var/www/html/RO-API/src/Application/JobsBundle/Resources/views</argument>
-        <argument>ApplicationJobs</argument>
-      </call>
-      <call method="addPath">
-        <argument>/var/www/html/RO-API/src/Application/ProducerBundle/Resources/views</argument>
-        <argument>ApplicationProducer</argument>
-      </call>
-      <call method="addPath">
-        <argument>/var/www/html/RO-API/vendor/symfony/symfony/src/Symfony/Bundle/DebugBundle/Resources/views</argument>
-        <argument>Debug</argument>
-      </call>
-      <call method="addPath">
-        <argument>/var/www/html/RO-API/vendor/symfony/symfony/src/Symfony/Bundle/WebProfilerBundle/Resources/views</argument>
-        <argument>WebProfiler</argument>
-      </call>
-      <call method="addPath">
-        <argument>/var/www/html/RO-API/vendor/symfony/symfony/src/Symfony/Bridge/Twig/Resources/views/Form</argument>
-      </call>
-    </service>
     <service id="logger" class="Symfony\Bridge\Monolog\Logger">
       <argument>app</argument>
       <call method="useMicrosecondTimestamps">
@@ -4900,6 +5162,114 @@
           </argument>
         </service>
       </argument>
+    </service>
+    <service id="twig.loader" class="Symfony\Bundle\TwigBundle\Loader\FilesystemLoader">
+      <tag name="twig.loader"/>
+      <argument type="service" id="templating.locator"/>
+      <argument type="service" id="templating.name_parser"/>
+      <call method="addPath">
+        <argument>/var/www/html/RO-API/vendor/symfony/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/views</argument>
+        <argument>Framework</argument>
+      </call>
+      <call method="addPath">
+        <argument>/var/www/html/RO-API/vendor/symfony/symfony/src/Symfony/Bundle/SecurityBundle/Resources/views</argument>
+        <argument>Security</argument>
+      </call>
+      <call method="addPath">
+        <argument>/var/www/html/RO-API/vendor/symfony/symfony/src/Symfony/Bundle/TwigBundle/Resources/views</argument>
+        <argument>Twig</argument>
+      </call>
+      <call method="addPath">
+        <argument>/var/www/html/RO-API/vendor/symfony/swiftmailer-bundle/Resources/views</argument>
+        <argument>Swiftmailer</argument>
+      </call>
+      <call method="addPath">
+        <argument>/var/www/html/RO-API/vendor/doctrine/doctrine-bundle/Resources/views</argument>
+        <argument>Doctrine</argument>
+      </call>
+      <call method="addPath">
+        <argument>/var/www/html/RO-API/vendor/api-platform/core/src/Bridge/Symfony/Bundle/Resources/views</argument>
+        <argument>ApiPlatform</argument>
+      </call>
+      <call method="addPath">
+        <argument>/var/www/html/RO-API/src/Application/AppBundle/Resources/views</argument>
+        <argument>ApplicationApp</argument>
+      </call>
+      <call method="addPath">
+        <argument>/var/www/html/RO-API/vendor/nelmio/api-doc-bundle/Nelmio/ApiDocBundle/Resources/views</argument>
+        <argument>NelmioApiDoc</argument>
+      </call>
+      <call method="addPath">
+        <argument>/var/www/html/RO-API/src/Application/EmailBundle/Resources/views</argument>
+        <argument>ApplicationEmail</argument>
+      </call>
+      <call method="addPath">
+        <argument>/var/www/html/RO-API/src/Application/ProductBundle/Resources/views</argument>
+        <argument>ApplicationProduct</argument>
+      </call>
+      <call method="addPath">
+        <argument>/var/www/html/RO-API/src/Application/CategoryBundle/Resources/views</argument>
+        <argument>ApplicationCategory</argument>
+      </call>
+      <call method="addPath">
+        <argument>/var/www/html/RO-API/src/Application/AutoBundle/Resources/views</argument>
+        <argument>ApplicationAuto</argument>
+      </call>
+      <call method="addPath">
+        <argument>/var/www/html/RO-API/src/Application/RealEstateBundle/Resources/views</argument>
+        <argument>ApplicationRealEstate</argument>
+      </call>
+      <call method="addPath">
+        <argument>/var/www/html/RO-API/src/Application/ElectronicsBundle/Resources/views</argument>
+        <argument>ApplicationElectronics</argument>
+      </call>
+      <call method="addPath">
+        <argument>/var/www/html/RO-API/src/Application/FashionBundle/Resources/views</argument>
+        <argument>ApplicationFashion</argument>
+      </call>
+      <call method="addPath">
+        <argument>/var/www/html/RO-API/src/Application/HouseGardeningBundle/Resources/views</argument>
+        <argument>ApplicationHouseGardening</argument>
+      </call>
+      <call method="addPath">
+        <argument>/var/www/html/RO-API/src/Application/FamilyBundle/Resources/views</argument>
+        <argument>ApplicationFamily</argument>
+      </call>
+      <call method="addPath">
+        <argument>/var/www/html/RO-API/src/Application/SportBundle/Resources/views</argument>
+        <argument>ApplicationSport</argument>
+      </call>
+      <call method="addPath">
+        <argument>/var/www/html/RO-API/src/Application/PetsBundle/Resources/views</argument>
+        <argument>ApplicationPets</argument>
+      </call>
+      <call method="addPath">
+        <argument>/var/www/html/RO-API/src/Application/IndustryBundle/Resources/views</argument>
+        <argument>ApplicationIndustry</argument>
+      </call>
+      <call method="addPath">
+        <argument>/var/www/html/RO-API/src/Application/BusinessBundle/Resources/views</argument>
+        <argument>ApplicationBusiness</argument>
+      </call>
+      <call method="addPath">
+        <argument>/var/www/html/RO-API/src/Application/JobsBundle/Resources/views</argument>
+        <argument>ApplicationJobs</argument>
+      </call>
+      <call method="addPath">
+        <argument>/var/www/html/RO-API/src/Application/ProducerBundle/Resources/views</argument>
+        <argument>ApplicationProducer</argument>
+      </call>
+      <call method="addPath">
+        <argument>/var/www/html/RO-API/vendor/symfony/symfony/src/Symfony/Bundle/DebugBundle/Resources/views</argument>
+        <argument>Debug</argument>
+      </call>
+      <call method="addPath">
+        <argument>/var/www/html/RO-API/vendor/symfony/symfony/src/Symfony/Bundle/WebProfilerBundle/Resources/views</argument>
+        <argument>WebProfiler</argument>
+      </call>
+      <call method="addPath">
+        <argument>/var/www/html/RO-API/vendor/symfony/symfony/src/Symfony/Bridge/Twig/Resources/views/Form</argument>
+      </call>
     </service>
     <service id="session.storage" alias="session.storage.native"/>
     <service id="event_dispatcher" alias="debug.event_dispatcher"/>
