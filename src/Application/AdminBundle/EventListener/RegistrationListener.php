@@ -37,8 +37,7 @@ class RegistrationListener implements EventSubscriberInterface
         $user->setLastName($request->get("lastName"));
         $user->setEmail($request->get("email"));
         $user->setPlainPassword($request->get("password"));
-        $user->setConfirmationToken($request->get("confirmPassword"));
-        $user->setEnabled(true);
+        $user->setEnabled(false);
 
         return $event->setResponse($user);
     }

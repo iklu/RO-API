@@ -9,6 +9,7 @@ namespace Application\EmailBundle\Mailer;
  */
 use Application\AdminBundle\Model\UserInterface;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class Mailer implements MailerInterface
@@ -47,11 +48,10 @@ class Mailer implements MailerInterface
     /**
      * {@inheritdoc}
      */
-    public function sendConfirmationEmailMessage(UserInterface $user)
+    public function sendConfirmationEmailMessage(UserInterface $user, Request $request)
     {
         $template = $this->parameters['confirmation.template'];
-        //$url = $this->router->generate('fos_user_registration_confirm', array('token' => $user->getConfirmationToken()), UrlGeneratorInterface::ABSOLUTE_URL);
-        $url = "care vreii";
+        $url = $request->get("activateURL").$user->getConfirmationToken();
         $rendered = $this->templating->render($template, array(
             'user' => $user,
             'confirmationUrl' => $url,

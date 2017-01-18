@@ -86,6 +86,7 @@ class UserManager extends BaseUserManager
         $this->updateCanonicalFields($user);
         $this->updatePassword($user);
 
+
         $this->objectManager->persist($user);
         if ($andFlush) {
             $this->objectManager->flush();
