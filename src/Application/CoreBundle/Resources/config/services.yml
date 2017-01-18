@@ -5,25 +5,10 @@
 #    - { resource: 'services/form.yml' }
 
 services:
-    flash.helper:
-        class: Application\CoreBundle\Helper\Flash\FlashHelper
-        arguments: ['@session', '@translator.helper']
-
-#    image.helper:
-#        class: Application\CoreBundle\Helper\Image\ImageHelper
-#        arguments: ['@liip_imagine.cache.manager']
-
-    router.helper:
-        class: Application\CoreBundle\Helper\Router\RouterHelper
-        arguments: ['@router', '@request.helper']
 
     request.helper:
         class: Application\CoreBundle\Helper\Request\RequestHelper
         arguments: ['@request_stack']
-
-    environment_helper:
-        class: Application\CoreBundle\Helper\Environment\EnvironmentHelper
-        arguments: ['@kernel']
 
     validator.helper:
         class: Application\CoreBundle\Helper\Validator\ValidatorHelper
@@ -32,16 +17,6 @@ services:
     translator.helper:
         class: Application\CoreBundle\Helper\Translator\TranslatorHelper
         arguments: ['@translator']
-
-    templating.helper:
-        class: Application\CoreBundle\Helper\Templating\TemplatingHelper
-        arguments: ['@templating', '@kernel']
-
-    mailer.helper:
-        class: Application\CoreBundle\Helper\Mailer\MailerHelper
-        arguments: ['%kernel.debug%']
-        calls:
-            - [setContainer, ['@service_container']]
 
     security.helper:
         class: Application\CoreBundle\Helper\Security\SecurityHelper
