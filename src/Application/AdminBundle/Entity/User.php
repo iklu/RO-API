@@ -1065,4 +1065,10 @@ class User implements UserInterface, GroupableInterface
     {
         $this->confirmPassword = $confirmPassword;
     }
+
+    public function prePersist()
+    {
+        $this->roles= array(static::ROLE_DEFAULT);
+    }
+
 }

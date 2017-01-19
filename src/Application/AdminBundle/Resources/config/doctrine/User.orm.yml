@@ -170,4 +170,5 @@ Application\AdminBundle\Entity\User:
             inverseJoinColumns:
                 group_id:
                     referencedColumnName: id
-    lifecycleCallbacks: {  }
+    lifecycleCallbacks:
+        prePersist: [prePersist]
