@@ -14,6 +14,7 @@ use Symfony\Component\Validator\Constraints;
 
 /**
  * @ApiResource(
+ *
  *     itemOperations={
  *          "getUser"={"route_name"="get_user"},
  *          "updateUser"={"route_name"="update_user"}
@@ -23,6 +24,7 @@ use Symfony\Component\Validator\Constraints;
  *          "getUsers"={"route_name"="get_users"}
  *      },
  *     attributes={
+ *          "jsonld_embed_context" = true,
  *          "normalization_context"={"groups"={"user", "user-read"}},
  *          "denormalization_context"={"groups"={"user", "user-write"}}
  * }

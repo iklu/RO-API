@@ -9,14 +9,15 @@ Application\AdminBundle\Entity\User:
     properties:
         username:
             - NotBlank:
-                message: "Need to login"
+                message: "The Username is required."
         email:
             - NotBlank:
+                message: "The Email is required."
             - Email:
-                message: "Not good email"
+                message: "The Email is invalid."
         password:
             - NotBlank:
-                message: "Pass required"
+                message: "The Password is required."
             - Length:
                 min: 2
                 max: 30
@@ -24,7 +25,7 @@ Application\AdminBundle\Entity\User:
                 maxMessage: "max ch"
         confirmPassword:
             - NotBlank:
-                message: "required"
+                message: "The Repeated Password is required."
     getters:
         passwordEqual:
-            - 'IsFalse': { message: 'The repeated password fields must match.' }
+            - 'IsFalse': { message: 'The Repeated Password fields must match.' }

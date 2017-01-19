@@ -11,14 +11,7 @@
 
 namespace Application\AdminBundle\Model;
 
-/**
- * Interface to be implemented by group managers. This adds an additional level
- * of abstraction between your application, and the actual repository.
- *
- * All changes to groups should happen through this interface.
- *
- * @author Christophe Coevoet <stof@notk.org>
- */
+
 interface GroupManagerInterface
 {
     /**

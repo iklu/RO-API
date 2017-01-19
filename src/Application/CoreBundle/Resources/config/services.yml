@@ -31,3 +31,5 @@ services:
     app.operation_path_resolver.no_separators:
         class: Application\CoreBundle\PathResolver\NoSeparatorsOperationPathResolver
         public: false
+
+

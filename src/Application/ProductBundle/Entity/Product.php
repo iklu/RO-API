@@ -8,6 +8,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 /**
  * @ApiResource(
  *     attributes={
+ *          "jsonld_embed_context"=true,
  *          "normalization_context"={"groups"={"product", "user-read"}},
  *          "denormalization_context"={"groups"={"product", "user-write"}}
  * }

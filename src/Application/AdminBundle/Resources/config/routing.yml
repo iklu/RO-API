@@ -81,5 +81,3 @@ get_profile_action:
     methods:  ['GET']
     defaults:
         _controller: 'ApplicationAdminBundle:Security:getProfile'
-        _api_resource_class: 'Application\AdminBundle\Entity\User'
-        _api_collection_operation_name: 'addUser'

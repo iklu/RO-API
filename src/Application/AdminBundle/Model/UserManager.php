@@ -11,12 +11,7 @@ use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface as SecurityUserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 
-/**
- * Abstract User Manager implementation which can be used as base class for your
- * concrete manager.
- *
- * @author Johannes M. Schmitt <schmittjoh@gmail.com>
- */
+
 abstract class UserManager implements UserManagerInterface, UserProviderInterface
 {
     /**

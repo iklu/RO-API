@@ -13,13 +13,14 @@ use Doctrine\Common\Collections\Collection;
  * @ApiResource(
  *     itemOperations={
  *          "getCar"={"route_name"="get_car"},
- *          "updateCar"={"route_name"="update_car"}
+ *          "updateCar"={"route_name"="update_car"},
  *      },
  *     collectionOperations = {
  *          "addCar"={"route_name"="add_car"},
  *          "getCars"={"route_name"="get_cars"}
  *      },
  *     attributes={
+ *          "jsonld_embed_context"=true,
  *          "normalization_context"={"groups"={"car", "user-read"}},
  *          "denormalization_context"={"groups"={"car", "user-write"}}
  * }
