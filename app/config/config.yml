@@ -53,7 +53,14 @@ doctrine:
         auto_generate_proxy_classes: "%kernel.debug%"
         naming_strategy: doctrine.orm.naming_strategy.underscore
         auto_mapping: true
-
+        metadata_cache_driver:
+            type: redis
+            host: localhost
+            port: 6389
+        query_cache_driver:
+            type: redis
+            host: localhost
+            port: 6389
 # Swiftmailer Configuration
 swiftmailer:
     disable_delivery:  false
@@ -127,3 +134,16 @@ doctrine_migrations:
     namespace: Application\Migrations
     table_name: migration_versions
     name: Application Migrations
+
+cache_adapter:
+  providers:
+    my_redis:
+      factory: 'cache.factory.redis'
+      options:
+        host: 127.0.0.1 # Using custom host
+        port: 6389
+    my_chain:
+      factory: 'cache.factory.chain'
+      options:
+        services:
+            - '@cache.provider.my_redis'
