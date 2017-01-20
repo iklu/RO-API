@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "5f33ae441c5410fbbcc287c8d844ce4d",
-    "content-hash": "af168472a20f4578d4211aa8f91abd98",
+    "hash": "cf02235ddff307e1cf5784d9e4c53001",
+    "content-hash": "f1c966cb49cc1a148c65f1eb4120e009",
     "packages": [
         {
             "name": "api-platform/core",
@@ -217,6 +217,70 @@
             "time": "2016-07-31 18:10:41"
         },
         {
+            "name": "cache/cache-bundle",
+            "version": "0.4.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-cache/cache-bundle.git",
+                "reference": "c711fe1599d628ba73525abd4dc5bbfe3d6ccb98"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-cache/cache-bundle/zipball/c711fe1599d628ba73525abd4dc5bbfe3d6ccb98",
+                "reference": "c711fe1599d628ba73525abd4dc5bbfe3d6ccb98",
+                "shasum": ""
+            },
+            "require": {
+                "cache/session-handler": "^0.1",
+                "cache/taggable-cache": "^0.4.3",
+                "php": "^5.5 || ^7.0",
+                "symfony/framework-bundle": "^2.7 || ^3.0"
+            },
+            "require-dev": {
+                "cache/array-adapter": "^0.4",
+                "cache/psr-6-doctrine-bridge": "^2.0",
+                "matthiasnoback/symfony-dependency-injection-test": "^1.0",
+                "phpunit/phpunit": "^5.1 || ^4.0",
+                "symfony/symfony": "^2.7 || ^3.0"
+            },
+            "suggest": {
+                "cache/adapter-bundle": "To register PSR-6 compliant cache implementations as services.",
+                "cache/psr-6-doctrine-bridge": "To be able to use Doctrine query, result and metadata cache."
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Cache\\CacheBundle\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Aaron Scherer",
+                    "email": "aequasi@gmail.com",
+                    "homepage": "https://github.com/aequasi"
+                },
+                {
+                    "name": "Tobias Nyholm",
+                    "email": "tobias.nyholm@gmail.com",
+                    "homepage": "https://github.com/nyholm"
+                }
+            ],
+            "description": "Symfony 2 bundle providing integration between PSR-6 compliant cache services and the framework. It supports cache for sessions, routing and Doctrine",
+            "homepage": "http://www.php-cache.com/en/latest/",
+            "keywords": [
+                "cache",
+                "doctrine",
+                "psr6",
+                "router",
+                "session"
+            ],
+            "time": "2016-08-16 13:41:00"
+        },
+        {
             "name": "cache/chain-adapter",
             "version": "0.4.0",
             "source": {
@@ -389,6 +453,60 @@
                 "psr-6"
             ],
             "time": "2016-08-07 15:04:55"
+        },
+        {
+            "name": "cache/session-handler",
+            "version": "0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-cache/session-handler.git",
+                "reference": "edb96d23d8206324095f8cc392dd3c5a85c7b078"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-cache/session-handler/zipball/edb96d23d8206324095f8cc392dd3c5a85c7b078",
+                "reference": "edb96d23d8206324095f8cc392dd3c5a85c7b078",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.5|^7.0",
+                "psr/cache": "~1.0"
+            },
+            "require-dev": {
+                "cache/array-adapter": "@stable",
+                "mockery/mockery": "^0.9.4",
+                "phpunit/phpunit": "^5.1|^4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Cache\\SessionHandler\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Aaron Scherer",
+                    "email": "aequasi@gmail.com",
+                    "homepage": "https://github.com/aequasi"
+                },
+                {
+                    "name": "Tobias Nyholm",
+                    "email": "tobias.nyholm@gmail.com",
+                    "homepage": "https://github.com/nyholm"
+                }
+            ],
+            "description": "An implementation of PHP's SessionHandlerInterface that allows PSR-6",
+            "homepage": "https://github.com/php-cache/session-handler",
+            "keywords": [
+                "cache",
+                "psr-6",
+                "session handler"
+            ],
+            "time": "2016-01-23 12:40:20"
         },
         {
             "name": "cache/taggable-cache",

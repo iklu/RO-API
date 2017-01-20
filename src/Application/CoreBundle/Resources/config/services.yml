@@ -22,6 +22,10 @@ services:
         class: Application\CoreBundle\Helper\Security\SecurityHelper
         arguments: ['@security.token_storage', '@request.helper', '@security.authorization_checker']
 
+    redis.cache.helper:
+        class: Application\CoreBundle\Helper\Cache\RedisCacheHelper
+        arguments: ['@cache.provider.my_redis']
+
     app.listener.decorating_deserialize:
         class: 'Application\CoreBundle\EventListener\DeserializeListener'
         arguments: ['@api_platform.serializer', '@api_platform.serializer.context_builder', '@api_platform.listener.request.deserialize']

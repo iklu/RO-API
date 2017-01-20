@@ -1,7 +1,8 @@
 <?php
 
-namespace Acme\CoreBundle\Helper\Cache;
+namespace Application\CoreBundle\Helper\Cache;
 use Cache\Adapter\Redis\RedisCachePool;
+use Symfony\Component\Cache\Adapter\RedisAdapter;
 
 /**
  * Created by PhpStorm.

@@ -1,6 +1,6 @@
 <?php
 
-namespace Acme\CoreBundle\Helper\Cache;
+namespace Application\CoreBundle\Helper\Cache;
 /**
  * Created by PhpStorm.
  * User: ovidiu

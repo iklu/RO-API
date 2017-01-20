@@ -18,6 +18,12 @@ class CarController extends AbstractFrontController
     }
 
     public function getCarsAction($data){
+        $cache  = $this->getCacheHelper();
+        $cacheKey = 'car';
+        if($cache->has($cacheKey)){
+          return $cache->get($cacheKey);
+        }
+        $cache->set($cacheKey, "dd");
         return $data;
     }
 }

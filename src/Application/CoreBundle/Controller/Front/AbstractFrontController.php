@@ -43,6 +43,11 @@ class AbstractFrontController extends AbstractController implements FrontControl
         return $this->getSecurityHelper()->getAuthenticatedClient();
     }
 
+    public function getCacheHelper()
+    {
+        return $this->get("redis.cache.helper");
+    }
+
     public function getCustomerAuthorizationChecker($entity)
     {
         return $this->getSecurityHelper()->getCustomerAuthorizationChecker($entity);
