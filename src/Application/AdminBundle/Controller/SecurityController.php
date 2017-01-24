@@ -117,9 +117,8 @@ class SecurityController extends AbstractAdminController
             $dispatcher->dispatch(ApplicationAdminEvents::REGISTRATION_INITIALIZE, $event);
 
             if ($form->isSubmitted() && $form->isValid()) {
-
-                $dispatcher->dispatch(ApplicationAdminEvents::REGISTRATION_SUCCESS, $event);
                 $userManager->updateUser($user);
+                $dispatcher->dispatch(ApplicationAdminEvents::REGISTRATION_SUCCESS, $event);
 
                 if (null === $response = $event->getResponse()) {
                     echo $event->getResponse();

@@ -1,0 +1,12 @@
+{% extends "AcmeEmailNotificationBundle::master.em.twig" %}
+
+{% block content %}
+
+    <p>
+        Hello,<br><br>
+        Thank you for supporting our nation’s Veterans with your donation towards our Service for Service program. As a token of our appreciation, please follow the link below to retrieve a coupon, redeemable for $5 off your next full-priced oil change at any participating Meineke.<br><br>
+        Coupon Link: <a href="{{ documentURL }}" target="_blank">{{ documentURL }}</a><br><br>
+        Thank you again,
+    </p>
+
+{% endblock %}

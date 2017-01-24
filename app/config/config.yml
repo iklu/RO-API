@@ -56,11 +56,11 @@ doctrine:
         metadata_cache_driver:
             type: redis
             host: localhost
-            port: 6389
+            port: 6379
         query_cache_driver:
             type: redis
             host: localhost
-            port: 6389
+            port: 6379
 # Swiftmailer Configuration
 swiftmailer:
     disable_delivery:  false
@@ -70,7 +70,7 @@ swiftmailer:
     password:  "%mailer_password%"
     port:      "%mailer_port%"
     encryption: "%mailer_encryption%"
-    spool:     { type: memory }
+    spool:     { type: db }
 
 # Nelmio CORS
 nelmio_cors:
@@ -141,9 +141,13 @@ cache_adapter:
       factory: 'cache.factory.redis'
       options:
         host: 127.0.0.1 # Using custom host
-        port: 6389
+        port: 6379
     my_chain:
       factory: 'cache.factory.chain'
       options:
         services:
             - '@cache.provider.my_redis'
+
+citrax_database_swift_mailer:
+    max_retries: 1
+    delete_sent_messages: false

@@ -6,4 +6,6 @@ category:
     resource: "@ApplicationCategoryBundle/Resources/config/routing.yml"
 auto:
     resource: "@ApplicationAutoBundle/Resources/config/routing.yml"
+cache:
+    resource: "@ApplicationCacheBundle/Resources/config/routing.yml"
 

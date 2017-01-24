@@ -44,6 +44,8 @@ interface UserInterface extends AdvancedUserInterface, \Serializable
      */
     public function setUsername($username);
 
+    public function getUsername();
+
     /**
      * Sets the firstName.
      *
@@ -52,6 +54,7 @@ interface UserInterface extends AdvancedUserInterface, \Serializable
      * @return self
      */
     public function setFirstName($firstName);
+    public function getFirstName();
 
     /**
      * Sets the lastName.
@@ -61,6 +64,7 @@ interface UserInterface extends AdvancedUserInterface, \Serializable
      * @return self
      */
     public function setLastName($lastName);
+    public function getLastName();
 
     /**
      * Gets the canonical username in search and sort queries.

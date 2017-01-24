@@ -14,16 +14,5 @@ use Symfony\Component\HttpFoundation\Request;
 
 interface MailerInterface
 {
-    /**
-     * Send an email to a user to confirm the account creation.
-     *
-     * @param UserInterface $user
-     */
-    public function sendConfirmationEmailMessage(UserInterface $user, Request $request);
-    /**
-     * Send an email to a user to confirm the password reset.
-     *
-     * @param UserInterface $user
-     */
-    public function sendResettingEmailMessage(UserInterface $user);
+    public function sendActivationEmail(UserInterface $user, Request $request);
 }

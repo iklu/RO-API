@@ -43,19 +43,19 @@ services:
         class: Application\AdminBundle\EventListener\RegistrationListener
         tags:
             - { name: kernel.event_subscriber }
-        arguments: ["@email.user_confirmation", "@admin.util_token_generator"]
+        arguments: ["@email.notification", "@admin.util_token_generator"]
 
     admin.confirm_user_registration.listener:
         class: Application\AdminBundle\EventListener\EmailConfirmationListener
         tags:
             - { name: kernel.event_subscriber }
-        arguments: ["@email.user_confirmation", "@admin.util_token_generator"]
+        arguments: ["@email.notification", "@admin.util_token_generator"]
 
     admin.completed_user_registration.listener:
         class: Application\AdminBundle\EventListener\ApiResponseListener
         tags:
             - { name: kernel.event_subscriber }
-        arguments: ["@email.user_confirmation", "@admin.util_token_generator"]
+        arguments: ["@email.notification", "@admin.util_token_generator"]
 
 
 

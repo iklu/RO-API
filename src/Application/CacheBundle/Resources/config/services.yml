@@ -1,0 +1,4 @@
+services:
+#    application_cache.example:
+#        class: Application\CacheBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]

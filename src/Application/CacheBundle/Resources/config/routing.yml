@@ -1,0 +1,11 @@
+clear_cache_action:
+    path: '/secured/cache/invalidate'
+    methods:  ['POST']
+    defaults:
+        _controller: 'ApplicationCacheBundle:Admin/Cache:invalidateCache'
+
+clear_cache_tags_action:
+    path: '/secured/tags/invalidate'
+    methods:  ['POST']
+    defaults:
+        _controller: 'ApplicationCacheBundle:Admin/Cache:invalidateTags'

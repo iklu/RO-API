@@ -41,6 +41,8 @@ class AppKernel extends Kernel
             new Application\DoctrineBundle\ApplicationDoctrineBundle(),
             new \Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
             new Cache\AdapterBundle\CacheAdapterBundle(),
+            new Application\CacheBundle\ApplicationCacheBundle(),
+            new Citrax\Bundle\DatabaseSwiftMailerBundle\CitraxDatabaseSwiftMailerBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

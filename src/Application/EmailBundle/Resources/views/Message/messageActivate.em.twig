@@ -1,0 +1,14 @@
+{% extends "ApplicationEmailBundle::master.em.twig" %}
+
+{% block content %}
+
+  <p>
+  	Buna {{ receiverFirstName }},<br><br>
+    Pentru a finaliza procesul de inregistrare, acceseaza Link-ul de mai jos:<br><br>
+      <a href="http://{{ activateUrl }}" target="_blank">{{ activateUrl }}</a>
+  </p>
+  <p>
+    - Cu drag, Echipa Web Ro
+  </p>
+
+{% endblock %}

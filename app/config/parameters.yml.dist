@@ -1,3 +1,4 @@
+# This file is auto-generated during the composer install
 parameters:
     database_host: localhost
     database_port: 3306
@@ -12,7 +13,10 @@ parameters:
     mailer_encryption:  ssl
     secret: ThisTokenIsNotSoSecretChangeIt
     cors_allow_origin: 'http://localhost'
-    from_email:
-        address:        noreply@example.com
-        sender_name:    Demo App
+
+    email:
+        email_notification_from_name: noreply@example.com
+        email_notification_to: dragoiovidiu2011@gmail.com
+        email_notification_bcc: dragoiovidiu2011@gmail.com
+        sender_name: 'Demo App'
         confirmation: dragoiovidiu2011@gmail.com

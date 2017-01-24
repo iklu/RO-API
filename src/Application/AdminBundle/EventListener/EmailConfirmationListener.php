@@ -26,8 +26,6 @@ class EmailConfirmationListener implements EventSubscriberInterface
 {
     private $mailer;
     private $tokenGenerator;
-    private $router;
-    private $session;
 
     /**
      * EmailConfirmationListener constructor.
@@ -58,19 +56,12 @@ class EmailConfirmationListener implements EventSubscriberInterface
 
         /** @var $user UserInterface */
         $user = $event->getUser();
-
         $request = $event->getRequest();
-
         $user->setEnabled(false);
         if (null === $user->getConfirmationToken()) {
             $user->setConfirmationToken($this->tokenGenerator->generateToken());
         }
-
-        $this->mailer->sendConfirmationEmailMessage($user,$request);
-//
-//        $this->session->set('fos_user_send_confirmation_email/email', $user->getEmail());
-//
-//        $url = $this->router->generate('fos_user_registration_check_email');
+        $this->mailer->sendActivationEmail($user,$request);
         $event->setResponse(true);
     }
 }
