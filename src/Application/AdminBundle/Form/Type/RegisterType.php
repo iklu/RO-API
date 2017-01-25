@@ -33,6 +33,7 @@ class RegisterType extends AbstractType
         $resolver->setDefaults(array(
             'data_class' => 'Application\AdminBundle\Entity\User',
             'csrf_protection' => false,
+            'allow_extra_fields' => true
         ));
     }
 
