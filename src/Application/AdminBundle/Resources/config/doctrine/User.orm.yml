@@ -1,6 +1,6 @@
 Application\AdminBundle\Entity\User:
     type: entity
-    table: user
+    table: users
     repositoryClass: Application\AdminBundle\Repository\UserRepository
     id:
         id:
@@ -10,7 +10,11 @@ Application\AdminBundle\Entity\User:
             comment: ''
             id: true
             generator:
-                strategy: IDENTITY
+                strategy: SEQUENCE
+            sequenceGenerator:
+                sequenceName: id_seq
+                allocationSize: 100
+                initialValue: 1
     fields:
         username:
             type: string
