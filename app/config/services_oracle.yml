@@ -4,6 +4,6 @@ services:
         tags:
             - { name: doctrine.event_listener, event: postConnect }
     acme.doctrine.dbal.oracle_platform.type_mapping.listener:
-        class: Application\CoreBundle\EventListener\OracleDoctrineTypeMappingListener
+        class: Application\DoctrineBundle\EventListener\OracleDoctrineTypeMappingListener
         tags:
         - { name: doctrine.event_listener, event: postConnect }

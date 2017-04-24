@@ -1,6 +1,6 @@
 <?php
 
-namespace Application\CoreBundle\EventListener;
+namespace Application\DoctrineBundle\EventListener;
 
 use Doctrine\DBAL\Event\ConnectionEventArgs;
 use Doctrine\DBAL\Events;
