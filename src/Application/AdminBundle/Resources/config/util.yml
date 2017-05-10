@@ -1,0 +1,7 @@
+parameters:
+    admin_user.util.user_manipulator_class: Application\AdminBundle\Util\UserManipulator
+
+services:
+    admin_user.util.user_manipulator:
+        class: '%admin_user.util.user_manipulator_class%'
+        arguments: ["@admin.user_manager", "@event_dispatcher", "@request_stack"]
