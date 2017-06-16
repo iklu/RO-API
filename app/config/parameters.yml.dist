@@ -13,6 +13,7 @@ parameters:
     mailer_encryption:  ssl
     secret: ThisTokenIsNotSoSecretChangeIt
     cors_allow_origin: 'http://localhost'
+    jwt_secret_key: "ovidiu"
 
     email:
         email_notification_from_name: noreply@example.com

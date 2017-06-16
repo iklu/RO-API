@@ -9,9 +9,15 @@ use Application\AdminBundle\Event\ValidationEvent;
 use Application\CoreBundle\Utils\ApiResponse;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Response;
+use Application\AdminBundle\Util\JWTGenerator;
 
 class RegistrationListener implements EventSubscriberInterface
 {
+    private $jwtSecretKey;
+    public function __construct($jwtSecretKey)
+    {
+        $this->jwtSecretKey = $jwtSecretKey;
+    }
 
     /**
      * {@inheritdoc}
@@ -28,9 +34,11 @@ class RegistrationListener implements EventSubscriberInterface
      * @param GetResponseUserEvent $event
      */
     public function onRegisterInitialize(GetResponseUserEvent $event){
-
         $request = $event->getRequest();
         $user = $event->getUser();
+
+        $jwtConfirmationToken = new JWTGenerator($user->getUsername(), $user->getPassword(), $this->jwtSecretKey);
+        $token = $jwtConfirmationToken->generateToken();
 
         $user->setUsername($request->get("username"));
         $user->setFirstName($request->get("firstName"));
@@ -38,6 +46,7 @@ class RegistrationListener implements EventSubscriberInterface
         $user->setEmail($request->get("email"));
         $user->setPlainPassword($request->get("password"));
         $user->setEnabled(false);
+        $user->setConfirmationToken($token);
 
         return $event->setResponse($user);
     }

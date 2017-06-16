@@ -107,15 +107,16 @@ class SecurityController extends AbstractAdminController
         try {
 
             $user = $userManager->createUser();
-
             $data = $request->request->all();
 
-            $form = $this->createForm("Application\AdminBundle\Form\Type\RegisterType", $user);
-            $form->submit($data);
-
+            //modify user before sending to the form
             $event = new GetResponseUserEvent($user, $request);
             $dispatcher->dispatch(ApplicationAdminEvents::REGISTRATION_INITIALIZE, $event);
 
+            //bind user to form for validation
+            $form = $this->createForm("Application\AdminBundle\Form\Type\RegisterType", $user);
+            $form->submit($data);
+      
             if ($form->isSubmitted() && $form->isValid()) {
                 $userManager->updateUser($user);
                 $dispatcher->dispatch(ApplicationAdminEvents::REGISTRATION_SUCCESS, $event);

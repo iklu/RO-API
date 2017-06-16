@@ -24,7 +24,7 @@ class Mailer extends AbstractMailer implements MailerInterface
                 array(
                     'receiverFirstName' => $receiver->getFirstName(),
                     'receiverLastName' => $receiver->getLastName(),
-                    'activateUrl' => "localhost/RO-WEB/web/secured/account/activate/" . $receiver->getId() . "/" . md5($receiver->getId() . $receiver->getEmail() . $receiver->getPassword())
+                    'activateUrl' => "localhost/RO-WEB/web/secured/account/activate/" . $receiver->getId() . "/" . $receiver->getConfirmationToken()
                 )
             );
 

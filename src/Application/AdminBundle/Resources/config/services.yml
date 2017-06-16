@@ -43,7 +43,7 @@ services:
         class: Application\AdminBundle\EventListener\RegistrationListener
         tags:
             - { name: kernel.event_subscriber }
-        arguments: ["@email.notification", "@admin.util_token_generator"]
+        arguments: ["%jwt_secret_key%"]
 
     admin.confirm_user_registration.listener:
         class: Application\AdminBundle\EventListener\EmailConfirmationListener
